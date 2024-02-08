@@ -78,3 +78,6 @@ header a{
 .stuffcolumn {
     flex: 33%;
 }
+.tinytext {
+    font-size: 12px;
+}
