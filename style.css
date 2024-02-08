@@ -1,0 +1,80 @@
+body{
+    /* background-color: rgb(27, 73, 101); */
+    background-image: linear-gradient(rgb(6, 0, 90), rgb(12, 0, 121));
+    margin: 0;
+}
+h1 {
+    color: rgb(255, 166, 0);
+    font-size: 32px;
+    font-family: 'Playpen Sans', cursive;
+}
+h2 {
+    color: rgb(255, 166, 0);
+    font-size: 28px;
+    font-family: 'Playpen Sans', cursive;
+}
+p {
+    font-size: 18px;
+    color: rgb(245, 133, 73);
+    font-family: 'Playpen Sans', cursive;
+}
+a {
+    color: rgb(0, 140, 255);
+}
+
+footer {
+    text-align: center;
+    font-family: 'Playpen Sans', cursive;
+    padding: 20px;
+
+}
+header {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 60px;
+    border: 3px;
+    border-color: aqua;
+    /* background-color: rgb(7, 0, 104); */
+    background-image: url("headspace.jpg");
+}
+nav {
+    text-align: center;
+    word-spacing: 35px;
+    padding: 5px;
+    font-size: 25px;
+}
+
+
+.spacer{
+    font-size: 50px;
+}
+
+
+header h1 {
+    font-size: 60px;
+}
+header a{
+    color: darkblue;
+}
+.infobox {
+    padding-left: 45%;
+}
+
+.whatido{
+    background-image: linear-gradient(rgb(78, 2, 66), rgb(155, 0, 160));
+}
+.whatido h1{
+    text-align: center;
+    font-size: 40px;
+}
+.stuffrow {
+    display: flex;
+    padding-left:5%;
+    padding-right: 5%;
+    text-align: center;
+}
+  
+.stuffcolumn {
+    flex: 33%;
+}
