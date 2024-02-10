@@ -81,3 +81,6 @@ header a{
 .tinytext {
     font-size: 12px;
 }
+.basictext {
+    text-align: center;
+}
