@@ -40,8 +40,8 @@
         }
 
         // define arrays for buying stuff
-        let max = [1, 6, 8, 0];
-        let costs = [2000, 50, 1000, 2000];
+        let max = [1, 6, 8, 8];
+        let costs = [2000, 50, 1000, 10000];
         let itemprice = 0;
 
         if (!dolor) {
@@ -110,24 +110,21 @@
           if (parseInt(itemqty) < itemmax) {
             if (dolor >= itemprice) {
               dolor = dolor-itemprice;
-            //  document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
               if (id == 0) {
                 bought.splice(0, 1, parseInt(itemqty)+1)
                 document.getElementById("money").innerHTML = `Get Money 🐈`
-            //    document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[1])}/1)`
                 updatetext();
               } else if (id == 1) {
                 mpc = mpc + 0.5;
                 bought.splice(1, 1, parseInt(itemqty)+1)
-            //    document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
-            //    document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
                 updatetext();
               } else if (id == 2) {
                 bought.splice(2, 1, parseInt(itemqty)+1)
                 mpc = mpc + 2;
-            //    document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
-            //    document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[1])}/8)`
                 updatetext();
+              } else if (id == 3) {
+                bought.splice(3, 1, parseInt(itemqty)+1)
+                mpc = mpc + 10;
               }
               document.getElementById("clickerinfo").innerHTML = "---"
               // bought item
@@ -154,33 +151,49 @@
       <div class="spacer">
         <p>&#10240</p>
       </div>
-      <p id="clickertopbar">Mangos Clicker Game v0.3.3</p>
-      <p id="clickerinfo">---</p>
-      <h2 id="moneydisp">Money: 0</h2>
-      <p id="mpcdisp">Money per Click: 1</p>
-      <button onclick="money()" class="moneybutton" id="money">Get Money</button>
-      <button onclick="localsave()" class="savebutton">Save</button>
-      <button onclick="localload()" class="savebutton">Load</button>
-      <button onclick="resetstorage()" class="savebutton">Reset</button>
-      <p id="lastsaved">Last Saved: Not saved this session.</p>
-      <button onclick="buyitem(0)" class="moneybutton" id="cat1">Buy a Cat $2000 (0/1)</button>
-      <button onclick="buyitem(1)" class="moneybutton" id="mpc1">Increase mpc $50 (0/6)</button>
-      <button onclick="buyitem(2)" class="moneybutton" id="mpc2">Mpc lv 2 $1000 (0/8)</button>
+      <div class="topbar">
+        <p id="clickertopbar">Mangos Clicker Game v0.3.4</p>
+      </div>
+      <div class="savemenu">
+        <button onclick="localsave()" class="savebutton">Save</button>
+        <button onclick="localload()" class="savebutton">Load</button>
+        <button onclick="resetstorage()" class="resetbutton">Reset</button>
+        <p id="lastsaved">Last Saved: Not saved this session.</p>
+      </div>
+      <div class="interface">
+        <h2 id="moneydisp">Money: 0</h2>
+        <p id="mpcdisp">Money per Click: 1</p>
+        <button onclick="money()" class="moneybutton" id="money">Get Money</button>
+      </div>
+      <div class="spacer">
+        <p>&#10240</p>
+        <p>&#10240</p>
+      </div>
+      <div class="shop">
+        <button onclick="buyitem(0)" class="buybutton" id="cat1">Buy a Cat $2000 (0/1)</button>
+        <button onclick="buyitem(1)" class="buybutton" id="mpc1">Increase mpc $50 (0/6)</button>
+        <button onclick="buyitem(2)" class="buybutton" id="mpc2">Mpc lv 2 $1000 (0/8)</button>
+        <button onclick="buyitem(3)" class="buybutton" id="mpc3">Mpc lv 3 $10000 (0/8)</button>
+        <p id="clickerinfo">---</p>
+      </div>
       <div class="spacer">
         <p>&#10240</p>
         <p>&#10240</p>
         <p>&#10240</p>
       </div>
-      <h2>Changelog:</h2>
-      <p>v0.3.3<br>Added another mpc upgrade button, fixed some bugs with saving, compressed text updating</p>
-      <p>v0.3.2<br>Added the changelog to the main site (it was held on a .txt file on my computer)</p>
-      <p>v0.3.1<br>Fixed bug where resetting with max purchases and refreshing made you unable to purchase anything</p>
-      <p>v0.3.0<br>Added shop!!!</p>
-      <p>v0.2.1<br>Added 'buy cat' button..... hmm what will it do</p>
-      <p>v0.2.0<br>Added autosaving</p>
-      <p>v0.1.2<br>Fixed various bugs relating to the reset button</p>
-      <p>v0.1.1<br>Added Reset button</p>
-      <p>v0.1.0<br>Created the game. Its just a button, and a number</p>
+      <div class="changelog">
+        <h2>Changelog:</h2>
+        <p>v0.3.4<br>Adjusted css - now it looks better</p>
+        <p>v0.3.3<br>Added another mpc upgrade button, fixed some bugs with saving, compressed text updating</p>
+        <p>v0.3.2<br>Added the changelog to the main site (it was held on a .txt file on my computer)</p>
+        <p>v0.3.1<br>Fixed bug where resetting with max purchases and refreshing made you unable to purchase anything</p>
+        <p>v0.3.0<br>Added shop!!!</p>
+        <p>v0.2.1<br>Added 'buy cat' button..... hmm what will it do</p>
+        <p>v0.2.0<br>Added autosaving</p>
+        <p>v0.1.2<br>Fixed various bugs relating to the reset button</p>
+        <p>v0.1.1<br>Added Reset button</p>
+        <p>v0.1.0<br>Created the game. Its just a button, and a number</p>
+      </div>
     </main>
     <footer>
       <a href="https://www.youtube.com/@mangokittengaming">YouTube</a>
