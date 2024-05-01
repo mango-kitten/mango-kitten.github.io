@@ -23,12 +23,25 @@
         if (mpc == 1) {
           bought = [0, 0, 0, 0];
         } else {
-          bought = localStorage.getItem("bought");
+          var str = localStorage.getItem("bought");
+          if (str.includes("[")) {
+            str = str.substring(1, str.length - 1); // cut out the brackets
+          }
+          bought = str.split(",");
+          console.log(bought)
+        }
+
+        function updatetext() {
+          document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+          document.getElementById("mpcdisp").innerHTML = `Money per Click ${String(mpc)}`
+          document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[0])}/1)`
+          document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
+          document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
         }
 
         // define arrays for buying stuff
-        let max = [1, 6, 0, 0];
-        let costs = [2000, 50, 100, 2000];
+        let max = [1, 6, 8, 0];
+        let costs = [2000, 50, 1000, 2000];
         let itemprice = 0;
 
         if (!dolor) {
@@ -44,8 +57,9 @@
 
         // continue preload once html elements exist
         function autoload() {
-          document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
-          document.getElementById("mpcdisp").innerHTML = `Money: per Click ${String(mpc)}`
+      //    document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+      //    document.getElementById("mpcdisp").innerHTML = `Money per Click ${String(mpc)}`
+          updatetext();
           console.log("Loaded")
         }
 
@@ -63,26 +77,29 @@
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
           console.log("Saved")
+          updatetext();
         }
         // manual load
         function localload() {
           let dolor = parseInt(localStorage.getItem("money"));
-          document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+      //    document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           let mpc = parseInt(localStorage.getItem("mpc"));
-          document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
+      //    document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
           let bought = localStorage.getItem("bought");
           console.log("Loaded")
+          updatetext();
         }
         // manual hard reset
         function resetstorage() {
           dolor = 0;
-          localStorage.setItem("money", dolor);
+          localStorage.setItem("money", 0);
           mpc = 1;
-          localStorage.setItem("mpc", mpc);
+          localStorage.setItem("mpc", 1);
           bought = [0, 0, 0, 0];
-          localStorage.setItem("bought", bought);
+          localStorage.setItem("bought", [0, 0, 0, 0]);
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
+          updatetext();
         }
 
         // buy an item off the above arrays
@@ -90,16 +107,27 @@
           itemprice = costs[id];
           itemqty = bought[id];
           itemmax = max[id];
-          if (itemqty < itemmax) {
+          if (parseInt(itemqty) < itemmax) {
             if (dolor >= itemprice) {
               dolor = dolor-itemprice;
-              document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+            //  document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
               if (id == 0) {
+                bought.splice(0, 1, parseInt(itemqty)+1)
                 document.getElementById("money").innerHTML = `Get Money 🐈`
+            //    document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[1])}/1)`
+                updatetext();
               } else if (id == 1) {
                 mpc = mpc + 0.5;
-                bought.splice(1, 1, itemqty+1)
-                document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
+                bought.splice(1, 1, parseInt(itemqty)+1)
+            //    document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
+            //    document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
+                updatetext();
+              } else if (id == 2) {
+                bought.splice(2, 1, parseInt(itemqty)+1)
+                mpc = mpc + 2;
+            //    document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
+            //    document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[1])}/8)`
+                updatetext();
               }
               document.getElementById("clickerinfo").innerHTML = "---"
               // bought item
@@ -126,7 +154,7 @@
       <div class="spacer">
         <p>&#10240</p>
       </div>
-      <p id="clickertopbar">Mangos Clicker Game v0.3</p>
+      <p id="clickertopbar">Mangos Clicker Game v0.3.3</p>
       <p id="clickerinfo">---</p>
       <h2 id="moneydisp">Money: 0</h2>
       <p id="mpcdisp">Money per Click: 1</p>
@@ -135,14 +163,16 @@
       <button onclick="localload()" class="savebutton">Load</button>
       <button onclick="resetstorage()" class="savebutton">Reset</button>
       <p id="lastsaved">Last Saved: Not saved this session.</p>
-      <button onclick="buyitem(0)" class="moneybutton">Buy a Cat $2000</button>
-      <button onclick="buyitem(1)" class="moneybutton">Increase mpc $50</button>
+      <button onclick="buyitem(0)" class="moneybutton" id="cat1">Buy a Cat $2000 (0/1)</button>
+      <button onclick="buyitem(1)" class="moneybutton" id="mpc1">Increase mpc $50 (0/6)</button>
+      <button onclick="buyitem(2)" class="moneybutton" id="mpc2">Mpc lv 2 $1000 (0/8)</button>
       <div class="spacer">
         <p>&#10240</p>
         <p>&#10240</p>
         <p>&#10240</p>
       </div>
       <h2>Changelog:</h2>
+      <p>v0.3.3<br>Added another mpc upgrade button, fixed some bugs with saving, compressed text updating</p>
       <p>v0.3.2<br>Added the changelog to the main site (it was held on a .txt file on my computer)</p>
       <p>v0.3.1<br>Fixed bug where resetting with max purchases and refreshing made you unable to purchase anything</p>
       <p>v0.3.0<br>Added shop!!!</p>
