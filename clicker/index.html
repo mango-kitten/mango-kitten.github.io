@@ -16,73 +16,107 @@
     </header>
     <main>
       <script>
+        // preloading and restoration
         let dolor = parseInt(localStorage.getItem("money"));
-        let mpc = 1;
+        let mpc = parseInt(localStorage.getItem("mpc"));
         let bought = [0, 0, 0, 0];
+        if (mpc == 1) {
+          bought = [0, 0, 0, 0];
+        } else {
+          bought = localStorage.getItem("bought");
+        }
+
+        // define arrays for buying stuff
+        let max = [1, 6, 0, 0];
         let costs = [2000, 50, 100, 2000];
         let itemprice = 0;
-        let itemflag = 0;
+
         if (!dolor) {
           dolor = 0;
           console.log("No save file found, starting fresh.")
         }
+        if (!mpc) {
+          mpc = 1;
+        }
+        if (!bought) {
+          bought = [0, 0, 0, 0];
+        }
+
+        // continue preload once html elements exist
         function autoload() {
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+          document.getElementById("mpcdisp").innerHTML = `Money: per Click ${String(mpc)}`
           console.log("Loaded")
         }
+
+        // get money
         function money() {
           dolor = dolor + mpc
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
         }
+        // manual save
         function localsave() {
           localStorage.setItem("money", dolor);
+          localStorage.setItem("mpc", mpc);
+          localStorage.setItem("bought", bought);
           var now = new Date();
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
           console.log("Saved")
         }
+        // manual load
         function localload() {
           let dolor = parseInt(localStorage.getItem("money"));
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+          let mpc = parseInt(localStorage.getItem("mpc"));
+          document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
+          let bought = localStorage.getItem("bought");
           console.log("Loaded")
         }
+        // manual hard reset
         function resetstorage() {
           dolor = 0;
-          localStorage.removeItem("money");
+          localStorage.setItem("money", dolor);
+          mpc = 1;
+          localStorage.setItem("mpc", mpc);
+          bought = [0, 0, 0, 0];
+          localStorage.setItem("bought", bought);
+          document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+          document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
         }
+
+        // buy an item off the above arrays
         function buyitem(id) {
           itemprice = costs[id];
-          if (id == 0) {
-            itemflag = bought[0];
-            if (itemflag == 0) {
-              if (dolor >= itemprice) {
-                // buy the item
-                dolor = dolor - itemprice;
-                document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
-                document.getElementById("money").innerHTML = "Get Money 🐈"
-                bought.splice(0, 1, 1)
-              } else {
-                // too poor
-                document.getElementById("clickerinfo").innerHTML = "You're too poor!"
-              };
-            } else {
-              // already owned
-              document.getElementById("clickerinfo").innerHTML = "You already own this item!"
-            };
+          itemqty = bought[id];
+          itemmax = max[id];
+          if (itemqty < itemmax) {
             if (dolor >= itemprice) {
               dolor = dolor-itemprice;
               document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
-              mpc = mpc+0.5
+              if (id == 0) {
+                document.getElementById("money").innerHTML = `Get Money 🐈`
+              } else if (id == 1) {
+                mpc = mpc + 0.5;
+                bought.splice(1, 1, itemqty+1)
+                document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
+              }
+              document.getElementById("clickerinfo").innerHTML = "---"
               // bought item
             } else {
               // too poor
               document.getElementById("clickerinfo").innerHTML = "You're too poor!"
             };
-          };
-        }
+          } else {
+            document.getElementById("clickerinfo").innerHTML = "You already have the max!"
+          }
+        };
         
+        // autosave
         setInterval(function() {
           localStorage.setItem("money", dolor);
+          localStorage.setItem("mpc", mpc);
+          localStorage.setItem("bought", bought);
           var now = new Date();
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
@@ -92,9 +126,10 @@
       <div class="spacer">
         <p>&#10240</p>
       </div>
-      <p id="clickertopbar">Mangos Clicker Game v0.2</p>
-      <p id=clickerinfo">&#10240</p>
+      <p id="clickertopbar">Mangos Clicker Game v0.3</p>
+      <p id="clickerinfo">---</p>
       <h2 id="moneydisp">Money: 0</h2>
+      <p id="mpcdisp">Money per Click: 1</p>
       <button onclick="money()" class="moneybutton" id="money">Get Money</button>
       <button onclick="localsave()" class="savebutton">Save</button>
       <button onclick="localload()" class="savebutton">Load</button>
