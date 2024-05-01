@@ -84,3 +84,17 @@ header a{
 .basictext {
     text-align: center;
 }
+
+.moneybutton {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 18px;
+    padding: 3px;
+    background-color: rgb(20, 202, 126);
+}
+
+.savebutton {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 18px;
+    padding: 3px;
+    background-color: rgb(214, 209, 203);
+}
