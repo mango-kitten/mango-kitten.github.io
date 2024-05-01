@@ -19,9 +19,9 @@
         // preloading and restoration
         let dolor = parseInt(localStorage.getItem("money"));
         let mpc = parseInt(localStorage.getItem("mpc"));
-        let bought = [0, 0, 0, 0];
+        let bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         if (mpc == 1) {
-          bought = [0, 0, 0, 0];
+          bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         } else {
           var str = localStorage.getItem("bought");
           if (str.includes("[")) {
@@ -37,11 +37,12 @@
           document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[0])}/1)`
           document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
           document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
+          document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
         }
 
         // define arrays for buying stuff
-        let max = [1, 6, 8, 8];
-        let costs = [2000, 50, 1000, 10000];
+        let max = [1, 6, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let costs = [2000, 50, 1000, 10000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let itemprice = 0;
 
         if (!dolor) {
@@ -52,13 +53,11 @@
           mpc = 1;
         }
         if (!bought) {
-          bought = [0, 0, 0, 0];
+          bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
 
         // continue preload once html elements exist
         function autoload() {
-      //    document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
-      //    document.getElementById("mpcdisp").innerHTML = `Money per Click ${String(mpc)}`
           updatetext();
           console.log("Loaded")
         }
@@ -82,9 +81,7 @@
         // manual load
         function localload() {
           let dolor = parseInt(localStorage.getItem("money"));
-      //    document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           let mpc = parseInt(localStorage.getItem("mpc"));
-      //    document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
           let bought = localStorage.getItem("bought");
           console.log("Loaded")
           updatetext();
@@ -96,7 +93,7 @@
           mpc = 1;
           localStorage.setItem("mpc", 1);
           bought = [0, 0, 0, 0];
-          localStorage.setItem("bought", [0, 0, 0, 0]);
+          localStorage.setItem("bought", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
           updatetext();
@@ -125,6 +122,7 @@
               } else if (id == 3) {
                 bought.splice(3, 1, parseInt(itemqty)+1)
                 mpc = mpc + 10;
+                updatetext();
               }
               document.getElementById("clickerinfo").innerHTML = "---"
               // bought item
@@ -152,7 +150,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.3.4</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.3.5</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -183,6 +181,7 @@
       </div>
       <div class="changelog">
         <h2>Changelog:</h2>
+        <p>v0.3.5<br>Bugfixes with mpc3 button</p>
         <p>v0.3.4<br>Adjusted css - now it looks better</p>
         <p>v0.3.3<br>Added another mpc upgrade button, fixed some bugs with saving, compressed text updating</p>
         <p>v0.3.2<br>Added the changelog to the main site (it was held on a .txt file on my computer)</p>
