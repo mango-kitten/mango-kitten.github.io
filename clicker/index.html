@@ -8,7 +8,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap" rel="stylesheet">
       <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
   </head>
-  <body>
+  <body onload="autoload()">
     <header>
       <p class="spacer">&#10240</p>
       <h1>MangoKitten</h1>
@@ -16,7 +16,15 @@
     </header>
     <main>
       <script>
-        let dolor = 0;
+        let dolor = parseInt(localStorage.getItem("money"));
+        if (!dolor) {
+          let dolor = 0;
+          console.log("No save file found.")
+        }
+        function autoload() {
+          document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+          console.log("Loaded")
+        }
         function money() {
           dolor = dolor + 1
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
@@ -26,7 +34,7 @@
           console.log("Saved")
         }
         function localload() {
-          let dolor = localStorage.getItem("money");
+          let dolor = parseInt(localStorage.getItem("money"));
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           console.log("Loaded")
         }
