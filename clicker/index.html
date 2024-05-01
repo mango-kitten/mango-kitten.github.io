@@ -23,10 +23,12 @@
         }
         function localsave() {
           localStorage.setItem("money", dolor);
+          console.log("Saved")
         }
         function localload() {
-          dolor = localStorage.getItem("money");
+          let dolor = localStorage.getItem("money");
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+          console.log("Loaded")
         }
       </script>
       <div class="spacer">
