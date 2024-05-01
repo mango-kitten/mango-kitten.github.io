@@ -85,11 +85,13 @@ header a{
     text-align: center;
 }
 
+
 .moneybutton {
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
     padding: 3px;
     background-color: rgb(20, 202, 126);
+    color: rgb(86, 161, 11);
 }
 
 .savebutton {
@@ -97,4 +99,80 @@ header a{
     font-size: 18px;
     padding: 3px;
     background-color: rgb(214, 209, 203);
+    position: relative;
+    right: 7%;
+}
+
+
+
+.buybutton {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 18px;
+    padding: 3px;
+    background-color: rgb(4, 4, 155);
+    color: rgb(1, 216, 216);
+    border-color: rgb(1, 1, 104);
+}
+
+
+.changelog {
+    padding-left: 30px;
+}
+
+.topbar {
+    text-align: center;
+}
+.interface {
+    text-align: center;
+}
+.shop {
+    text-align: center;
+}
+.savemenu {
+    text-align: right;
+    padding-right: 30px;
+}
+.resetbutton {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 18px;
+    padding: 3px;
+    background-color: red;
+}
+
+
+.achievementholder {
+    font-family: 'Playpen Sans', cursive;
+}
+.achievementheaderno {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 20px;
+    color: rgb(129, 129, 129);
+    padding-top: 30px;
+    padding-bottom: 3px;
+    padding-left: 20px;
+}
+.achievementtextno {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 14px;
+    color: rgb(92, 92, 92);
+    padding-top: 1px;
+    padding-bottom: 10px;
+    padding-left: 60px;
+}
+
+.achievementheaderyes {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 20px;
+    color: rgb(250, 142, 19);
+    padding-top: 30px;
+    padding-bottom: 3px;
+    padding-left: 20px;
+}
+.achievementtextyes {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 14px;
+    color: rgb(212, 132, 28);
+    padding-top: 1px;
+    padding-bottom: 10px;
+    padding-left: 60px;
 }
