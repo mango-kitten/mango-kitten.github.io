@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MangoKitten Home</title>
+    <title>MangoKitten Clicker</title>
       <link rel="stylesheet" href="../style.css">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +18,8 @@
       <script>
         let dolor = parseInt(localStorage.getItem("money"));
         if (!dolor) {
-          let dolor = 0;
-          console.log("No save file found.")
+          dolor = 0;
+          console.log("No save file found, starting fresh.")
         }
         function autoload() {
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
@@ -31,6 +31,9 @@
         }
         function localsave() {
           localStorage.setItem("money", dolor);
+          var now = new Date();
+          var datetime = now.toLocaleString();
+          document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
           console.log("Saved")
         }
         function localload() {
@@ -42,6 +45,13 @@
           dolor = 0;
           localStorage.removeItem("money");
         }
+        setInterval(function() {
+          localStorage.setItem("money", dolor);
+          var now = new Date();
+          var datetime = now.toLocaleString();
+          document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
+          console.log("Auto-saved")
+        }, 60 * 1000);
       </script>
       <div class="spacer">
         <p>&#10240</p>
@@ -51,6 +61,7 @@
       <button onclick="localsave()" class="savebutton">Save</button>
       <button onclick="localload()" class="savebutton">Load</button>
       <button onclick="resetstorage()" class="savebutton">Reset</button>
+      <p id="lastsaved">Last Saved: Not saved this session.</p>
     </main>
     <footer>
       <a href="https://www.youtube.com/@mangokittengaming">YouTube</a>
