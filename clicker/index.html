@@ -17,6 +17,11 @@
     <main>
       <script>
         let dolor = parseInt(localStorage.getItem("money"));
+        let mpc = 1;
+        let bought = [0, 0, 0, 0];
+        let costs = [2000, 50, 100, 2000];
+        let itemprice = 0;
+        let itemflag = 0;
         if (!dolor) {
           dolor = 0;
           console.log("No save file found, starting fresh.")
@@ -26,7 +31,7 @@
           console.log("Loaded")
         }
         function money() {
-          dolor = dolor + 1
+          dolor = dolor + mpc
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
         }
         function localsave() {
@@ -45,6 +50,37 @@
           dolor = 0;
           localStorage.removeItem("money");
         }
+        function buyitem(id) {
+          itemprice = costs[id];
+          if (id == 0) {
+            itemflag = bought[0];
+            if (itemflag == 0) {
+              if (dolor >= itemprice) {
+                // buy the item
+                dolor = dolor - itemprice;
+                document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+                document.getElementById("money").innerHTML = "Get Money 🐈"
+                bought.splice(0, 1, 1)
+              } else {
+                // too poor
+                document.getElementById("clickerinfo").innerHTML = "You're too poor!"
+              };
+            } else {
+              // already owned
+              document.getElementById("clickerinfo").innerHTML = "You already own this item!"
+            };
+            if (dolor >= itemprice) {
+              dolor = dolor-itemprice;
+              document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+              mpc = mpc+0.5
+              // bought item
+            } else {
+              // too poor
+              document.getElementById("clickerinfo").innerHTML = "You're too poor!"
+            };
+          };
+        }
+        
         setInterval(function() {
           localStorage.setItem("money", dolor);
           var now = new Date();
@@ -56,12 +92,16 @@
       <div class="spacer">
         <p>&#10240</p>
       </div>
+      <p id="clickertopbar">Mangos Clicker Game v0.2</p>
+      <p id=clickerinfo">&#10240</p>
       <h2 id="moneydisp">Money: 0</h2>
-      <button onclick="money()" class="moneybutton">Get Money</button>
+      <button onclick="money()" class="moneybutton" id="money">Get Money</button>
       <button onclick="localsave()" class="savebutton">Save</button>
       <button onclick="localload()" class="savebutton">Load</button>
       <button onclick="resetstorage()" class="savebutton">Reset</button>
       <p id="lastsaved">Last Saved: Not saved this session.</p>
+      <button onclick="buyitem(0)" class="moneybutton">Buy a Cat $2000</button>
+      <button onclick="buyitem(1)" class="moneybutton">Increase mpc $50</button>
     </main>
     <footer>
       <a href="https://www.youtube.com/@mangokittengaming">YouTube</a>
