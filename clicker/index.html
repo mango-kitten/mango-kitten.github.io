@@ -38,6 +38,10 @@
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           console.log("Loaded")
         }
+        function resetstorage() {
+          dolor = 0;
+          localStorage.removeItem("money");
+        }
       </script>
       <div class="spacer">
         <p>&#10240</p>
@@ -46,6 +50,7 @@
       <button onclick="money()" class="moneybutton">Get Money</button>
       <button onclick="localsave()" class="savebutton">Save</button>
       <button onclick="localload()" class="savebutton">Load</button>
+      <button onclick="resetstorage()" class="savebutton">Reset</button>
     </main>
     <footer>
       <a href="https://www.youtube.com/@mangokittengaming">YouTube</a>
