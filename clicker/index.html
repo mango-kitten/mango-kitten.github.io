@@ -51,14 +51,14 @@
           dolor = 0;
           console.log("No save file found, starting fresh.")
         }
-        if (dolor == NaN) {
+        if (isNaN(dolor)) {
           dolor = 0;
           console.log("No save file found, starting fresh.")
         }
         if (!mpc) {
           mpc = 1;
         }
-        if (mpc == NaN) {
+        if (isNaN(mpc)) {
           mpc = 1;
         }
         if (!bought) {
@@ -159,7 +159,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.3.6</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.3.7</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -204,6 +204,7 @@
 
       <div class="changelog">
         <h2>Changelog:</h2>
+        <p>v0.3.7<br>More NaN related bugfixes</p>
         <p>v0.3.6<br>Bugfixes with new games creating NaN-types, started to add backend support for next major update, code modularization</p>
         <p>v0.3.5<br>Bugfixes with mpc3 button</p>
         <p>v0.3.4<br>Adjusted css - now it looks better</p>
