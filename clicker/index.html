@@ -23,6 +23,8 @@
         let cats = localStorage.getItem("cats");
         let bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let iscat1 = 0;
+        let iscat2 = 0;
+        let iscat3 = 0;
         if (mpc == 1) {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         } else {
@@ -45,8 +47,8 @@
         }
 
         // define arrays for buying stuff
-        let max = [1, 6, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        let costs = [2000, 50, 1000, 10000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let max = [1, 6, 8, 8, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let costs = [2000, 50, 1000, 10000, 100000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let itemprice = 0;
 
         if (!dolor) {
@@ -122,36 +124,81 @@
         // buy an item off the above arrays
         function buyitem(id) {
           itemprice = costs[id];
-          itemqty = bought[id];
           itemmax = max[id];
-          if (parseInt(itemqty) < itemmax) {
+          if (bought.length <= id) {
+            console.log("list bought not long enough")
+            let remainder = bought.length - id
+            if (remainder > 0) {
+                for (let i=0; i<remainder; i++) {
+                    bought.push(0)
+                }
+            }
             if (dolor >= itemprice) {
-              dolor = dolor-itemprice;
-              if (id == 0) {
-                bought.splice(0, 1, parseInt(itemqty)+1)
-                document.getElementById("money").innerHTML = `Get Money 🐈`
-                updatetext();
-              } else if (id == 1) {
-                mpc = mpc + 0.5;
-                bought.splice(1, 1, parseInt(itemqty)+1)
-                updatetext();
-              } else if (id == 2) {
-                bought.splice(2, 1, parseInt(itemqty)+1)
-                mpc = mpc + 2;
-                updatetext();
-              } else if (id == 3) {
-                bought.splice(3, 1, parseInt(itemqty)+1)
-                mpc = mpc + 10;
-                updatetext();
-              }
-              document.getElementById("clickerinfo").innerHTML = "---"
-              // bought item
+                dolor = dolor-itemprice;
+                if (id == 0) {
+                    bought.push('1')
+                    document.getElementById("money").innerHTML = `Get Money 🐈`
+                    updatetext();
+                } else if (id == 1) {
+                    mpc = mpc + 0.5;
+                    bought.push('1')
+                    updatetext();
+                } else if (id == 2) {
+                    bought.push('1')
+                    mpc = mpc + 2;
+                    updatetext();
+                } else if (id == 3) {
+                    bought.push('1')
+                    mpc = mpc + 10;
+                    updatetext();
+                } else if (id == 4) {
+                    bought.push('1')
+                    mpc = mpc + 100;
+                    updatetext();
+                }
+                document.getElementById("clickerinfo").innerHTML = "---"
+                console.log(bought)
+                // bought item
             } else {
-              // too poor
-              document.getElementById("clickerinfo").innerHTML = "You're too poor!"
+                // too poor
+                document.getElementById("clickerinfo").innerHTML = "You're too poor!"
             };
+
           } else {
-            document.getElementById("clickerinfo").innerHTML = "You already have the max!"
+            itemqty = bought[id];
+            if (parseInt(itemqty) < itemmax) {
+                if (dolor >= itemprice) {
+                dolor = dolor-itemprice;
+                if (id == 0) {
+                    bought.splice(0, 1, parseInt(itemqty)+1)
+                    document.getElementById("money").innerHTML = `Get Money 🐈`
+                    updatetext();
+                } else if (id == 1) {
+                    mpc = mpc + 0.5;
+                    bought.splice(1, 1, parseInt(itemqty)+1)
+                    updatetext();
+                } else if (id == 2) {
+                    bought.splice(2, 1, parseInt(itemqty)+1)
+                    mpc = mpc + 2;
+                    updatetext();
+                } else if (id == 3) {
+                    bought.splice(3, 1, parseInt(itemqty)+1)
+                    mpc = mpc + 10;
+                    updatetext();
+                } else if (id == 4) {
+                    bought.splice(4, 1, parseInt(itemqty)+1)
+                    mpc = mpc + 100;
+                    updatetext();
+                }
+                document.getElementById("clickerinfo").innerHTML = "---"
+                // bought item
+                } else {
+                // too poor
+                document.getElementById("clickerinfo").innerHTML = "You're too poor!"
+                };
+            } else {
+                document.getElementById("clickerinfo").innerHTML = "You already have the max!"
+            }
           }
         };
         
@@ -171,7 +218,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.4.1</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.4.3</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -193,6 +240,7 @@
         <button onclick="buyitem(1)" class="buybutton" id="mpc1">Increase mpc $50 (0/6)</button>
         <button onclick="buyitem(2)" class="buybutton" id="mpc2">Mpc lv 2 $1000 (0/8)</button>
         <button onclick="buyitem(3)" class="buybutton" id="mpc3">Mpc lv 3 $10000 (0/8)</button>
+        <button onclick="buyitem(4)" class="buybutton" id="mpc4">Mpc lv 4 $100000 (0/10)</button>
         <p id="clickerinfo">---</p>
       </div>
       <div class="spacer">
@@ -201,14 +249,34 @@
         <p>&#10240</p>
       </div>
 
+      <p class="catinfo">Adopt more cats, get more money!!!!!!<br></p>
       <div class="catstorage">
-        <p>Adopt more cats, get more money!!!!!!</p>
-        <p id="cat1error">---</p>
-        <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray ($500)</button>
-        <p id="catres1">No cats recently found</p>
-        <button onclick="keepCat1()" class="keepbutton" id="keepc1">Adopt</button>
-        <button onclick="releaseCat1()" class="replacebutton" id="releasec1">Release</button>
-        <p id="catown1">You have no cat in slot 1</p>
+        <div class="getcat">
+          <p id="cat1error">---</p>
+          <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray ($500)</button>
+          <p id="catres1">No cats recently found</p>
+          <button onclick="keepCat1()" class="keepbutton" id="keepc1">Adopt</button>
+          <button onclick="releaseCat1()" class="replacebutton" id="releasec1">Release</button>
+          <p id="catown1">You have no cat in slot 1</p>
+        </div>
+
+        <div class="getcat">
+          <p id="cat2error">---</p>
+          <button onclick="buyCatSet2()" class="buybutton" id="getc2">Perform a Magic Ritual ($20000)</button>
+          <p id="catres2">No cats recently summoned</p>
+          <button onclick="keepCat2()" class="keepbutton" id="keepc2">Adopt</button>
+          <button onclick="releaseCat2()" class="replacebutton" id="releasec2">Release</button>
+          <p id="catown2">You have no cat in slot 2</p>
+        </div>
+
+        <div class="getcat">
+            <p id="cat3error">---</p>
+            <button onclick="buyCatSet3()" class="buybutton" id="getc3">Buy an Odd Fruitbowl ($1000000)</button>
+            <p id="catres3">No cats recently picked</p>
+            <button onclick="keepCat3()" class="keepbutton" id="keepc3">Adopt</button>
+            <button onclick="releaseCat3()" class="replacebutton" id="releasec3">Release</button>
+            <p id="catown3">You have no cat in slot 3</p>
+          </div>
       </div>
 
       <div class="spacer">
@@ -220,6 +288,8 @@
 
       <div class="changelog">
         <h2>Changelog:</h2>
+        <p>v0.4.3<br>Added a cat-related fruit bowl</p>
+        <p>v0.4.2<br>Added a cat-related summoning ritual, and a mpc lv4 button</p>
         <p>v0.4.1<br>Fixed reset and cat-related bugs that could end up in negative mpc</p>
         <p>v0.4.0<br>Added the first set of cat adoption!</p>
         <p>v0.3.7<br>More NaN related bugfixes</p>
