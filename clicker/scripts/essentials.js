@@ -15,9 +15,24 @@ function updatetext() {
     document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
     document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
     document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
+    if (bought[4]) {
+        document.getElementById("mpc4").innerHTML = `Mpc lv4 $100000 (${String(bought[4])}/10)`
+    } else {
+        document.getElementById("mpc4").innerHTML = `Mpc lv4 $100000 (0/10)`
+    }
     if (cats[0] == 0) {
         document.getElementById("catown1").innerHTML = "You have no cat in slot 1"
     } else {
         document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} mpc)`
+    }
+    if (cats[1] == 0) {
+        document.getElementById("catown2").innerHTML = "You have no cat in slot 2"
+    } else {
+        document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat (+${String(mpcadd[cats[1]])} mpc)`
+    }
+    if (cats[2] == 0) {
+        document.getElementById("catown3").innerHTML = "You have no cat in slot 3"
+    } else {
+        document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc)`
     }
 }
