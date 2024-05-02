@@ -111,6 +111,8 @@
           localStorage.setItem("mpc", 1);
           bought = [0, 0, 0, 0];
           localStorage.setItem("bought", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+          cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          catgot1 = 0
           localStorage.setItem("cats", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
@@ -169,7 +171,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.4.0</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.4.1</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -218,6 +220,7 @@
 
       <div class="changelog">
         <h2>Changelog:</h2>
+        <p>v0.4.1<br>Fixed reset and cat-related bugs that could end up in negative mpc</p>
         <p>v0.4.0<br>Added the first set of cat adoption!</p>
         <p>v0.3.7<br>More NaN related bugfixes</p>
         <p>v0.3.6<br>Bugfixes with new games creating NaN-types, started to add backend support for next major update, code modularization</p>
