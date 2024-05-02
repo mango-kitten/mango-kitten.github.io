@@ -15,4 +15,9 @@ function updatetext() {
     document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
     document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
     document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
+    if (cats[0] == 0) {
+        document.getElementById("catown1").innerHTML = "You have no cat in slot 1"
+    } else {
+        document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} mpc)`
+    }
 }
