@@ -15,6 +15,7 @@
       <p class="spacer">&#10240</p>
     </header>
     <main>
+      <script src="scripts/essentials.js"></script>
       <script>
         // preloading and restoration
         let dolor = parseInt(localStorage.getItem("money"));
@@ -31,14 +32,15 @@
           console.log(bought)
         }
 
-        function updatetext() {
-          document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
-          document.getElementById("mpcdisp").innerHTML = `Money per Click ${String(mpc)}`
-          document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[0])}/1)`
-          document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
-          document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
-          document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
-        }
+        // function updatetext() {
+        //   console.log(bought[0],bought[1],bought[2],bought[3],bought)
+        //   document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
+        //   document.getElementById("mpcdisp").innerHTML = `Money per Click ${String(mpc)}`
+        //   document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[0])}/1)`
+        //   document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
+        //   document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
+        //   document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
+        // }
 
         // define arrays for buying stuff
         let max = [1, 6, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -49,7 +51,14 @@
           dolor = 0;
           console.log("No save file found, starting fresh.")
         }
+        if (dolor == NaN) {
+          dolor = 0;
+          console.log("No save file found, starting fresh.")
+        }
         if (!mpc) {
+          mpc = 1;
+        }
+        if (mpc == NaN) {
           mpc = 1;
         }
         if (!bought) {
@@ -150,7 +159,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.3.5</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.3.6</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -179,8 +188,23 @@
         <p>&#10240</p>
         <p>&#10240</p>
       </div>
+
+      <div class="catstorage">
+        <p>This button does not have any game effect, besides spending your money. You can click it, but you have been warned.</p>
+        <button onclick="buyCatSet1()" class="buybutton" id="getc1">Generate a Cat ($500)</button>
+        <p id="catres1">No cats recently generated</p>
+      </div>
+
+      <div class="spacer">
+        <p>&#10240</p>
+        <p>&#10240</p>
+        <p>&#10240</p>
+        <p>&#10240</p>
+      </div>
+
       <div class="changelog">
         <h2>Changelog:</h2>
+        <p>v0.3.6<br>Bugfixes with new games creating NaN-types, started to add backend support for next major update, code modularization</p>
         <p>v0.3.5<br>Bugfixes with mpc3 button</p>
         <p>v0.3.4<br>Adjusted css - now it looks better</p>
         <p>v0.3.3<br>Added another mpc upgrade button, fixed some bugs with saving, compressed text updating</p>
@@ -201,3 +225,4 @@
     </footer>
   </body>
 </html>
+<script src="scripts/cats.js"></script>
