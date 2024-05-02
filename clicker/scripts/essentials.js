@@ -1,8 +1,12 @@
 function updatetext() {
     if (isNaN(dolor)) {
+        console.log("dolor = NaN")
+        resetstorage();
         dolor = 0;
     }
     if (isNaN(mpc)) {
+        console.log("mpc = NaN")
+        resetstorage();
         mpc = 1;
     }
     document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
