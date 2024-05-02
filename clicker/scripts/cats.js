@@ -1,14 +1,15 @@
-let catset = [1,  1,     1,       1,       1]
-let weight = [500,200,   150,     75,      25]
-let mpcadd = [5,  3,     3,       3,       4]
-let catpsc = [0,  1,     3,       5,       10]
-let ctname = ["","Tabby","Tuxedo","Calico","Siamese"]
+let catset = [0, 1,  1,     1,       1,       1]
+let weight = [0, 500,200,   150,     75,      25]
+let mpcadd = [0, 5,  10,     20,       30,       50]
+let catpsc = [0, 0,  1,     3,       5,       10]
+let ctname = ["","","Tabby","Tuxedo","Calico","Siamese"]
 let possibleids = []
 let combpool = 0
 let weightroll = 0
 let rescheck = 0
 let result = 0
 let foundres = 0
+let catgot1 = 0
 
 function getCat(set) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUALLY WORKS
   possibleids = [] // empty the possibilites and other stuff
@@ -32,15 +33,44 @@ function getCat(set) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUAL
       result = possibleids[i]
     }
   }
-  document.getElementById("catres1").innerHTML = `Got a ${String(ctname[result])} Cat`
+  return result
 }
 
 
 
 function buyCatSet1() {
   if (dolor >= 500) {
-    getCat(1)
+    catgot1 = getCat(1)
+    iscat1 = 1
+    document.getElementById("catres1").innerHTML = `Got a ${String(ctname[catgot1])} Cat (+${String(mpcadd[catgot1])} mpc)`
+    document.getElementById("cat1error").innerHTML = "---"
     dolor = dolor-500
     updatetext();
+  }
+}
+
+function keepCat1() {
+  if (iscat1 == 1) {
+    mpc = mpc - mpcadd[cats[0]]
+    cats.splice(0, 1, catgot1)
+    mpc = mpc + mpcadd[catgot1]
+    document.getElementById("catres1").innerHTML = `Search for a new cat...`
+    document.getElementById("cat1error").innerHTML = "---"
+    document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} mpc)`
+    iscat1 = 0
+    updatetext();
+  } else {
+    document.getElementById("cat1error").innerHTML = "There is no cat waiting!"
+  }
+}
+
+function releaseCat1() {
+  if (iscat1 == 1) {
+    document.getElementById("catres1").innerHTML = `Search for a new cat...`
+    document.getElementById("cat1error").innerHTML = "---"
+    updatetext();
+    iscat1 = 0
+  } else {
+    document.getElementById("cat1error").innerHTML = "There is no cat waiting!"
   }
 }
