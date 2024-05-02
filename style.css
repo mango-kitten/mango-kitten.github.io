@@ -47,7 +47,7 @@ nav {
 
 
 .spacer{
-    font-size: 50px;
+    font-size: 32px;
 }
 
 
@@ -76,7 +76,7 @@ header a{
 }
   
 .stuffcolumn {
-    flex: 33%;
+    flex: 20%;
 }
 .tinytext {
     font-size: 12px;
@@ -84,6 +84,24 @@ header a{
 .basictext {
     text-align: center;
 }
+button {
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 28px;
+    color: purple;
+    background-color: rgb(189, 71, 212);
+}
+
+.useless {
+    background-color: black;
+}
+
+.paused {
+    background-color: rgb(138, 28, 28);
+}
+
 
 
 .moneybutton {
@@ -175,4 +193,19 @@ header a{
     padding-top: 1px;
     padding-bottom: 10px;
     padding-left: 60px;
+}
+
+.keepbutton {
+    background-color: green;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 18px;
+    color: rgb(6, 83, 12);
+    padding: 3px;
+}
+.replacebutton {
+    background-color: red;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 18px;
+    color: rgb(131, 13, 9);
+    padding: 3px;
 }
