@@ -20,7 +20,9 @@
         // preloading and restoration
         let dolor = parseInt(localStorage.getItem("money"));
         let mpc = parseInt(localStorage.getItem("mpc"));
+        let cats = localStorage.getItem("cats");
         let bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let iscat1 = 0;
         if (mpc == 1) {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         } else {
@@ -31,16 +33,16 @@
           bought = str.split(",");
           console.log(bought)
         }
-
-        // function updatetext() {
-        //   console.log(bought[0],bought[1],bought[2],bought[3],bought)
-        //   document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
-        //   document.getElementById("mpcdisp").innerHTML = `Money per Click ${String(mpc)}`
-        //   document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[0])}/1)`
-        //   document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
-        //   document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
-        //   document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
-        // }
+        if (cats) {
+          var str = localStorage.getItem("cats");
+          if (str.includes("[")) {
+            str = str.substring(1, str.length - 1); // cut out the brackets
+          }
+          cats = str.split(",");
+          console.log(cats)
+        } else {
+          cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
 
         // define arrays for buying stuff
         let max = [1, 6, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -85,6 +87,7 @@
           localStorage.setItem("money", dolor);
           localStorage.setItem("mpc", mpc);
           localStorage.setItem("bought", bought);
+          localStorage.setItem("cats", cats)
           var now = new Date();
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
@@ -96,6 +99,7 @@
           let dolor = parseInt(localStorage.getItem("money"));
           let mpc = parseInt(localStorage.getItem("mpc"));
           let bought = localStorage.getItem("bought");
+          let cats = localStorage.getItem("cats");
           console.log("Loaded")
           updatetext();
         }
@@ -107,6 +111,7 @@
           localStorage.setItem("mpc", 1);
           bought = [0, 0, 0, 0];
           localStorage.setItem("bought", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+          localStorage.setItem("cats", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
           updatetext();
@@ -153,6 +158,7 @@
           localStorage.setItem("money", dolor);
           localStorage.setItem("mpc", mpc);
           localStorage.setItem("bought", bought);
+          localStorage.setItem("cats", cats)
           var now = new Date();
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
@@ -163,7 +169,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.3.7</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.4.0</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -194,9 +200,13 @@
       </div>
 
       <div class="catstorage">
-        <p>This button does not have any game effect, besides spending your money. You can click it, but you have been warned.</p>
-        <button onclick="buyCatSet1()" class="buybutton" id="getc1">Generate a Cat ($500)</button>
-        <p id="catres1">No cats recently generated</p>
+        <p>Adopt more cats, get more money!!!!!!</p>
+        <p id="cat1error">---</p>
+        <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray ($500)</button>
+        <p id="catres1">No cats recently found</p>
+        <button onclick="keepCat1()" class="keepbutton" id="keepc1">Adopt</button>
+        <button onclick="releaseCat1()" class="replacebutton" id="releasec1">Release</button>
+        <p id="catown1">You have no cat in slot 1</p>
       </div>
 
       <div class="spacer">
@@ -208,6 +218,7 @@
 
       <div class="changelog">
         <h2>Changelog:</h2>
+        <p>v0.4.0<br>Added the first set of cat adoption!</p>
         <p>v0.3.7<br>More NaN related bugfixes</p>
         <p>v0.3.6<br>Bugfixes with new games creating NaN-types, started to add backend support for next major update, code modularization</p>
         <p>v0.3.5<br>Bugfixes with mpc3 button</p>
