@@ -1,4 +1,10 @@
 function updatetext() {
+    if (dolor == NaN) {
+        dolor = 0;
+    }
+    if (mpc == NaN) {
+        mpc = 1;
+    }
     document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
     document.getElementById("mpcdisp").innerHTML = `Money per Click ${String(mpc)}`
     document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[0])}/1)`
