@@ -52,6 +52,8 @@
           console.log("No save file found, starting fresh.")
         }
         if (isNaN(dolor)) {
+          resetstorage();
+          console.log("dolor = NaN")
           dolor = 0;
           console.log("No save file found, starting fresh.")
         }
@@ -59,6 +61,8 @@
           mpc = 1;
         }
         if (isNaN(mpc)) {
+          console.log("mpc = NaN")
+          resetstorage();
           mpc = 1;
         }
         if (!bought) {
