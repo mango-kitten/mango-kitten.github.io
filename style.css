@@ -209,3 +209,15 @@ button {
     color: rgb(131, 13, 9);
     padding: 3px;
 }
+
+.catstorage {
+    display: flex;
+    text-align: center;
+    padding: 1%;
+}
+.getcat {
+    padding: 1%;
+}
+.catinfo {
+    text-align: center;
+}
