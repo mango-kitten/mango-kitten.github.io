@@ -1,8 +1,8 @@
 function updatetext() {
-    if (dolor == NaN) {
+    if (!Number.isInteger(dolor)) {
         dolor = 0;
     }
-    if (mpc == NaN) {
+    if (!Number.isInteger(mpc)) {
         mpc = 1;
     }
     document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
