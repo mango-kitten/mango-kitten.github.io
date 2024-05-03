@@ -80,10 +80,7 @@
         }
 
         // get money
-        function money() {
-          dolor = dolor + mpc
-          document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
-        }
+
         // manual save
         function localsave() {
           localStorage.setItem("money", dolor);
@@ -218,7 +215,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.4.3</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.4.4</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -229,14 +226,17 @@
       <div class="interface">
         <h2 id="moneydisp">Money: 0</h2>
         <p id="mpcdisp">Money per Click: 1</p>
-        <button onclick="money()" class="moneybutton" id="money">Get Money</button>
+        <div id="moneybutton">
+          <!-- <button onclick="money()" class="moneybutton" id="money" style="background: url(../img/yarnblue.png)">Get Money</button> -->
+          <img src="../img/yarnred.png">
+        </div>
       </div>
       <div class="spacer">
         <p>&#10240</p>
         <p>&#10240</p>
       </div>
       <div class="shop">
-        <button onclick="buyitem(0)" class="buybutton" id="cat1">Buy a Cat $2000 (0/1)</button>
+        <!-- <button onclick="buyitem(0)" class="buybutton" id="cat1">Buy a Cat $2000 (0/1)</button> -->
         <button onclick="buyitem(1)" class="buybutton" id="mpc1">Increase mpc $50 (0/6)</button>
         <button onclick="buyitem(2)" class="buybutton" id="mpc2">Mpc lv 2 $1000 (0/8)</button>
         <button onclick="buyitem(3)" class="buybutton" id="mpc3">Mpc lv 3 $10000 (0/8)</button>
@@ -288,6 +288,7 @@
 
       <div class="changelog">
         <h2>Changelog:</h2>
+        <p>v0.4.4<br>Made the button more exciting</p>
         <p>v0.4.3<br>Added a cat-related fruit bowl</p>
         <p>v0.4.2<br>Added a cat-related summoning ritual, and a mpc lv4 button</p>
         <p>v0.4.1<br>Fixed reset and cat-related bugs that could end up in negative mpc</p>
@@ -315,3 +316,4 @@
   </body>
 </html>
 <script src="scripts/cats.js"></script>
+<script src="scripts/money.js"></script>
