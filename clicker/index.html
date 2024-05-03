@@ -26,6 +26,11 @@
         let iscat1 = 0;
         let iscat2 = 0;
         let iscat3 = 0;
+        let iscat4 = 0
+        let inDevReset = 0;
+        let changelogtoggle = 0;
+        let prestigelevel = parseInt(localStorage.getItem("prestige"));
+        let totalmade = parseInt(localStorage.getItem("total"));
         if (mpc == 1) {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         } else {
@@ -52,7 +57,9 @@
         let costs = [2000, 50, 1000, 10000, 100000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let itemprice = 0;
 
-        if (!dolor) {
+        if (dolor) {
+            console.log("Successfully called variable dolor")
+        } else {
           dolor = 0;
           console.log("No save file found, starting fresh.")
         }
@@ -62,7 +69,9 @@
           dolor = 0;
           console.log("No save file found, starting fresh.")
         }
-        if (!mpc) {
+        if (mpc) {
+            console.log("Successfully called variable mpc")
+        } else {
           mpc = 1;
         }
         if (isNaN(mpc)) {
@@ -70,10 +79,14 @@
           resetstorage();
           mpc = 1;
         }
-        if (!bought) {
+        if (bought) {
+            console.log("Successfully called variable bought")
+        } else {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
-        if (!cps) {
+        if (cps) {
+            console.log("Successfully called variable cps")
+        } else {
             cps = 0
         }
         if (isNaN(cps)) {
@@ -82,6 +95,19 @@
             cps = 0
         }
 
+        if (prestigelevel) {
+            console.log("Successfully called variable prestigelevel")
+        } else {
+            prestigelevel = 1
+        }
+        if (totalmade) {
+            console.log("Successfully called variable totalmade")
+        } else {
+            totalmade = 0
+        }
+        
+        console.log(prestigelevel)
+
         // continue preload once html elements exist
         function autoload() {
           updatetext();
@@ -89,7 +115,6 @@
           console.log("Loaded")
         }
 
-        // get money
 
         // manual save
         function localsave() {
@@ -98,6 +123,8 @@
           localStorage.setItem("bought", bought);
           localStorage.setItem("cats", cats)
           localStorage.setItem("cps", cps);
+          localStorage.setItem("prestige", prestigelevel);
+          localStorage.setItem("total", totalmade);
           var now = new Date();
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
@@ -112,6 +139,8 @@
           let bought = localStorage.getItem("bought");
           let cats = localStorage.getItem("cats");
           let cps = parseInt(localStorage.getItem("cps"))
+          let prestigelevel = parseInt(localStorage.getItem("prestige"));
+          let totalmade = parseInt(localStorage.getItem("total"));
           console.log("Loaded")
           updatetext();
           updatebutton();
@@ -129,6 +158,10 @@
           localStorage.setItem("cats", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           cps = 0
           localStorage.setItem("cps", 0)
+          prestigelevel = 0
+          localStorage.setItem("prestige", 0)
+          totalmade = 0
+          localStorage.setItem("total", 0)
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
           updatetext();
@@ -222,6 +255,9 @@
           localStorage.setItem("mpc", mpc);
           localStorage.setItem("bought", bought);
           localStorage.setItem("cats", cats)
+          localStorage.setItem("cps", cps)
+          localStorage.setItem("prestige", prestigelevel)
+          localStorage.setItem("total", totalmade);
           var now = new Date();
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
@@ -229,16 +265,22 @@
         }, 60 * 1000);
 
         setInterval(function() { // autoclicker + updates per second
-          dolor = dolor + (cps*mpc)
+          dolor = dolor + ((cps*mpc)*prestigelevel)
+          totalmade = totalmade + ((cps*mpc)*prestigelevel)
           updatebutton();
           updatetext();
+          prestigecheck();
         }, 1000);
+
+        setInterval(function() { // fast tick updates, attempts to run at 50 times per second
+          fastTickUpdate();
+        }, 200);
       </script>
       <div class="spacer">
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.5.0</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.5.2</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -263,7 +305,6 @@
         <p>&#10240</p>
       </div>
       <div class="shop">
-        <!-- <button onclick="buyitem(0)" class="buybutton" id="cat1">Buy a Cat $2000 (0/1)</button> -->
         <button onclick="buyitem(1)" class="buybutton" id="mpc1">Increase mpc $50 (0/6)</button>
         <button onclick="buyitem(2)" class="buybutton" id="mpc2">Mpc lv 2 $1000 (0/8)</button>
         <button onclick="buyitem(3)" class="buybutton" id="mpc3">Mpc lv 3 $10000 (0/8)</button>
@@ -275,6 +316,14 @@
         <p>&#10240</p>
         <p>&#10240</p>
       </div>
+
+      <div id="prestigeholder" class="prestige hidden">
+        <p>Prestiging will permenantly increase your earnings, at the cost of your progress! This function is in development.</p>
+        <p class="smalltext">You will keep your achievements (wip) and catalogue (wip) progress.</p>
+        <p id="totalyarntext">You have made 0 yarn ever</p>
+        <div id="prestigebutton" class="prestigebutton">Prestige!</div>
+      </div>
+
 
       <p class="catinfo">Adopt more cats, get more money!!!!!!<br></p>
       <div class="catstorage">
@@ -303,7 +352,17 @@
             <button onclick="keepCat3()" class="keepbutton" id="keepc3">Adopt</button>
             <button onclick="releaseCat3()" class="replacebutton" id="releasec3">Release</button>
             <p id="catown3">You have no cat in slot 3</p>
-          </div>
+        </div>
+
+
+        <div class="getcat">
+            <p id="cat4error">---</p>
+            <button onclick="buyCatSet4()" class="buybutton" id="getc4">Program some Cats in ($100m)</button>
+            <p id="catres4">No cats recently encoded</p>
+            <button onclick="keepCat4()" class="keepbutton" id="keepc4">Adopt</button>
+            <button onclick="releaseCat4()" class="replacebutton" id="releasec4">Release</button>
+            <p id="catown4">You have no cat in slot 4</p>
+        </div>
       </div>
 
       <div class="spacer">
@@ -313,8 +372,11 @@
         <p>&#10240</p>
       </div>
 
-      <div class="changelog">
+      <button class="changebutton" onclick="toggleChangelog()" id="changelogbutton">Show Changelog</button>
+      <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.5.2<br>Started adding prestige content</p>
+        <p>v0.5.1<br>Added another tier of cats, made the changelog hidden by default</p>
         <p>v0.5.0<br>High level cats now automatically click the button!</p>
         <p>v0.4.4<br>Made the button more exciting</p>
         <p>v0.4.3<br>Added a cat-related fruit bowl</p>
@@ -345,3 +407,4 @@
 </html>
 <script src="scripts/cats.js"></script>
 <script src="scripts/money.js"></script>
+<script src="scripts/prestige.js"></script>
