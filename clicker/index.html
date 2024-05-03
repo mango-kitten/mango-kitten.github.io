@@ -20,6 +20,7 @@
         // preloading and restoration
         let dolor = parseInt(localStorage.getItem("money"));
         let mpc = parseInt(localStorage.getItem("mpc"));
+        let cps = parseInt(localStorage.getItem("cps"));
         let cats = localStorage.getItem("cats");
         let bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let iscat1 = 0;
@@ -72,10 +73,19 @@
         if (!bought) {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
+        if (!cps) {
+            cps = 0
+        }
+        if (isNaN(cps)) {
+            console.log("cps = NaN")
+            resetstorage();
+            cps = 0
+        }
 
         // continue preload once html elements exist
         function autoload() {
           updatetext();
+          updatebutton();
           console.log("Loaded")
         }
 
@@ -87,11 +97,13 @@
           localStorage.setItem("mpc", mpc);
           localStorage.setItem("bought", bought);
           localStorage.setItem("cats", cats)
+          localStorage.setItem("cps", cps);
           var now = new Date();
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
           console.log("Saved")
           updatetext();
+          updatebutton();
         }
         // manual load
         function localload() {
@@ -99,8 +111,10 @@
           let mpc = parseInt(localStorage.getItem("mpc"));
           let bought = localStorage.getItem("bought");
           let cats = localStorage.getItem("cats");
+          let cps = parseInt(localStorage.getItem("cps"))
           console.log("Loaded")
           updatetext();
+          updatebutton();
         }
         // manual hard reset
         function resetstorage() {
@@ -113,9 +127,12 @@
           cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           catgot1 = 0
           localStorage.setItem("cats", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+          cps = 0
+          localStorage.setItem("cps", 0)
           document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
           document.getElementById("mpcdisp").innerHTML = `Money per Click: ${String(mpc)}`
           updatetext();
+          updatebutton();
         }
 
         // buy an item off the above arrays
@@ -210,12 +227,18 @@
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
           console.log("Auto-saved")
         }, 60 * 1000);
+
+        setInterval(function() { // autoclicker + updates per second
+          dolor = dolor + (cps*mpc)
+          updatebutton();
+          updatetext();
+        }, 1000);
       </script>
       <div class="spacer">
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.4.4</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.5.0</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -226,9 +249,13 @@
       <div class="interface">
         <h2 id="moneydisp">Money: 0</h2>
         <p id="mpcdisp">Money per Click: 1</p>
+        <p id="cpsdisp" class="hidden">Clicks per Second: 0</p>
         <div id="moneybutton">
-          <!-- <button onclick="money()" class="moneybutton" id="money" style="background: url(../img/yarnblue.png)">Get Money</button> -->
-          <img src="../img/yarnred.png">
+          <img src="../img/yarnred.png" class="" id="yarnred">
+          <img src="../img/yarngreen.png" class="hidden" id="yarngreen">
+          <img src="../img/yarnblue.png" class="hidden" id="yarnblue">
+          <img src="../img/yarngray.png" class="hidden" id="yarngray">
+          <img src="../img/yarnorange.png" class="hidden" id="yarnorange">
         </div>
       </div>
       <div class="spacer">
@@ -288,6 +315,7 @@
 
       <div class="changelog">
         <h2>Changelog:</h2>
+        <p>v0.5.0<br>High level cats now automatically click the button!</p>
         <p>v0.4.4<br>Made the button more exciting</p>
         <p>v0.4.3<br>Added a cat-related fruit bowl</p>
         <p>v0.4.2<br>Added a cat-related summoning ritual, and a mpc lv4 button</p>
