@@ -15,6 +15,7 @@ function updatetext() {
     document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
     document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
     document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
+    document.getElementById("cpsdisp").innerHTML = `Clicks per Second: ${String(cps)}`
     if (bought[4]) {
         document.getElementById("mpc4").innerHTML = `Mpc lv4 $100000 (${String(bought[4])}/10)`
     } else {
@@ -33,6 +34,51 @@ function updatetext() {
     if (cats[2] == 0) {
         document.getElementById("catown3").innerHTML = "You have no cat in slot 3"
     } else {
-        document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc)`
+        document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc\n+${String(catcps[cats[2]])} cps)`
+        if (cps == 0) {
+            console.log("Updating cps...")
+            cps = catcps[cats[2]]
+        }
+    }
+}
+
+
+function updatebutton() {
+    if (mpc < 50) {
+        document.getElementById("yarnred").classList = ""
+        document.getElementById("yarngreen").classList = "hidden"
+        document.getElementById("yarnblue").classList = "hidden"
+        document.getElementById("yarngray").classList = "hidden"
+        document.getElementById("yarnorange").classList = "hidden"
+    } else if (mpc < 200) {
+        document.getElementById("yarnred").classList = "hidden"
+        document.getElementById("yarngreen").classList = ""
+        document.getElementById("yarnblue").classList = "hidden"
+        document.getElementById("yarngray").classList = "hidden"
+        document.getElementById("yarnorange").classList = "hidden"
+    } else if (mpc < 2000) {
+        document.getElementById("yarnred").classList = "hidden"
+        document.getElementById("yarngreen").classList = "hidden"
+        document.getElementById("yarnblue").classList = ""
+        document.getElementById("yarngray").classList = "hidden"
+        document.getElementById("yarnorange").classList = "hidden"
+    } else if (mpc < 15000) {
+        document.getElementById("yarnred").classList = "hidden"
+        document.getElementById("yarngreen").classList = "hidden"
+        document.getElementById("yarnblue").classList = "hidden"
+        document.getElementById("yarngray").classList = ""
+        document.getElementById("yarnorange").classList = "hidden"
+    } else if (mpc < 50000) {
+        document.getElementById("yarnred").classList = "hidden"
+        document.getElementById("yarngreen").classList = "hidden"
+        document.getElementById("yarnblue").classList = "hidden"
+        document.getElementById("yarngray").classList = "hidden"
+        document.getElementById("yarnorange").classList = ""
+    }
+
+    if (cps > 0) {
+        document.getElementById("cpsdisp").classList = ""
+    } else {
+        document.getElementById("cpsdisp").classList = "hidden"
     }
 }
