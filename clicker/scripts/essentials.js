@@ -9,8 +9,8 @@ function updatetext() {
         resetstorage();
         mpc = 1;
     }
-    document.getElementById("moneydisp").innerHTML = `Money: ${String(dolor)}`
-    document.getElementById("mpcdisp").innerHTML = `Money per Click ${String(mpc)}`
+    document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(dolor)}`
+    document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(mpc)}`
     // document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[0])}/1)`
     document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
     document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
@@ -38,6 +38,15 @@ function updatetext() {
         if (cps == 0) {
             console.log("Updating cps...")
             cps = catcps[cats[2]]
+        }
+    }
+    if (cats[3] == 0) {
+        document.getElementById("catown4").innerHTML = "You have no cat in slot 4"
+    } else {
+        document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat (+${String(mpcadd[cats[3]])} mpc\n+${String(catcps[cats[3]])} cps)`
+        if (cps == 0) {
+            console.log("Updating cps...")
+            cps = catcps[cats[3]]
         }
     }
 }
@@ -80,5 +89,86 @@ function updatebutton() {
         document.getElementById("cpsdisp").classList = ""
     } else {
         document.getElementById("cpsdisp").classList = "hidden"
+    }
+}
+
+
+
+function parseCommas(input) {
+    let inputstr = String(input)
+    let stringlength = String(input).length
+    let output = ""
+    let stringiter = 0
+    let num = 0
+    if (stringlength % 3 == 0){
+        stringiter = stringlength/3
+        for (let i=0;i<stringiter;i++) {
+            if (output == "") {
+                output = inputstr.substring(0, 3)
+            } else {
+                num = i*3
+                output = output+ "," + inputstr.substring(num, num+3)
+            }
+        }
+    } else if (stringlength % 3 == 1) {
+        stringiter = (stringlength+2)/3
+        for (let i=0;i<stringiter;i++) {
+            if (output == "") {
+                output = inputstr.substring(0, 1)
+            } else {
+                num = i*3
+                output = output+ "," + inputstr.substring(num-2, num+1)
+            }
+        }
+    } else if (stringlength % 3 == 2) {
+        stringiter = (stringlength+1)/3
+        for (let i=0;i<stringiter;i++) {
+            if (output == "") {
+                output = inputstr.substring(0, 2)
+            } else {
+                num = i*3
+                output = output+ "," + inputstr.substring(num-1, num+2)
+            }
+        }
+    }
+    return output
+}
+
+
+
+function fastTickUpdate() {
+    document.getElementById("totalyarntext").innerHTML = `You have made ${parseCommas(totalmade)} yarn ever`
+}
+
+
+
+
+function devReset() {
+  inDevReset = 1
+  console.log("Are you sure? This will completely wipe your save, with no hope of ever recovering it. It will be as if you have never opened this site. Run devResetConfirm() to confirm this action.")
+}
+
+function devResetConfirm() {
+  if (inDevReset == 1) {
+    localStorage.removeItem("money")
+    localStorage.removeItem("mpc")
+    localStorage.removeItem("bought")
+    localStorage.removeItem("cats")
+    localStorage.removeItem("cps")
+    localStorage.removeItem("prestige")
+    localStorage.removeItem("total")
+    window.location.reload();
+  } else {
+    console.log("You are not in dev-reset mode.")
+  }
+}
+
+function toggleChangelog() {
+    if (changelogtoggle == 0) {
+        document.getElementById("changelog").classList = "changelog"
+        changelogtoggle = 1
+    } else {
+        document.getElementById("changelog").classList = "changelog hidden"
+        changelogtoggle = 0
     }
 }
