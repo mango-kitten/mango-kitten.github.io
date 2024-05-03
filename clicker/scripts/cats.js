@@ -1,7 +1,7 @@
 let catset = [0, 1,  1,     1,       1,       1,        2,       2,      2,      2,            3,      3,     3,     3,           3]
 let weight = [0, 500,200,   150,     75,      25,       1000,    300,    50,     2,            500,    400,   100,   25,          1]
 let mpcadd = [0, 5,  10,     20,     30,      50,       30,      75,     100,    500,          1000,   1500,  3000,  5000,        10000]
-let catpsc = [0, 0,  1,     3,       5,       10,       40,      80,     100,    300,          1000,   1500,  2500,  5000,        20000]
+let catcps = [0, 0,  0,     0,       0,       0,        0,       0,      0,      1,            1,      1,     2,     2,           3]
 let ctname = ["","","Tabby","Tuxedo","Calico","Siamese","Zombie","Demon","Angel","Shrodingers","Apple","Pear","Plum","Watermelon","Mango"]
 let possibleids = []
 let combpool = 0
@@ -134,7 +134,7 @@ function buyCatSet3() {
     if (dolor >= 1000000) {
         catgot3 = getCat(3)
         iscat3 = 1
-        document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} mpc)`
+        document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} mpc, +${String(catcps[catgot3])} cps)`
         document.getElementById("cat3error").innerHTML = "---"
         dolor = dolor-1000000
         updatetext();
@@ -146,11 +146,13 @@ function buyCatSet3() {
 function keepCat3() {
     if (iscat3 == 1) {
       mpc = mpc - mpcadd[cats[2]]
+      cps = cps - catcps[cats[2]]
       cats.splice(2, 1, catgot3)
       mpc = mpc + mpcadd[catgot3]
+      cps = cps + catcps[cats[2]]
       document.getElementById("catres3").innerHTML = `Get a new bowl...`
       document.getElementById("cat3error").innerHTML = "---"
-      document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc)`
+      document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc, +${String(catcps[catgot3])} cps)`
       iscat3 = 0
       updatetext();
     } else {
