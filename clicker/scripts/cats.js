@@ -26,8 +26,9 @@ function getCat(set) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUAL
     }
   }
   for (let i=0; i<possibleids.length; i++) {
-    combpool = combpool + weight[possibleids[i]] + 1 // total up the weights
+    combpool = combpool + weight[possibleids[i]] // total up the weights
   }
+  combpool = combpool + 1
   weightroll = Math.random() * combpool // roll, multiply by max weight
   console.log("Rolled ",weightroll," out of ",combpool)
   for (let i=0; i<possibleids.length; i++) {
