@@ -1,8 +1,8 @@
-let catset = [0, 1,  1,     1,       1,       1,        2,       2,      2,      2,            3,      3,     3,     3,           3]
-let weight = [0, 500,200,   150,     75,      25,       1000,    300,    50,     2,            500,    400,   100,   25,          1]
-let mpcadd = [0, 5,  10,     20,     30,      50,       30,      75,     100,    500,          1000,   1500,  3000,  5000,        10000]
-let catcps = [0, 0,  0,     0,       0,       0,        0,       0,      0,      1,            1,      1,     2,     2,           3]
-let ctname = ["","","Tabby","Tuxedo","Calico","Siamese","Zombie","Demon","Angel","Shrodingers","Apple","Pear","Plum","Watermelon","Mango"]
+let catset = [0, 1,  1,     1,       1,       1,        2,       2,      2,      2,            3,      3,     3,     3,           3,      4,     4,    4,    4]
+let weight = [0, 500,200,   150,     75,      25,       1000,    300,    50,     2,            500,    400,   100,   25,          1,      500,   500,  200,  20]
+let mpcadd = [0, 5,  10,     20,     30,      50,       30,      75,     100,    500,          1000,   1500,  3000,  5000,        10000,  7500,  7500, 10000,30000]
+let catcps = [0, 0,  0,     0,       0,       0,        0,       0,      0,      1,            1,      1,     2,     2,           3,      2,     2,    4,    10]
+let ctname = ["","","Tabby","Tuxedo","Calico","Siamese","Zombie","Demon","Angel","Shrodingers","Apple","Pear","Plum","Watermelon","Mango","HTML","CSS","JS", "Python"]
 let possibleids = []
 let combpool = 0
 let weightroll = 0
@@ -12,8 +12,10 @@ let foundres = 0
 let catgot1 = 0
 let catgot2 = 0
 let catgot3 = 0
+let catgot4 = 0
 
-function getCat(set) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUALLY WORKS
+function getCat(set, roll = 9999) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUALLY WORKS
+  console.log(roll)
   possibleids = [] // empty the possibilites and other stuff
   combpool = 0
   rescheck = 0
@@ -29,7 +31,11 @@ function getCat(set) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUAL
     combpool = combpool + weight[possibleids[i]] // total up the weights
   }
   combpool = combpool + 1
-  weightroll = Math.random() * combpool // roll, multiply by max weight
+  if (roll == 9999) {
+    weightroll = Math.random() * combpool // roll, multiply by max weight
+  } else {
+    weightroll = roll
+  }
   console.log("Rolled ",weightroll," out of ",combpool)
   for (let i=0; i<possibleids.length; i++) {
     rescheck = rescheck + weight[possibleids[i]]
@@ -38,21 +44,32 @@ function getCat(set) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUAL
       result = possibleids[i]
     }
   }
+  if (foundres == 0) {
+    result = possibleids[possibleids.length-1]
+  }
   return result
 }
 
 
 
-function buyCatSet1() {
-  if (dolor >= 500) {
-    catgot1 = getCat(1)
+function buyCatSet1(id = 0) {
+  if (id == 0) {
+    if (dolor >= 500) {
+        catgot1 = getCat(1)
+        iscat1 = 1
+        document.getElementById("catres1").innerHTML = `Got a ${String(ctname[catgot1])} Cat (+${String(mpcadd[catgot1])} mpc)`
+        document.getElementById("cat1error").innerHTML = "---"
+        dolor = dolor-500
+        updatetext();
+    } else {
+        document.getElementById("cat1error").innerHTML = "Too poor!"
+    }
+  } else {
+    catgot1 = getCat(1, id)
     iscat1 = 1
     document.getElementById("catres1").innerHTML = `Got a ${String(ctname[catgot1])} Cat (+${String(mpcadd[catgot1])} mpc)`
     document.getElementById("cat1error").innerHTML = "---"
-    dolor = dolor-500
     updatetext();
-  } else {
-    document.getElementById("cat1error").innerHTML = "Too poor!"
   }
 }
 
@@ -85,16 +102,24 @@ function releaseCat1() {
 
 
 
-function buyCatSet2() {
-    if (dolor >= 20000) {
-      catgot2 = getCat(2)
-      iscat2 = 1
-      document.getElementById("catres2").innerHTML = `Got a ${String(ctname[catgot2])} Cat (+${String(mpcadd[catgot2])} mpc)`
-      document.getElementById("cat2error").innerHTML = "---"
-      dolor = dolor-20000
-      updatetext();
+function buyCatSet2(id = 0) {
+    if (id == 0) {
+        if (dolor >= 20000) {
+            catgot2 = getCat(2)
+            iscat2 = 1
+            document.getElementById("catres2").innerHTML = `Got a ${String(ctname[catgot2])} Cat (+${String(mpcadd[catgot2])} mpc)`
+            document.getElementById("cat2error").innerHTML = "---"
+            dolor = dolor-20000
+            updatetext();
+            } else {
+                document.getElementById("cat2error").innerHTML = "Too poor!"
+            }
     } else {
-        document.getElementById("cat2error").innerHTML = "Too poor!"
+        catgot2 = getCat(2, id)
+        iscat2 = 1
+        document.getElementById("catres2").innerHTML = `Got a ${String(ctname[catgot2])} Cat (+${String(mpcadd[catgot2])} mpc)`
+        document.getElementById("cat2error").innerHTML = "---"
+        updatetext();
     }
   }
   
@@ -131,16 +156,24 @@ function releaseCat2() {
 
 
 
-function buyCatSet3() {
-    if (dolor >= 1000000) {
-        catgot3 = getCat(3)
+function buyCatSet3(id = 0) {
+    if (id == 0) {
+        if (dolor >= 1000000) {
+            catgot3 = getCat(3)
+            iscat3 = 1
+            document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} mpc, +${String(catcps[catgot3])} cps)`
+            document.getElementById("cat3error").innerHTML = "---"
+            dolor = dolor-1000000
+            updatetext();
+        } else {
+            document.getElementById("cat3error").innerHTML = "Too poor!"
+        }
+    } else {
+        catgot3 = getCat(3, id)
         iscat3 = 1
         document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} mpc, +${String(catcps[catgot3])} cps)`
         document.getElementById("cat3error").innerHTML = "---"
-        dolor = dolor-1000000
         updatetext();
-    } else {
-        document.getElementById("cat3error").innerHTML = "Too poor!"
     }
 }
   
@@ -153,7 +186,7 @@ function keepCat3() {
       cps = cps + catcps[cats[2]]
       document.getElementById("catres3").innerHTML = `Get a new bowl...`
       document.getElementById("cat3error").innerHTML = "---"
-      document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc, +${String(catcps[catgot3])} cps)`
+      document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc, +${String(catcps[cats[2]])} cps)`
       iscat3 = 0
       updatetext();
     } else {
@@ -169,5 +202,57 @@ function releaseCat3() {
       iscat3 = 0
     } else {
       document.getElementById("cat3error").innerHTML = "There is no cat waiting!"
+    }
+}
+
+
+
+
+function buyCatSet4(id = 0) {
+    if (id == 0) {
+        if (dolor >= 100000000) {
+            catgot4 = getCat(4)
+            iscat4 = 1
+            document.getElementById("catres4").innerHTML = `Got a ${String(ctname[catgot4])} Cat (+${String(mpcadd[catgot4])} mpc, +${String(catcps[catgot4])} cps)`
+            document.getElementById("cat4error").innerHTML = "---"
+            dolor = dolor-100000000
+            updatetext();
+        } else {
+            document.getElementById("cat4error").innerHTML = "Too poor!"
+        }
+    } else {
+        catgot4 = getCat(4, id)
+        iscat4 = 1
+        document.getElementById("catres4").innerHTML = `Got a ${String(ctname[catgot4])} Cat (+${String(mpcadd[catgot4])} mpc, +${String(catcps[catgot4])} cps)`
+        document.getElementById("cat4error").innerHTML = "---"
+        updatetext();
+    }
+}
+  
+function keepCat4() {
+    if (iscat4 == 1) {
+      mpc = mpc - mpcadd[cats[3]]
+      cps = cps - catcps[cats[3]]
+      cats.splice(3, 1, catgot4)
+      mpc = mpc + mpcadd[catgot4]
+      cps = cps + catcps[cats[3]]
+      document.getElementById("catres4").innerHTML = `Run a new program...`
+      document.getElementById("cat4error").innerHTML = "---"
+      document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat (+${String(mpcadd[cats[3]])} mpc, +${String(catcps[cats[3]])} cps)`
+      iscat4 = 0
+      updatetext();
+    } else {
+      document.getElementById("cat4error").innerHTML = "There is no cat waiting!"
+    }
+}
+  
+function releaseCat4() {
+    if (iscat4 == 1) {
+      document.getElementById("catres4").innerHTML = `Run a new program...`
+      document.getElementById("cat4error").innerHTML = "---"
+      updatetext();
+      iscat4 = 0
+    } else {
+      document.getElementById("cat4error").innerHTML = "There is no cat waiting!"
     }
 }
