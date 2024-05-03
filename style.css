@@ -225,3 +225,23 @@ button {
 .hidden {
     display: none;
 }
+
+.changebutton {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 18px;
+    padding: 3px;
+    background-color: rgb(214, 209, 203);
+    color: orange;
+}
+
+.prestige {
+    text-align: center;
+}
+
+.smalltext {
+    font-size: 14px;
+}
+
+.prestigebutton {
+    color: rgb(74, 74, 196);
+}
