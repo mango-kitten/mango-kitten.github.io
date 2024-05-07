@@ -263,8 +263,8 @@ button {
     text-align: center;
 }
 .catentry {
-    width: 140px;
-    padding: 1.5%;
+    width: 10%;
+    padding: 0.5%;
 }
 .cattext {
     font-size: 16px;
@@ -275,9 +275,8 @@ button {
     font-size: 0.75vm;
 }
 .catimg {
-    height: 129px;
-    width: 115px;
-    /* width: 100%; */
+    width: 90%;
+    height: auto;
 }
 
 .greytext {
