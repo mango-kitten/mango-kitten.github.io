@@ -58,9 +58,10 @@ function resetCatalogue() {
 }
 
 function loadCatalogue() {
-    if (catgot == [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
-        for (let i=0;i<cats.length;) {
-            if (cats[i] > 0) {
+    console.log(cats.length)
+    if (cats.length > 0) {
+        for (let i=0;i<cats.length;i++) {
+            if (cats[i] > 0 && catgot[cats[i]] == 0) {
                 console.log("Current cat found, logging.")
                 catgot.splice(cats[i], 1, 1)
             }
