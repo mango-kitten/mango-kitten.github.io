@@ -11,7 +11,6 @@ function updatetext() {
     }
     document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(dolor)}`
     document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(mpc)}`
-    // document.getElementById("cat1").innerHTML = `Buy a Cat $2000 (${String(bought[0])}/1)`
     document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
     document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
     document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
@@ -100,34 +99,38 @@ function parseCommas(input) {
     let output = ""
     let stringiter = 0
     let num = 0
-    if (stringlength % 3 == 0){
-        stringiter = stringlength/3
-        for (let i=0;i<stringiter;i++) {
-            if (output == "") {
-                output = inputstr.substring(0, 3)
-            } else {
-                num = i*3
-                output = output+ "," + inputstr.substring(num, num+3)
+    if (String(input).includes("e") || String(input).includes("Infinity")) {
+        output = input
+    } else {
+        if (stringlength % 3 == 0){
+            stringiter = stringlength/3
+            for (let i=0;i<stringiter;i++) {
+                if (output == "") {
+                    output = inputstr.substring(0, 3)
+                } else {
+                    num = i*3
+                    output = output+ "," + inputstr.substring(num, num+3)
+                }
             }
-        }
-    } else if (stringlength % 3 == 1) {
-        stringiter = (stringlength+2)/3
-        for (let i=0;i<stringiter;i++) {
-            if (output == "") {
-                output = inputstr.substring(0, 1)
-            } else {
-                num = i*3
-                output = output+ "," + inputstr.substring(num-2, num+1)
+        } else if (stringlength % 3 == 1) {
+            stringiter = (stringlength+2)/3
+            for (let i=0;i<stringiter;i++) {
+                if (output == "") {
+                    output = inputstr.substring(0, 1)
+                } else {
+                    num = i*3
+                    output = output+ "," + inputstr.substring(num-2, num+1)
+                }
             }
-        }
-    } else if (stringlength % 3 == 2) {
-        stringiter = (stringlength+1)/3
-        for (let i=0;i<stringiter;i++) {
-            if (output == "") {
-                output = inputstr.substring(0, 2)
-            } else {
-                num = i*3
-                output = output+ "," + inputstr.substring(num-1, num+2)
+        } else if (stringlength % 3 == 2) {
+            stringiter = (stringlength+1)/3
+            for (let i=0;i<stringiter;i++) {
+                if (output == "") {
+                    output = inputstr.substring(0, 2)
+                } else {
+                    num = i*3
+                    output = output+ "," + inputstr.substring(num-1, num+2)
+                }
             }
         }
     }
@@ -170,5 +173,15 @@ function toggleChangelog() {
     } else {
         document.getElementById("changelog").classList = "changelog hidden"
         changelogtoggle = 0
+    }
+}
+
+function updateCatalogue() {
+    for (let i=0;i<catgot.length;i++) {
+        if (catgot[i] > 0) {
+            cataUnlock(i)
+        } else {
+            cataLock(i)
+        }
     }
 }
