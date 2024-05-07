@@ -56,16 +56,19 @@ function buyCatSet1(id = 0) {
   if (id == 0) {
     if (dolor >= 500) {
         catgot1 = getCat(1)
+        enterCat(catgot1)
         iscat1 = 1
         document.getElementById("catres1").innerHTML = `Got a ${String(ctname[catgot1])} Cat (+${String(mpcadd[catgot1])} mpc)`
         document.getElementById("cat1error").innerHTML = "---"
         dolor = dolor-500
+        localsave();
         updatetext();
     } else {
         document.getElementById("cat1error").innerHTML = "Too poor!"
     }
   } else {
     catgot1 = getCat(1, id)
+    enterCat(catgot1)
     iscat1 = 1
     document.getElementById("catres1").innerHTML = `Got a ${String(ctname[catgot1])} Cat (+${String(mpcadd[catgot1])} mpc)`
     document.getElementById("cat1error").innerHTML = "---"
@@ -82,6 +85,7 @@ function keepCat1() {
     document.getElementById("cat1error").innerHTML = "---"
     document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} mpc)`
     iscat1 = 0
+    localsave();
     updatetext();
   } else {
     document.getElementById("cat1error").innerHTML = "There is no cat waiting!"
@@ -106,16 +110,19 @@ function buyCatSet2(id = 0) {
     if (id == 0) {
         if (dolor >= 20000) {
             catgot2 = getCat(2)
+            enterCat(catgot2)
             iscat2 = 1
             document.getElementById("catres2").innerHTML = `Got a ${String(ctname[catgot2])} Cat (+${String(mpcadd[catgot2])} mpc)`
             document.getElementById("cat2error").innerHTML = "---"
             dolor = dolor-20000
+            localsave();
             updatetext();
             } else {
                 document.getElementById("cat2error").innerHTML = "Too poor!"
             }
     } else {
         catgot2 = getCat(2, id)
+        enterCat(catgot2)
         iscat2 = 1
         document.getElementById("catres2").innerHTML = `Got a ${String(ctname[catgot2])} Cat (+${String(mpcadd[catgot2])} mpc)`
         document.getElementById("cat2error").innerHTML = "---"
@@ -132,6 +139,7 @@ function keepCat2() {
       document.getElementById("cat2error").innerHTML = "---"
       document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat (+${String(mpcadd[cats[1]])} mpc)`
       iscat2 = 0
+      localsave();
       updatetext();
     } else {
       document.getElementById("cat2error").innerHTML = "There is no cat waiting!"
@@ -160,16 +168,19 @@ function buyCatSet3(id = 0) {
     if (id == 0) {
         if (dolor >= 1000000) {
             catgot3 = getCat(3)
+            enterCat(catgot3)
             iscat3 = 1
             document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} mpc, +${String(catcps[catgot3])} cps)`
             document.getElementById("cat3error").innerHTML = "---"
             dolor = dolor-1000000
+            localsave();
             updatetext();
         } else {
             document.getElementById("cat3error").innerHTML = "Too poor!"
         }
     } else {
         catgot3 = getCat(3, id)
+        enterCat(catgot3)
         iscat3 = 1
         document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} mpc, +${String(catcps[catgot3])} cps)`
         document.getElementById("cat3error").innerHTML = "---"
@@ -188,6 +199,7 @@ function keepCat3() {
       document.getElementById("cat3error").innerHTML = "---"
       document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc, +${String(catcps[cats[2]])} cps)`
       iscat3 = 0
+      localsave();
       updatetext();
     } else {
       document.getElementById("cat3error").innerHTML = "There is no cat waiting!"
@@ -212,16 +224,19 @@ function buyCatSet4(id = 0) {
     if (id == 0) {
         if (dolor >= 100000000) {
             catgot4 = getCat(4)
+            enterCat(catgot4)
             iscat4 = 1
             document.getElementById("catres4").innerHTML = `Got a ${String(ctname[catgot4])} Cat (+${String(mpcadd[catgot4])} mpc, +${String(catcps[catgot4])} cps)`
             document.getElementById("cat4error").innerHTML = "---"
             dolor = dolor-100000000
+            localsave();
             updatetext();
         } else {
             document.getElementById("cat4error").innerHTML = "Too poor!"
         }
     } else {
         catgot4 = getCat(4, id)
+        enterCat(catgot4)
         iscat4 = 1
         document.getElementById("catres4").innerHTML = `Got a ${String(ctname[catgot4])} Cat (+${String(mpcadd[catgot4])} mpc, +${String(catcps[catgot4])} cps)`
         document.getElementById("cat4error").innerHTML = "---"
@@ -240,6 +255,7 @@ function keepCat4() {
       document.getElementById("cat4error").innerHTML = "---"
       document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat (+${String(mpcadd[cats[3]])} mpc, +${String(catcps[cats[3]])} cps)`
       iscat4 = 0
+      localsave();
       updatetext();
     } else {
       document.getElementById("cat4error").innerHTML = "There is no cat waiting!"
