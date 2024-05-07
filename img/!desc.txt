@@ -2,7 +2,7 @@ all of the following files are used across the site
 
 
 image credits are as follows:
-  Mango (me) - badtime.png, favicon.ico, mangocrown.png, zombie.png, programming.png
+  Mango (me) - badtime.png, css.png, favicon.ico, html.png, javascript.png, mangocrown.png, programming.png, python.png, zombie.png
   OMOCAT - headspace.jpg, omori.png
   Microsoft - minecraft.png
   Toby Fox - undertale.png
