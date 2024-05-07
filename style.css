@@ -107,6 +107,7 @@ button {
 .moneybutton {
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
+    font-size: 1.5vm;
     padding: 3px;
     background-color: rgb(20, 202, 126);
     color: rgb(86, 161, 11);
@@ -115,6 +116,7 @@ button {
 .savebutton {
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
+    font-size: 1.5vm;
     padding: 3px;
     background-color: rgb(214, 209, 203);
     position: relative;
@@ -126,6 +128,7 @@ button {
 .buybutton {
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
+    font-size: 1.5vm;
     padding: 3px;
     background-color: rgb(4, 4, 155);
     color: rgb(1, 216, 216);
@@ -153,6 +156,7 @@ button {
 .resetbutton {
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
+    font-size: 1.5vm;
     padding: 3px;
     background-color: red;
 }
@@ -199,6 +203,7 @@ button {
     background-color: green;
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
+    font-size: 1.5vm;
     color: rgb(6, 83, 12);
     padding: 3px;
 }
@@ -206,6 +211,7 @@ button {
     background-color: red;
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
+    font-size: 1.5vm;
     color: rgb(131, 13, 9);
     padding: 3px;
 }
@@ -229,6 +235,7 @@ button {
 .changebutton {
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
+    font-size: 1.5vm;
     padding: 3px;
     background-color: rgb(214, 209, 203);
     color: orange;
@@ -240,8 +247,47 @@ button {
 
 .smalltext {
     font-size: 14px;
+    font-size: 1vm;
 }
 
 .prestigebutton {
     color: rgb(74, 74, 196);
+}
+
+* {
+    touch-action: manipulation;
+}
+
+.catalogue {
+    display: flex;
+    text-align: center;
+}
+.catentry {
+    width: 140px;
+    padding: 1.5%;
+}
+.cattext {
+    font-size: 16px;
+    font-size: 1.5vm;
+}
+.cattext2 {
+    font-size: 9px;
+    font-size: 0.75vm;
+}
+.catimg {
+    height: 129px;
+    width: 115px;
+    /* width: 100%; */
+}
+
+.greytext {
+    color: grey !important;
+}
+.catatier {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.flexhidden {
+    visibility: hidden;
 }
