@@ -11,29 +11,29 @@ function updatetext() {
     }
     document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(dolor)}`
     document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(mpc)}`
-    document.getElementById("mpc1").innerHTML = `Increase mpc $50 (${String(bought[1])}/6)`
-    document.getElementById("mpc2").innerHTML = `Mpc lv2 $1000 (${String(bought[2])}/8)`
-    document.getElementById("mpc3").innerHTML = `Mpc lv3 $10000 (${String(bought[3])}/8)`
+    document.getElementById("mpc1").innerHTML = `Increase ypc $50 (${String(bought[1])}/3)`
+    document.getElementById("mpc2").innerHTML = `Ypc lv2 $1000 (${String(bought[2])}/8)`
+    document.getElementById("mpc3").innerHTML = `Ypc lv3 $10000 (${String(bought[3])}/8)`
     document.getElementById("cpsdisp").innerHTML = `Clicks per Second: ${String(cps)}`
     if (bought[4]) {
-        document.getElementById("mpc4").innerHTML = `Mpc lv4 $100000 (${String(bought[4])}/10)`
+        document.getElementById("mpc4").innerHTML = `Ypc lv4 $100000 (${String(bought[4])}/10)`
     } else {
-        document.getElementById("mpc4").innerHTML = `Mpc lv4 $100000 (0/10)`
+        document.getElementById("mpc4").innerHTML = `Ypc lv4 $100000 (0/10)`
     }
     if (cats[0] == 0) {
         document.getElementById("catown1").innerHTML = "You have no cat in slot 1"
     } else {
-        document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} mpc)`
+        document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} ypc)`
     }
     if (cats[1] == 0) {
         document.getElementById("catown2").innerHTML = "You have no cat in slot 2"
     } else {
-        document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat (+${String(mpcadd[cats[1]])} mpc)`
+        document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat (+${String(mpcadd[cats[1]])} ypc)`
     }
     if (cats[2] == 0) {
         document.getElementById("catown3").innerHTML = "You have no cat in slot 3"
     } else {
-        document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} mpc\n+${String(catcps[cats[2]])} cps)`
+        document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} ypc\n+${String(catcps[cats[2]])} cps)`
         if (cps == 0) {
             console.log("Updating cps...")
             cps = catcps[cats[2]]
@@ -42,7 +42,7 @@ function updatetext() {
     if (cats[3] == 0) {
         document.getElementById("catown4").innerHTML = "You have no cat in slot 4"
     } else {
-        document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat (+${String(mpcadd[cats[3]])} mpc\n+${String(catcps[cats[3]])} cps)`
+        document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat (+${String(mpcadd[cats[3]])} ypc\n+${String(catcps[cats[3]])} cps)`
         if (cps == 0) {
             console.log("Updating cps...")
             cps = catcps[cats[3]]
