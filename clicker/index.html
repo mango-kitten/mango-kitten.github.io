@@ -18,9 +18,9 @@
       <script src="scripts/essentials.js"></script>
       <script>
         // preloading and restoration
-        let dolor = parseInt(localStorage.getItem("money"));
-        let mpc = parseInt(localStorage.getItem("mpc"));
-        let cps = parseInt(localStorage.getItem("cps"));
+        let dolor = Number(localStorage.getItem("money"));
+        let mpc = Number(localStorage.getItem("mpc"));
+        let cps = Number(localStorage.getItem("cps"));
         let cats = localStorage.getItem("cats");
         let bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let catgot = localStorage.getItem("catgot");
@@ -30,8 +30,18 @@
         let iscat4 = 0
         let inDevReset = 0;
         let changelogtoggle = 0;
-        let prestigelevel = parseInt(localStorage.getItem("prestige"));
-        let totalmade = parseInt(localStorage.getItem("total"));
+        let prestigelevel = Number(localStorage.getItem("prestige"));
+        let totalmade = Number(localStorage.getItem("total"));
+        if (mpc) {
+            console.log("Successfully called variable mpc")
+        } else {
+          mpc = 1;
+        }
+        if (isNaN(mpc)) {
+          console.log("mpc = NaN")
+          resetstorage();
+          mpc = 1;
+        }
         if (mpc == 1) {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         } else {
@@ -80,16 +90,6 @@
           dolor = 0;
           console.log("No save file found, starting fresh.")
         }
-        if (mpc) {
-            console.log("Successfully called variable mpc")
-        } else {
-          mpc = 1;
-        }
-        if (isNaN(mpc)) {
-          console.log("mpc = NaN")
-          resetstorage();
-          mpc = 1;
-        }
         if (bought) {
             console.log("Successfully called variable bought")
         } else {
@@ -109,7 +109,7 @@
         if (prestigelevel) {
             console.log("Successfully called variable prestigelevel")
         } else {
-            prestigelevel = 1
+            prestigelevel = 0
         }
         if (totalmade) {
             console.log("Successfully called variable totalmade")
@@ -148,20 +148,7 @@
           updatetext();
           updatebutton();
         }
-        // manual load
-        // function localload() {
-        //   let dolor = parseInt(localStorage.getItem("money"));
-        //   let mpc = parseInt(localStorage.getItem("mpc"));
-        //   let bought = localStorage.getItem("bought");
-        //   let cats = localStorage.getItem("cats");
-        //   let cps = parseInt(localStorage.getItem("cps"))
-        //   let prestigelevel = parseInt(localStorage.getItem("prestige"));
-        //   let totalmade = parseInt(localStorage.getItem("total"));
-        //   console.log("Loaded")
-        //   updatetext();
-        //   updatebutton();
-        //   updateCatalogue();
-        // }
+
         // manual hard reset
         function resetstorage() {
           dolor = 0;
@@ -302,11 +289,10 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.6.1</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.6.2</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
-        <!-- <button onclick="localload()" class="savebutton">Load</button> -->
         <button onclick="resetstorage()" class="resetbutton">Reset</button>
         <p id="lastsaved">Last Saved: Not saved this session.</p>
       </div>
@@ -343,6 +329,7 @@
         <p>Prestiging will permenantly increase your earnings, at the cost of your progress! This function is in development.</p>
         <p class="smalltext">You will keep your achievements (wip) and catalogue (wip) progress.</p>
         <p id="totalyarntext">You have made 0 yarn ever</p>
+        <p id="prestigelevel">You will be prestige level 0.</p>
         <div id="prestigebutton" class="prestigebutton">Prestige!</div>
       </div>
 
@@ -591,6 +578,7 @@
       <button class="changebutton" onclick="toggleChangelog()" id="changelogbutton">Show Changelog</button>
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.6.2<br>Fixed some issues with starting a fresh save, added backend for prestige</p>
         <p>v0.6.1<br>Fixed floats... again</p>
         <p>v0.6.0<br>Added the Catalogue!</p>
         <p>v0.5.3<br>Fixed some issues with commas, added anti-savescumming (sorry)</p>
