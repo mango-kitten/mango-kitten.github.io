@@ -29,7 +29,6 @@ function prestigeLevel(yarn) {
             level = level + 1
         }
     }
-    yarnamt = yarnamt + ((coeff ** level) * 1000000)
     remaining = yarnamt - yarn
     return [level, remaining]
 }
