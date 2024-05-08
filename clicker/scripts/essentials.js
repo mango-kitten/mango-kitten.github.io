@@ -1,3 +1,7 @@
+let tickLevel = 0
+let tickRemain = 0
+
+
 function updatetext() {
     if (isNaN(dolor)) {
         console.log("dolor = NaN")
@@ -141,6 +145,9 @@ function parseCommas(input) {
 
 function fastTickUpdate() {
     document.getElementById("totalyarntext").innerHTML = `You have made ${parseCommas(totalmade)} yarn ever`
+    tickLevel = prestigeLevel(totalmade)[0]
+    tickRemain = Math.floor(prestigeLevel(totalmade)[1])
+    document.getElementById("prestigelevel").innerHTML = `You will be prestige level ${tickLevel} (+${tickLevel-prestigelevel})<br>${parseCommas(tickRemain)} to next level`
 }
 
 
@@ -185,3 +192,23 @@ function updateCatalogue() {
         }
     }
 }
+
+
+// function toStore(num) {
+//     let numparse = []
+//     let numlen = String(num).length
+//     console.log(Math.ceil(numlen/15))
+//     let res = ""
+//     for (let i=0;i<Math.ceil(numlen/15);i++) {
+//         numparse.push(String(num).substring(i*15, (i*15)+14))
+//         console.log(numparse)
+//     }
+//     for (let i=0;i<numparse.length;i++) {
+//         res = res + Number(numparse[i]).toString(36)
+//     }
+//     return res
+// }
+
+// function fromStore(str) {
+//     return parseInt(str, 36)
+// }
