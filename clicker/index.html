@@ -31,6 +31,9 @@
         let inDevReset = 0;
         let changelogtoggle = 0;
         let prestigelevel = Number(localStorage.getItem("prestige"));
+        if (prestigelevel == 1) {
+          prestigelevel = 0
+        }
         let totalmade = Number(localStorage.getItem("total"));
         if (mpc) {
             console.log("Successfully called variable mpc")
