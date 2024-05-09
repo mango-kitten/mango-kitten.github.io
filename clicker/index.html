@@ -31,30 +31,32 @@
         let inDevReset = 0;
         let changelogtoggle = 0;
         let prestigelevel = Number(localStorage.getItem("prestige"));
-        if (prestigelevel == 1) {
-          prestigelevel = 0
-        }
         let totalmade = Number(localStorage.getItem("total"));
-        if (mpc) {
-            console.log("Successfully called variable mpc")
-        } else {
-          mpc = 1;
+
+        let prestigeMulti = 1
+        let strayMulti = 1
+        let magicMulti = 1
+        let fruitMulti = 1
+        let programMulti = 1
+        let prestigeCps = 0
+
+        // if (mpc) {
+        //     console.log("Successfully called variable mpc")
+        // } else {
+        //   mpc = 1;
+        // }
+        // if (isNaN(mpc)) {
+        //   console.log("mpc = NaN")
+        //   resetstorage();
+        //   mpc = 1;
+        // }
+        var str = localStorage.getItem("bought");
+        if (str.includes("[")) {
+          str = str.substring(1, str.length - 1); // cut out the brackets
         }
-        if (isNaN(mpc)) {
-          console.log("mpc = NaN")
-          resetstorage();
-          mpc = 1;
-        }
-        if (mpc == 1) {
-          bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        } else {
-          var str = localStorage.getItem("bought");
-          if (str.includes("[")) {
-            str = str.substring(1, str.length - 1); // cut out the brackets
-          }
-          bought = str.split(",");
-          console.log(bought)
-        }
+        bought = str.split(",");
+        console.log(bought)
+        
         if (cats) {
           var str = localStorage.getItem("cats");
           if (str.includes("[")) {
@@ -98,16 +100,16 @@
         } else {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
-        if (cps) {
-            console.log("Successfully called variable cps")
-        } else {
-            cps = 0
-        }
-        if (isNaN(cps)) {
-            console.log("cps = NaN")
-            resetstorage();
-            cps = 0
-        }
+        // if (cps) {
+        //     console.log("Successfully called variable cps")
+        // } else {
+        //     cps = 0
+        // }
+        // if (isNaN(cps)) {
+        //     console.log("cps = NaN")
+        //     resetstorage();
+        //     cps = 0
+        // }
 
         if (prestigelevel) {
             console.log("Successfully called variable prestigelevel")
@@ -124,6 +126,10 @@
 
         // continue preload once html elements exist
         function autoload() {
+          buildPrestige()
+          mpc = buildYpc()
+          cps = buildCps()
+          console.log(mpc, cps)
           updatetext();
           updatebutton();
           loadCatalogue();
@@ -137,10 +143,10 @@
         // manual save
         function localsave() {
           localStorage.setItem("money", dolor);
-          localStorage.setItem("mpc", mpc);
+          // localStorage.setItem("mpc", mpc);
           localStorage.setItem("bought", bought);
           localStorage.setItem("cats", cats)
-          localStorage.setItem("cps", cps);
+          // localStorage.setItem("cps", cps);
           localStorage.setItem("prestige", prestigelevel);
           localStorage.setItem("total", totalmade);
           localStorage.setItem("catgot", catgot);
@@ -157,14 +163,14 @@
           dolor = 0;
           localStorage.setItem("money", 0);
           mpc = 1;
-          localStorage.setItem("mpc", 1);
+          // localStorage.setItem("mpc", 1);
           bought = [0, 0, 0, 0];
           localStorage.setItem("bought", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           catgot1 = 0
           localStorage.setItem("cats", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
           cps = 0
-          localStorage.setItem("cps", 0)
+          // localStorage.setItem("cps", 0)
           prestigelevel = 0
           localStorage.setItem("prestige", 0)
           totalmade = 0
@@ -197,20 +203,20 @@
                     document.getElementById("money").innerHTML = `Get Money 🐈`
                     updatetext();
                 } else if (id == 1) {
-                    mpc = mpc + 1;
                     bought.push('1')
+                    mpc = buildYpc()
                     updatetext();
                 } else if (id == 2) {
                     bought.push('1')
-                    mpc = mpc + 2;
+                    mpc = buildYpc()
                     updatetext();
                 } else if (id == 3) {
                     bought.push('1')
-                    mpc = mpc + 10;
+                    mpc = buildYpc()
                     updatetext();
                 } else if (id == 4) {
                     bought.push('1')
-                    mpc = mpc + 100;
+                    mpc = buildYpc()
                     updatetext();
                 }
                 document.getElementById("clickerinfo").innerHTML = "---"
@@ -220,7 +226,6 @@
                 // too poor
                 document.getElementById("clickerinfo").innerHTML = "You're too poor!"
             };
-
           } else {
             itemqty = bought[id];
             if (parseInt(itemqty) < itemmax) {
@@ -231,20 +236,20 @@
                     document.getElementById("money").innerHTML = `Get Money 🐈`
                     updatetext();
                 } else if (id == 1) {
-                    mpc = mpc + 1;
                     bought.splice(1, 1, parseInt(itemqty)+1)
+                    mpc = buildYpc()
                     updatetext();
                 } else if (id == 2) {
                     bought.splice(2, 1, parseInt(itemqty)+1)
-                    mpc = mpc + 2;
+                    mpc = buildYpc()
                     updatetext();
                 } else if (id == 3) {
                     bought.splice(3, 1, parseInt(itemqty)+1)
-                    mpc = mpc + 10;
+                    mpc = buildYpc()
                     updatetext();
                 } else if (id == 4) {
                     bought.splice(4, 1, parseInt(itemqty)+1)
-                    mpc = mpc + 100;
+                    mpc = buildYpc()
                     updatetext();
                 }
                 document.getElementById("clickerinfo").innerHTML = "---"
@@ -275,24 +280,27 @@
           console.log("Auto-saved")
         }, 60 * 1000);
 
-        setInterval(function() { // autoclicker + updates per second
-          dolor = dolor + ((cps*mpc))
-          totalmade = totalmade + ((cps*mpc))
+        setInterval(function() { // autoclicker + slow updates
+          dolor = dolor + Math.floor((cps*mpc)/10)
+          totalmade = totalmade + Math.floor((cps*mpc)/10)
           updatebutton();
           updatetext();
           prestigecheck();
-        }, 1000);
+        }, 100);
 
-        setInterval(function() { // fast tick updates, attempts to run at 5 times per second
+        setInterval(function() { // fast tick updates, attempts to run at 10 times per second
           fastTickUpdate();
-        }, 200);
+          buildPrestige()
+          mpc = buildYpc()
+          cps = buildCps()
+        }, 50);
       </script>
 
       <div class="spacer">
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.6.2</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.6.3</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -333,9 +341,16 @@
         <p class="smalltext">You will keep your achievements (wip) and catalogue (wip) progress.</p>
         <p id="totalyarntext">You have made 0 yarn ever</p>
         <p id="prestigelevel">You will be prestige level 0.</p>
+        <progress id="prestigeprogress" class="prestigeprogress" value="0" max="1000"></progress>
         <div id="prestigebutton" class="prestigebutton">Prestige!</div>
+        <div id="confirmprestige" class="prestigebutton hidden">Confirm Prestige</div>
       </div>
 
+      <div class="spacer">
+        <p>&#10240</p>
+        <p>&#10240</p>
+        <p>&#10240</p>
+      </div>
 
       <p class="catinfo">Adopt more cats, get more money!!!!!!<br></p>
       <div class="catstorage">
@@ -581,6 +596,7 @@
       <button class="changebutton" onclick="toggleChangelog()" id="changelogbutton">Show Changelog</button>
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.6.3<br>TONS of backend stuff for prestiges...</p>
         <p>v0.6.2<br>Fixed some issues with starting a fresh save, added backend for prestige</p>
         <p>v0.6.1<br>Fixed floats... again</p>
         <p>v0.6.0<br>Added the Catalogue!</p>
