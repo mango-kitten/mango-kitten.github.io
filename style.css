@@ -290,3 +290,21 @@ button {
 .flexhidden {
     visibility: hidden;
 }
+
+
+.prestigeprogress {
+    border-radius: 7px; 
+    width: 20%;
+    height: 22px;
+    padding-bottom: 20px;
+    box-shadow: 1px 1px -19px rgba( 0, 0, 0, 0.2 );
+  }
+.prestigeprogress::-webkit-progress-bar {
+    background-color: rgb(77, 51, 19);
+    border-radius: 7px;
+}
+.prestigeprogress::-webkit-progress-value {
+    background-color: rgb(255, 166, 0);
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px 2px rgba(180, 96, 1, 0.8);
+}
