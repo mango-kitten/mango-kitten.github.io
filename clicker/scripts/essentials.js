@@ -1,6 +1,6 @@
 let tickLevel = 0
 let tickRemain = 0
-
+ 
 
 function updatetext() {
     if (isNaN(dolor)) {
