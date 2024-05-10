@@ -28,7 +28,7 @@ function prestigeLevel(yarn) {
     while (yarnamt <= yarn) {
         yarnamt = yarnamt + ((coeff ** level) * 1000000)
         if (coeff > 1.001) {
-            coeff = coeff - 0.000001
+            coeff = coeff - 0.00001
         }
         if (yarnamt <= yarn) {
             level = level + 1
