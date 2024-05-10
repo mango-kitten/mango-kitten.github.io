@@ -308,3 +308,8 @@ button {
     border-radius: 7px;
     box-shadow: 1px 1px 5px 2px rgba(180, 96, 1, 0.8);
 }
+.prestigebutton {
+    width: 5%;
+    height: auto;
+    align-items: center;
+}
