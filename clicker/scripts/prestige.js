@@ -27,8 +27,8 @@ function prestigeLevel(yarn) {
     let currentlevel = 0
     while (yarnamt <= yarn) {
         yarnamt = yarnamt + ((coeff ** level) * 1000000)
-        if (coeff > 1.002) {
-            coeff = coeff - 0.0002
+        if (coeff > 1.005) {
+            coeff = coeff - 0.0001
         }
         if (yarnamt <= yarn) {
             level = level + 1
