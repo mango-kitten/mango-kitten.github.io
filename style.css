@@ -113,6 +113,17 @@ button {
     color: rgb(86, 161, 11);
 }
 
+.moneybutton{
+    transition: .2s;
+}
+
+.moneybutton:hover{
+    transform: scale(1.05);
+}
+.moneybutton:active {
+    transform: scale(0.9);
+}
+
 .savebutton {
     font-family: 'Playpen Sans', cursive;
     font-size: 18px;
@@ -309,7 +320,7 @@ button {
     box-shadow: 1px 1px 5px 2px rgba(180, 96, 1, 0.8);
 }
 .prestigebutton {
-    width: 5%;
+    width: 7.5%;
     height: auto;
     align-items: center;
 }
