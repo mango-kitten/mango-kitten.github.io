@@ -40,6 +40,18 @@
         let programMulti = 1
         let prestigeCps = 0
 
+
+        if (cats) {
+          var str = localStorage.getItem("cats");
+          if (str.includes("[")) {
+            str = str.substring(1, str.length - 1); // cut out the brackets
+          }
+          cats = str.split(",");
+          console.log(cats)
+        } else {
+          cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+
         // if (mpc) {
         //     console.log("Successfully called variable mpc")
         // } else {
@@ -51,22 +63,17 @@
         //   mpc = 1;
         // }
         var str = localStorage.getItem("bought");
-        if (str.includes("[")) {
-          str = str.substring(1, str.length - 1); // cut out the brackets
-        }
-        bought = str.split(",");
-        console.log(bought)
-        
-        if (cats) {
-          var str = localStorage.getItem("cats");
+        if (str) {
           if (str.includes("[")) {
             str = str.substring(1, str.length - 1); // cut out the brackets
           }
-          cats = str.split(",");
-          console.log(cats)
+          bought = str.split(",");
+          console.log(bought)
         } else {
-          cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
+        
+
         if (catgot) {
           var str = localStorage.getItem("catgot");
           if (str.includes("[")) {
