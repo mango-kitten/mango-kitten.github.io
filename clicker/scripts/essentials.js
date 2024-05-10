@@ -292,62 +292,105 @@ function buildCps() {
 function buildPrestige() {
     if (prestigelevel >= 2) {
         prestigeMulti = 2
+        document.getElementById("p1").classList = "prestigeyes"
     } else {
         prestigeMulti = 1
+        document.getElementById("p1").classList = "prestigeno"
     }
     if (prestigelevel >= 4) {
         mpc5 = 1
+        document.getElementById("p2").classList = "prestigeyes"
     } else {
         mpc5 = 0
+        document.getElementById("p2").classList = "prestigeno"
     }
     if (prestigelevel >= 10) {
         strayMulti = 9
+        document.getElementById("p3").classList = "prestigeyes"
     } else {
         strayMulti = 1
+        document.getElementById("p3").classList = "prestigeno"
     }
     if (prestigelevel >= 20) {
         prestigeCps = 1
+        document.getElementById("p4").classList = "prestigeyes"
     } else {
         prestigeCps = 0
+        document.getElementById("p4").classList = "prestigeno"
     }
     if (prestigelevel >= 50) {
         prestigeMulti = 4
+        document.getElementById("p5").classList = "prestigeyes"
+    } else {
+        document.getElementById("p5").classList = "prestigeno"
     }
     if (prestigelevel >= 100) {
         magicMulti = 9
+        document.getElementById("p6").classList = "prestigeyes"
     } else {
         magicMulti = 1
+        document.getElementById("p6").classList = "prestigeno"
     }
     if (prestigelevel >= 150) {
         prestigeMulti = 8
+        document.getElementById("p7").classList = "prestigeyes"
+    } else {
+        document.getElementById("p7").classList = "prestigeno"
     }
     if (prestigelevel >= 200) {
         prestigeCps = 6
+        document.getElementById("p8").classList = "prestigeyes"
+    } else {
+        document.getElementById("p8").classList = "prestigeno"
+
     }
     if (prestigelevel >= 300) {
         fruitMulti = 9
+        document.getElementById("p9").classList = "prestigeyes"
     } else {
         fruitMulti = 1
+        document.getElementById("p9").classList = "prestigeno"
     }
     if (prestigelevel >= 350) {
         prestigeMulti = 16
+        document.getElementById("p10").classList = "prestigeyes"
+    } else {
+        document.getElementById("p10").classList = "prestigeno"
     }
     if (prestigelevel >= 400) {
         strayMulti = 81
+        document.getElementById("p11").classList = "prestigeyes"
+    } else {
+        document.getElementById("p11").classList = "prestigeno"
     }
     if (prestigelevel >= 500) {
         programMulti = 9
+        document.getElementById("p12").classList = "prestigeyes"
+    } else {
+        document.getElementById("p12").classList = "prestigeno"
     }
     if (prestigelevel >= 550) {
         prestigeMulti = 32
+        document.getElementById("p13").classList = "prestigeyes"
+    } else {
+        document.getElementById("p13").classList = "prestigeno"
     }
     if (prestigelevel >= 600) {
         magicMulti = 81
+        document.getElementById("p14").classList = "prestigeyes"
+    } else {
+        document.getElementById("p14").classList = "prestigeno"
     }
     if (prestigelevel >= 650) {
         prestigeMulti = 64
+        document.getElementById("p15").classList = "prestigeyes"
+    } else {
+        document.getElementById("p15").classList = "prestigeno"
     }
     if (prestigelevel >= 700) {
         prestigeMulti = 128
+        document.getElementById("p16").classList = "prestigeyes"
+    } else {
+        document.getElementById("p16").classList = "prestigeno"
     }
 }
