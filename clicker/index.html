@@ -30,7 +30,13 @@
         let iscat4 = 0
         let inDevReset = 0;
         let changelogtoggle = 0;
-        let prestigelevel = Number(localStorage.getItem("prestige"));
+        let prestigelevel = 0
+        // let prestigelevel = Number(localStorage.getItem("prestige"));
+        if (prestigelevel == 1) {
+          prestigelevel = 0;
+        } else {
+          prestigelevel = localStorage.getItem("prestige")
+        }
         let totalmade = Number(localStorage.getItem("total"));
 
         let prestigeMulti = 1
@@ -274,10 +280,10 @@
         // autosave
         setInterval(function() {
           localStorage.setItem("money", dolor);
-          localStorage.setItem("mpc", mpc);
+          // localStorage.setItem("mpc", mpc);
           localStorage.setItem("bought", bought);
           localStorage.setItem("cats", cats)
-          localStorage.setItem("cps", cps)
+          // localStorage.setItem("cps", cps)
           localStorage.setItem("prestige", prestigelevel)
           localStorage.setItem("total", totalmade);
           localStorage.setItem("catgot", catgot);
@@ -307,7 +313,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.6.3</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.7.0</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -349,8 +355,12 @@
         <p id="totalyarntext">You have made 0 yarn ever</p>
         <p id="prestigelevel">You will be prestige level 0.</p>
         <progress id="prestigeprogress" class="prestigeprogress" value="0" max="1000"></progress>
-        <div id="prestigebutton" class="prestigebutton">Prestige!</div>
-        <div id="confirmprestige" class="prestigebutton hidden">Confirm Prestige</div>
+        <div id="prestigebutton">
+          <img src="../img/prestige.png" class="prestigebutton">
+        </div>
+        <div id="confirmprestige" class="hidden">
+          <img src="../img/confirmprestige.png" class="prestigebutton">
+        </div>
       </div>
 
       <div class="spacer">
@@ -603,6 +613,7 @@
       <button class="changebutton" onclick="toggleChangelog()" id="changelogbutton">Show Changelog</button>
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.7.0<br>Prestige!!! Lets see how game breaking this is...</p>
         <p>v0.6.3<br>TONS of backend stuff for prestiges...</p>
         <p>v0.6.2<br>Fixed some issues with starting a fresh save, added backend for prestige</p>
         <p>v0.6.1<br>Fixed floats... again</p>
