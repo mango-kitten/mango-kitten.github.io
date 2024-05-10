@@ -39,12 +39,33 @@ function prestigeLevel(yarn) {
     return [level, remaining, currentlevel]
 }
 
+function invPrestige(level) {
+    let yarnamt = 0
+    let levela = 0
+    let coeff = 1.02
+    while (levela < level) {
+        yarnamt = yarnamt + ((coeff ** levela) * 1000000)
+        if (coeff > 1.001) {
+            coeff = coeff - 0.00001
+        }
+        levela = levela + 1
+    }
+    return parseCommas(Math.round(yarnamt))
+}
+
+
+
 var prs = document.getElementById('prestigebutton');
 
 
 function doPrestige() {
-    prestigecnf = 1
-    document.getElementById('confirmprestige').classList = ""
+    if (prestigecnf == 0) {
+        prestigecnf = 1
+        document.getElementById('confirmprestige').classList = ""
+    } else {
+        prestigecnf = 0
+        document.getElementById('confirmprestige').classList = "hidden"
+    }
 }
 
 prs.addEventListener('click', doPrestige);
@@ -67,6 +88,7 @@ function confirmPrestige() {
         catgot2 = 0
         catgot3 = 0
         catgot4 = 0
+        catgot5 = 0
         localStorage.setItem("cats", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         cps = 0
         // localStorage.setItem("cps", 0)
