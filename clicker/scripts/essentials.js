@@ -79,40 +79,53 @@ function updatetext() {
             cps = catcps[cats[3]]
         }
     }
+    if (cats[4] == 0) {
+        document.getElementById("catown5").innerHTML = "You have no cat in slot 5"
+    } else {
+        if (planetMulti == 1) {
+            document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat <br>+${String(mpcadd[cats[4]])} ypc<br>+${String(catcps[cats[4]])} cps`
+        } else {
+            document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat <br>+${String(mpcadd[cats[4]])} x ${planetMulti} ypc<br>+${String(catcps[cats[4]])} x ${planetMulti} cps`
+        }
+        if (cps == 0) {
+            console.log("Updating cps...")
+            cps = catcps[cats[4]]
+        }
+    }
 }
 
 
 function updatebutton() {
     if (mpc < 50) {
-        document.getElementById("yarnred").classList = ""
-        document.getElementById("yarngreen").classList = "hidden"
-        document.getElementById("yarnblue").classList = "hidden"
-        document.getElementById("yarngray").classList = "hidden"
-        document.getElementById("yarnorange").classList = "hidden"
+        document.getElementById("yarnred").classList = "moneybutton"
+        document.getElementById("yarngreen").classList = "hidden moneybutton"
+        document.getElementById("yarnblue").classList = "hidden moneybutton"
+        document.getElementById("yarngray").classList = "hidden moneybutton"
+        document.getElementById("yarnorange").classList = "hidden moneybutton"
     } else if (mpc < 200) {
-        document.getElementById("yarnred").classList = "hidden"
-        document.getElementById("yarngreen").classList = ""
-        document.getElementById("yarnblue").classList = "hidden"
-        document.getElementById("yarngray").classList = "hidden"
-        document.getElementById("yarnorange").classList = "hidden"
+        document.getElementById("yarnred").classList = "hidden moneybutton"
+        document.getElementById("yarngreen").classList = "moneybutton"
+        document.getElementById("yarnblue").classList = "hidden moneybutton"
+        document.getElementById("yarngray").classList = "hidden moneybutton"
+        document.getElementById("yarnorange").classList = "hidden moneybutton"
     } else if (mpc < 2000) {
-        document.getElementById("yarnred").classList = "hidden"
-        document.getElementById("yarngreen").classList = "hidden"
-        document.getElementById("yarnblue").classList = ""
-        document.getElementById("yarngray").classList = "hidden"
-        document.getElementById("yarnorange").classList = "hidden"
+        document.getElementById("yarnred").classList = "hidden moneybutton"
+        document.getElementById("yarngreen").classList = "hidden moneybutton"
+        document.getElementById("yarnblue").classList = "moneybutton"
+        document.getElementById("yarngray").classList = "hidden moneybutton"
+        document.getElementById("yarnorange").classList = "hidden moneybutton"
     } else if (mpc < 15000) {
-        document.getElementById("yarnred").classList = "hidden"
-        document.getElementById("yarngreen").classList = "hidden"
-        document.getElementById("yarnblue").classList = "hidden"
-        document.getElementById("yarngray").classList = ""
-        document.getElementById("yarnorange").classList = "hidden"
+        document.getElementById("yarnred").classList = "hidden moneybutton"
+        document.getElementById("yarngreen").classList = "hidden moneybutton"
+        document.getElementById("yarnblue").classList = "hidden moneybutton"
+        document.getElementById("yarngray").classList = "moneybutton"
+        document.getElementById("yarnorange").classList = "hidden moneybutton"
     } else {
-        document.getElementById("yarnred").classList = "hidden"
-        document.getElementById("yarngreen").classList = "hidden"
-        document.getElementById("yarnblue").classList = "hidden"
-        document.getElementById("yarngray").classList = "hidden"
-        document.getElementById("yarnorange").classList = ""
+        document.getElementById("yarnred").classList = "hidden moneybutton"
+        document.getElementById("yarngreen").classList = "hidden moneybutton"
+        document.getElementById("yarnblue").classList = "hidden moneybutton"
+        document.getElementById("yarngray").classList = "hidden moneybutton"
+        document.getElementById("yarnorange").classList = "moneybutton"
     }
 
     if (cps > 0) {
@@ -251,6 +264,7 @@ function buildYpc() {
     mpca = mpca + (mpcadd[cats[1]]*magicMulti)
     mpca = mpca + (mpcadd[cats[2]]*fruitMulti)
     mpca = mpca + (mpcadd[cats[3]]*programMulti)
+    mpca = mpca + (mpcadd[cats[4]]*planetMulti)
 
 
     mpca = mpca + (1*bought[1])
@@ -267,7 +281,9 @@ function buildCps() {
     
     cpsa = cpsa + (catcps[cats[2]]*fruitMulti)
     cpsa = cpsa + (catcps[cats[3]]*programMulti)
-    
+    cpsa = cpsa + (catcps[cats[4]]*planetMulti)
+
+
     cpsa = cpsa + prestigeCps
 
     return cpsa
@@ -278,6 +294,11 @@ function buildPrestige() {
         prestigeMulti = 2
     } else {
         prestigeMulti = 1
+    }
+    if (prestigelevel >= 4) {
+        mpc5 = 1
+    } else {
+        mpc5 = 0
     }
     if (prestigelevel >= 10) {
         strayMulti = 9
@@ -313,5 +334,17 @@ function buildPrestige() {
     }
     if (prestigelevel >= 500) {
         strayMulti = 81
+    }
+    if (prestigelevel >= 550) {
+        programMulti = 9
+    }
+    if (prestigelevel >= 600) {
+        prestigeMulti = 32
+    }
+    if (prestigelevel >= 650) {
+        magicMulti = 81
+    }
+    if (prestigelevel >= 700) {
+        prestigeMulti = 64
     }
 }
