@@ -1,6 +1,6 @@
 let tickLevel = 0
 let tickRemain = 0
- 
+
 
 function updatetext() {
     if (isNaN(dolor)) {
@@ -196,6 +196,7 @@ function devResetConfirm() {
     localStorage.removeItem("cps")
     localStorage.removeItem("prestige")
     localStorage.removeItem("total")
+    localStorage.removeItem("catgot")
     window.location.reload();
   } else {
     console.log("You are not in dev-reset mode.")
@@ -272,7 +273,7 @@ function buildCps() {
 }
 
 function buildPrestige() {
-    if (prestigelevel >= 1) {
+    if (prestigelevel >= 2) {
         prestigeMulti = 2
     } else {
         prestigeMulti = 1
@@ -301,15 +302,15 @@ function buildPrestige() {
     if (prestigelevel >= 200) {
         prestigeCps = 6
     }
-    if (prestigelevel >= 250) {
+    if (prestigelevel >= 300) {
         fruitMulti = 9
     } else {
         fruitMulti = 1
     }
-    if (prestigelevel >= 300) {
+    if (prestigelevel >= 400) {
         prestigeMulti = 16
     }
-    if (prestigelevel >= 350) {
+    if (prestigelevel >= 500) {
         strayMulti = 81
     }
 }
