@@ -1,4 +1,10 @@
 function enterCat(id) {
+    while (catgot.length < id) {
+        catgot.push(0)
+    }
+    if (isNaN(Number(catgot[id]))) {
+        catgot.splice(id, 1, 0)
+    }
     currentamnt = parseInt(catgot[id])
     if (currentamnt == 0) {
         cataUnlock(id)
@@ -8,6 +14,12 @@ function enterCat(id) {
     document.getElementById(amtid).innerHTML = `Obtained: ${String(catgot[id])}`
 }
 function cataUnlock(id) {
+    while (catgot.length < id) {
+        catgot.push(0)
+    }
+    if (isNaN(Number(catgot[id]))) {
+        catgot.splice(id, 1, 0)
+    }
     topida = `${String(id)}acatt`
     topidb = `${String(id)}bcatt`
     botida = `${String(id)}acatd`
