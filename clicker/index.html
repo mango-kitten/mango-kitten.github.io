@@ -44,8 +44,9 @@
         let magicMulti = 1
         let fruitMulti = 1
         let programMulti = 1
+        let planetMulti = 1
         let prestigeCps = 0
-
+        let mpc5 = 0
 
         if (cats) {
           var str = localStorage.getItem("cats");
@@ -313,7 +314,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Mangos Clicker Game v0.7.0</p>
+        <p id="clickertopbar">Mangos Clicker Game v0.7.1</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -370,7 +371,7 @@
         <p>&#10240</p>
       </div>
 
-      <p class="catinfo">Adopt more cats, get more money!!!!!!<br></p>
+      <p class="catinfo">Adopt more cats, get more yarn!!!!!!<br></p>
       <div class="catstorage">
         <div class="getcat">
           <p id="cat1error">---</p>
@@ -408,6 +409,16 @@
             <button onclick="releaseCat4()" class="replacebutton" id="releasec4">Release</button>
             <p id="catown4">You have no cat in slot 4</p>
         </div>
+        
+        <div class="getcat">
+          <p id="cat5error">---</p>
+          <button onclick="buyCatSet5()" class="buybutton" id="getc5">Observe a Cat-based Solar System ($10b)</button>
+          <p id="catres5">No cats recently observed</p>
+          <button onclick="keepCat5()" class="keepbutton" id="keepc5">Adopt</button>
+          <button onclick="releaseCat5()" class="replacebutton" id="releasec5">Release</button>
+          <p id="catown5">You have no cat in slot 5</p>
+      </div>
+
       </div>
 
       <div class="spacer">
@@ -604,6 +615,100 @@
         </div>
       </div>
 
+      <div class="catatier">
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="19acati">
+          <img src="../img/nocat.png" class="catimg" id="19bcati">
+          <p class="cattext hidden" id="19acatt">Mercury Cat</p>
+          <p class="cattext greytext" id="19bcatt">???</p>
+          <p class="cattext2 hidden" id="19acatd">It feels warm to the touch... a little too warm</p>
+          <p class="cattext2 greytext" id="19bcatd">???</p>
+          <p class="cattext2" id="19bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="20acati">
+          <img src="../img/nocat.png" class="catimg" id="20bcati">
+          <p class="cattext hidden" id="20acatt">Venus Cat</p>
+          <p class="cattext greytext" id="20bcatt">???</p>
+          <p class="cattext2 hidden" id="20acatd">look at all the pretty colors</p>
+          <p class="cattext2 greytext" id="20bcatd">???</p>
+          <p class="cattext2" id="20bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="21acati">
+          <img src="../img/nocat.png" class="catimg" id="21bcati">
+          <p class="cattext hidden" id="21acatt">Earth Cat</p>
+          <p class="cattext greytext" id="21bcatt">???</p>
+          <p class="cattext2 hidden" id="21acatd">it feels familiar... homey, almost...</p>
+          <p class="cattext2 greytext" id="21bcatd">???</p>
+          <p class="cattext2" id="21bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="22acati">
+          <img src="../img/nocat.png" class="catimg" id="22bcati">
+          <p class="cattext hidden" id="22acatt">Mars Cat</p>
+          <p class="cattext greytext" id="22bcatt">???</p>
+          <p class="cattext2 hidden" id="22acatd">If Mars is this friendly, why are'nt we living on it already?</p>
+          <p class="cattext2 greytext" id="22bcatd">???</p>
+          <p class="cattext2" id="22bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="23acati">
+          <img src="../img/nocat.png" class="catimg" id="23bcati">
+          <p class="cattext hidden" id="23acatt">Jupiter Cat</p>
+          <p class="cattext greytext" id="23bcatt">???</p>
+          <p class="cattext2 hidden" id="23acatd">its a tiny bit overweight, but dont make fun of it</p>
+          <p class="cattext2 greytext" id="23bcatd">???</p>
+          <p class="cattext2" id="23bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="24acati">
+          <img src="../img/nocat.png" class="catimg" id="24bcati">
+          <p class="cattext hidden" id="24acatt">Saturn Cat</p>
+          <p class="cattext greytext" id="24bcatt">???</p>
+          <p class="cattext2 hidden" id="24acatd">Its got such a fancy ring around it... i want it...</p>
+          <p class="cattext2 greytext" id="24bcatd">???</p>
+          <p class="cattext2" id="24bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="25acati">
+          <img src="../img/nocat.png" class="catimg" id="25bcati">
+          <p class="cattext hidden" id="25acatt">Uranus Cat</p>
+          <p class="cattext greytext" id="25bcatt">???</p>
+          <p class="cattext2 hidden" id="25acatd">nope nope NOPE not that</p>
+          <p class="cattext2 greytext" id="25bcatd">???</p>
+          <p class="cattext2" id="25bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="26acati">
+          <img src="../img/nocat.png" class="catimg" id="26bcati">
+          <p class="cattext hidden" id="26acatt">Neptune Cat</p>
+          <p class="cattext greytext" id="26bcatt">???</p>
+          <p class="cattext2 hidden" id="26acatd">Distant and frigid, but it warms up to you with time...</p>
+          <p class="cattext2 greytext" id="26bcatd">???</p>
+          <p class="cattext2" id="26bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="27acati">
+          <img src="../img/nocat.png" class="catimg" id="27bcati">
+          <p class="cattext hidden" id="27acatt">Pluto Cat</p>
+          <p class="cattext greytext" id="27bcatt">???</p>
+          <p class="cattext2 hidden" id="27acatd">this isnt even a planet, but it likes to think it is</p>
+          <p class="cattext2 greytext" id="27bcatd">???</p>
+          <p class="cattext2" id="27bcata">Obtained: 0</p>
+        </div>
+        <div class="catentry">
+          <img src="../img/food.png" class="catimg hidden" id="28acati">
+          <img src="../img/nocat.png" class="catimg" id="28bcati">
+          <p class="cattext hidden" id="28acatt">Astronaut Cat</p>
+          <p class="cattext greytext" id="28bcatt">???</p>
+          <p class="cattext2 hidden" id="28acatd">all suited up and ready to go out, sir!</p>
+          <p class="cattext2 greytext" id="28bcatd">???</p>
+          <p class="cattext2" id="28bcata">Obtained: 0</p>
+        </div>
+      </div>
+
+
       <div class="spacer">
         <p>&#10240</p>
         <p>&#10240</p>
@@ -614,6 +719,7 @@
       <button class="changebutton" onclick="toggleChangelog()" id="changelogbutton">Show Changelog</button>
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.7.1<br>Yarn ball is now fancy ooo</p>
         <p>v0.7.0<br>Prestige!!! Lets see how game breaking this is...</p>
         <p>v0.6.3<br>TONS of backend stuff for prestiges...</p>
         <p>v0.6.2<br>Fixed some issues with starting a fresh save, added backend for prestige</p>
