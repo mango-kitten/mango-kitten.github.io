@@ -329,22 +329,25 @@ function buildPrestige() {
     } else {
         fruitMulti = 1
     }
-    if (prestigelevel >= 400) {
+    if (prestigelevel >= 350) {
         prestigeMulti = 16
     }
-    if (prestigelevel >= 500) {
+    if (prestigelevel >= 400) {
         strayMulti = 81
     }
-    if (prestigelevel >= 550) {
+    if (prestigelevel >= 500) {
         programMulti = 9
     }
-    if (prestigelevel >= 600) {
+    if (prestigelevel >= 550) {
         prestigeMulti = 32
     }
-    if (prestigelevel >= 650) {
+    if (prestigelevel >= 600) {
         magicMulti = 81
     }
-    if (prestigelevel >= 700) {
+    if (prestigelevel >= 650) {
         prestigeMulti = 64
+    }
+    if (prestigelevel >= 700) {
+        prestigeMulti = 128
     }
 }
