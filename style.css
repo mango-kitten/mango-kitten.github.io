@@ -228,10 +228,14 @@ button {
 .catstorage {
     display: flex;
     text-align: center;
-    padding: 1.5%;
+    justify-content: center;
+    padding: 1%;
 }
 .getcat {
-    padding: 1%;
+    width: 19%;
+    padding: 0.5%;
+    background-clip: content-box;
+    background-color: rgb(7, 7, 146);
 }
 .catinfo {
     text-align: center;
