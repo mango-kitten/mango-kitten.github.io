@@ -1,8 +1,8 @@
-let catset = [0, 1,  1,     1,       1,       1,        2,       2,      2,      2,            3,      3,     3,     3,           3,      4,     4,    4,    4]
-let weight = [0, 500,200,   150,     75,      25,       1000,    300,    50,     2,            500,    400,   100,   25,          1,      500,   500,  200,  20]
-let mpcadd = [0, 5,  10,     20,     30,      50,       30,      75,     100,    500,          1000,   1500,  3000,  5000,        10000,  7500,  7500, 10000,30000]
-let catcps = [0, 0,  0,     0,       0,       0,        0,       0,      0,      0,            1,      1,     2,     2,           3,      2,     2,    4,    10]
-let ctname = ["","","Tabby","Tuxedo","Calico","Siamese","Zombie","Demon","Angel","Shrodingers","Apple","Pear","Plum","Watermelon","Mango","HTML","CSS","JS", "Python"]
+let catset = [0, 1,  1,     1,       1,       1,        2,       2,      2,      2,            3,      3,     3,     3,           3,      4,     4,    4,    4,       5,        5,      5,      5,     5,        5,       5,       5,        5,      5]
+let weight = [0, 500,200,   150,     75,      25,       1000,    300,    50,     2,            500,    400,   100,   25,          1,      500,   500,  200,  20,      1500,     1000,   800,    600,   500,      300,     150,     75,       30,     1]
+let mpcadd = [0, 5,  10,     20,     30,      50,       30,      75,     100,    500,          1000,   1500,  3000,  5000,        10000,  7500,  7500, 10000,30000,   10000,    15000,  20000,  25000, 30000,    40000,   50000,   75000,    100000, 200000]
+let catcps = [0, 0,  0,     0,       0,       0,        0,       0,      0,      0,            1,      1,     2,     2,           3,      2,     2,    4,    10,      10,       10,     15,     15,    20,       25,      30,      40,       50,     100]
+let ctname = ["","","Tabby","Tuxedo","Calico","Siamese","Zombie","Demon","Angel","Shrodingers","Apple","Pear","Plum","Watermelon","Mango","HTML","CSS","JS", "Python","Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","Astronaut"]
 let possibleids = []
 let combpool = 0
 let weightroll = 0
@@ -13,6 +13,7 @@ let catgot1 = 0
 let catgot2 = 0
 let catgot3 = 0
 let catgot4 = 0
+let catgot5 = 0
 
 function getCat(set, roll = 9999) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUALLY WORKS
   console.log(roll)
@@ -271,4 +272,61 @@ function releaseCat4() {
     } else {
       document.getElementById("cat4error").innerHTML = "There is no cat waiting!"
     }
+}
+
+
+
+
+
+function buyCatSet5(id = 0) {
+  if (id == 0) {
+      if (dolor >= 10000000000) {
+          catgot5 = getCat(5)
+          enterCat(catgot5)
+          iscat5 = 1
+          document.getElementById("catres5").innerHTML = `Got a ${String(ctname[catgot5])} Cat (+${String(mpcadd[catgot5])} ypc, +${String(catcps[catgot5])} cps)`
+          document.getElementById("cat5error").innerHTML = "---"
+          dolor = dolor-10000000000
+          localsave();
+          updatetext();
+      } else {
+          document.getElementById("cat5error").innerHTML = "Too poor!"
+      }
+  } else {
+      catgot5 = getCat(5, id)
+      enterCat(catgot5)
+      iscat5 = 1
+      document.getElementById("catres5").innerHTML = `Got a ${String(ctname[catgot5])} Cat (+${String(mpcadd[catgot5])} ypc, +${String(catcps[catgot5])} cps)`
+      document.getElementById("cat5error").innerHTML = "---"
+      updatetext();
+  }
+}
+
+function keepCat5() {
+  if (iscat5 == 1) {
+    mpc = mpc - mpcadd[cats[4]]
+    cps = cps - catcps[cats[4]]
+    cats.splice(4, 1, catgot5)
+    mpc = mpc + mpcadd[catgot5]
+    cps = cps + catcps[cats[4]]
+    document.getElementById("catres5").innerHTML = `Observe a new system...`
+    document.getElementById("cat5error").innerHTML = "---"
+    document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat (+${String(mpcadd[cats[4]])} ypc, +${String(catcps[cats[4]])} cps)`
+    iscat5 = 0
+    localsave();
+    updatetext();
+  } else {
+    document.getElementById("cat5error").innerHTML = "There is no cat waiting!"
+  }
+}
+
+function releaseCat5() {
+  if (iscat5 == 1) {
+    document.getElementById("catres5").innerHTML = `Observe a new system...`
+    document.getElementById("cat5error").innerHTML = "---"
+    updatetext();
+    iscat5 = 0
+  } else {
+    document.getElementById("cat5error").innerHTML = "There is no cat waiting!"
+  }
 }
