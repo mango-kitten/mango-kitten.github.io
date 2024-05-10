@@ -107,7 +107,7 @@ function updatebutton() {
         document.getElementById("yarnblue").classList = "hidden"
         document.getElementById("yarngray").classList = ""
         document.getElementById("yarnorange").classList = "hidden"
-    } else if (mpc < 50000) {
+    } else {
         document.getElementById("yarnred").classList = "hidden"
         document.getElementById("yarngreen").classList = "hidden"
         document.getElementById("yarnblue").classList = "hidden"
