@@ -1,6 +1,6 @@
 let catset = [0, 1,  1,     1,       1,       1,        2,       2,      2,      2,            3,      3,     3,     3,           3,      4,     4,    4,    4,       5,        5,      5,      5,     5,        5,       5,       5,        5,      5]
 let weight = [0, 500,200,   150,     75,      25,       1000,    300,    50,     2,            500,    400,   100,   25,          1,      500,   500,  200,  20,      1500,     1000,   800,    600,   500,      300,     150,     75,       30,     1]
-let mpcadd = [0, 5,  10,     20,     30,      50,       30,      75,     100,    500,          1000,   1500,  3000,  5000,        10000,  7500,  7500, 10000,30000,   10000,    15000,  20000,  25000, 30000,    40000,   50000,   75000,    100000, 200000]
+let mpcadd = [0, 5,  10,     20,     30,      50,       75,      200,    300,    1000,         1000,   1500,  3000,  5000,        10000,  7500,  7500, 10000,30000,   10000,    15000,  20000,  25000, 30000,    40000,   50000,   75000,    100000, 200000]
 let catcps = [0, 0,  0,     0,       0,       0,        0,       0,      0,      0,            1,      1,     2,     2,           3,      2,     2,    4,    10,      10,       10,     15,     15,    20,       25,      30,      40,       50,     100]
 let ctname = ["","","Tabby","Tuxedo","Calico","Siamese","Zombie","Demon","Angel","Shrodingers","Apple","Pear","Plum","Watermelon","Mango","HTML","CSS","JS", "Python","Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","Astronaut"]
 let possibleids = []
@@ -167,13 +167,13 @@ function releaseCat2() {
 
 function buyCatSet3(id = 0) {
     if (id == 0) {
-        if (dolor >= 1000000) {
+        if (dolor >= 500000) {
             catgot3 = getCat(3)
             enterCat(catgot3)
             iscat3 = 1
             document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} ypc, +${String(catcps[catgot3])} cps)`
             document.getElementById("cat3error").innerHTML = "---"
-            dolor = dolor-1000000
+            dolor = dolor-500000
             localsave();
             updatetext();
         } else {
@@ -330,3 +330,6 @@ function releaseCat5() {
     document.getElementById("cat5error").innerHTML = "There is no cat waiting!"
   }
 }
+
+
+
