@@ -39,6 +39,9 @@
         }
         let totalmade = Number(localStorage.getItem("total"));
 
+        
+
+
         let prestigeMulti = 1
         let strayMulti = 1
         let magicMulti = 1
@@ -140,6 +143,9 @@
 
         // continue preload once html elements exist
         function autoload() {
+          if (prestigelevel > prestigeLevel(totalmade)[0]) {
+            prestigelevel = prestigeLevel(totalmade)[0]
+          }
           buildPrestige()
           mpc = buildYpc()
           cps = buildCps()
@@ -314,7 +320,7 @@
         <p>&#10240</p>
       </div>
       <div class="topbar">
-        <p id="clickertopbar">Cat Clicker v0.7.3</p>
+        <p id="clickertopbar">Cat Clicker v0.7.4</p>
       </div>
       <div class="savemenu">
         <button onclick="localsave()" class="savebutton">Save</button>
@@ -740,6 +746,7 @@
       <button class="changebutton" onclick="toggleChangelog()" id="changelogbutton">Show Changelog</button>
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.7.4<br>Fixed the prestige formula because it messed up at high values</p>
         <p>v0.7.3<br>Rebranded to Cat Clicker</p>
         <p>v0.7.2<br>Planetary set is fully released!</p>
         <p>v0.7.1<br>Yarn ball is now fancy ooo</p>
@@ -772,11 +779,11 @@
         <p>v0.1.0<br>Created the game. Its just a button, and a number</p>
       </div>
     </main>
-<!--     <footer>
+    <footer>
       <a href="https://www.youtube.com/@mangokittengaming">YouTube</a>
       <a href="https://www.twitch.tv/mangokittengaming">Twitch</a>
       <a href="https://steamcommunity.com/profiles/76561199415611477/">Steam</a>
-    </footer> -->
+    </footer>
   </body>
 </html>
 <script src="scripts/cats.js"></script>
