@@ -139,13 +139,92 @@ function updatebutton() {
 
 function parseCommas(input) {
     let inputstr = String(input)
+    let eint = 0
     let stringlength = String(input).length
     let output = ""
     let stringiter = 0
     let num = 0
-    if (String(input).includes("e") || String(input).includes("Infinity")) {
-        output = input
-    } else {
+    let esplit = ""
+    let erem = 0
+    let iterate = 0
+    if (String(input).includes("e")) {
+        eint = Number(inputstr.split('+')[1]);
+
+
+
+        if (eint % 3 == 0) {
+            erem = 0
+        } else if (eint % 3 == 1) {
+            erem = 1
+        } else if (eint % 3 == 2) {
+            erem = 2
+        }
+
+
+
+        esplit = inputstr.split("e")[0]
+        if (esplit.length == 1) {
+            output = `${esplit}`
+        } else if (esplit.length == 3) {
+            if (erem == 0) {
+                output = esplit
+            } else if (erem == 1) {
+                output = `${esplit}0`
+            } else {
+                output = `${esplit}00`
+            }
+        } else if (esplit.length == 4) {
+            output = `${esplit}0`
+        } else {
+            output = esplit.substring(0, 5+erem)
+        }
+
+        if (erem == 1) {
+            output = Number(output)*10
+        } else if (erem == 2) {
+            output = Number(output)*100
+        }
+
+        // console.log(String(output).length)
+        if (String(output).length < 4) {
+            output = `${output}.000`
+        } else {
+            output = Math.floor(Number(output)*1000)/1000
+        }
+
+
+        if (eint < 24) {
+            output = `${output} sextillion`
+        } else if (eint < 27) {
+            output = `${output} septillion`
+        } else if (eint < 30) {
+            output = `${output} octillion`
+        } else if (eint < 33) {
+            output = `${output} nonillion`
+        } else if (eint < 36) {
+            output = `${output} decillion`
+        } else if (eint < 39) {
+            output = `${output} undecillion`
+        } else if (eint < 42) {
+            output = `${output} duodecillion`
+        } else if (eint < 45) {
+            output = `${output} tredecillion`
+        } else if (eint < 48) {
+            output = `${output} quaturodecillion`
+        } else if (eint < 51) {
+            output = `${output} quindecillion`
+        } else if (eint < 54) {
+            output = `${output} sedecillion`
+        } else if (eint < 57) {
+            output = `${output} septendecillion`
+        } else if (eint < 60) {
+            output = `${output} octodecillion`
+        } else {
+            output = `${output} too much :(`
+        }
+    } else if (String(input).includes("Infinity")) {
+        output = input  
+    } else if (stringlength < 10) {
         if (stringlength % 3 == 0){
             stringiter = stringlength/3
             for (let i=0;i<stringiter;i++) {
@@ -176,6 +255,25 @@ function parseCommas(input) {
                     output = output+ "," + inputstr.substring(num-1, num+2)
                 }
             }
+        }
+    } else {
+        if (stringlength % 3 == 0) {
+            output = `${inputstr.substring(0, 3)}.${inputstr.substring(3, 6)}`
+        } else if (stringlength % 3 == 1) {
+            output = `${inputstr.substring(0, 1)}.${inputstr.substring(1, 4)}`
+        } else if (stringlength % 3 == 2) {
+            output = `${inputstr.substring(0, 2)}.${inputstr.substring(2, 5)}`
+        }
+        if (stringlength < 13) {
+            output = `${output} billion`
+        } else if (stringlength < 16) {
+            output = `${output} trillion`
+        } else if (stringlength < 19) {
+            output = `${output} quadrillion`
+        } else if (stringlength < 22) {
+            output = `${output} quintillion`
+        } else if (stringlength < 25) {
+            output = `${output} sextillion`
         }
     }
     return output
