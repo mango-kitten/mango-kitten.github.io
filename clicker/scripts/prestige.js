@@ -32,7 +32,7 @@ function prestigeLevel(yarn) {
         if (level < 450) {
             yarnamt = ((1.05-(0.00005*level))**level)+(level-1)
         } else {
-            yarnamt = level*(1000+(2*level)-1453)
+            yarnamt = level*((3*level)-900)
         }
         yarnamt = yarnamt * 1000000
         if (yarnamt <= yarn) {
@@ -49,7 +49,7 @@ function invPrestige(level) {
     if (level < 450) {
         yarnamt = ((1.05-(0.00005*level))**level)+(level-1)
     } else {
-        yarnamt = level*(1000+(2*level)-1453)
+        yarnamt = level*((3*level)-900)
     }
     yarnamt = yarnamt * 1000000
     return parseCommas(Math.round(yarnamt))
