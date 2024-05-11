@@ -23,13 +23,18 @@ function prestigeLevel(yarn) {
     let yarnamt = 0
     let level = 0
     let remaining = 0
-    let coeff = 1.02
     let currentlevel = 0
     while (yarnamt <= yarn) {
-        yarnamt = yarnamt + ((coeff ** level) * 1000000)
-        if (coeff > 1.001) {
-            coeff = coeff - 0.00001
+        // yarnamt = yarnamt + ((coeff ** level) * 1000000)
+        // if (coeff > 1.0025) {
+        //     coeff = coeff - 0.000005
+        // }
+        if (level < 450) {
+            yarnamt = ((1.05-(0.00005*level))**level)+(level-1)
+        } else {
+            yarnamt = level*(1000+(2*level)-1453)
         }
+        yarnamt = yarnamt * 1000000
         if (yarnamt <= yarn) {
             level = level + 1
             currentlevel = yarnamt
@@ -41,15 +46,12 @@ function prestigeLevel(yarn) {
 
 function invPrestige(level) {
     let yarnamt = 0
-    let levela = 0
-    let coeff = 1.02
-    while (levela < level) {
-        yarnamt = yarnamt + ((coeff ** levela) * 1000000)
-        if (coeff > 1.001) {
-            coeff = coeff - 0.00001
-        }
-        levela = levela + 1
+    if (level < 450) {
+        yarnamt = ((1.05-(0.00005*level))**level)+(level-1)
+    } else {
+        yarnamt = level*(1000+(2*level)-1453)
     }
+    yarnamt = yarnamt * 1000000
     return parseCommas(Math.round(yarnamt))
 }
 
