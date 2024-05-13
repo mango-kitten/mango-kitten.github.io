@@ -396,10 +396,18 @@ function buildPrestige() {
         document.getElementById("p1").classList = "prestigeno"
     }
     if (prestigelevel >= 4) {
-        mpc5 = 1
+        document.getElementById("betc1").classList = "buybutton"
+        document.getElementById("betc2").classList = "buybutton"
+        document.getElementById("betc3").classList = "buybutton"
+        document.getElementById("betc4").classList = "buybutton"
+        document.getElementById("betc5").classList = "buybutton"
         document.getElementById("p2").classList = "prestigeyes"
     } else {
-        mpc5 = 0
+        document.getElementById("betc1").classList = "buybutton hidden"
+        document.getElementById("betc2").classList = "buybutton hidden"
+        document.getElementById("betc3").classList = "buybutton hidden"
+        document.getElementById("betc4").classList = "buybutton hidden"
+        document.getElementById("betc5").classList = "buybutton hidden"
         document.getElementById("p2").classList = "prestigeno"
     }
     if (prestigelevel >= 10) {
