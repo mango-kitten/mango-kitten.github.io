@@ -77,6 +77,25 @@ function buyCatSet1(id = 0) {
   }
 }
 
+function buyBetter1() {
+  let catiter = 0
+  if (cats[0] == 5) {
+    console.log("You already have the best cat")
+  } else {
+    while (catgot1 <= cats[0] && dolor >= 500) {
+      catiter = catiter + 1
+      buyCatSet1()
+      console.log("bought a cat")
+    }
+    document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
+    setTimeout(function () {
+      document.getElementById("iterc").innerHTML = `---`
+    }, 5000)
+    console.log("finished")
+  }
+}
+
+
 function keepCat1() {
   if (iscat1 == 1) {
     mpc = mpc - mpcadd[cats[0]]
@@ -86,6 +105,7 @@ function keepCat1() {
     document.getElementById("cat1error").innerHTML = "---"
     document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} ypc)`
     iscat1 = 0
+    catgot1 = 0
     localsave();
     updatetext();
   } else {
@@ -99,6 +119,7 @@ function releaseCat1() {
     document.getElementById("cat1error").innerHTML = "---"
     updatetext();
     iscat1 = 0
+    catgot1 = 0
   } else {
     document.getElementById("cat1error").innerHTML = "There is no cat waiting!"
   }
@@ -129,8 +150,28 @@ function buyCatSet2(id = 0) {
         document.getElementById("cat2error").innerHTML = "---"
         updatetext();
     }
-  }
+}
   
+function buyBetter2() {
+  let catiter = 0
+  if (cats[1] == 9) {
+    console.log("You already have the best cat")
+  } else {
+    while (catgot2 <= cats[1] && dolor >= 20000) {
+      catiter = catiter + 1
+      buyCatSet2()
+      console.log("bought a cat")
+    }
+    document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
+    setTimeout(function () {
+      document.getElementById("iterc").innerHTML = `---`
+    }, 5000)
+    console.log("finished")
+  }
+}
+
+
+
 function keepCat2() {
     if (iscat2 == 1) {
       mpc = mpc - mpcadd[cats[1]]
@@ -140,6 +181,7 @@ function keepCat2() {
       document.getElementById("cat2error").innerHTML = "---"
       document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat (+${String(mpcadd[cats[1]])} ypc)`
       iscat2 = 0
+      catgot2 = 0
       localsave();
       updatetext();
     } else {
@@ -153,6 +195,7 @@ function releaseCat2() {
       document.getElementById("cat2error").innerHTML = "---"
       updatetext();
       iscat2 = 0
+      catgot2 = 0
     } else {
       document.getElementById("cat2error").innerHTML = "There is no cat waiting!"
     }
@@ -189,6 +232,24 @@ function buyCatSet3(id = 0) {
     }
 }
   
+function buyBetter3() {
+  let catiter = 0
+  if (cats[2] == 14) {
+    console.log("You already have the best cat")
+  } else {
+    while (catgot3 <= cats[2] && dolor >= 500000) {
+      catiter = catiter + 1
+      buyCatSet3()
+      console.log("bought a cat")
+    }
+    document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
+    setTimeout(function () {
+      document.getElementById("iterc").innerHTML = `---`
+    }, 5000)
+    console.log("finished")
+  }
+}
+
 function keepCat3() {
     if (iscat3 == 1) {
       mpc = mpc - mpcadd[cats[2]]
@@ -200,6 +261,7 @@ function keepCat3() {
       document.getElementById("cat3error").innerHTML = "---"
       document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} ypc, +${String(catcps[cats[2]])} cps)`
       iscat3 = 0
+      catgot3 = 0
       localsave();
       updatetext();
     } else {
@@ -213,6 +275,7 @@ function releaseCat3() {
       document.getElementById("cat3error").innerHTML = "---"
       updatetext();
       iscat3 = 0
+      catgot3 = 0
     } else {
       document.getElementById("cat3error").innerHTML = "There is no cat waiting!"
     }
@@ -245,6 +308,25 @@ function buyCatSet4(id = 0) {
     }
 }
   
+function buyBetter4() {
+  let catiter = 0
+  if (cats[3] == 18) {
+    console.log("You already have the best cat")
+  } else {
+    while (catgot4 <= cats[3] && dolor >= 100000000) {
+      catiter = catiter + 1
+      buyCatSet4()
+      console.log("bought a cat")
+    }
+    document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
+    setTimeout(function () {
+      document.getElementById("iterc").innerHTML = `---`
+    }, 5000)
+    console.log("finished")
+  }
+}
+
+
 function keepCat4() {
     if (iscat4 == 1) {
       mpc = mpc - mpcadd[cats[3]]
@@ -256,6 +338,7 @@ function keepCat4() {
       document.getElementById("cat4error").innerHTML = "---"
       document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat (+${String(mpcadd[cats[3]])} ypc, +${String(catcps[cats[3]])} cps)`
       iscat4 = 0
+      catgot4 = 0
       localsave();
       updatetext();
     } else {
@@ -269,6 +352,7 @@ function releaseCat4() {
       document.getElementById("cat4error").innerHTML = "---"
       updatetext();
       iscat4 = 0
+      catgot4 = 0
     } else {
       document.getElementById("cat4error").innerHTML = "There is no cat waiting!"
     }
@@ -302,6 +386,24 @@ function buyCatSet5(id = 0) {
   }
 }
 
+function buyBetter5() {
+  let catiter = 0
+  if (cats[4] == 28) {
+    console.log("You already have the best cat")
+  } else {
+    while (catgot5 <= cats[4] && dolor >= 10000000000) {
+      catiter = catiter + 1
+      buyCatSet5()
+      console.log("bought a cat")
+    }
+    document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
+    setTimeout(function () {
+      document.getElementById("iterc").innerHTML = `---`
+    }, 5000)
+    console.log("finished")
+  }
+}
+
 function keepCat5() {
   if (iscat5 == 1) {
     mpc = mpc - mpcadd[cats[4]]
@@ -313,6 +415,7 @@ function keepCat5() {
     document.getElementById("cat5error").innerHTML = "---"
     document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat (+${String(mpcadd[cats[4]])} ypc, +${String(catcps[cats[4]])} cps)`
     iscat5 = 0
+    catgot5 = 0
     localsave();
     updatetext();
   } else {
@@ -326,6 +429,7 @@ function releaseCat5() {
     document.getElementById("cat5error").innerHTML = "---"
     updatetext();
     iscat5 = 0
+    catgot5 = 0
   } else {
     document.getElementById("cat5error").innerHTML = "There is no cat waiting!"
   }
