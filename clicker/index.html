@@ -9,11 +9,11 @@
       <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
   </head>
   <body onload="autoload()">
-    <header>
+    <!-- <header>
       <p class="spacer">&#10240</p>
       <h1>MangoKitten</h1>
       <p class="spacer">&#10240</p>
-    </header>
+    </header> -->
     <main>
       <script src="scripts/essentials.js"></script>
       <script>
@@ -62,16 +62,6 @@
           cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
 
-        // if (mpc) {
-        //     console.log("Successfully called variable mpc")
-        // } else {
-        //   mpc = 1;
-        // }
-        // if (isNaN(mpc)) {
-        //   console.log("mpc = NaN")
-        //   resetstorage();
-        //   mpc = 1;
-        // }
         var str = localStorage.getItem("bought");
         if (str) {
           if (str.includes("[")) {
@@ -117,16 +107,6 @@
         } else {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
-        // if (cps) {
-        //     console.log("Successfully called variable cps")
-        // } else {
-        //     cps = 0
-        // }
-        // if (isNaN(cps)) {
-        //     console.log("cps = NaN")
-        //     resetstorage();
-        //     cps = 0
-        // }
 
         if (prestigelevel) {
             console.log("Successfully called variable prestigelevel")
@@ -245,6 +225,9 @@
             } else {
                 // too poor
                 document.getElementById("clickerinfo").innerHTML = "You're too poor!"
+                setTimeout(function () {
+                  document.getElementById("clickerinfo").innerHTML = "---"
+                }, 5000)
             };
           } else {
             itemqty = bought[id];
@@ -277,9 +260,15 @@
                 } else {
                 // too poor
                 document.getElementById("clickerinfo").innerHTML = "You're too poor!"
+                setTimeout(function () {
+                  document.getElementById("clickerinfo").innerHTML = "---"
+                }, 5000)
                 };
             } else {
                 document.getElementById("clickerinfo").innerHTML = "You already have the max!"
+                setTimeout(function () {
+                  document.getElementById("clickerinfo").innerHTML = "---"
+                }, 5000)
             }
           }
         };
@@ -316,436 +305,441 @@
         }, 50);
       </script>
 
-      <div class="spacer">
-        <p>&#10240</p>
-      </div>
-      <div class="topbar">
-        <p id="clickertopbar">Cat Clicker v0.7.4</p>
-      </div>
-      <div class="savemenu">
-        <button onclick="localsave()" class="savebutton">Save</button>
-        <button onclick="resetstorage()" class="resetbutton">Reset</button>
-        <p id="lastsaved">Last Saved: Not saved this session.</p>
-      </div>
-      <div class="interface">
-        <h2 id="moneydisp">Money: 0</h2>
-        <p id="mpcdisp">Money per Click: 1</p>
-        <p id="cpsdisp" class="hidden">Clicks per Second: 0</p>
-        <div id="moneybutton">
-          <img src="../img/yarnred.png" class="" id="yarnred">
-          <img src="../img/yarngreen.png" class="hidden" id="yarngreen">
-          <img src="../img/yarnblue.png" class="hidden" id="yarnblue">
-          <img src="../img/yarngray.png" class="hidden" id="yarngray">
-          <img src="../img/yarnorange.png" class="hidden" id="yarnorange">
-        </div>
-      </div>
-      <div class="spacer">
-        <p>&#10240</p>
-        <p>&#10240</p>
-      </div>
-      <div class="shop">
-        <button onclick="buyitem(1)" class="buybutton" id="mpc1">Increase ypc $50 (0/3)</button>
-        <button onclick="buyitem(2)" class="buybutton" id="mpc2">Ypc lv 2 $1000 (0/8)</button>
-        <button onclick="buyitem(3)" class="buybutton" id="mpc3">Ypc lv 3 $10000 (0/8)</button>
-        <button onclick="buyitem(4)" class="buybutton" id="mpc4">Ypc lv 4 $100000 (0/10)</button>
-        <p id="clickerinfo">---</p>
-      </div>
-      <div class="spacer">
-        <p>&#10240</p>
-        <p>&#10240</p>
-        <p>&#10240</p>
-      </div>
 
-      <div id="prestigeholder" class="prestige">
-        <p>Prestiging will permenantly increase your earnings, at the cost of your progress! This function is in development.</p>
-        <p class="smalltext">You will keep your achievements (wip) and catalogue (wip) progress.</p>
-        <p id="totalyarntext">You have made 0 yarn ever</p>
-        <p id="prestigecurrent">You are prestige level 0.</p>
-        <p id="prestigelevel">You will be prestige level 0.</p>
-        <progress id="prestigeprogress" class="prestigeprogress" value="0" max="1000"></progress>
-        <div id="prestigebutton">
-          <img src="../img/prestige.png" class="prestigebutton">
+      <div class="globalbar" id="globalbar">
+        <div class="spacer">
+          <p>&#10240</p>
         </div>
-        <div id="confirmprestige" class="hidden">
-          <img src="../img/confirmprestige.png" class="prestigebutton">
-        </div>
-        <div class="prestigebonus">
-          <p class="prestigeno" id="p1">2 - double earnings</p>
-          <p class="prestigeno" id="p2">4 - nothing yet</p>
-          <p class="prestigeno" id="p3">10 - elevate stray cats (x9 earnings)</p>
-          <p class="prestigeno" id="p4">20 - +1 cps</p>
-          <p class="prestigeno" id="p5">50 - x2 yarn</p>
-          <p class="prestigeno" id="p6">100 - elevate ritual cats</p>
-          <p class="prestigeno" id="p7">150 - x2 yarn</p>
-          <p class="prestigeno" id="p8">200 - +5 cps</p>
-          <p class="prestigeno" id="p9">300 - elevate fruit cats</p>
-          <p class="prestigeno" id="p10">350 - x2 yarn</p>
-          <p class="prestigeno" id="p11">400 - ascend stray cats (x81 earnings)</p>
-          <p class="prestigeno" id="p12">500 - elevate program cats</p>
-          <p class="prestigeno" id="p13">550 - x2 yarn</p>
-          <p class="prestigeno" id="p14">600 - ascend ritual cats</p>
-          <p class="prestigeno" id="p15">650 - x2 yarn</p>
-          <p class="prestigeno" id="p16">700 - x2 yarn</p>
-
-        </div>
-      </div>
-
-      <div class="spacer">
-        <p>&#10240</p>
-        <p>&#10240</p>
-        <p>&#10240</p>
-      </div>
-
-      <p class="catinfo">Adopt more cats, get more yarn!!!!!!<br></p>
-      <div class="catstorage">
-        <div class="getcat">
-          <p id="cat1error">---</p>
-          <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray ($500)</button>
-          <p id="catres1">No cats recently found</p>
-          <button onclick="keepCat1()" class="keepbutton" id="keepc1">Adopt</button>
-          <button onclick="releaseCat1()" class="replacebutton" id="releasec1">Release</button>
-          <p id="catown1">You have no cat in slot 1</p>
+        <div class="topbar">
+          <p id="clickertopbar">Cat Clicker v0.7.6</p>
         </div>
 
-        <div class="getcat">
-          <p id="cat2error">---</p>
-          <button onclick="buyCatSet2()" class="buybutton" id="getc2">Perform a Magic Ritual ($20000)</button>
-          <p id="catres2">No cats recently summoned</p>
-          <button onclick="keepCat2()" class="keepbutton" id="keepc2">Adopt</button>
-          <button onclick="releaseCat2()" class="replacebutton" id="releasec2">Release</button>
-          <p id="catown2">You have no cat in slot 2</p>
-        </div>
-
-        <div class="getcat">
-            <p id="cat3error">---</p>
-            <button onclick="buyCatSet3()" class="buybutton" id="getc3">Buy an Odd Fruitbowl ($500k)</button>
-            <p id="catres3">No cats recently picked</p>
-            <button onclick="keepCat3()" class="keepbutton" id="keepc3">Adopt</button>
-            <button onclick="releaseCat3()" class="replacebutton" id="releasec3">Release</button>
-            <p id="catown3">You have no cat in slot 3</p>
-        </div>
+        <button onclick="homepage()" class="menubutton">Home</button>
+        <button onclick="prestigepage()" class="menubutton hidden" id="prestigebutton">Prestige</button>
+        <button onclick="adoptpage()" class="menubutton">Adopt</button>
+        <button onclick="catapage()" class="menubutton">Catalogue</button>
+        <button onclick="changepage()" class="menubutton">Changelog</button>
 
 
-        <div class="getcat">
-            <p id="cat4error">---</p>
-            <button onclick="buyCatSet4()" class="buybutton" id="getc4">Program some Cats in ($100m)</button>
-            <p id="catres4">No cats recently encoded</p>
-            <button onclick="keepCat4()" class="keepbutton" id="keepc4">Adopt</button>
-            <button onclick="releaseCat4()" class="replacebutton" id="releasec4">Release</button>
-            <p id="catown4">You have no cat in slot 4</p>
-        </div>
-        
-        <div class="getcat">
-          <p id="cat5error">---</p>
-          <button onclick="buyCatSet5()" class="buybutton" id="getc5">Observe a Cat-based Solar System ($10b)</button>
-          <p id="catres5">No cats recently observed</p>
-          <button onclick="keepCat5()" class="keepbutton" id="keepc5">Adopt</button>
-          <button onclick="releaseCat5()" class="replacebutton" id="releasec5">Release</button>
-          <p id="catown5">You have no cat in slot 5</p>
-      </div>
 
-      </div>
-
-      <div class="spacer">
-        <p>&#10240</p>
-        <p>&#10240</p>
-        <p>&#10240</p>
-        <p>&#10240</p>
-      </div>
-
-
-      <h2 class="cataloguetitle">Catalogue</h2>
-
-      <div class="catatier">
-        <div class="catentry">
-          <img src="../img/cat.png" class="catimg hidden" id="1acati">
-          <img src="../img/nocat.png" class="catimg" id="1bcati">
-          <p class="cattext hidden" id="1acatt">Cat</p>
-          <p class="cattext greytext" id="1bcatt">???</p>
-          <p class="cattext2 hidden" id="1acatd">A basic cat. The start of your journey.</p>
-          <p class="cattext2 greytext" id="1bcatd">???</p>
-          <p class="cattext2" id="1bcata">Obtained: 0</p>
+        <div class="savemenu">
+          <button onclick="localsave()" class="savebutton">Save</button>
+          <button onclick="resetstorage()" class="resetbutton">Reset</button>
+          <p id="lastsaved">Last Saved: Not saved this session.</p>
         </div>
-        <div class="catentry">
-          <img src="../img/tabby.png" class="catimg hidden" id="2acati">
-          <img src="../img/nocat.png" class="catimg" id="2bcati">
-          <p class="cattext hidden" id="2acatt">Tabby Cat</p>
-          <p class="cattext greytext" id="2bcatt">???</p>
-          <p class="cattext2 hidden" id="2acatd">A little tabby cat. It has a pleading look on its face, like it needs to be fed.</p>
-          <p class="cattext2 greytext" id="2bcatd">???</p>
-          <p class="cattext2" id="2bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/tuxedo.png" class="catimg hidden" id="3acati">
-          <img src="../img/nocat.png" class="catimg" id="3bcati">
-          <p class="cattext hidden" id="3acatt">Tuxedo Cat</p>
-          <p class="cattext greytext" id="3bcatt">???</p>
-          <p class="cattext2 hidden" id="3acatd">why he so dressed up tho????????</p>
-          <p class="cattext2 greytext" id="3bcatd">???</p>
-          <p class="cattext2" id="3bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/calico.png" class="catimg hidden" id="4acati">
-          <img src="../img/nocat.png" class="catimg" id="4bcati">
-          <p class="cattext hidden" id="4acatt">Calico Cat</p>
-          <p class="cattext greytext" id="4bcatt">???</p>
-          <p class="cattext2 hidden" id="4acatd">Patches, perchance?</p>
-          <p class="cattext2 greytext" id="4bcatd">???</p>
-          <p class="cattext2" id="4bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/siamese.png" class="catimg hidden" id="5acati">
-          <img src="../img/nocat.png" class="catimg" id="5bcati">
-          <p class="cattext hidden" id="5acatt">Siamese Cat</p>
-          <p class="cattext greytext" id="5bcatt">???</p>
-          <p class="cattext2 hidden" id="5acatd">HELLO IM A SIAMESE CAT NICE TO MEET YOU</p>
-          <p class="cattext2 greytext" id="5bcatd">???</p>
-          <p class="cattext2" id="5bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry flexhidden">
-          <img src="../img/food.png" class="catimg hidden" id="0acati">
-          <img src="../img/nocat.png" class="catimg" id="0bcati">
-          <p class="cattext hidden" id="0acatt">No Cat</p>
-          <p class="cattext greytext" id="0bcatt">???</p>
-          <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
-          <p class="cattext2 greytext" id="0bcatd">???</p>
-          <p class="cattext2" id="0bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/zombie.png" class="catimg hidden" id="6acati">
-          <img src="../img/nocat.png" class="catimg" id="6bcati">
-          <p class="cattext hidden" id="6acatt">Zombie Cat</p>
-          <p class="cattext greytext" id="6bcatt">???</p>
-          <p class="cattext2 hidden" id="6acatd">fiiisshhhhhhhh..... fiiIIIISSSssshhhhh...</p>
-          <p class="cattext2 greytext" id="6bcatd">???</p>
-          <p class="cattext2" id="6bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/demon.png" class="catimg hidden" id="7acati">
-          <img src="../img/nocat.png" class="catimg" id="7bcati">
-          <p class="cattext hidden" id="7acatt">Demon Cat</p>
-          <p class="cattext greytext" id="7bcatt">???</p>
-          <p class="cattext2 hidden" id="7acatd">nyeh heh hehhh im a devilish little kitty ready to do devilish deeds!</p>
-          <p class="cattext2 greytext" id="7bcatd">???</p>
-          <p class="cattext2" id="7bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/angel.png" class="catimg hidden" id="8acati">
-          <img src="../img/nocat.png" class="catimg" id="8bcati">
-          <p class="cattext hidden" id="8acatt">Angel Cat</p>
-          <p class="cattext greytext" id="8bcatt">???</p>
-          <p class="cattext2 hidden" id="8acatd">*angel noises*</p>
-          <p class="cattext2 greytext" id="8bcatd">???</p>
-          <p class="cattext2" id="8bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/shrodingers.png" class="catimg hidden" id="9acati">
-          <img src="../img/nocat.png" class="catimg" id="9bcati">
-          <p class="cattext hidden" id="9acatt">Shrodingers Cat</p>
-          <p class="cattext greytext" id="9bcatt">???</p>
-          <p class="cattext2 hidden" id="9acatd">Some part of your magical tampering caused this cat to be stuck inbetween life and death... if you look at it its fate will be sealed.</p>
-          <p class="cattext2 greytext" id="9bcatd">???</p>
-          <p class="cattext2" id="9bcata">Obtained: 0</p>
-        </div>
-      </div>
-
-      <div class="catatier">
-        <div class="catentry">
-          <img src="../img/apple.png" class="catimg hidden" id="10acati">
-          <img src="../img/nocat.png" class="catimg" id="10bcati">
-          <p class="cattext hidden" id="10acatt">Apple Cat</p>
-          <p class="cattext greytext" id="10bcatt">???</p>
-          <p class="cattext2 hidden" id="10acatd">crunchy apel yim yam yum - wait</p>
-          <p class="cattext2 greytext" id="10bcatd">???</p>
-          <p class="cattext2" id="10bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/pear.png" class="catimg hidden" id="11acati">
-          <img src="../img/nocat.png" class="catimg" id="11bcati">
-          <p class="cattext hidden" id="11acatt">Pear Cat</p>
-          <p class="cattext greytext" id="11bcatt">???</p>
-          <p class="cattext2 hidden" id="11acatd">actually very similar to the average shape a cat takes</p>
-          <p class="cattext2 greytext" id="11bcatd">???</p>
-          <p class="cattext2" id="11bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/plum.png" class="catimg hidden" id="12acati">
-          <img src="../img/nocat.png" class="catimg" id="12bcati">
-          <p class="cattext hidden" id="12acatt">Plum Cat</p>
-          <p class="cattext greytext" id="12bcatt">???</p>
-          <p class="cattext2 hidden" id="12acatd">this cat is a plumb plum sitting very plumbly in the middle of your screen</p>
-          <p class="cattext2 greytext" id="12bcatd">???</p>
-          <p class="cattext2" id="12bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/watermelon.png" class="catimg hidden" id="13acati">
-          <img src="../img/nocat.png" class="catimg" id="13bcati">
-          <p class="cattext hidden" id="13acatt">Watermelon Cat</p>
-          <p class="cattext greytext" id="13bcatt">???</p>
-          <p class="cattext2 hidden" id="13acatd">also known as a catermelon. haccck-THOOP</p>
-          <p class="cattext2 greytext" id="13bcatd">???</p>
-          <p class="cattext2" id="13bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/mango.png" class="catimg hidden" id="14acati">
-          <img src="../img/nocat.png" class="catimg" id="14bcati">
-          <p class="cattext hidden" id="14acatt">Mango Cat</p>
-          <p class="cattext greytext" id="14bcatt">???</p>
-          <p class="cattext2 hidden" id="14acatd">brand placement</p>
-          <p class="cattext2 greytext" id="14bcatd">???</p>
-          <p class="cattext2" id="14bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry flexhidden">
-          <img src="../img/food.png" class="catimg hidden" id="0acati">
-          <img src="../img/nocat.png" class="catimg" id="0bcati">
-          <p class="cattext hidden" id="0acatt">No Cat</p>
-          <p class="cattext greytext" id="0bcatt">???</p>
-          <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
-          <p class="cattext2 greytext" id="0bcatd">???</p>
-          <p class="cattext2" id="0bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/html.png" class="catimg hidden" id="15acati">
-          <img src="../img/nocat.png" class="catimg" id="15bcati">
-          <p class="cattext hidden" id="15acatt">HTML Cat</p>
-          <p class="cattext greytext" id="15bcatt">???</p>
-          <p class="cattext2 hidden" id="15acatd">A very basic cat, but with a lot of potential.</p>
-          <p class="cattext2 greytext" id="15bcatd">???</p>
-          <p class="cattext2" id="15bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/css.png" class="catimg hidden" id="16acati">
-          <img src="../img/nocat.png" class="catimg" id="16bcati">
-          <p class="cattext hidden" id="16acatt">CSS Cat</p>
-          <p class="cattext greytext" id="16bcatt">???</p>
-          <p class="cattext2 hidden" id="16acatd">I Despise CSS!</p>
-          <p class="cattext2 greytext" id="16bcatd">???</p>
-          <p class="cattext2" id="16bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/javascript.png" class="catimg hidden" id="17acati">
-          <img src="../img/nocat.png" class="catimg" id="17bcati">
-          <p class="cattext hidden" id="17acatt">JS Cat</p>
-          <p class="cattext greytext" id="17bcatt">???</p>
-          <p class="cattext2 hidden" id="17acatd">also known as javascript, this cat is essential to its own existence</p>
-          <p class="cattext2 greytext" id="17bcatd">???</p>
-          <p class="cattext2" id="17bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/python.png" class="catimg hidden" id="18acati">
-          <img src="../img/nocat.png" class="catimg" id="18bcati">
-          <p class="cattext hidden" id="18acatt">Python Cat</p>
-          <p class="cattext greytext" id="18bcatt">???</p>
-          <p class="cattext2 hidden" id="18acatd">Where did you find this??? This site is in HTML, CSS, and JS???</p>
-          <p class="cattext2 greytext" id="18bcatd">???</p>
-          <p class="cattext2" id="18bcata">Obtained: 0</p>
-        </div>
-      </div>
-
-      <div class="catatier">
-        <div class="catentry">
-          <img src="../img/mercury.png" class="catimg hidden" id="19acati">
-          <img src="../img/nocat.png" class="catimg" id="19bcati">
-          <p class="cattext hidden" id="19acatt">Mercury Cat</p>
-          <p class="cattext greytext" id="19bcatt">???</p>
-          <p class="cattext2 hidden" id="19acatd">It feels warm to the touch... a little too warm</p>
-          <p class="cattext2 greytext" id="19bcatd">???</p>
-          <p class="cattext2" id="19bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/venus.png" class="catimg hidden" id="20acati">
-          <img src="../img/nocat.png" class="catimg" id="20bcati">
-          <p class="cattext hidden" id="20acatt">Venus Cat</p>
-          <p class="cattext greytext" id="20bcatt">???</p>
-          <p class="cattext2 hidden" id="20acatd">look at all the pretty colors</p>
-          <p class="cattext2 greytext" id="20bcatd">???</p>
-          <p class="cattext2" id="20bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/earth.png" class="catimg hidden" id="21acati">
-          <img src="../img/nocat.png" class="catimg" id="21bcati">
-          <p class="cattext hidden" id="21acatt">Earth Cat</p>
-          <p class="cattext greytext" id="21bcatt">???</p>
-          <p class="cattext2 hidden" id="21acatd">it feels familiar... homey, almost...</p>
-          <p class="cattext2 greytext" id="21bcatd">???</p>
-          <p class="cattext2" id="21bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/mars.png" class="catimg hidden" id="22acati">
-          <img src="../img/nocat.png" class="catimg" id="22bcati">
-          <p class="cattext hidden" id="22acatt">Mars Cat</p>
-          <p class="cattext greytext" id="22bcatt">???</p>
-          <p class="cattext2 hidden" id="22acatd">If Mars is this friendly, why are'nt we living on it already?</p>
-          <p class="cattext2 greytext" id="22bcatd">???</p>
-          <p class="cattext2" id="22bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/jupiter.png" class="catimg hidden" id="23acati">
-          <img src="../img/nocat.png" class="catimg" id="23bcati">
-          <p class="cattext hidden" id="23acatt">Jupiter Cat</p>
-          <p class="cattext greytext" id="23bcatt">???</p>
-          <p class="cattext2 hidden" id="23acatd">its a tiny bit overweight, but dont make fun of it</p>
-          <p class="cattext2 greytext" id="23bcatd">???</p>
-          <p class="cattext2" id="23bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/saturn.png" class="catimg hidden" id="24acati">
-          <img src="../img/nocat.png" class="catimg" id="24bcati">
-          <p class="cattext hidden" id="24acatt">Saturn Cat</p>
-          <p class="cattext greytext" id="24bcatt">???</p>
-          <p class="cattext2 hidden" id="24acatd">Its got such a fancy ring around it... i want it...</p>
-          <p class="cattext2 greytext" id="24bcatd">???</p>
-          <p class="cattext2" id="24bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/uranus.png" class="catimg hidden" id="25acati">
-          <img src="../img/nocat.png" class="catimg" id="25bcati">
-          <p class="cattext hidden" id="25acatt">Uranus Cat</p>
-          <p class="cattext greytext" id="25bcatt">???</p>
-          <p class="cattext2 hidden" id="25acatd">nope nope NOPE not that</p>
-          <p class="cattext2 greytext" id="25bcatd">???</p>
-          <p class="cattext2" id="25bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/neptune.png" class="catimg hidden" id="26acati">
-          <img src="../img/nocat.png" class="catimg" id="26bcati">
-          <p class="cattext hidden" id="26acatt">Neptune Cat</p>
-          <p class="cattext greytext" id="26bcatt">???</p>
-          <p class="cattext2 hidden" id="26acatd">Distant and frigid, but it warms up to you with time...</p>
-          <p class="cattext2 greytext" id="26bcatd">???</p>
-          <p class="cattext2" id="26bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/pluto.png" class="catimg hidden" id="27acati">
-          <img src="../img/nocat.png" class="catimg" id="27bcati">
-          <p class="cattext hidden" id="27acatt">Pluto Cat</p>
-          <p class="cattext greytext" id="27bcatt">???</p>
-          <p class="cattext2 hidden" id="27acatd">this isnt even a planet, but it likes to think it is</p>
-          <p class="cattext2 greytext" id="27bcatd">???</p>
-          <p class="cattext2" id="27bcata">Obtained: 0</p>
-        </div>
-        <div class="catentry">
-          <img src="../img/astronaut.png" class="catimg hidden" id="28acati">
-          <img src="../img/nocat.png" class="catimg" id="28bcati">
-          <p class="cattext hidden" id="28acatt">Astronaut Cat</p>
-          <p class="cattext greytext" id="28bcatt">???</p>
-          <p class="cattext2 hidden" id="28acatd">all suited up and ready to go out, sir!</p>
-          <p class="cattext2 greytext" id="28bcatd">???</p>
-          <p class="cattext2" id="28bcata">Obtained: 0</p>
+        <div class="interface">
+          <h2 id="moneydisp">Money: 0</h2>
+          <p id="mpcdisp">Money per Click: 1</p>
+          <p id="cpsdisp" class="hidden">Clicks per Second: 0</p>
         </div>
       </div>
 
 
-      <div class="spacer">
-        <p>&#10240</p>
-        <p>&#10240</p>
-        <p>&#10240</p>
-        <p>&#10240</p>
+      <div class="mainpage" id="mainpage">
+        <div class="interface">
+          <div id="moneybutton">
+            <img src="../img/yarnred.png" class="" id="yarnred">
+            <img src="../img/yarngreen.png" class="hidden" id="yarngreen">
+            <img src="../img/yarnblue.png" class="hidden" id="yarnblue">
+            <img src="../img/yarngray.png" class="hidden" id="yarngray">
+            <img src="../img/yarnorange.png" class="hidden" id="yarnorange">
+          </div>
+        </div>
+        <div class="spacer">
+          <p>&#10240</p>
+          <p>&#10240</p>
+        </div>
+        <div class="shop">
+          <button onclick="buyitem(1)" class="buybutton" id="mpc1">Increase ypc $50 (0/3)</button>
+          <button onclick="buyitem(2)" class="buybutton" id="mpc2">Ypc lv 2 $1000 (0/8)</button>
+          <button onclick="buyitem(3)" class="buybutton" id="mpc3">Ypc lv 3 $10000 (0/8)</button>
+          <button onclick="buyitem(4)" class="buybutton" id="mpc4">Ypc lv 4 $100000 (0/10)</button>
+          <p id="clickerinfo">---</p>
+        </div>
       </div>
 
-      <button class="changebutton" onclick="toggleChangelog()" id="changelogbutton">Show Changelog</button>
+
+      <div class="prestigepage hidden" id="prestigepage">
+        <div id="prestigeholder" class="prestige">
+          <p>Prestiging will permenantly increase your earnings, at the cost of your progress! This function is in development.</p>
+          <p class="smalltext">You will keep your achievements (wip) and catalogue (wip) progress.</p>
+          <p id="totalyarntext">You have made 0 yarn ever</p>
+          <p id="prestigecurrent">You are prestige level 0.</p>
+          <p id="prestigelevel">You will be prestige level 0.</p>
+          <progress id="prestigeprogress" class="prestigeprogress" value="0" max="1000"></progress>
+          <div id="prestigebutton">
+            <img src="../img/prestige.png" class="prestigebutton">
+          </div>
+          <div id="confirmprestige" class="hidden">
+            <img src="../img/confirmprestige.png" class="prestigebutton">
+          </div>
+          <div class="prestigebonus">
+            <p class="prestigeno" id="p1">2 - double earnings</p>
+            <p class="prestigeno" id="p2">4 - unlock 'buy until better' button when adopting</p>
+            <p class="prestigeno" id="p3">10 - elevate stray cats (x9 earnings)</p>
+            <p class="prestigeno" id="p4">20 - +1 cps</p>
+            <p class="prestigeno" id="p5">50 - x2 yarn</p>
+            <p class="prestigeno" id="p6">100 - elevate ritual cats</p>
+            <p class="prestigeno" id="p7">150 - x2 yarn</p>
+            <p class="prestigeno" id="p8">200 - +5 cps</p>
+            <p class="prestigeno" id="p9">300 - elevate fruit cats</p>
+            <p class="prestigeno" id="p10">350 - x2 yarn</p>
+            <p class="prestigeno" id="p11">400 - ascend stray cats (x81 earnings)</p>
+            <p class="prestigeno" id="p12">500 - elevate program cats</p>
+            <p class="prestigeno" id="p13">550 - x2 yarn</p>
+            <p class="prestigeno" id="p14">600 - ascend ritual cats</p>
+            <p class="prestigeno" id="p15">650 - x2 yarn</p>
+            <p class="prestigeno" id="p16">700 - x2 yarn</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="adoptpage hidden" id="adoptpage">
+        <p class="catinfo">Adopt more cats, get more yarn!!!!!!<br></p>
+        <p class="catinfo" id="iterc">---</p>
+        <div class="catstorage">
+          <div class="getcat">
+            <p id="cat1error">---</p>
+            <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray ($500)</button>
+            <button onclick="buyBetter1()" class="buybutton hidden" id="betc1">Buy until better</button>
+            <p id="catres1">No cats recently found</p>
+            <button onclick="keepCat1()" class="keepbutton" id="keepc1">Adopt</button>
+            <button onclick="releaseCat1()" class="replacebutton" id="releasec1">Release</button>
+            <p id="catown1">You have no cat in slot 1</p>
+          </div>
+
+          <div class="getcat">
+            <p id="cat2error">---</p>
+            <button onclick="buyCatSet2()" class="buybutton" id="getc2">Perform a Magic Ritual ($20000)</button>
+            <button onclick="buyBetter2()" class="buybutton hidden" id="betc2">Buy until better</button>
+            <p id="catres2">No cats recently summoned</p>
+            <button onclick="keepCat2()" class="keepbutton" id="keepc2">Adopt</button>
+            <button onclick="releaseCat2()" class="replacebutton" id="releasec2">Release</button>
+            <p id="catown2">You have no cat in slot 2</p>
+          </div>
+
+          <div class="getcat">
+              <p id="cat3error">---</p>
+              <button onclick="buyCatSet3()" class="buybutton" id="getc3">Buy an Odd Fruitbowl ($500k)</button>
+              <button onclick="buyBetter3()" class="buybutton hidden" id="betc3">Buy until better</button>
+              <p id="catres3">No cats recently picked</p>
+              <button onclick="keepCat3()" class="keepbutton" id="keepc3">Adopt</button>
+              <button onclick="releaseCat3()" class="replacebutton" id="releasec3">Release</button>
+              <p id="catown3">You have no cat in slot 3</p>
+          </div>
+
+
+          <div class="getcat">
+              <p id="cat4error">---</p>
+              <button onclick="buyCatSet4()" class="buybutton" id="getc4">Program some Cats in ($100m)</button>
+              <button onclick="buyBetter4()" class="buybutton hidden" id="betc4">Buy until better</button>
+              <p id="catres4">No cats recently encoded</p>
+              <button onclick="keepCat4()" class="keepbutton" id="keepc4">Adopt</button>
+              <button onclick="releaseCat4()" class="replacebutton" id="releasec4">Release</button>
+              <p id="catown4">You have no cat in slot 4</p>
+          </div>
+          
+          <div class="getcat">
+            <p id="cat5error">---</p>
+            <button onclick="buyCatSet5()" class="buybutton" id="getc5">Observe a Cat-based Solar System ($10b)</button>
+            <button onclick="buyBetter5()" class="buybutton hidden" id="betc5">Buy until better</button>
+            <p id="catres5">No cats recently observed</p>
+            <button onclick="keepCat5()" class="keepbutton" id="keepc5">Adopt</button>
+            <button onclick="releaseCat5()" class="replacebutton" id="releasec5">Release</button>
+            <p id="catown5">You have no cat in slot 5</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="cataloguepage hidden" id="cataloguepage">
+        <h2 class="cataloguetitle">Catalogue</h2>
+
+        <div class="catatier">
+          <div class="catentry">
+            <img src="../img/cat.png" class="catimg hidden" id="1acati">
+            <img src="../img/nocat.png" class="catimg" id="1bcati">
+            <p class="cattext hidden" id="1acatt">Cat</p>
+            <p class="cattext greytext" id="1bcatt">???</p>
+            <p class="cattext2 hidden" id="1acatd">A basic cat. The start of your journey.</p>
+            <p class="cattext2 greytext" id="1bcatd">???</p>
+            <p class="cattext2" id="1bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/tabby.png" class="catimg hidden" id="2acati">
+            <img src="../img/nocat.png" class="catimg" id="2bcati">
+            <p class="cattext hidden" id="2acatt">Tabby Cat</p>
+            <p class="cattext greytext" id="2bcatt">???</p>
+            <p class="cattext2 hidden" id="2acatd">A little tabby cat. It has a pleading look on its face, like it needs to be fed.</p>
+            <p class="cattext2 greytext" id="2bcatd">???</p>
+            <p class="cattext2" id="2bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/tuxedo.png" class="catimg hidden" id="3acati">
+            <img src="../img/nocat.png" class="catimg" id="3bcati">
+            <p class="cattext hidden" id="3acatt">Tuxedo Cat</p>
+            <p class="cattext greytext" id="3bcatt">???</p>
+            <p class="cattext2 hidden" id="3acatd">why he so dressed up tho????????</p>
+            <p class="cattext2 greytext" id="3bcatd">???</p>
+            <p class="cattext2" id="3bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/calico.png" class="catimg hidden" id="4acati">
+            <img src="../img/nocat.png" class="catimg" id="4bcati">
+            <p class="cattext hidden" id="4acatt">Calico Cat</p>
+            <p class="cattext greytext" id="4bcatt">???</p>
+            <p class="cattext2 hidden" id="4acatd">Patches, perchance?</p>
+            <p class="cattext2 greytext" id="4bcatd">???</p>
+            <p class="cattext2" id="4bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/siamese.png" class="catimg hidden" id="5acati">
+            <img src="../img/nocat.png" class="catimg" id="5bcati">
+            <p class="cattext hidden" id="5acatt">Siamese Cat</p>
+            <p class="cattext greytext" id="5bcatt">???</p>
+            <p class="cattext2 hidden" id="5acatd">HELLO IM A SIAMESE CAT NICE TO MEET YOU</p>
+            <p class="cattext2 greytext" id="5bcatd">???</p>
+            <p class="cattext2" id="5bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry flexhidden">
+            <img src="../img/food.png" class="catimg hidden" id="0acati">
+            <img src="../img/nocat.png" class="catimg" id="0bcati">
+            <p class="cattext hidden" id="0acatt">No Cat</p>
+            <p class="cattext greytext" id="0bcatt">???</p>
+            <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
+            <p class="cattext2 greytext" id="0bcatd">???</p>
+            <p class="cattext2" id="0bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/zombie.png" class="catimg hidden" id="6acati">
+            <img src="../img/nocat.png" class="catimg" id="6bcati">
+            <p class="cattext hidden" id="6acatt">Zombie Cat</p>
+            <p class="cattext greytext" id="6bcatt">???</p>
+            <p class="cattext2 hidden" id="6acatd">fiiisshhhhhhhh..... fiiIIIISSSssshhhhh...</p>
+            <p class="cattext2 greytext" id="6bcatd">???</p>
+            <p class="cattext2" id="6bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/demon.png" class="catimg hidden" id="7acati">
+            <img src="../img/nocat.png" class="catimg" id="7bcati">
+            <p class="cattext hidden" id="7acatt">Demon Cat</p>
+            <p class="cattext greytext" id="7bcatt">???</p>
+            <p class="cattext2 hidden" id="7acatd">nyeh heh hehhh im a devilish little kitty ready to do devilish deeds!</p>
+            <p class="cattext2 greytext" id="7bcatd">???</p>
+            <p class="cattext2" id="7bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/angel.png" class="catimg hidden" id="8acati">
+            <img src="../img/nocat.png" class="catimg" id="8bcati">
+            <p class="cattext hidden" id="8acatt">Angel Cat</p>
+            <p class="cattext greytext" id="8bcatt">???</p>
+            <p class="cattext2 hidden" id="8acatd">*angel noises*</p>
+            <p class="cattext2 greytext" id="8bcatd">???</p>
+            <p class="cattext2" id="8bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/shrodingers.png" class="catimg hidden" id="9acati">
+            <img src="../img/nocat.png" class="catimg" id="9bcati">
+            <p class="cattext hidden" id="9acatt">Shrodingers Cat</p>
+            <p class="cattext greytext" id="9bcatt">???</p>
+            <p class="cattext2 hidden" id="9acatd">Some part of your magical tampering caused this cat to be stuck inbetween life and death... if you look at it its fate will be sealed.</p>
+            <p class="cattext2 greytext" id="9bcatd">???</p>
+            <p class="cattext2" id="9bcata">Obtained: 0</p>
+          </div>
+        </div>
+
+        <div class="catatier">
+          <div class="catentry">
+            <img src="../img/apple.png" class="catimg hidden" id="10acati">
+            <img src="../img/nocat.png" class="catimg" id="10bcati">
+            <p class="cattext hidden" id="10acatt">Apple Cat</p>
+            <p class="cattext greytext" id="10bcatt">???</p>
+            <p class="cattext2 hidden" id="10acatd">crunchy apel yim yam yum - wait</p>
+            <p class="cattext2 greytext" id="10bcatd">???</p>
+            <p class="cattext2" id="10bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/pear.png" class="catimg hidden" id="11acati">
+            <img src="../img/nocat.png" class="catimg" id="11bcati">
+            <p class="cattext hidden" id="11acatt">Pear Cat</p>
+            <p class="cattext greytext" id="11bcatt">???</p>
+            <p class="cattext2 hidden" id="11acatd">actually very similar to the average shape a cat takes</p>
+            <p class="cattext2 greytext" id="11bcatd">???</p>
+            <p class="cattext2" id="11bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/plum.png" class="catimg hidden" id="12acati">
+            <img src="../img/nocat.png" class="catimg" id="12bcati">
+            <p class="cattext hidden" id="12acatt">Plum Cat</p>
+            <p class="cattext greytext" id="12bcatt">???</p>
+            <p class="cattext2 hidden" id="12acatd">this cat is a plumb plum sitting very plumbly in the middle of your screen</p>
+            <p class="cattext2 greytext" id="12bcatd">???</p>
+            <p class="cattext2" id="12bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/watermelon.png" class="catimg hidden" id="13acati">
+            <img src="../img/nocat.png" class="catimg" id="13bcati">
+            <p class="cattext hidden" id="13acatt">Watermelon Cat</p>
+            <p class="cattext greytext" id="13bcatt">???</p>
+            <p class="cattext2 hidden" id="13acatd">also known as a catermelon. haccck-THOOP</p>
+            <p class="cattext2 greytext" id="13bcatd">???</p>
+            <p class="cattext2" id="13bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/mango.png" class="catimg hidden" id="14acati">
+            <img src="../img/nocat.png" class="catimg" id="14bcati">
+            <p class="cattext hidden" id="14acatt">Mango Cat</p>
+            <p class="cattext greytext" id="14bcatt">???</p>
+            <p class="cattext2 hidden" id="14acatd">brand placement</p>
+            <p class="cattext2 greytext" id="14bcatd">???</p>
+            <p class="cattext2" id="14bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry flexhidden">
+            <img src="../img/food.png" class="catimg hidden" id="0acati">
+            <img src="../img/nocat.png" class="catimg" id="0bcati">
+            <p class="cattext hidden" id="0acatt">No Cat</p>
+            <p class="cattext greytext" id="0bcatt">???</p>
+            <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
+            <p class="cattext2 greytext" id="0bcatd">???</p>
+            <p class="cattext2" id="0bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/html.png" class="catimg hidden" id="15acati">
+            <img src="../img/nocat.png" class="catimg" id="15bcati">
+            <p class="cattext hidden" id="15acatt">HTML Cat</p>
+            <p class="cattext greytext" id="15bcatt">???</p>
+            <p class="cattext2 hidden" id="15acatd">A very basic cat, but with a lot of potential.</p>
+            <p class="cattext2 greytext" id="15bcatd">???</p>
+            <p class="cattext2" id="15bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/css.png" class="catimg hidden" id="16acati">
+            <img src="../img/nocat.png" class="catimg" id="16bcati">
+            <p class="cattext hidden" id="16acatt">CSS Cat</p>
+            <p class="cattext greytext" id="16bcatt">???</p>
+            <p class="cattext2 hidden" id="16acatd">I Despise CSS!</p>
+            <p class="cattext2 greytext" id="16bcatd">???</p>
+            <p class="cattext2" id="16bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/javascript.png" class="catimg hidden" id="17acati">
+            <img src="../img/nocat.png" class="catimg" id="17bcati">
+            <p class="cattext hidden" id="17acatt">JS Cat</p>
+            <p class="cattext greytext" id="17bcatt">???</p>
+            <p class="cattext2 hidden" id="17acatd">also known as javascript, this cat is essential to its own existence</p>
+            <p class="cattext2 greytext" id="17bcatd">???</p>
+            <p class="cattext2" id="17bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/python.png" class="catimg hidden" id="18acati">
+            <img src="../img/nocat.png" class="catimg" id="18bcati">
+            <p class="cattext hidden" id="18acatt">Python Cat</p>
+            <p class="cattext greytext" id="18bcatt">???</p>
+            <p class="cattext2 hidden" id="18acatd">Where did you find this??? This site is in HTML, CSS, and JS???</p>
+            <p class="cattext2 greytext" id="18bcatd">???</p>
+            <p class="cattext2" id="18bcata">Obtained: 0</p>
+          </div>
+        </div>
+
+        <div class="catatier">
+          <div class="catentry">
+            <img src="../img/mercury.png" class="catimg hidden" id="19acati">
+            <img src="../img/nocat.png" class="catimg" id="19bcati">
+            <p class="cattext hidden" id="19acatt">Mercury Cat</p>
+            <p class="cattext greytext" id="19bcatt">???</p>
+            <p class="cattext2 hidden" id="19acatd">It feels warm to the touch... a little too warm</p>
+            <p class="cattext2 greytext" id="19bcatd">???</p>
+            <p class="cattext2" id="19bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/venus.png" class="catimg hidden" id="20acati">
+            <img src="../img/nocat.png" class="catimg" id="20bcati">
+            <p class="cattext hidden" id="20acatt">Venus Cat</p>
+            <p class="cattext greytext" id="20bcatt">???</p>
+            <p class="cattext2 hidden" id="20acatd">look at all the pretty colors</p>
+            <p class="cattext2 greytext" id="20bcatd">???</p>
+            <p class="cattext2" id="20bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/earth.png" class="catimg hidden" id="21acati">
+            <img src="../img/nocat.png" class="catimg" id="21bcati">
+            <p class="cattext hidden" id="21acatt">Earth Cat</p>
+            <p class="cattext greytext" id="21bcatt">???</p>
+            <p class="cattext2 hidden" id="21acatd">it feels familiar... homey, almost...</p>
+            <p class="cattext2 greytext" id="21bcatd">???</p>
+            <p class="cattext2" id="21bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/mars.png" class="catimg hidden" id="22acati">
+            <img src="../img/nocat.png" class="catimg" id="22bcati">
+            <p class="cattext hidden" id="22acatt">Mars Cat</p>
+            <p class="cattext greytext" id="22bcatt">???</p>
+            <p class="cattext2 hidden" id="22acatd">If Mars is this friendly, why are'nt we living on it already?</p>
+            <p class="cattext2 greytext" id="22bcatd">???</p>
+            <p class="cattext2" id="22bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/jupiter.png" class="catimg hidden" id="23acati">
+            <img src="../img/nocat.png" class="catimg" id="23bcati">
+            <p class="cattext hidden" id="23acatt">Jupiter Cat</p>
+            <p class="cattext greytext" id="23bcatt">???</p>
+            <p class="cattext2 hidden" id="23acatd">its a tiny bit overweight, but dont make fun of it</p>
+            <p class="cattext2 greytext" id="23bcatd">???</p>
+            <p class="cattext2" id="23bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/saturn.png" class="catimg hidden" id="24acati">
+            <img src="../img/nocat.png" class="catimg" id="24bcati">
+            <p class="cattext hidden" id="24acatt">Saturn Cat</p>
+            <p class="cattext greytext" id="24bcatt">???</p>
+            <p class="cattext2 hidden" id="24acatd">Its got such a fancy ring around it... i want it...</p>
+            <p class="cattext2 greytext" id="24bcatd">???</p>
+            <p class="cattext2" id="24bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/uranus.png" class="catimg hidden" id="25acati">
+            <img src="../img/nocat.png" class="catimg" id="25bcati">
+            <p class="cattext hidden" id="25acatt">Uranus Cat</p>
+            <p class="cattext greytext" id="25bcatt">???</p>
+            <p class="cattext2 hidden" id="25acatd">nope nope NOPE not that</p>
+            <p class="cattext2 greytext" id="25bcatd">???</p>
+            <p class="cattext2" id="25bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/neptune.png" class="catimg hidden" id="26acati">
+            <img src="../img/nocat.png" class="catimg" id="26bcati">
+            <p class="cattext hidden" id="26acatt">Neptune Cat</p>
+            <p class="cattext greytext" id="26bcatt">???</p>
+            <p class="cattext2 hidden" id="26acatd">Distant and frigid, but it warms up to you with time...</p>
+            <p class="cattext2 greytext" id="26bcatd">???</p>
+            <p class="cattext2" id="26bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/pluto.png" class="catimg hidden" id="27acati">
+            <img src="../img/nocat.png" class="catimg" id="27bcati">
+            <p class="cattext hidden" id="27acatt">Pluto Cat</p>
+            <p class="cattext greytext" id="27bcatt">???</p>
+            <p class="cattext2 hidden" id="27acatd">this isnt even a planet, but it likes to think it is</p>
+            <p class="cattext2 greytext" id="27bcatd">???</p>
+            <p class="cattext2" id="27bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/astronaut.png" class="catimg hidden" id="28acati">
+            <img src="../img/nocat.png" class="catimg" id="28bcati">
+            <p class="cattext hidden" id="28acatt">Astronaut Cat</p>
+            <p class="cattext greytext" id="28bcatt">???</p>
+            <p class="cattext2 hidden" id="28acatd">all suited up and ready to go out, sir!</p>
+            <p class="cattext2 greytext" id="28bcatd">???</p>
+            <p class="cattext2" id="28bcata">Obtained: 0</p>
+          </div>
+        </div>
+      </div>
+
+
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.7.6<br>Tons of UI changes, prepping for major UI stuff, 'buy until better' button for adopting</p>
         <p>v0.7.5<br>Buffed cats from Set 2, reduced the price of Set 3 to $500k</p>
         <p>v0.7.4<br>Fixed the prestige formula because it messed up at high values</p>
         <p>v0.7.3<br>Rebranded to Cat Clicker</p>
@@ -780,14 +774,10 @@
         <p>v0.1.0<br>Created the game. Its just a button, and a number</p>
       </div>
     </main>
-    <footer>
-      <a href="https://www.youtube.com/@mangokittengaming">YouTube</a>
-      <a href="https://www.twitch.tv/mangokittengaming">Twitch</a>
-      <a href="https://steamcommunity.com/profiles/76561199415611477/">Steam</a>
-    </footer>
   </body>
 </html>
 <script src="scripts/cats.js"></script>
 <script src="scripts/money.js"></script>
 <script src="scripts/prestige.js"></script>
 <script src="scripts/catalogue.js"></script>
+<script src="scripts/pages.js"></script>
