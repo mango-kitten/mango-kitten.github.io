@@ -4,9 +4,9 @@ let prestigecnf = 0
 
 function prestigecheck() {
     if (cats[2] > 0 || prestigelevel > 0) {
-        document.getElementById("prestigebutton").classList = "menubutton"
+        document.getElementById("prestigemenu").classList = "menubutton"
     } else {
-        document.getElementById("prestigebutton").classList = "menubutton hidden"
+        document.getElementById("prestigemenu").classList = "menubutton hidden"
     }
 }
 
