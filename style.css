@@ -114,7 +114,6 @@ button {
 .moneybutton{
     transition: .2s;
 }
-
 .moneybutton:hover{
     transform: scale(1.05);
 }
@@ -346,4 +345,18 @@ button {
 
 .cataloguetitle {
     padding: 10px;
+}
+
+
+.menubutton {
+    background: none;
+    border: none;
+    height: 22px;
+    transition: .2s;
+    font-size: 16px;
+    padding-left: 4%;
+    color: rgb(26, 135, 207);
+}
+.menubutton:hover {
+    transform: scale(1.1);
 }
