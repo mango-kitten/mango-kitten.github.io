@@ -360,3 +360,14 @@ button {
 .menubutton:hover {
     transform: scale(1.1);
 }
+
+
+.tutorialhold {
+    padding: 2%;
+}
+.tutorialtop {
+    font-size: 18px;
+}
+.tutorialbottom {
+    font-size: 14px;
+}
