@@ -286,9 +286,11 @@ function fastTickUpdate() {
     tickLevel = prestigeLevel(totalmade)[0]
     tickRemain = Math.floor(prestigeLevel(totalmade)[1])
     tickMax = Math.floor(prestigeLevel(totalmade)[2])
-    document.getElementById("prestigecurrent").innerHTML = `You are prestige level ${prestigelevel}`
-    document.getElementById("prestigelevel").innerHTML = `You will be prestige level ${tickLevel} (+${tickLevel-prestigelevel})<br>${parseCommas(tickRemain)} to next level`
-    document.getElementById("prestigeprogress").value = ((totalmade-tickMax)/((totalmade+tickRemain)-tickMax))*1000
+    if (totalmade > 1000000) {
+        document.getElementById("prestigecurrent").innerHTML = `You are prestige level ${prestigelevel}`
+        document.getElementById("prestigelevel").innerHTML = `You will be prestige level ${tickLevel} (+${tickLevel-prestigelevel})<br>${parseCommas(tickRemain)} to next level`
+        document.getElementById("prestigeprogress").value = ((totalmade-tickMax)/((totalmade+tickRemain)-tickMax))*1000
+    }
 }
 
 
