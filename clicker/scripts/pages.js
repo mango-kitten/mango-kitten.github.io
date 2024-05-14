@@ -8,6 +8,7 @@ function homepage() {
     document.getElementById("cataloguepage").classList = "cataloguepage hidden"
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
+    document.getElementById("tutorial").classList = "tutorialpage hidden"
     resetconfirmval = 0
 }
 
@@ -18,6 +19,7 @@ function prestigepage() {
     document.getElementById("cataloguepage").classList = "cataloguepage hidden"
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
+    document.getElementById("tutorial").classList = "tutorialpage hidden"
     resetconfirmval = 0
 }
 
@@ -28,6 +30,7 @@ function adoptpage() {
     document.getElementById("cataloguepage").classList = "cataloguepage hidden"
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
+    document.getElementById("tutorial").classList = "tutorialpage hidden"
     resetconfirmval = 0
 }
 
@@ -38,6 +41,7 @@ function catapage() {
     document.getElementById("cataloguepage").classList = "cataloguepage"
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
+    document.getElementById("tutorial").classList = "tutorialpage hidden"
     resetconfirmval = 0
 }
 
@@ -49,9 +53,20 @@ function changepage() {
     document.getElementById("cataloguepage").classList = "cataloguepage hidden"
     document.getElementById("changelog").classList = "changelog"
     document.getElementById("resetpage").classList = "resetpage hidden"
+    document.getElementById("tutorial").classList = "tutorialpage hidden"
     resetconfirmval = 0
 }
 
+function tutorial() {
+    document.getElementById("mainpage").classList = "mainpage hidden"
+    document.getElementById("prestigepage").classList = "prestigepage hidden"
+    document.getElementById("adoptpage").classList = "adoptpage hidden"
+    document.getElementById("cataloguepage").classList = "cataloguepage hidden"
+    document.getElementById("changelog").classList = "changelog hidden"
+    document.getElementById("resetpage").classList = "resetpage hidden"
+    document.getElementById("tutorial").classList = "tutorialpage"
+    resetconfirmval = 0
+}
 
 
 function resetconfirm() {
@@ -91,5 +106,6 @@ function resetstorage() {
     document.getElementById("adoptpage").classList = "adoptpage hidden"
     document.getElementById("cataloguepage").classList = "cataloguepage hidden"
     document.getElementById("changelog").classList = "changelog hidden"
+    document.getElementById("tutorial").classList = "tutorialpage hidden"
     document.getElementById("resetpage").classList = "resetpage"
 }
