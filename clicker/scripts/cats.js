@@ -15,14 +15,14 @@ let catgot3 = 0
 let catgot4 = 0
 let catgot5 = 0
 
+let betterinfo = 0
+
 function getCat(set, roll = 9999) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING IDIOT IT ACTUALLY WORKS
-  console.log(roll)
   possibleids = [] // empty the possibilites and other stuff
   combpool = 0
   rescheck = 0
   result = 0
   foundres = 0
-  console.log("Getting cats with id",set)
   for (let i=0; i<catset.length; i++) {
     if (parseInt(catset[i]) == parseInt(set)) {
       possibleids.splice(possibleids.length, 0, i) // get every cat from that set
@@ -34,6 +34,7 @@ function getCat(set, roll = 9999) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING ID
   combpool = combpool + 1
   if (roll == 9999) {
     weightroll = Math.random() * combpool // roll, multiply by max weight
+    weightroll = weightroll + rollboost // oooooo prestige 7500 stuff waow
   } else {
     weightroll = roll
   }
@@ -82,16 +83,15 @@ function buyBetter1() {
   if (cats[0] == 5) {
     console.log("You already have the best cat")
   } else {
-    while (catgot1 <= cats[0] && dolor >= 500) {
+    clearTimeout(betterinfo)
+    while (catgot1 <= cats[0] && dolor >= 500 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet1()
-      console.log("bought a cat")
     }
     document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
-    setTimeout(function () {
+    betterinfo = setTimeout(function () {
       document.getElementById("iterc").innerHTML = `---`
     }, 5000)
-    console.log("finished")
   }
 }
 
@@ -157,16 +157,15 @@ function buyBetter2() {
   if (cats[1] == 9) {
     console.log("You already have the best cat")
   } else {
-    while (catgot2 <= cats[1] && dolor >= 20000) {
+    clearTimeout(betterinfo)
+    while (catgot2 <= cats[1] && dolor >= 20000 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet2()
-      console.log("bought a cat")
     }
     document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
-    setTimeout(function () {
+    betterinfo = setTimeout(function () {
       document.getElementById("iterc").innerHTML = `---`
     }, 5000)
-    console.log("finished")
   }
 }
 
@@ -237,16 +236,15 @@ function buyBetter3() {
   if (cats[2] == 14) {
     console.log("You already have the best cat")
   } else {
-    while (catgot3 <= cats[2] && dolor >= 500000) {
+    clearTimeout(betterinfo)
+    while (catgot3 <= cats[2] && dolor >= 500000 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet3()
-      console.log("bought a cat")
     }
     document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
-    setTimeout(function () {
+    betterinfo = setTimeout(function () {
       document.getElementById("iterc").innerHTML = `---`
     }, 5000)
-    console.log("finished")
   }
 }
 
@@ -313,16 +311,15 @@ function buyBetter4() {
   if (cats[3] == 18) {
     console.log("You already have the best cat")
   } else {
-    while (catgot4 <= cats[3] && dolor >= 100000000) {
+    clearTimeout(betterinfo)
+    while (catgot4 <= cats[3] && dolor >= 100000000 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet4()
-      console.log("bought a cat")
     }
     document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
-    setTimeout(function () {
+    betterinfo = setTimeout(function () {
       document.getElementById("iterc").innerHTML = `---`
     }, 5000)
-    console.log("finished")
   }
 }
 
@@ -391,16 +388,15 @@ function buyBetter5() {
   if (cats[4] == 28) {
     console.log("You already have the best cat")
   } else {
-    while (catgot5 <= cats[4] && dolor >= 10000000000) {
+    clearTimeout(betterinfo)
+    while (catgot5 <= cats[4] && dolor >= 10000000000 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet5()
-      console.log("bought a cat")
     }
     document.getElementById("iterc").innerHTML = `Bought ${catiter} cats`
-    setTimeout(function () {
+    betterinfo = setTimeout(function () {
       document.getElementById("iterc").innerHTML = `---`
     }, 5000)
-    console.log("finished")
   }
 }
 
@@ -434,6 +430,3 @@ function releaseCat5() {
     document.getElementById("cat5error").innerHTML = "There is no cat waiting!"
   }
 }
-
-
-
