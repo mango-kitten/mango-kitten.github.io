@@ -31,6 +31,7 @@
         let inDevReset = 0;
         let changelogtoggle = 0;
         let prestigelevel = 0
+        let moneyclicked = 0
         // let prestigelevel = Number(localStorage.getItem("prestige"));
         if (prestigelevel == 1) {
           prestigelevel = 0;
@@ -287,7 +288,7 @@
           <p>&#10240</p>
         </div>
         <div class="topbar">
-          <p id="clickertopbar">Cat Clicker v0.7.6</p>
+          <p id="clickertopbar">Cat Clicker v0.7.7</p>
         </div>
 
         <button onclick="homepage()" class="menubutton">Home</button>
@@ -326,10 +327,10 @@
           <p>&#10240</p>
         </div>
         <div class="shop">
-          <button onclick="buyitem(1)" class="buybutton" id="mpc1">Increase ypc $50 (0/3)</button>
-          <button onclick="buyitem(2)" class="buybutton" id="mpc2">Ypc lv 2 $1000 (0/8)</button>
-          <button onclick="buyitem(3)" class="buybutton" id="mpc3">Ypc lv 3 $10000 (0/8)</button>
-          <button onclick="buyitem(4)" class="buybutton" id="mpc4">Ypc lv 4 $100000 (0/10)</button>
+          <button onclick="buyitem(1)" class="buybutton" id="mpc1">Increase ypc ¥50 (0/3)</button>
+          <button onclick="buyitem(2)" class="buybutton" id="mpc2">Ypc lv 2 ¥1000 (0/8)</button>
+          <button onclick="buyitem(3)" class="buybutton" id="mpc3">Ypc lv 3 ¥10000 (0/8)</button>
+          <button onclick="buyitem(4)" class="buybutton" id="mpc4">Ypc lv 4 ¥100000 (0/10)</button>
           <p id="clickerinfo">---</p>
         </div>
       </div>
@@ -377,7 +378,7 @@
         <div class="catstorage">
           <div class="getcat">
             <p id="cat1error">---</p>
-            <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray ($500)</button>
+            <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray (¥500)</button>
             <button onclick="buyBetter1()" class="buybutton hidden" id="betc1">Buy until better</button>
             <p id="catres1">No cats recently found</p>
             <button onclick="keepCat1()" class="keepbutton" id="keepc1">Adopt</button>
@@ -387,7 +388,7 @@
 
           <div class="getcat">
             <p id="cat2error">---</p>
-            <button onclick="buyCatSet2()" class="buybutton" id="getc2">Perform a Magic Ritual ($20000)</button>
+            <button onclick="buyCatSet2()" class="buybutton" id="getc2">Perform a Magic Ritual (¥20000)</button>
             <button onclick="buyBetter2()" class="buybutton hidden" id="betc2">Buy until better</button>
             <p id="catres2">No cats recently summoned</p>
             <button onclick="keepCat2()" class="keepbutton" id="keepc2">Adopt</button>
@@ -397,7 +398,7 @@
 
           <div class="getcat">
               <p id="cat3error">---</p>
-              <button onclick="buyCatSet3()" class="buybutton" id="getc3">Buy an Odd Fruitbowl ($500k)</button>
+              <button onclick="buyCatSet3()" class="buybutton" id="getc3">Buy an Odd Fruitbowl (¥500k)</button>
               <button onclick="buyBetter3()" class="buybutton hidden" id="betc3">Buy until better</button>
               <p id="catres3">No cats recently picked</p>
               <button onclick="keepCat3()" class="keepbutton" id="keepc3">Adopt</button>
@@ -408,7 +409,7 @@
 
           <div class="getcat">
               <p id="cat4error">---</p>
-              <button onclick="buyCatSet4()" class="buybutton" id="getc4">Program some Cats in ($100m)</button>
+              <button onclick="buyCatSet4()" class="buybutton" id="getc4">Program some Cats in (¥100m)</button>
               <button onclick="buyBetter4()" class="buybutton hidden" id="betc4">Buy until better</button>
               <p id="catres4">No cats recently encoded</p>
               <button onclick="keepCat4()" class="keepbutton" id="keepc4">Adopt</button>
@@ -418,7 +419,7 @@
           
           <div class="getcat">
             <p id="cat5error">---</p>
-            <button onclick="buyCatSet5()" class="buybutton" id="getc5">Observe a Cat-based Solar System ($10b)</button>
+            <button onclick="buyCatSet5()" class="buybutton" id="getc5">Observe a Cat-based Solar System (¥10b)</button>
             <button onclick="buyBetter5()" class="buybutton hidden" id="betc5">Buy until better</button>
             <p id="catres5">No cats recently observed</p>
             <button onclick="keepCat5()" class="keepbutton" id="keepc5">Adopt</button>
@@ -743,6 +744,7 @@
 
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.7.7<br>Fixed reset-related bugs, switched $ to ¥</p>
         <p>v0.7.6<br>Tons of UI changes, prepping for major UI stuff, 'buy until better' button for adopting</p>
         <p>v0.7.5<br>Buffed cats from Set 2, reduced the price of Set 3 to $500k</p>
         <p>v0.7.4<br>Fixed the prestige formula because it messed up at high values</p>
