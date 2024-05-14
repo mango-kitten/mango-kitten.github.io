@@ -30,6 +30,26 @@ function updatetext() {
     }
 
 
+    if (buybetter > 0) {
+        document.getElementById("betc1").classList = "buybutton"
+        document.getElementById("betc2").classList = "buybutton"
+        document.getElementById("betc3").classList = "buybutton"
+        document.getElementById("betc4").classList = "buybutton"
+        document.getElementById("betc5").classList = "buybutton"
+        document.getElementById("betc1").innerHTML = `Buy until better x${buybetter}`
+        document.getElementById("betc2").innerHTML = `Buy until better x${buybetter}`
+        document.getElementById("betc3").innerHTML = `Buy until better x${buybetter}`
+        document.getElementById("betc4").innerHTML = `Buy until better x${buybetter}`
+        document.getElementById("betc5").innerHTML = `Buy until better x${buybetter}`
+    } else {
+        document.getElementById("betc1").classList = "buybutton hidden"
+        document.getElementById("betc2").classList = "buybutton hidden"
+        document.getElementById("betc3").classList = "buybutton hidden"
+        document.getElementById("betc4").classList = "buybutton hidden"
+        document.getElementById("betc5").classList = "buybutton hidden"
+    }
+
+
     if (bought[4]) {
         document.getElementById("mpc4").innerHTML = `Ypc lv4 ¥100000 (${String(bought[4])}/10)`
     } else {
@@ -62,7 +82,6 @@ function updatetext() {
             document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat <br>+${String(mpcadd[cats[2]])} x ${fruitMulti} ypc<br>+${String(catcps[cats[2]])} x ${fruitMulti} cps`
         }
         if (cps == 0) {
-            console.log("Updating cps...")
             cps = catcps[cats[2]]
         }
     }
@@ -75,7 +94,6 @@ function updatetext() {
             document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat <br>+${String(mpcadd[cats[3]])} x ${programMulti} ypc<br>+${String(catcps[cats[3]])} x ${programMulti} cps`
         }
         if (cps == 0) {
-            console.log("Updating cps...")
             cps = catcps[cats[3]]
         }
     }
@@ -88,7 +106,6 @@ function updatetext() {
             document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat <br>+${String(mpcadd[cats[4]])} x ${planetMulti} ypc<br>+${String(catcps[cats[4]])} x ${planetMulti} cps`
         }
         if (cps == 0) {
-            console.log("Updating cps...")
             cps = catcps[cats[4]]
         }
     }
@@ -185,7 +202,6 @@ function parseCommas(input) {
             output = Number(output)*100
         }
 
-        // console.log(String(output).length)
         if (String(output).length < 4) {
             output = `${output}.000`
         } else {
@@ -281,6 +297,9 @@ function parseCommas(input) {
 
 
 
+
+
+
 function fastTickUpdate() {
     document.getElementById("totalyarntext").innerHTML = `You have made ${parseCommas(totalmade)} yarn ever`
     tickLevel = prestigeLevel(totalmade)[0]
@@ -338,25 +357,6 @@ function updateCatalogue() {
 }
 
 
-// function toStore(num) {
-//     let numparse = []
-//     let numlen = String(num).length
-//     console.log(Math.ceil(numlen/15))
-//     let res = ""
-//     for (let i=0;i<Math.ceil(numlen/15);i++) {
-//         numparse.push(String(num).substring(i*15, (i*15)+14))
-//         console.log(numparse)
-//     }
-//     for (let i=0;i<numparse.length;i++) {
-//         res = res + Number(numparse[i]).toString(36)
-//     }
-//     return res
-// }
-
-// function fromStore(str) {
-//     return parseInt(str, 36)
-// }
-
 function buildYpc() {
     let mpca = 1
 
@@ -389,6 +389,22 @@ function buildCps() {
     return cpsa
 }
 
+
+function unlockbuybetter() {
+    document.getElementById("betc1").classList = "buybutton"
+    document.getElementById("betc2").classList = "buybutton"
+    document.getElementById("betc3").classList = "buybutton"
+    document.getElementById("betc4").classList = "buybutton"
+    document.getElementById("betc5").classList = "buybutton"
+}
+function lockbuybetter() {
+    document.getElementById("betc1").classList = "buybutton hidden"
+    document.getElementById("betc2").classList = "buybutton hidden"
+    document.getElementById("betc3").classList = "buybutton hidden"
+    document.getElementById("betc4").classList = "buybutton hidden"
+    document.getElementById("betc5").classList = "buybutton hidden"
+}
+
 function buildPrestige() {
     if (prestigelevel >= 2) {
         prestigeMulti = 2
@@ -398,18 +414,12 @@ function buildPrestige() {
         document.getElementById("p1").classList = "prestigeno"
     }
     if (prestigelevel >= 4) {
-        document.getElementById("betc1").classList = "buybutton"
-        document.getElementById("betc2").classList = "buybutton"
-        document.getElementById("betc3").classList = "buybutton"
-        document.getElementById("betc4").classList = "buybutton"
-        document.getElementById("betc5").classList = "buybutton"
+        buybetter = 10
+        unlockbuybetter()
         document.getElementById("p2").classList = "prestigeyes"
     } else {
-        document.getElementById("betc1").classList = "buybutton hidden"
-        document.getElementById("betc2").classList = "buybutton hidden"
-        document.getElementById("betc3").classList = "buybutton hidden"
-        document.getElementById("betc4").classList = "buybutton hidden"
-        document.getElementById("betc5").classList = "buybutton hidden"
+        buybetter = 0
+        lockbuybetter()
         document.getElementById("p2").classList = "prestigeno"
     }
     if (prestigelevel >= 10) {
@@ -500,5 +510,97 @@ function buildPrestige() {
         document.getElementById("p16").classList = "prestigeyes"
     } else {
         document.getElementById("p16").classList = "prestigeno"
+    }
+    if (prestigelevel >= 1000) {
+        prestigeCps = 21
+        document.getElementById("p17").classList = "prestigeyes"
+    } else {
+        document.getElementById("p17").classList = "prestigeno"
+    }
+    if (prestigelevel >= 2000) {
+        prestigeMulti = 256
+        document.getElementById("p18").classList = "prestigeyes"
+    } else {
+        document.getElementById("p18").classList = "prestigeno"
+    }
+    if (prestigelevel >= 3000) {
+        prestigeCps = 51
+        document.getElementById("p19").classList = "prestigeyes"
+    } else {
+        document.getElementById("p19").classList = "prestigeno"
+    }
+    if (prestigelevel >= 4000) {
+        strayMulti = 729
+        document.getElementById("p20").classList = "prestigeyes"
+    } else {
+        document.getElementById("p20").classList = "prestigeno"
+    }
+    if (prestigelevel >= 5000) {
+        buybetter = 100
+        document.getElementById("p21").classList = "prestigeyes"
+    } else {
+        document.getElementById("p21").classList = "prestigeno"
+    }
+    if (prestigelevel >= 7500) {
+        rollboost = 1
+        document.getElementById("p22").classList = "prestigeyes"
+    } else {
+        rollboost = 0
+        document.getElementById("p22").classList = "prestigeno"
+    }
+    if (prestigelevel >= 10000) {
+        manualclick = 25
+        document.getElementById("p23").classList = "prestigeyes"
+    } else {
+        manualclick = 1
+        document.getElementById("p23").classList = "prestigeno"
+    }
+    if (prestigelevel >= 12500) {
+        prestigeMulti = 512
+        document.getElementById("p24").classList = "prestigeyes"
+    } else {
+        document.getElementById("p24").classList = "prestigeno"
+    }
+    if (prestigelevel >= 15000) {
+        magicMulti = 729
+        document.getElementById("p25").classList = "prestigeyes"
+    } else {
+        document.getElementById("p25").classList = "prestigeno"
+    }
+    if (prestigelevel >= 17500) {
+        planetMulti = 2
+        document.getElementById("p26").classList = "prestigeyes"
+    } else {
+        document.getElementById("p26").classList = "prestigeno"
+    }
+    if (prestigelevel >= 20000) {
+        rollboost = 3
+        document.getElementById("p27").classList = "prestigeyes"
+    } else {
+        document.getElementById("p27").classList = "prestigeno"
+    }
+    if (prestigelevel >= 25000) {
+        prestigeMulti = 1024
+        document.getElementById("p28").classList = "prestigeyes"
+    } else {
+        document.getElementById("p28").classList = "prestigeno"
+    }
+    if (prestigelevel >= 30000) {
+        prestigeCps = 100
+        document.getElementById("p29").classList = "prestigeyes"
+    } else {
+        document.getElementById("p29").classList = "prestigeno"
+    }
+    if (prestigelevel >= 40000) {
+        manualclick = 50
+        document.getElementById("p30").classList = "prestigeyes"
+    } else {
+        document.getElementById("p30").classList = "prestigeno"
+    }
+    if (prestigelevel >= 50000) {
+        rollboost = 6
+        document.getElementById("p31").classList = "prestigeyes"
+    } else {
+        document.getElementById("p31").classList = "prestigeno"
     }
 }
