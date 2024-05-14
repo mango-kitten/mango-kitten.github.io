@@ -19,9 +19,9 @@ function updatetext() {
     } else {
         document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(mpc/prestigeMulti)} x ${prestigeMulti}`
     }
-    document.getElementById("mpc1").innerHTML = `Increase ypc $50 (${String(bought[1])}/3)`
-    document.getElementById("mpc2").innerHTML = `Ypc lv2 $1000 (${String(bought[2])}/8)`
-    document.getElementById("mpc3").innerHTML = `Ypc lv3 $10000 (${String(bought[3])}/8)`
+    document.getElementById("mpc1").innerHTML = `Increase ypc ¥50 (${String(bought[1])}/3)`
+    document.getElementById("mpc2").innerHTML = `Ypc lv2 ¥1000 (${String(bought[2])}/8)`
+    document.getElementById("mpc3").innerHTML = `Ypc lv3 ¥10000 (${String(bought[3])}/8)`
 
     if (prestigeCps == 0) {
         document.getElementById("cpsdisp").innerHTML = `Clicks per Second: ${String(cps)}`
@@ -31,9 +31,9 @@ function updatetext() {
 
 
     if (bought[4]) {
-        document.getElementById("mpc4").innerHTML = `Ypc lv4 $100000 (${String(bought[4])}/10)`
+        document.getElementById("mpc4").innerHTML = `Ypc lv4 ¥100000 (${String(bought[4])}/10)`
     } else {
-        document.getElementById("mpc4").innerHTML = `Ypc lv4 $100000 (0/10)`
+        document.getElementById("mpc4").innerHTML = `Ypc lv4 ¥100000 (0/10)`
     }
     if (cats[0] == 0) {
         document.getElementById("catown1").innerHTML = "You have no cat in slot 1"
