@@ -79,6 +79,7 @@ function resetconfirm() {
         updatebutton();
         updateCatalogue();
         resetconfirmval = 0
+        window.location.reload();
     }
 }
 
