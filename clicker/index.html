@@ -50,7 +50,9 @@
         let programMulti = 1
         let planetMulti = 1
         let prestigeCps = 0
-        let mpc5 = 0
+        let buybetter = 0
+        let rollboost = 0
+        let manualclick = 1
 
         if (cats) {
           var str = localStorage.getItem("cats");
@@ -197,7 +199,6 @@
                     updatetext();
                 }
                 document.getElementById("clickerinfo").innerHTML = "---"
-                console.log(bought)
                 // bought item
             } else {
                 // too poor
@@ -288,7 +289,7 @@
           <p>&#10240</p>
         </div>
         <div class="topbar">
-          <p id="clickertopbar">Cat Clicker v0.7.7</p>
+          <p id="clickertopbar">Cat Clicker v0.7.8</p>
         </div>
 
         <button onclick="homepage()" class="menubutton">Home</button>
@@ -296,6 +297,7 @@
         <button onclick="adoptpage()" class="menubutton">Adopt</button>
         <button onclick="catapage()" class="menubutton">Catalogue</button>
         <button onclick="changepage()" class="menubutton">Changelog</button>
+        <button onclick="tutorial()" class="menubutton">Tutorial</button>
 
 
 
@@ -305,8 +307,8 @@
           <p id="lastsaved">Last Saved: Not saved this session.</p>
         </div>
         <div class="interface">
-          <h2 id="moneydisp">Money: 0</h2>
-          <p id="mpcdisp">Money per Click: 1</p>
+          <h2 id="moneydisp">Yarn: 0</h2>
+          <p id="mpcdisp">Yarn per Click: 1</p>
           <p id="cpsdisp" class="hidden">Clicks per Second: 0</p>
         </div>
       </div>
@@ -323,7 +325,6 @@
           </div>
         </div>
         <div class="spacer">
-          <p>&#10240</p>
           <p>&#10240</p>
         </div>
         <div class="shop">
@@ -351,7 +352,7 @@
             <img src="../img/confirmprestige.png" class="prestigebutton">
           </div>
           <div class="prestigebonus">
-            <p class="prestigeno" id="p1">2 - double earnings</p>
+            <p class="prestigeno" id="p1">2 - x2 yarn</p>
             <p class="prestigeno" id="p2">4 - unlock 'buy until better' button when adopting</p>
             <p class="prestigeno" id="p3">10 - elevate stray cats (x9 earnings)</p>
             <p class="prestigeno" id="p4">20 - +1 cps</p>
@@ -368,6 +369,24 @@
             <p class="prestigeno" id="p15">650 - x2 yarn</p>
             <p class="prestigeno" id="p16">700 - x2 yarn</p>
           </div>
+          <div class="prestigebonus">
+            <p class="prestigeno" id="p17">1000 - +15 cps</p>
+            <p class="prestigeno" id="p18">2000 - x2 yarn</p>
+            <p class="prestigeno" id="p19">3000 - +30 cps</p>
+            <p class="prestigeno" id="p20">4000 - inspire stray cats (x729 earnings)</p>
+            <p class="prestigeno" id="p21">5000 - improves buy until better to x100</p>
+            <p class="prestigeno" id="p22">7500 - increase cat rolls by 1</p>
+            <p class="prestigeno" id="p23">10000 - multiply manual clicks by 25</p>
+            <p class="prestigeno" id="p24">12500 - x2 yarn</p>
+            <p class="prestigeno" id="p25">15000 - inspire ritual cats</p>
+            <p class="prestigeno" id="p26">17500 - boost planetary cats (x2 earnings)</p>
+            <p class="prestigeno" id="p27">20000 - increase cat rolls by 2</p>
+            <p class="prestigeno" id="p28">25000 - x2 yarn</p>
+            <p class="prestigeno" id="p29">30000 - +49 cps</p>
+            <p class="prestigeno" id="p30">40000 - increase manual clicking multi by +25x</p>
+            <p class="prestigeno" id="p31">50000 - increase cat rolls by 3</p>
+
+          </div>
         </div>
       </div>
 
@@ -378,8 +397,12 @@
         <div class="catstorage">
           <div class="getcat">
             <p id="cat1error">---</p>
-            <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray (¥500)</button>
-            <button onclick="buyBetter1()" class="buybutton hidden" id="betc1">Buy until better</button>
+            <div>
+              <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray (¥500)</button>
+            </div>
+            <div>
+              <button onclick="buyBetter1()" class="buybutton hidden" id="betc1">Buy until better x10</button>
+            </div>
             <p id="catres1">No cats recently found</p>
             <button onclick="keepCat1()" class="keepbutton" id="keepc1">Adopt</button>
             <button onclick="releaseCat1()" class="replacebutton" id="releasec1">Release</button>
@@ -388,8 +411,12 @@
 
           <div class="getcat">
             <p id="cat2error">---</p>
-            <button onclick="buyCatSet2()" class="buybutton" id="getc2">Perform a Magic Ritual (¥20000)</button>
-            <button onclick="buyBetter2()" class="buybutton hidden" id="betc2">Buy until better</button>
+            <div>
+              <button onclick="buyCatSet2()" class="buybutton" id="getc2">Perform a Magic Ritual (¥20000)</button>
+            </div>
+            <div>
+              <button onclick="buyBetter2()" class="buybutton hidden" id="betc2">Buy until better x10</button>
+            </div>
             <p id="catres2">No cats recently summoned</p>
             <button onclick="keepCat2()" class="keepbutton" id="keepc2">Adopt</button>
             <button onclick="releaseCat2()" class="replacebutton" id="releasec2">Release</button>
@@ -398,8 +425,12 @@
 
           <div class="getcat">
               <p id="cat3error">---</p>
-              <button onclick="buyCatSet3()" class="buybutton" id="getc3">Buy an Odd Fruitbowl (¥500k)</button>
-              <button onclick="buyBetter3()" class="buybutton hidden" id="betc3">Buy until better</button>
+              <div>
+                <button onclick="buyCatSet3()" class="buybutton" id="getc3">Buy an Odd Fruitbowl (¥500k)</button>
+              </div>
+              <div>
+                <button onclick="buyBetter3()" class="buybutton hidden" id="betc3">Buy until better x10</button>
+              </div>
               <p id="catres3">No cats recently picked</p>
               <button onclick="keepCat3()" class="keepbutton" id="keepc3">Adopt</button>
               <button onclick="releaseCat3()" class="replacebutton" id="releasec3">Release</button>
@@ -409,8 +440,12 @@
 
           <div class="getcat">
               <p id="cat4error">---</p>
-              <button onclick="buyCatSet4()" class="buybutton" id="getc4">Program some Cats in (¥100m)</button>
-              <button onclick="buyBetter4()" class="buybutton hidden" id="betc4">Buy until better</button>
+              <div>
+                <button onclick="buyCatSet4()" class="buybutton" id="getc4">Program some Cats in (¥100m)</button>
+              </div>
+              <div>
+                <button onclick="buyBetter4()" class="buybutton hidden" id="betc4">Buy until better x10</button>
+              </div>
               <p id="catres4">No cats recently encoded</p>
               <button onclick="keepCat4()" class="keepbutton" id="keepc4">Adopt</button>
               <button onclick="releaseCat4()" class="replacebutton" id="releasec4">Release</button>
@@ -419,8 +454,12 @@
           
           <div class="getcat">
             <p id="cat5error">---</p>
-            <button onclick="buyCatSet5()" class="buybutton" id="getc5">Observe a Cat-based Solar System (¥10b)</button>
-            <button onclick="buyBetter5()" class="buybutton hidden" id="betc5">Buy until better</button>
+            <div>
+              <button onclick="buyCatSet5()" class="buybutton" id="getc5">Observe a Cat-based Solar System (¥10b)</button>
+            </div>
+            <div>
+              <button onclick="buyBetter5()" class="buybutton hidden" id="betc5">Buy until better x10</button>
+            </div>
             <p id="catres5">No cats recently observed</p>
             <button onclick="keepCat5()" class="keepbutton" id="keepc5">Adopt</button>
             <button onclick="releaseCat5()" class="replacebutton" id="releasec5">Release</button>
@@ -744,6 +783,7 @@
 
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.7.8<br>Added 15 more tiers of prestige bonuses</p>
         <p>v0.7.7<br>Fixed reset-related bugs, switched $ to ¥</p>
         <p>v0.7.6<br>Tons of UI changes, prepping for major UI stuff, 'buy until better' button for adopting</p>
         <p>v0.7.5<br>Buffed cats from Set 2, reduced the price of Set 3 to $500k</p>
@@ -778,6 +818,50 @@
         <p>v0.1.2<br>Fixed various bugs relating to the reset button</p>
         <p>v0.1.1<br>Added Reset button</p>
         <p>v0.1.0<br>Created the game. Its just a button, and a number</p>
+      </div>
+
+
+      <div class="tutorialpage hidden" id="tutorial">
+        <div class="spacer">
+          <p>&#10240<br>&#10240<br></p>
+        </div>
+        <p class="cataloguetitle">Tutorials</p>
+        <div class="tutorialhold">
+          <p class="tutorialtop">Yarn</p>
+          <p class="tutorialbottom">You get yarn by clicking the ball of yarn on the HOME page.</p>
+        </div>
+        <div class="tutorialhold">
+          <p class="tutorialtop">Yarn per Click</p>
+          <p class="tutorialbottom">Yarn per Click, or ypc, is the amount of yarn earned each time you click the yarn ball. It can be increased by buying upgrades or adopting cats.</p>
+        </div>
+        <div class="tutorialhold">
+          <p class="tutorialtop">Cats</p>
+          <p class="tutorialbottom">Once you get enough money, you can go to the ADOPT page. Clicking 'find a stray' will get a random cat from the strays, and clicking adopt will keep it.<br>Different cats give different bonuses, and you may have one cat from each set at a time.</p>
+        </div>
+        <div class="tutorialhold">
+          <p class="tutorialtop">Catalogue</p>
+          <p class="tutorialbottom">Found on the CATALOGUE page, this handy tool automatically tracks how many of each type of cat you have gotten.<br>Later in development, hitting a certain threshold of cats will give a bonus.</p>
+        </div>
+        <div class="tutorialhold">
+          <p class="tutorialtop">CPS</p>
+          <p class="tutorialbottom">10 times a second, you gain an amount of yarn equal to (cps/10)*(ypc*prestigebonus). 1 CPS equates to 1 click on the yarn ball every second.</p>
+        </div>
+        <div class="tutorialhold">
+          <p class="tutorialtop">Prestige</p>
+          <p class="tutorialbottom">Once you get a cat from the fruit bowl, you unlock the PRESTIGE tab. Prestiging resets your current cats and yarn, but keeps all catalogue progress. Prestiging will give upgrades to yarn earnings, as is shown at the bottom of the page.</p>
+        </div>
+        <div class="tutorialhold">
+          <p class="tutorialtop">Set Boosts</p>
+          <p class="tutorialbottom">BOOSTING a cat set multiplies all the bonuses from cats a part of that set by 2.<br>ELEVATING a cat set multiplies all the bonuses from cats a part of that set by 9.<br>ASCENDING a cat set multiplies the bonuses by 81.<br>INSPIRING a cat set multiplies the bonuses by 729.</p>
+        </div>
+        <div class="tutorialhold">
+          <p class="tutorialtop">Buy until Better</p>
+          <p class="tutorialbottom">Clicking this button, found on the adopt screen, buys until you get a better cat, run out of money, or reach the limit granted by your prestige level.<br>Prestige level 4 - Buy until Better x10<br>Prestige level 5000 - Buy until Better x100</p>
+        </div>
+        <div class="tutorialhold">
+          <p class="tutorialtop">Increasing cat rolls</p>
+          <p class="tutorialbottom">Found at some prestige levels, this directly increases the rolls you get when adopting cats, improving your chances of getting good cats.</p>
+        </div>
       </div>
 
 
