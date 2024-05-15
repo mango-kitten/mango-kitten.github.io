@@ -9,11 +9,14 @@ let moneybutton = document.getElementById("moneybutton")
 
 moneybutton.addEventListener('mousedown', function() {
   clearTimeout(hold)
+  clearInterval(autoclick)
   mouseIsDown = true;
   hold = setTimeout(function() {
     if(mouseIsDown) {
       autoclick = setInterval(function() {
-        money()
+        if (mouseIsDown) {
+            money()
+        }
       }, 150)
     }
   }, 1000);
