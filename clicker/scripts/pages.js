@@ -9,6 +9,7 @@ function homepage() {
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
+    document.getElementById("offlinepage").classList = "offlinescreen hidden"
     resetconfirmval = 0
 }
 
@@ -20,6 +21,7 @@ function prestigepage() {
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
+    document.getElementById("offlinepage").classList = "offlinescreen hidden"
     resetconfirmval = 0
 }
 
@@ -31,6 +33,7 @@ function adoptpage() {
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
+    document.getElementById("offlinepage").classList = "offlinescreen hidden"
     resetconfirmval = 0
 }
 
@@ -42,9 +45,9 @@ function catapage() {
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
+    document.getElementById("offlinepage").classList = "offlinescreen hidden"
     resetconfirmval = 0
 }
-
 
 function changepage() {
     document.getElementById("mainpage").classList = "mainpage hidden"
@@ -54,6 +57,7 @@ function changepage() {
     document.getElementById("changelog").classList = "changelog"
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
+    document.getElementById("offlinepage").classList = "offlinescreen hidden"
     resetconfirmval = 0
 }
 
@@ -65,6 +69,7 @@ function tutorial() {
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage"
+    document.getElementById("offlinepage").classList = "offlinescreen hidden"
     resetconfirmval = 0
 }
 
@@ -98,7 +103,6 @@ function resetconfirm() {
     }
 }
 
-
 function resetstorage() {
     resetconfirmval = 1
     document.getElementById("mainpage").classList = "mainpage hidden"
@@ -108,4 +112,5 @@ function resetstorage() {
     document.getElementById("changelog").classList = "changelog hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
     document.getElementById("resetpage").classList = "resetpage"
+    document.getElementById("offlinepage").classList = "offlinescreen hidden"
 }
