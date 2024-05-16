@@ -41,8 +41,6 @@
         let totalmade = Number(localStorage.getItem("total"));
 
         
-
-
         let prestigeMulti = 1
         let strayMulti = 1
         let magicMulti = 1
@@ -122,6 +120,9 @@
             totalmade = 0
         }
         
+
+
+
         console.log(prestigelevel)
 
         // continue preload once html elements exist
@@ -132,6 +133,25 @@
           buildPrestige()
           mpc = buildYpc()
           cps = buildCps()
+          let lastsave = 0
+          lastsave = localStorage.getItem("lastlogged")
+          if (lastsave == null) {
+            console.log("No old save found, skipping offline progress.")
+          } else {
+            var olddolor = dolor
+
+            var now = new Date();
+            now = Number(now.getTime())
+            console.log(now, lastsave)
+            var timepass = Math.round((now - Number(lastsave))/1000)
+
+            dolor = calcOffline(timepass)
+            if (dolor == olddolor) {
+
+            } else {
+
+            }
+          }
           console.log(mpc, cps)
           updatetext();
           updatebutton();
@@ -154,6 +174,8 @@
           localStorage.setItem("total", totalmade);
           localStorage.setItem("catgot", catgot);
           var now = new Date();
+          logged = now.getTime()
+          localStorage.setItem("lastlogged", logged)
           var datetime = now.toLocaleString();
           document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
           console.log("Saved")
@@ -161,7 +183,6 @@
           updatebutton();
         }
 
-        // manual hard reset
 
         // buy an item off the above arrays
         function buyitem(id) {
@@ -253,17 +274,7 @@
         
         // autosave
         setInterval(function() {
-          localStorage.setItem("money", dolor);
-          // localStorage.setItem("mpc", mpc);
-          localStorage.setItem("bought", bought);
-          localStorage.setItem("cats", cats)
-          // localStorage.setItem("cps", cps)
-          localStorage.setItem("prestige", prestigelevel)
-          localStorage.setItem("total", totalmade);
-          localStorage.setItem("catgot", catgot);
-          var now = new Date();
-          var datetime = now.toLocaleString();
-          document.getElementById("lastsaved").innerHTML = `Last Saved: ${String(datetime)}`
+          localsave()
           console.log("Auto-saved")
         }, 60 * 1000);
 
@@ -289,7 +300,7 @@
           <p>&#10240</p>
         </div>
         <div class="topbar">
-          <p id="clickertopbar">Cat Clicker v0.7.8</p>
+          <p id="clickertopbar">Cat Clicker v0.7.9</p>
         </div>
 
         <button onclick="homepage()" class="menubutton">Home</button>
@@ -363,7 +374,7 @@
             <p class="prestigeno" id="p9">300 - elevate fruit cats</p>
             <p class="prestigeno" id="p10">350 - x2 yarn</p>
             <p class="prestigeno" id="p11">400 - ascend stray cats (x81 earnings)</p>
-            <p class="prestigeno" id="p12">500 - elevate program cats</p>
+            <p class="prestigeno" id="p12">500 - elevate program cats, unlock offline earnings at 25%</p>
             <p class="prestigeno" id="p13">550 - x2 yarn</p>
             <p class="prestigeno" id="p14">600 - ascend ritual cats</p>
             <p class="prestigeno" id="p15">650 - x2 yarn</p>
@@ -376,7 +387,7 @@
             <p class="prestigeno" id="p20">4000 - inspire stray cats (x729 earnings)</p>
             <p class="prestigeno" id="p21">5000 - improves buy until better to x100</p>
             <p class="prestigeno" id="p22">7500 - increase cat rolls by 1</p>
-            <p class="prestigeno" id="p23">10000 - multiply manual clicks by 25</p>
+            <p class="prestigeno" id="p23">10000 - multiply manual clicks by 25, improve offline earnings to 50%</p>
             <p class="prestigeno" id="p24">12500 - x2 yarn</p>
             <p class="prestigeno" id="p25">15000 - inspire ritual cats</p>
             <p class="prestigeno" id="p26">17500 - boost planetary cats (x2 earnings)</p>
@@ -783,6 +794,7 @@
 
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.7.9<br>Added offline progress, unlocked and improved at different prestige layers</p>
         <p>v0.7.8<br>Added 15 more tiers of prestige bonuses</p>
         <p>v0.7.7<br>Fixed reset-related bugs, switched $ to ¥</p>
         <p>v0.7.6<br>Tons of UI changes, prepping for major UI stuff, 'buy until better' button for adopting</p>
@@ -870,6 +882,16 @@
       </div>
 
 
+      <div class="offlinescreen hidden" id="offlinepage">
+        <div class="spacer">
+          <p>&#10240</p>
+          <p>&#10240</p>
+        </div>
+        <p class="offltop" id="offltop">You were offline for 0 seconds.</p>
+        <p class="offlbot" id="offlbot">You made 0 yarn.</p>
+        <p class="offlbot" id="offlper">0% efficency</p>
+      </div>
+
     </main>
   </body>
 </html>
@@ -879,3 +901,4 @@
 <script src="scripts/catalogue.js"></script>
 <script src="scripts/pages.js"></script>
 <script src="scripts/click.js"></script>
+<script src="scripts/offline.js"></script>
