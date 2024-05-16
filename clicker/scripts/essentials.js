@@ -298,6 +298,30 @@ function parseCommas(input) {
 
 
 
+function parseSeconds(seconds) {
+    let output = ""
+    let days = 0
+    let hours = 0
+    let minutes = 0
+    let secondmod = seconds
+    while (secondmod >= 86400) {
+        secondmod = secondmod - 86400
+        days = days + 1
+    }
+    while (secondmod >= 3600) {
+        secondmod = secondmod - 3600
+        hours = hours + 1
+    }
+    while (secondmod >= 60) {
+        secondmod = secondmod - 60
+        minutes = minutes + 1
+    }
+    output = `${days} days, ${hours} hours, ${minutes} minutes, ${secondmod} seconds`
+    return output
+}
+
+
+
 
 
 function fastTickUpdate() {
