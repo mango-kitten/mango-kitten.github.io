@@ -371,3 +371,12 @@ button {
 .tutorialbottom {
     font-size: 14px;
 }
+
+.offltop {
+    text-align: center;
+    font-size: 18px;
+}
+.offlbot {
+    text-align: center;
+    font-size: 14px;
+}
