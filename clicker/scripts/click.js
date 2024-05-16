@@ -15,7 +15,8 @@ moneybutton.addEventListener('mousedown', function() {
     if(mouseIsDown) {
       autoclick = setInterval(function() {
         if (mouseIsDown) {
-            money()
+          console.log("mouse is really down")
+          money()
         }
       }, 150)
     }
@@ -25,5 +26,12 @@ moneybutton.addEventListener('mousedown', function() {
 window.addEventListener('mouseup', function() {
   mouseIsDown = false;
   moneyclicked = 0
-  this.clearInterval(autoclick)
+  clearInterval(autoclick)
+});
+
+
+window.addEventListener('mousemove', function() {
+  mouseIsDown = false;
+  moneyclicked = 0
+  clearInterval(autoclick)
 });
