@@ -2,8 +2,7 @@ let moneynow = 0
 
 function calcOffline(duration) {
     if (prestigelevel >= 500) {
-        
-        var earnings = duration * mpc
+        var earnings = duration * (mpc * cps)
         var efficency = 0
         if (prestigelevel < 10000) {
           efficency = 25
