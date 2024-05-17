@@ -145,7 +145,8 @@
             console.log(now, lastsave)
             var timepass = Math.round((now - Number(lastsave))/1000)
 
-            dolor = calcOffline(timepass)
+            dolor = calcOffline(timepass)[0]
+            totalmade = calcOffline(timepass)[1]
             if (dolor == olddolor) {
 
             } else {
