@@ -26,6 +26,7 @@ function calcOffline(duration) {
         document.getElementById("offlinepage").classList = "offlinescreen"
 
         moneynow = dolor + earnings
+        totalnow = totalmade + earnings
     }
-    return moneynow
+    return [moneynow, totalnow]
 }
