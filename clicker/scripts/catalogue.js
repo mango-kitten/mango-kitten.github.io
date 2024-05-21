@@ -1,3 +1,28 @@
+let mangocat = document.getElementById("14acati")
+let schcat = document.getElementById("9acati")
+let schclick = 0
+
+
+
+let rustle = document.getElementById("cardrustle")
+
+
+mangocat.addEventListener('click', function () {
+    achstore = `${achstore.substring(0, 1)}1${achstore.substring(2)}`
+})
+
+schcat.addEventListener('click', function () {
+    schclick = Math.random() * 5
+    rustle.play();
+    if (schclick < 4) {
+
+    } else {
+        achstore = `${achstore.substring(0, 2)}1${achstore.substring(3)}`
+        document.getElementById("murdera").classList = "tooltipbot hidden"
+        document.getElementById("murderb").classList = "tooltipbot"
+    }
+})
+
 function enterCat(id) {
     while (catgot.length < id) {
         catgot.push(0)
@@ -34,6 +59,10 @@ function cataUnlock(id) {
         document.getElementById(botidb).classList = "cattext2 hidden greytext"
         document.getElementById(imgida).classList = "catimg"
         document.getElementById(imgidb).classList = "catimg hidden"
+        if (id == 9 && achievements[42]) {
+            document.getElementById("9acati").classList = "catimg hidden"
+            document.getElementById("9ccati").classList = "catimg"
+        }
         amtid = `${String(id)}bcata`
         document.getElementById(amtid).innerHTML = `Obtained: ${String(catgot[id])}`
     } else {
