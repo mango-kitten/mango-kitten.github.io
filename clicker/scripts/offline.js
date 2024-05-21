@@ -6,10 +6,10 @@ function calcOffline(duration) {
         var efficency = 0
         if (prestigelevel < 10000) {
           efficency = 25
-          earnings = Math.round(earnings * 0.25)
+          earnings = earnings / 4
         } else {
           efficency = 50
-          earnings = Math.round(earnings * 0.50)
+          earnings = earnings / 2
         }
         console.log(`Earned ${earnings} yarn while offline for ${duration} seconds (${efficency}% efficency)`)
         document.getElementById("offltop").innerHTML = `You were offline for ${parseSeconds(duration)}`
@@ -24,6 +24,11 @@ function calcOffline(duration) {
         document.getElementById("resetpage").classList = "resetpage hidden"
         document.getElementById("tutorial").classList = "tutorialpage hidden"
         document.getElementById("offlinepage").classList = "offlinescreen"
+
+
+        if (earnings > 1000000000000) {
+          achstore = `${achstore.substring(0, 5)}1${achstore.substring(6)}`
+        }
 
         moneynow = dolor + earnings
         totalnow = totalmade + earnings
