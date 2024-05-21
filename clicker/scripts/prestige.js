@@ -1,6 +1,6 @@
 let prestigecnf = 0
 
-
+let prepres = 0
 
 function prestigecheck() {
     if (cats[2] > 0 || prestigelevel > 0) {
@@ -21,26 +21,25 @@ function prestigecheck() {
 
 function prestigeLevel(yarn) {
     let yarnamt = 0
-    let level = 0
+    let level = Number(lastprestigelevel)
     let remaining = 0
     let currentlevel = 0
+    currentlevel = invPrestige(level-1)
     while (yarnamt <= yarn) {
-        // yarnamt = yarnamt + ((coeff ** level) * 1000000)
-        // if (coeff > 1.0025) {
-        //     coeff = coeff - 0.000005
+        yarnamt = invPrestige(level)
+        // if (level < 450) {
+        //     yarnamt = ((1.05-(0.00005*level))**level)+(level-1)
+        // } else {
+        //     yarnamt = level*((3*level)-900)
         // }
-        if (level < 450) {
-            yarnamt = ((1.05-(0.00005*level))**level)+(level-1)
-        } else {
-            yarnamt = level*((3*level)-900)
-        }
-        yarnamt = yarnamt * 1000000
+        // yarnamt = yarnamt * 1000000
         if (yarnamt <= yarn) {
             level = level + 1
             currentlevel = yarnamt
         }
     }
-    remaining = yarnamt - yarn
+    remaining = Number(yarnamt) - Number(yarn)
+    lastprestigelevel = level
     return [level, remaining, currentlevel]
 }
 
@@ -52,7 +51,7 @@ function invPrestige(level) {
         yarnamt = level*((3*level)-900)
     }
     yarnamt = yarnamt * 1000000
-    return parseCommas(Math.round(yarnamt))
+    return Math.round(yarnamt)
 }
 
 
@@ -76,6 +75,7 @@ var prscnf = document.getElementById('confirmprestige')
 
 function confirmPrestige() {
     if (prestigecnf == 1) {
+        prepres = prestigelevel
         document.getElementById('confirmprestige').classList = "hidden"
         prestigecnf = 0
         // console.log("nothing happened, because this doesnt work yet")
@@ -96,6 +96,9 @@ function confirmPrestige() {
         // localStorage.setItem("cps", 0)
         document.getElementById("moneydisp").innerHTML = `Yarn: ${String(dolor)}`
         document.getElementById("mpcdisp").innerHTML = `Yarn per Click: ${String(mpc)}`
+        if (prepres == prestigelevel) {
+            achstore = `${achstore.substring(0, 3)}1${achstore.substring(4)}`
+        }
         updatetext();
         updatebutton();
         updateCatalogue();
