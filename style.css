@@ -380,3 +380,107 @@ button {
     text-align: center;
     font-size: 14px;
 }
+
+
+.achievementtier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.achievementbox {
+    width: 7%;
+    align-items: center;
+    margin: .25%;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: black;
+    opacity: 0;
+    width: 6.5%;
+    margin: 0.25%;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.tooltip:hover {
+    opacity: 0.8;
+}
+.achimg {
+    width: 100%;
+}
+.tooltiptop {
+    margin: 0;
+    font-size: 14px;
+}
+.tooltipbot {
+    margin: 0;
+    font-size: 10px;
+    padding-bottom: 10%;
+}
+
+.achget {
+    position: fixed;
+    background-color: rgb(187, 124, 6);
+    opacity: 0;
+    height: 10%;
+    width: 22%;
+    bottom: 2%;
+    left: 1%;
+    border-radius: 25px;
+}
+.achgot {
+    opacity: 0.85;
+}
+.achtop {
+    font-size: 17px;
+    padding-left: 7%;
+    padding-right: 7%;
+    color: rgb(63, 45, 5);
+}
+.achbot {
+    font-size: 12px;
+    padding-left: 7%;
+    padding-right: 7%;
+    color: rgb(63, 43, 5);
+}
+
+
+
+
+.globalbar {
+    height: 30%;
+}
+.mainpage {
+    height: 70%;
+}
+.offlinescreen {
+    height: 70%;
+}
+
+
+
+.prestigebox {
+    height: 1%;
+    display: flex;
+    justify-content: center;
+}
+.prestigefish {
+    width: 40px;
+    height: fit-content;
+    padding-top: 1.5%;
+    padding-left: 0.5%;
+    margin: 0;
+}
+.prestigecurrent {
+    margin: 0;
+}
+
+
+.realfishbone {
+    width: 60px;
+    height: fit-content;
+}
+.realtext {
+    font-size: 8px;
+}
