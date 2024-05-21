@@ -38,6 +38,9 @@ function getCat(set, roll = 9999) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING ID
   } else {
     weightroll = roll
   }
+  if (weightroll < 5) {
+    achstore = `1${achstore.substring(1)}`
+  }
   console.log("Rolled ",weightroll," out of ",combpool)
   for (let i=0; i<possibleids.length; i++) {
     rescheck = rescheck + weight[possibleids[i]]
@@ -95,12 +98,12 @@ function buyBetter1() {
   }
 }
 
-
 function keepCat1() {
   if (iscat1 == 1) {
-    mpc = mpc - mpcadd[cats[0]]
+    if (cats[0] == 5 && catgot1 < 5) {
+      achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+    }
     cats.splice(0, 1, catgot1)
-    mpc = mpc + mpcadd[catgot1]
     document.getElementById("catres1").innerHTML = `Search for a new cat...`
     document.getElementById("cat1error").innerHTML = "---"
     document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} ypc)`
@@ -169,13 +172,12 @@ function buyBetter2() {
   }
 }
 
-
-
 function keepCat2() {
     if (iscat2 == 1) {
-      mpc = mpc - mpcadd[cats[1]]
+      if (cats[1] == 9 && catgot2 < 9) {
+        achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+      }
       cats.splice(1, 1, catgot2)
-      mpc = mpc + mpcadd[catgot2]
       document.getElementById("catres2").innerHTML = `Summon a new cat...`
       document.getElementById("cat2error").innerHTML = "---"
       document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat (+${String(mpcadd[cats[1]])} ypc)`
@@ -186,7 +188,7 @@ function keepCat2() {
     } else {
       document.getElementById("cat2error").innerHTML = "There is no cat waiting!"
     }
-  }
+}
   
 function releaseCat2() {
     if (iscat2 == 1) {
@@ -250,11 +252,10 @@ function buyBetter3() {
 
 function keepCat3() {
     if (iscat3 == 1) {
-      mpc = mpc - mpcadd[cats[2]]
-      cps = cps - catcps[cats[2]]
+      if (cats[2] == 14 && catgot3 < 14) {
+        achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+      }
       cats.splice(2, 1, catgot3)
-      mpc = mpc + mpcadd[catgot3]
-      cps = cps + catcps[cats[2]]
       document.getElementById("catres3").innerHTML = `Get a new bowl...`
       document.getElementById("cat3error").innerHTML = "---"
       document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} ypc, +${String(catcps[cats[2]])} cps)`
@@ -323,14 +324,13 @@ function buyBetter4() {
   }
 }
 
-
 function keepCat4() {
     if (iscat4 == 1) {
-      mpc = mpc - mpcadd[cats[3]]
-      cps = cps - catcps[cats[3]]
+      if (cats[3] == 18 && catgot4 < 18) {
+        console.log("betrayal")
+        achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+      }
       cats.splice(3, 1, catgot4)
-      mpc = mpc + mpcadd[catgot4]
-      cps = cps + catcps[cats[3]]
       document.getElementById("catres4").innerHTML = `Run a new program...`
       document.getElementById("cat4error").innerHTML = "---"
       document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat (+${String(mpcadd[cats[3]])} ypc, +${String(catcps[cats[3]])} cps)`
@@ -402,11 +402,10 @@ function buyBetter5() {
 
 function keepCat5() {
   if (iscat5 == 1) {
-    mpc = mpc - mpcadd[cats[4]]
-    cps = cps - catcps[cats[4]]
+    if (cats[4] == 27 && catgot5 < 27) {
+      achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+    }
     cats.splice(4, 1, catgot5)
-    mpc = mpc + mpcadd[catgot5]
-    cps = cps + catcps[cats[4]]
     document.getElementById("catres5").innerHTML = `Observe a new system...`
     document.getElementById("cat5error").innerHTML = "---"
     document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat (+${String(mpcadd[cats[4]])} ypc, +${String(catcps[cats[4]])} cps)`
@@ -430,3 +429,6 @@ function releaseCat5() {
     document.getElementById("cat5error").innerHTML = "There is no cat waiting!"
   }
 }
+
+
+
