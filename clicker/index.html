@@ -15,7 +15,11 @@
       <p class="spacer">&#10240</p>
     </header> -->
     <main>
+      <audio id="cardrustle">
+        <source src="../aud/cardboard-rustle.mp3" type="audio/mp3">
+      </audio>
       <script src="scripts/essentials.js"></script>
+      <script src="scripts/achievement.js"></script>
       <script>
         // preloading and restoration
         let dolor = Number(localStorage.getItem("money"));
@@ -31,15 +35,27 @@
         let inDevReset = 0;
         let changelogtoggle = 0;
         let prestigelevel = 0
-        let moneyclicked = 0
+        let lastprestigelevel = 0
+        let loader = 0
+
+
+        let achstore = String(localStorage.getItem("achstore"))
+        if (achstore) {
+          console.log("called achstore")
+        } else {
+          achstore = "0000000"
+        }
+
         // let prestigelevel = Number(localStorage.getItem("prestige"));
         if (prestigelevel == 1) {
           prestigelevel = 0;
         } else {
           prestigelevel = localStorage.getItem("prestige")
+          console.log(prestigelevel)
         }
         let totalmade = Number(localStorage.getItem("total"));
 
+        lastprestigelevel = prestigelevel
         
         let prestigeMulti = 1
         let strayMulti = 1
@@ -121,6 +137,23 @@
         }
         
 
+        let achievements = localStorage.getItem("achievements")
+        if (achievements) {
+          var str = localStorage.getItem("achievements");
+          if (str.includes("[")) {
+            str = str.substring(1, str.length - 1); // cut out the brackets
+          }
+          achievements = str.split(",");
+        } else {
+          achievements = [0, 0, 0, 0]
+        }
+
+        if (achievements.length < achievementamnt) {
+          while (achievements.length < achievementamnt) {
+            achievements.push(0)
+          }
+        }
+        console.log(achievements)
 
 
         console.log(prestigelevel)
@@ -144,6 +177,10 @@
             now = Number(now.getTime())
             console.log(now, lastsave)
             var timepass = Math.round((now - Number(lastsave))/1000)
+
+            buildAch()
+            updateAchievements()
+            loader = 1
 
             dolor = calcOffline(timepass)[0]
             totalmade = calcOffline(timepass)[1]
@@ -174,6 +211,7 @@
           localStorage.setItem("prestige", prestigelevel);
           localStorage.setItem("total", totalmade);
           localStorage.setItem("catgot", catgot);
+          localStorage.setItem("achstore", achstore)
           var now = new Date();
           logged = now.getTime()
           localStorage.setItem("lastlogged", logged)
@@ -280,18 +318,26 @@
         }, 60 * 1000);
 
         setInterval(function() { // autoclicker + slow updates
-          dolor = dolor + Math.floor((cps*mpc)/10)
-          totalmade = totalmade + Math.floor((cps*mpc)/10)
+          dolor = Math.round(Number(dolor) + (cps*mpc)/10)
+          totalmade = Math.round(Number(totalmade) + (cps*mpc)/10)
           updatebutton();
           updatetext();
           prestigecheck();
         }, 100);
 
+        setInterval(function () {
+          updateAchievements();
+        }, 1000);
+
+        setInterval(function () {
+          updateCatalogue()
+        }, 30000)
+
         setInterval(function() { // fast tick updates, attempts to run at 10 times per second
           fastTickUpdate();
           buildPrestige()
-          mpc = buildYpc()
-          cps = buildCps()
+          mpc = Math.round(buildYpc())
+          cps = Math.round(buildCps())
         }, 50);
       </script>
 
@@ -301,13 +347,14 @@
           <p>&#10240</p>
         </div>
         <div class="topbar">
-          <p id="clickertopbar">Cat Clicker v0.7.9</p>
+          <p id="clickertopbar">Cat Clicker v0.8.0</p>
         </div>
 
         <button onclick="homepage()" class="menubutton">Home</button>
         <button onclick="prestigepage()" class="menubutton hidden" id="prestigemenu">Prestige</button>
         <button onclick="adoptpage()" class="menubutton">Adopt</button>
         <button onclick="catapage()" class="menubutton">Catalogue</button>
+        <button onclick="achievementpage()" class="menubutton">Achievements</button>
         <button onclick="changepage()" class="menubutton">Changelog</button>
         <button onclick="tutorial()" class="menubutton">Tutorial</button>
 
@@ -354,7 +401,10 @@
           <p>Prestiging will permenantly increase your earnings, at the cost of your progress! This function is in development.</p>
           <p class="smalltext">You will keep your achievements (wip) and catalogue (wip) progress.</p>
           <p id="totalyarntext">You have made 0 yarn ever</p>
-          <p id="prestigecurrent">You are prestige level 0.</p>
+          <div class="prestigebox">
+            <p id="prestigecurrent">You are prestige level 0.</p>
+            <img src="../img/fishbone.png" class="prestigefish">
+          </div>
           <p id="prestigelevel">You will be prestige level 0.</p>
           <progress id="prestigeprogress" class="prestigeprogress" value="0" max="1000"></progress>
           <div id="prestigebutton">
@@ -397,7 +447,6 @@
             <p class="prestigeno" id="p29">30000 - +49 cps</p>
             <p class="prestigeno" id="p30">40000 - increase manual clicking multi by +25x</p>
             <p class="prestigeno" id="p31">50000 - increase cat rolls by 3</p>
-
           </div>
         </div>
       </div>
@@ -577,6 +626,7 @@
           <div class="catentry">
             <img src="../img/shrodingers.png" class="catimg hidden" id="9acati">
             <img src="../img/nocat.png" class="catimg" id="9bcati">
+            <img src="../img/shrodingers-dead.png" class="catimg hidden" id="9ccati">
             <p class="cattext hidden" id="9acatt">Shrodingers Cat</p>
             <p class="cattext greytext" id="9bcatt">???</p>
             <p class="cattext2 hidden" id="9acatd">Some part of your magical tampering caused this cat to be stuck inbetween life and death... if you look at it its fate will be sealed.</p>
@@ -795,6 +845,7 @@
 
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.8.0<br>Added achievements</p>
         <p>v0.7.9<br>Added offline progress, unlocked and improved at different prestige layers</p>
         <p>v0.7.8<br>Added 15 more tiers of prestige bonuses</p>
         <p>v0.7.7<br>Fixed reset-related bugs, switched $ to ¥</p>
@@ -831,6 +882,8 @@
         <p>v0.1.2<br>Fixed various bugs relating to the reset button</p>
         <p>v0.1.1<br>Added Reset button</p>
         <p>v0.1.0<br>Created the game. Its just a button, and a number</p>
+        <p class="realtext">v0.0.0<br>The real fishbone.</p>
+        <img src="../img/real-fishbone.png" id="realfishbone" class="realfishbone">
       </div>
 
 
@@ -892,6 +945,327 @@
         <p class="offlbot" id="offlbot">You made 0 yarn.</p>
         <p class="offlbot" id="offlper">0% efficency</p>
       </div>
+
+
+      <div class="achievementpage hidden" id="achievementpage">
+        <div class="achievementtier">
+
+          <div class="achievementbox">
+            <div class="tooltip" id="a1t">
+              <p class="tooltiptop">A Start</p>
+              <p class="tooltipbot">Make 1,000 total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a1a">
+            <img src="../img/achievement/achyarn1.png" class="achimg hidden" id="a1b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a2t">
+              <p class="tooltiptop">Makin that Yarn</p>
+              <p class="tooltipbot">Make 100,000 total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a2a">
+            <img src="../img/achievement/achyarn2.png" class="achimg hidden" id="a2b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a3t">
+              <p class="tooltiptop">Go Big - no - Bigger</p>
+              <p class="tooltipbot">Make 10 m total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a3a">
+            <img src="../img/achievement/achyarn3.png" class="achimg hidden" id="a3b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a4t">
+              <p class="tooltiptop">No End</p>
+              <p class="tooltipbot">Make 1 b total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a4a">
+            <img src="../img/achievement/achyarn4.png" class="achimg hidden" id="a4b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a5t">
+              <p class="tooltiptop">Yarn the World 'Round</p>
+              <p class="tooltipbot">Make 1 t total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a5a">
+            <img src="../img/achievement/achyarn5.png" class="achimg hidden" id="a5b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a6t">
+              <p class="tooltiptop">Why stop?</p>
+              <p class="tooltipbot">Make 1 qu total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a6a">
+            <img src="../img/achievement/achyarn6.png" class="achimg hidden" id="a6b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a7t">
+              <p class="tooltiptop">Toying with you</p>
+              <p class="tooltipbot">Make 1 qi total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a7a">
+            <img src="../img/achievement/achyarn7.png" class="achimg hidden" id="a7b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a8t">
+              <p class="tooltiptop">Overachieving</p>
+              <p class="tooltipbot">Make 1 sx total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a8a">
+            <img src="../img/achievement/achyarn8.png" class="achimg hidden" id="a8b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a9t">
+              <p class="tooltiptop">Its in the works</p>
+              <p class="tooltipbot">Make 1 sp total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a9a">
+            <img src="../img/achievement/achyarn9.png" class="achimg hidden" id="a9b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a10t">
+              <p class="tooltiptop">And none for you</p>
+              <p class="tooltipbot">Make 1 oc total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a10a">
+            <img src="../img/achievement/achyarn10.png" class="achimg hidden" id="a10b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a11t">
+              <p class="tooltiptop">Magical Number Nine</p>
+              <p class="tooltipbot">Make 1 no total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a11a">
+            <img src="../img/achievement/achyarn11.png" class="achimg hidden" id="a11b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a12t">
+              <p class="tooltiptop">All of the above</p>
+              <p class="tooltipbot">Make 1 dc total yarn</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a12a">
+            <img src="../img/achievement/achyarn12.png" class="achimg hidden" id="a12b">
+          </div>
+        </div>
+
+        <div class="achievementtier">
+          <div class="achievementbox">
+            <div class="tooltip" id="a14t">
+              <p class="tooltiptop">Stray Cats</p>
+              <p class="tooltipbot">Get all cats in the 'stray cat' Catalogue</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a14a">
+            <img src="../img/achievement/achcata1.png" class="achimg hidden" id="a14b">
+          </div>
+
+          <div class="achievementbox">
+            <div class="tooltip" id="a15t">
+              <p class="tooltiptop">Ritual Cats</p>
+              <p class="tooltipbot">Get all cats in the 'ritual cat' Catalogue</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a15a">
+            <img src="../img/achievement/achcata2.png" class="achimg hidden" id="a15b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a16t">
+              <p class="tooltiptop">Fruit Cats</p>
+              <p class="tooltipbot">Get all cats in the 'fruit cat' Catalogue</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a16a">
+            <img src="../img/achievement/achcata3.png" class="achimg hidden" id="a16b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a17t">
+              <p class="tooltiptop">Program Cats</p>
+              <p class="tooltipbot">Get all cats in the 'program cat' Catalogue</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a17a">
+            <img src="../img/achievement/achcata4.png" class="achimg hidden" id="a17b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a18t">
+              <p class="tooltiptop">Planetary Cats</p>
+              <p class="tooltipbot">Get all cats in the 'planetary cat' Catalogue</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a18a">
+            <img src="../img/achievement/achcata5.png" class="achimg hidden" id="a18b">
+          </div>
+        </div>
+
+        <div class="achievementtier">
+          <div class="achievementbox">
+            <div class="tooltip" id="a27t">
+              <p class="tooltiptop">Fish Bones, Fish Bones</p>
+              <p class="tooltipbot">Get 1 Fish Bone.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a27a">
+            <img src="../img/achievement/achfish1.png" class="achimg hidden" id="a27b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a28t">
+              <p class="tooltiptop">Yummy yummy fish bones</p>
+              <p class="tooltipbot">Get 20 Fish Bones.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a28a">
+            <img src="../img/achievement/achfish2.png" class="achimg hidden" id="a28b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a29t">
+              <p class="tooltiptop">Eat them up!</p>
+              <p class="tooltipbot">Get 150 Fish Bones.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a29a">
+            <img src="../img/achievement/achfish3.png" class="achimg hidden" id="a29b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a30t">
+              <p class="tooltiptop">All Mine</p>
+              <p class="tooltipbot">Get 1000 Fish Bones.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a30a">
+            <img src="../img/achievement/achfish4.png" class="achimg hidden" id="a30b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a31t">
+              <p class="tooltiptop">Are you sure youre not a grizzly?</p>
+              <p class="tooltipbot">Get 10000 Fish Bones.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a31a">
+            <img src="../img/achievement/achfish5.png" class="achimg hidden" id="a31b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a32t">
+              <p class="tooltiptop">Why? Because why not.</p>
+              <p class="tooltipbot">Get 50000 Fish Bones.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a32a">
+            <img src="../img/achievement/achfish6.png" class="achimg hidden" id="a32b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a33t">
+              <p class="tooltiptop">In such a world, what isnt fish?</p>
+              <p class="tooltipbot">Get 100000 Fish Bones.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a33a">
+            <img src="../img/achievement/achfish7.png" class="achimg hidden" id="a33b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a34t">
+              <p class="tooltiptop">If you square a fish, what is there to eat</p>
+              <p class="tooltipbot">Get 500000 Fish Bones.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a34a">
+            <img src="../img/achievement/achfish8.png" class="achimg hidden" id="a34b">
+          </div>
+        </div>
+
+
+        <div class="achievementtier">
+          <div class="achievementbox">
+            <div class="tooltip" id="a40t">
+              <p class="tooltiptop">Scammed</p>
+              <p class="tooltipbot">Get scammed by the cat adopter, by rolling incredibly low.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a40a">
+            <img src="../img/achievement/achscam.png" class="achimg hidden" id="a40b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a41t">
+              <p class="tooltiptop">Mango Clicker</p>
+              <p class="tooltipbot">Back in the beginning of development, this game was actually called Mango Clicker. You never clicked a mango though</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a41a">
+            <img src="../img/achievement/achmangoclick.png" class="achimg hidden" id="a41b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a42t">
+              <p class="tooltiptop">MURDERER</p>
+              <p class="tooltipbot" id="murdera">???</p>
+              <p class="tooltipbot hidden" id="murderb">How dare you disturb the outcome of such an experiment in such a horrible way!</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a42a">
+            <img src="../img/achievement/achshr.png" class="achimg hidden" id="a42b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a43t">
+              <p class="tooltiptop">Why waste time?</p>
+              <p class="tooltipbot" id="wastea">???</p>
+              <p class="tooltipbot hidden" id="wasteb">Prestige without gaining any fish bones</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a43a">
+            <img src="../img/achievement/achwaste.png" class="achimg hidden" id="a43b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a44t">
+              <p class="tooltiptop">Clicky</p>
+              <p class="tooltipbot">Manually click a lot.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a44a">
+            <img src="../img/achievement/achclick.png" class="achimg hidden" id="a44b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a45t">
+              <p class="tooltiptop">That's Handy</p>
+              <p class="tooltipbot">Make 1t yarn from offline earnings at once.</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a45a">
+            <img src="../img/achievement/achoffline.png" class="achimg hidden" id="a45b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a46t">
+              <p class="tooltiptop">Get Real</p>
+              <p class="tooltipbot" id="reala">???</p>
+              <p class="tooltipbot hidden" id="realb">Find the real fishbone</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a46a">
+            <img src="../img/achievement/achfishbone.png" class="achimg hidden" id="a46b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a47t">
+              <p class="tooltiptop">Betrayal</p>
+              <p class="tooltipbot" id="betraya">???</p>
+              <p class="tooltipbot hidden" id="betrayb">Get rid of the best cat from a set for something worse</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a47a">
+            <img src="../img/achievement/achbetray.png" class="achimg hidden" id="a47b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a48t">
+              <p class="tooltiptop">Summoning Ritual</p>
+              <p class="tooltipbot" id="demona">???</p>
+              <p class="tooltipbot hidden" id="demonb">Have 666 demon cats in the Catalogue</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a48a">
+            <img src="../img/achievement/achsummon.png" class="achimg hidden" id="a48b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a49t">
+              <p class="tooltiptop">One Sun</p>
+              <p class="tooltipbot" id="suna">???</p>
+              <p class="tooltipbot hidden" id="sunb">A whole sun's worth of Jupiters! (this was originally intended to be earths but thats 1.3 million earths so)</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a49a">
+            <img src="../img/achievement/achsun.png" class="achimg hidden" id="a49b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a50t">
+              <p class="tooltiptop">That doesnt belong?</p>
+              <p class="tooltipbot" id="plutoa">???</p>
+              <p class="tooltipbot hidden" id="plutob">Get a Pluto Cat. Don't be mean to it...</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a50a">
+            <img src="../img/achievement/achpluto.png" class="achimg hidden" id="a50b">
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="achget" id="achtoast">
+        <p class="achtop" id="achtop">You got a new achievement!</p>
+        <p class="achbot" id="achbot"></p>
+      </div>
+
 
     </main>
   </body>
