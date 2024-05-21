@@ -1,6 +1,14 @@
 let resetconfirmval = 0
 
 
+
+let fishbone = document.getElementById("realfishbone")
+fishbone.addEventListener('click', function () {
+    achstore = `${achstore.substring(0, 6)}1${achstore.substring(7)}`
+})
+
+
+
 function homepage() {
     document.getElementById("mainpage").classList = "mainpage"
     document.getElementById("prestigepage").classList = "prestigepage hidden"
@@ -10,6 +18,7 @@ function homepage() {
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
     document.getElementById("offlinepage").classList = "offlinescreen hidden"
+    document.getElementById("achievementpage").classList = "achievementpage hidden"
     resetconfirmval = 0
 }
 
@@ -22,6 +31,7 @@ function prestigepage() {
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
     document.getElementById("offlinepage").classList = "offlinescreen hidden"
+    document.getElementById("achievementpage").classList = "achievementpage hidden"
     resetconfirmval = 0
 }
 
@@ -34,6 +44,7 @@ function adoptpage() {
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
     document.getElementById("offlinepage").classList = "offlinescreen hidden"
+    document.getElementById("achievementpage").classList = "achievementpage hidden"
     resetconfirmval = 0
 }
 
@@ -46,6 +57,7 @@ function catapage() {
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
     document.getElementById("offlinepage").classList = "offlinescreen hidden"
+    document.getElementById("achievementpage").classList = "achievementpage hidden"
     resetconfirmval = 0
 }
 
@@ -58,6 +70,7 @@ function changepage() {
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage hidden"
     document.getElementById("offlinepage").classList = "offlinescreen hidden"
+    document.getElementById("achievementpage").classList = "achievementpage hidden"
     resetconfirmval = 0
 }
 
@@ -70,6 +83,20 @@ function tutorial() {
     document.getElementById("resetpage").classList = "resetpage hidden"
     document.getElementById("tutorial").classList = "tutorialpage"
     document.getElementById("offlinepage").classList = "offlinescreen hidden"
+    document.getElementById("achievementpage").classList = "achievementpage hidden"
+    resetconfirmval = 0
+}
+
+function achievementpage() {
+    document.getElementById("mainpage").classList = "mainpage hidden"
+    document.getElementById("prestigepage").classList = "prestigepage hidden"
+    document.getElementById("adoptpage").classList = "adoptpage hidden"
+    document.getElementById("cataloguepage").classList = "cataloguepage hidden"
+    document.getElementById("changelog").classList = "changelog hidden"
+    document.getElementById("resetpage").classList = "resetpage hidden"
+    document.getElementById("tutorial").classList = "tutorialpage hidden"
+    document.getElementById("offlinepage").classList = "offlinescreen hidden"
+    document.getElementById("achievementpage").classList = "achievementpage"
     resetconfirmval = 0
 }
 
