@@ -3,30 +3,30 @@ let tickRemain = 0
 
 
 function updatetext() {
-    if (isNaN(dolor)) {
-        console.log("dolor = NaN")
-        resetstorage();
-        dolor = 0;
-    }
-    if (isNaN(mpc)) {
-        console.log("mpc = NaN")
-        resetstorage();
-        mpc = 1;
-    }
-    document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(dolor)}`
+    // if (isNaN(dolor)) {
+    //     console.log("dolor = NaN")
+    //     resetstorage();
+    //     dolor = 0;
+    // }
+    // if (isNaN(mpc)) {
+    //     console.log("mpc = NaN")
+    //     resetstorage();
+    //     mpc = 1;
+    // }
+    document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(Number(dolor))}`
     if (prestigeMulti == 1) {
-        document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(mpc)}`
+        document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(Number(mpc))}`
     } else {
-        document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(mpc/prestigeMulti)} x ${prestigeMulti}`
+        document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(Number(mpc)/prestigeMulti)} x ${prestigeMulti}`
     }
     document.getElementById("mpc1").innerHTML = `Increase ypc ¥50 (${String(bought[1])}/3)`
     document.getElementById("mpc2").innerHTML = `Ypc lv2 ¥1000 (${String(bought[2])}/8)`
     document.getElementById("mpc3").innerHTML = `Ypc lv3 ¥10000 (${String(bought[3])}/8)`
 
     if (prestigeCps == 0) {
-        document.getElementById("cpsdisp").innerHTML = `Clicks per Second: ${String(cps)}`
+        document.getElementById("cpsdisp").innerHTML = `Clicks per Second: ${String(Number(cps))}`
     } else {
-        document.getElementById("cpsdisp").innerHTML = `Clicks per Second: ${String(cps-prestigeCps)} + ${prestigeCps}`
+        document.getElementById("cpsdisp").innerHTML = `Clicks per Second: ${String(Number(cps)-Number(prestigeCps))} + ${prestigeCps}`
     }
 
 
@@ -119,19 +119,19 @@ function updatebutton() {
         document.getElementById("yarnblue").classList = "hidden moneybutton"
         document.getElementById("yarngray").classList = "hidden moneybutton"
         document.getElementById("yarnorange").classList = "hidden moneybutton"
-    } else if (mpc < 200) {
+    } else if (mpc < 500) {
         document.getElementById("yarnred").classList = "hidden moneybutton"
         document.getElementById("yarngreen").classList = "moneybutton"
         document.getElementById("yarnblue").classList = "hidden moneybutton"
         document.getElementById("yarngray").classList = "hidden moneybutton"
         document.getElementById("yarnorange").classList = "hidden moneybutton"
-    } else if (mpc < 2000) {
+    } else if (mpc < 10000) {
         document.getElementById("yarnred").classList = "hidden moneybutton"
         document.getElementById("yarngreen").classList = "hidden moneybutton"
         document.getElementById("yarnblue").classList = "moneybutton"
         document.getElementById("yarngray").classList = "hidden moneybutton"
         document.getElementById("yarnorange").classList = "hidden moneybutton"
-    } else if (mpc < 15000) {
+    } else if (mpc < 100000) {
         document.getElementById("yarnred").classList = "hidden moneybutton"
         document.getElementById("yarngreen").classList = "hidden moneybutton"
         document.getElementById("yarnblue").classList = "hidden moneybutton"
@@ -166,9 +166,6 @@ function parseCommas(input) {
     let iterate = 0
     if (String(input).includes("e")) {
         eint = Number(inputstr.split('+')[1]);
-
-
-
         if (eint % 3 == 0) {
             erem = 0
         } else if (eint % 3 == 1) {
@@ -176,9 +173,6 @@ function parseCommas(input) {
         } else if (eint % 3 == 2) {
             erem = 2
         }
-
-
-
         esplit = inputstr.split("e")[0]
         if (esplit.length == 1) {
             output = `${esplit}`
@@ -326,12 +320,12 @@ function parseSeconds(seconds) {
 
 function fastTickUpdate() {
     document.getElementById("totalyarntext").innerHTML = `You have made ${parseCommas(totalmade)} yarn ever`
-    tickLevel = prestigeLevel(totalmade)[0]
-    tickRemain = Math.floor(prestigeLevel(totalmade)[1])
-    tickMax = Math.floor(prestigeLevel(totalmade)[2])
+    tickLevel = Math.round(prestigeLevel(totalmade)[0])
+    tickRemain = Math.round(prestigeLevel(totalmade)[1])
+    tickMax = Math.round(prestigeLevel(totalmade)[2])
     if (totalmade > 1000000) {
-        document.getElementById("prestigecurrent").innerHTML = `You are prestige level ${prestigelevel}`
-        document.getElementById("prestigelevel").innerHTML = `You will be prestige level ${tickLevel} (+${tickLevel-prestigelevel})<br>${parseCommas(tickRemain)} to next level`
+        document.getElementById("prestigecurrent").innerHTML = `You have ${prestigelevel} fish bones`
+        document.getElementById("prestigelevel").innerHTML = `You will have ${tickLevel} fish bones (+${tickLevel-prestigelevel})<br>${parseCommas(tickRemain)} to next level`
         document.getElementById("prestigeprogress").value = ((totalmade-tickMax)/((totalmade+tickRemain)-tickMax))*1000
     }
 }
@@ -627,4 +621,13 @@ function buildPrestige() {
     } else {
         document.getElementById("p31").classList = "prestigeno"
     }
+}
+
+
+
+
+
+function expandNum(x) {
+    let num = x.toLocaleString('fullwide', {useGrouping:false})
+    return num
 }
