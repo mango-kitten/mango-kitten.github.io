@@ -128,7 +128,7 @@ button {
     padding: 3px;
     background-color: rgb(214, 209, 203);
     position: relative;
-    right: 7%;
+    right: 2%;
 }
 
 
@@ -168,6 +168,14 @@ button {
     padding: 3px;
     background-color: red;
 }
+.exportbutton {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 18px;
+    font-size: 1.5vm;
+    padding: 3px;
+    background-color: rgb(235, 235, 235);
+}
+
 
 
 .achievementholder {
@@ -483,4 +491,32 @@ button {
 }
 .realtext {
     font-size: 8px;
+}
+
+.expbot {
+    max-width: 90%;
+    word-wrap: break-word;
+    align-items: center;
+    margin: 5%;
+}
+
+
+.impbot {
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.importconf {
+    height: 40px;
+    width: 5%;
+    background-color: white;
+    padding: 1px;
+    font-size: 20px;
+    margin-left: 47.5%;
+}
+.importgood {
+    background-color: green;
+}
+.importbad {
+    background-color: red;
 }
