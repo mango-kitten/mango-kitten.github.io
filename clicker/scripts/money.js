@@ -1,9 +1,9 @@
 var element = document.getElementById('moneybutton');
 
 function money() {
-    dolor = dolor + ((mpc)*manualclick)
-    totalmade = totalmade + ((mpc)*manualclick)
-    document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(Number(dolor))}`
+    game.yarn = game.yarn + ((mpc)*manualclick)
+    game.totalyarn = game.totalyarn + ((mpc)*manualclick)
+    document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(Number(game.yarn))}`
 }
 
 element.addEventListener('click', function () {
@@ -11,6 +11,7 @@ element.addEventListener('click', function () {
     manualclicks = manualclicks + 1
     if (manualclicks >= 1000) {
         achstore = `${achstore.substring(0, 4)}1${achstore.substring(5)}`
+        game.achievements[44] = 1
     }
 });
 
