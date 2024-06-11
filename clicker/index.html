@@ -18,23 +18,41 @@
       <audio id="cardrustle">
         <source src="../aud/cardboard-rustle.mp3" type="audio/mp3">
       </audio>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+      <script src="scripts/handler.js"></script>
       <script src="scripts/essentials.js"></script>
       <script src="scripts/achievement.js"></script>
       <script>
         // preloading and restoration
+        let transfertoggle = 0
         let dolor = Number(localStorage.getItem("money"));
-        let mpc = Number(localStorage.getItem("mpc"));
-        let cps = Number(localStorage.getItem("cps"));
-        let cats = localStorage.getItem("cats");
-        let bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        let catgot = localStorage.getItem("catgot");
+        if (dolor && game.yarn == 0) {
+          game.yarn = Number(localStorage.getItem("money"))
+          transfertoggle = 1
+        }
+        let prestigelevel = Number(localStorage.getItem("prestige"));
+        if (prestigelevel && transfertoggle == 1) {
+          game.fishbones = Number(localStorage.getItem("prestige"))
+        }
+        let totalmade = Number(localStorage.getItem("total"));
+        if (totalmade && transfertoggle == 1) {
+          game.totalyarn = Number(localStorage.getItem("total"));
+        }
+
+        // let mpc = Number(localStorage.getItem("mpc"));
+        // let cps = Number(localStorage.getItem("cps"));
+        // let cats = localStorage.getItem("cats");
+        // let bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        // let catgot = localStorage.getItem("catgot");
+
+
         let iscat1 = 0;
         let iscat2 = 0;
         let iscat3 = 0;
         let iscat4 = 0
         let inDevReset = 0;
         let changelogtoggle = 0;
-        let prestigelevel = 0
+        // let prestigelevel = 0
         let lastprestigelevel = 0
         let loader = 0
 
@@ -46,16 +64,35 @@
           achstore = "0000000"
         }
 
-        // let prestigelevel = Number(localStorage.getItem("prestige"));
-        if (prestigelevel == 1) {
-          prestigelevel = 0;
-        } else {
-          prestigelevel = localStorage.getItem("prestige")
-          console.log(prestigelevel)
+        if (achstore == "0000000") {
+          if (game.achievements[40] == 1) {
+            achstore = `1${achstore.substring(1)}`
+          }
+          if (game.achievements[41] == 1) {
+            achstore = `${achstore.substring(0, 1)}1${achstore.substring(2)}`
+          }
+          if (game.achievements[42] == 1) {
+            achstore = `${achstore.substring(0, 2)}1${achstore.substring(3)}`
+          }
+          if (game.achievements[43] == 1) {
+            achstore = `${achstore.substring(0, 3)}1${achstore.substring(4)}`
+          }
+          if (game.achievements[44] == 1) {
+            achstore = `${achstore.substring(0, 4)}1${achstore.substring(5)}`
+          }
+          if (game.achievements[45] == 1) {
+            achstore = `${achstore.substring(0, 5)}1${achstore.substring(6)}`
+          }
+          if (game.achievements[46] == 1) {
+            achstore = `${achstore.substring(0, 6)}1${achstore.substring(7)}`
+          }
+          if (game.achievements[47] == 1) {
+            achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+          }
         }
-        let totalmade = Number(localStorage.getItem("total"));
 
-        lastprestigelevel = prestigelevel
+
+        lastprestigelevel = game.fishbones
         
         let prestigeMulti = 1
         let strayMulti = 1
@@ -68,16 +105,18 @@
         let rollboost = 0
         let manualclick = 1
 
-        if (cats) {
-          var str = localStorage.getItem("cats");
+        var str = localStorage.getItem("cats");
+        if (str) {
           if (str.includes("[")) {
             str = str.substring(1, str.length - 1); // cut out the brackets
           }
           cats = str.split(",");
-          console.log(cats)
         } else {
           cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
+
+        
+
 
         var str = localStorage.getItem("bought");
         if (str) {
@@ -85,21 +124,39 @@
             str = str.substring(1, str.length - 1); // cut out the brackets
           }
           bought = str.split(",");
-          console.log(bought)
         } else {
           bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
+       
         
-
-        if (catgot) {
-          var str = localStorage.getItem("catgot");
+        str = localStorage.getItem("catgot");
+        if (str) {
           if (str.includes("[")) {
             str = str.substring(1, str.length - 1); // cut out the brackets
           }
           catgot = str.split(",");
-          console.log(catgot)
         } else {
           catgot = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+        
+
+
+        if (transfertoggle == 1) {
+          let i = 0
+          while (i<cats.length) {
+            game.cats[i]= cats[i]
+            i = i + 1
+          }
+          i = 0
+          while (i<bought.length) {
+            game.bought[i]= bought[i]
+            i = i + 1
+          }
+          i = 0
+          while (i<catgot.length) {
+            game.catgot[i]= catgot[i]
+            i = i + 1
+          }
         }
 
         // define arrays for buying stuff
@@ -135,33 +192,12 @@
         } else {
             totalmade = 0
         }
-        
 
-        let achievements = localStorage.getItem("achievements")
-        if (achievements) {
-          var str = localStorage.getItem("achievements");
-          if (str.includes("[")) {
-            str = str.substring(1, str.length - 1); // cut out the brackets
-          }
-          achievements = str.split(",");
-        } else {
-          achievements = [0, 0, 0, 0]
-        }
-
-        if (achievements.length < achievementamnt) {
-          while (achievements.length < achievementamnt) {
-            achievements.push(0)
-          }
-        }
-        console.log(achievements)
-
-
-        console.log(prestigelevel)
 
         // continue preload once html elements exist
         function autoload() {
-          if (prestigelevel > prestigeLevel(totalmade)[0]) {
-            prestigelevel = prestigeLevel(totalmade)[0]
+          if (game.fishbones > prestigeLevel(game.totalyarn)[0]) {
+            game.fishbones = prestigeLevel(game.totalyarn)[0]
           }
           buildPrestige()
           mpc = buildYpc()
@@ -171,26 +207,19 @@
           if (lastsave == null) {
             console.log("No old save found, skipping offline progress.")
           } else {
-            var olddolor = dolor
+            // var olddolor = game.yarn
 
             var now = new Date();
             now = Number(now.getTime())
-            console.log(now, lastsave)
             var timepass = Math.round((now - Number(lastsave))/1000)
 
             buildAch()
-            updateAchievements()
+            achLoad()
             loader = 1
 
-            dolor = calcOffline(timepass)[0]
-            totalmade = calcOffline(timepass)[1]
-            if (dolor == olddolor) {
-
-            } else {
-
-            }
+            game.yarn = calcOffline(timepass)[0]
+            game.totalyarn = calcOffline(timepass)[1]
           }
-          console.log(mpc, cps)
           updatetext();
           updatebutton();
           loadCatalogue();
@@ -212,6 +241,8 @@
           localStorage.setItem("total", totalmade);
           localStorage.setItem("catgot", catgot);
           localStorage.setItem("achstore", achstore)
+
+          localStorage.setItem("json", JSON.stringify(game));
           var now = new Date();
           logged = now.getTime()
           localStorage.setItem("lastlogged", logged)
@@ -227,89 +258,28 @@
         function buyitem(id) {
           itemprice = costs[id];
           itemmax = max[id];
-          if (bought.length <= id) {
-            console.log("list bought not long enough")
-            let remainder = bought.length - id
-            if (remainder > 0) {
-                for (let i=0; i<remainder; i++) {
-                    bought.push(0)
-                }
-            }
-            if (dolor >= itemprice) {
-                dolor = dolor-itemprice;
-                if (id == 0) {
-                    bought.push('1')
-                    document.getElementById("money").innerHTML = `Get Money 🐈`
-                    updatetext();
-                } else if (id == 1) {
-                    bought.push('1')
-                    mpc = buildYpc()
-                    updatetext();
-                } else if (id == 2) {
-                    bought.push('1')
-                    mpc = buildYpc()
-                    updatetext();
-                } else if (id == 3) {
-                    bought.push('1')
-                    mpc = buildYpc()
-                    updatetext();
-                } else if (id == 4) {
-                    bought.push('1')
-                    mpc = buildYpc()
-                    updatetext();
-                }
+          if (game.bought[id]< itemmax) {
+              if (game.yarn >= itemprice) {
+                game.yarn = game.yarn-itemprice;
+                game.bought[id] = game.bought[id] + 1
+                mpc = buildYpc()
+                updatetext();
                 document.getElementById("clickerinfo").innerHTML = "---"
                 // bought item
-            } else {
-                // too poor
-                document.getElementById("clickerinfo").innerHTML = "You're too poor!"
-                setTimeout(function () {
-                  document.getElementById("clickerinfo").innerHTML = "---"
-                }, 5000)
-            };
+              } else {
+              // too poor
+              document.getElementById("clickerinfo").innerHTML = "You're too poor!"
+              setTimeout(function () {
+                document.getElementById("clickerinfo").innerHTML = "---"
+              }, 5000)
+              };
           } else {
-            itemqty = bought[id];
-            if (parseInt(itemqty) < itemmax) {
-                if (dolor >= itemprice) {
-                dolor = dolor-itemprice;
-                if (id == 0) {
-                    bought.splice(0, 1, parseInt(itemqty)+1)
-                    document.getElementById("money").innerHTML = `Get Money 🐈`
-                    updatetext();
-                } else if (id == 1) {
-                    bought.splice(1, 1, parseInt(itemqty)+1)
-                    mpc = buildYpc()
-                    updatetext();
-                } else if (id == 2) {
-                    bought.splice(2, 1, parseInt(itemqty)+1)
-                    mpc = buildYpc()
-                    updatetext();
-                } else if (id == 3) {
-                    bought.splice(3, 1, parseInt(itemqty)+1)
-                    mpc = buildYpc()
-                    updatetext();
-                } else if (id == 4) {
-                    bought.splice(4, 1, parseInt(itemqty)+1)
-                    mpc = buildYpc()
-                    updatetext();
-                }
+              document.getElementById("clickerinfo").innerHTML = "You already have the max!"
+              setTimeout(function () {
                 document.getElementById("clickerinfo").innerHTML = "---"
-                // bought item
-                } else {
-                // too poor
-                document.getElementById("clickerinfo").innerHTML = "You're too poor!"
-                setTimeout(function () {
-                  document.getElementById("clickerinfo").innerHTML = "---"
-                }, 5000)
-                };
-            } else {
-                document.getElementById("clickerinfo").innerHTML = "You already have the max!"
-                setTimeout(function () {
-                  document.getElementById("clickerinfo").innerHTML = "---"
-                }, 5000)
-            }
+              }, 5000)
           }
-        };
+        }
         
         // autosave
         setInterval(function() {
@@ -318,8 +288,10 @@
         }, 60 * 1000);
 
         setInterval(function() { // autoclicker + slow updates
-          dolor = Math.round(Number(dolor) + (cps*mpc)/10)
-          totalmade = Math.round(Number(totalmade) + (cps*mpc)/10)
+          // dolor = Math.round(Number(dolor) + (cps*mpc)/10)
+          game.yarn = Math.round(Number(game.yarn) + (cps*mpc)/10)
+          // totalmade = Math.round(Number(totalmade) + (cps*mpc)/10)
+          game.totalyarn = Math.round(Number(game.totalyarn) + (cps*mpc)/10)
           updatebutton();
           updatetext();
           prestigecheck();
@@ -347,7 +319,7 @@
           <p>&#10240</p>
         </div>
         <div class="topbar">
-          <p id="clickertopbar">Cat Clicker v0.8.0</p>
+          <p id="clickertopbar">Cat Clicker v0.8.1</p>
         </div>
 
         <button onclick="homepage()" class="menubutton">Home</button>
@@ -362,6 +334,8 @@
 
         <div class="savemenu">
           <button onclick="localsave()" class="savebutton">Save</button>
+          <button onclick="importsave()" class="exportbutton">Import</button>
+          <button onclick="exportsave()" class="exportbutton">Export</button>
           <button onclick="resetstorage()" class="resetbutton">Reset</button>
           <p id="lastsaved">Last Saved: Not saved this session.</p>
         </div>
@@ -845,6 +819,7 @@
 
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.8.1<br>Switched over to JSON, allowing for faster runtime and export/import of saves</p>
         <p>v0.8.0<br>Added achievements</p>
         <p>v0.7.9<br>Added offline progress, unlocked and improved at different prestige layers</p>
         <p>v0.7.8<br>Added 15 more tiers of prestige bonuses</p>
@@ -1266,6 +1241,30 @@
         <p class="achbot" id="achbot"></p>
       </div>
 
+
+
+      <div class="saveexp hidden" id="saveexp">
+        <div class="spacer">
+          <p>&#10240</p>
+          <p>&#10240</p>
+        </div>
+        <p class="offltop" id="exptop">Your string for exporting is:</p>
+        <div class="expbot">
+          <p class="offlbot" id="expbot">null</p>
+        </div>
+      </div>
+
+      <div class="saveexp hidden" id="saveimp">
+        <div class="spacer">
+          <p>&#10240</p>
+          <p>&#10240</p>
+        </div>
+        <p class="offltop" id="exptop">Input string. Make sure you have the import code from your current save on this device, as importing is irreversible.</p>
+        <div class="impbot">
+          <textarea id="impcode" class="impcode" rows="4" cols="50"></textarea>
+        </div>
+        <button onclick="importconf()" class="importconf" id="importconf">Import!</button>
+      </div>
 
     </main>
   </body>
