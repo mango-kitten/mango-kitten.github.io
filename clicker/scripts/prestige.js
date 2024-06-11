@@ -3,7 +3,7 @@ let prestigecnf = 0
 let prepres = 0
 
 function prestigecheck() {
-    if (cats[2] > 0 || prestigelevel > 0) {
+    if (game.cats[2] > 0 || game.fishbones > 0) {
         document.getElementById("prestigemenu").classList = "menubutton"
     } else {
         document.getElementById("prestigemenu").classList = "menubutton hidden"
@@ -21,7 +21,7 @@ function prestigecheck() {
 
 function prestigeLevel(yarn) {
     let yarnamt = 0
-    let level = Number(lastprestigelevel)
+    let level = lastprestigelevel
     let remaining = 0
     let currentlevel = 0
     currentlevel = invPrestige(level-1)
@@ -75,29 +75,43 @@ var prscnf = document.getElementById('confirmprestige')
 
 function confirmPrestige() {
     if (prestigecnf == 1) {
-        prepres = prestigelevel
+        prepres = game.fishbones
         document.getElementById('confirmprestige').classList = "hidden"
         prestigecnf = 0
         // console.log("nothing happened, because this doesnt work yet")
-        prestigelevel = prestigeLevel(totalmade)[0]
-        dolor = 0;
-        localStorage.setItem("money", 0);
-        mpc = 1;
-        bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        localStorage.setItem("bought", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        game.fishbones = prestigeLevel(totalmade)[0]
+        // dolor = 0;
+        game.yarn = 0
+        // localStorage.setItem("money", 0);
+        // mpc = 1;
+        // bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        console.log("made it here")
+        i = 0
+        while (i < game.bought.length) {
+            game.bought[i] = 0
+            i = i+1
+        }
+        // localStorage.setItem("bought", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         cats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        i = 0
+        while (i < game.cats.length) {
+            game.cats[i] = 0
+            i = i+1
+        }
         catgot1 = 0
         catgot2 = 0
         catgot3 = 0
         catgot4 = 0
         catgot5 = 0
-        localStorage.setItem("cats", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        cps = 0
+        // localStorage.setItem("cats", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        // cps = 0
         // localStorage.setItem("cps", 0)
-        document.getElementById("moneydisp").innerHTML = `Yarn: ${String(dolor)}`
-        document.getElementById("mpcdisp").innerHTML = `Yarn per Click: ${String(mpc)}`
-        if (prepres == prestigelevel) {
+        localStorage.setItem("json", game)
+        document.getElementById("moneydisp").innerHTML = `Yarn: ${String(game.yarn)}`
+        document.getElementById("mpcdisp").innerHTML = `Yarn per Click: 1`
+        if (prepres == game.fishbones) {
             achstore = `${achstore.substring(0, 3)}1${achstore.substring(4)}`
+            game.achievements[43] = 1
         }
         updatetext();
         updatebutton();
