@@ -3,25 +3,15 @@ let tickRemain = 0
 
 
 function updatetext() {
-    // if (isNaN(dolor)) {
-    //     console.log("dolor = NaN")
-    //     resetstorage();
-    //     dolor = 0;
-    // }
-    // if (isNaN(mpc)) {
-    //     console.log("mpc = NaN")
-    //     resetstorage();
-    //     mpc = 1;
-    // }
-    document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(Number(dolor))}`
+    document.getElementById("moneydisp").innerHTML = `Yarn: ${parseCommas(Number(game.yarn))}`
     if (prestigeMulti == 1) {
         document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(Number(mpc))}`
     } else {
         document.getElementById("mpcdisp").innerHTML = `Yarn per Click ${parseCommas(Number(mpc)/prestigeMulti)} x ${prestigeMulti}`
     }
-    document.getElementById("mpc1").innerHTML = `Increase ypc ¥50 (${String(bought[1])}/3)`
-    document.getElementById("mpc2").innerHTML = `Ypc lv2 ¥1000 (${String(bought[2])}/8)`
-    document.getElementById("mpc3").innerHTML = `Ypc lv3 ¥10000 (${String(bought[3])}/8)`
+    document.getElementById("mpc1").innerHTML = `Increase ypc ¥50 (${String(game.bought[1])}/3)`
+    document.getElementById("mpc2").innerHTML = `Ypc lv2 ¥1000 (${String(game.bought[2])}/8)`
+    document.getElementById("mpc3").innerHTML = `Ypc lv3 ¥10000 (${String(game.bought[3])}/8)`
 
     if (prestigeCps == 0) {
         document.getElementById("cpsdisp").innerHTML = `Clicks per Second: ${String(Number(cps))}`
@@ -51,62 +41,62 @@ function updatetext() {
 
 
     if (bought[4]) {
-        document.getElementById("mpc4").innerHTML = `Ypc lv4 ¥100000 (${String(bought[4])}/10)`
+        document.getElementById("mpc4").innerHTML = `Ypc lv4 ¥100000 (${String(game.bought[4])}/10)`
     } else {
         document.getElementById("mpc4").innerHTML = `Ypc lv4 ¥100000 (0/10)`
     }
-    if (cats[0] == 0) {
+    if (game.cats[0] == 0) {
         document.getElementById("catown1").innerHTML = "You have no cat in slot 1"
     } else {
         if (strayMulti == 1) {
-            document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat <br>+${String(mpcadd[cats[0]])} ypc`
+            document.getElementById("catown1").innerHTML = `You have a ${String(ctname[game.cats[0]])} Cat <br>+${String(mpcadd[game.cats[0]])} ypc`
         } else {
-            document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat <br>+${String(mpcadd[cats[0]])} x ${strayMulti} ypc`
+            document.getElementById("catown1").innerHTML = `You have a ${String(ctname[game.cats[0]])} Cat <br>+${String(mpcadd[game.cats[0]])} x ${strayMulti} ypc`
         }
     }
-    if (cats[1] == 0) {
+    if (game.cats[1] == 0) {
         document.getElementById("catown2").innerHTML = "You have no cat in slot 2"
     } else {
         if (magicMulti == 1) {
-            document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat <br>+${String(mpcadd[cats[1]])} ypc`
+            document.getElementById("catown2").innerHTML = `You have a ${String(ctname[game.cats[1]])} Cat <br>+${String(mpcadd[game.cats[1]])} ypc`
         } else {
-            document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat <br>+${String(mpcadd[cats[1]])} x ${magicMulti} ypc`
+            document.getElementById("catown2").innerHTML = `You have a ${String(ctname[game.cats[1]])} Cat <br>+${String(mpcadd[game.cats[1]])} x ${magicMulti} ypc`
         }
     }
-    if (cats[2] == 0) {
+    if (game.cats[2] == 0) {
         document.getElementById("catown3").innerHTML = "You have no cat in slot 3"
     } else {
         if (fruitMulti == 1) {
-            document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat <br>+${String(mpcadd[cats[2]])} ypc<br>+${String(catcps[cats[2]])} cps`
+            document.getElementById("catown3").innerHTML = `You have a ${String(ctname[game.cats[2]])} Cat <br>+${String(mpcadd[game.cats[2]])} ypc<br>+${String(catcps[game.cats[2]])} cps`
         } else {
-            document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat <br>+${String(mpcadd[cats[2]])} x ${fruitMulti} ypc<br>+${String(catcps[cats[2]])} x ${fruitMulti} cps`
+            document.getElementById("catown3").innerHTML = `You have a ${String(ctname[game.cats[2]])} Cat <br>+${String(mpcadd[game.cats[2]])} x ${fruitMulti} ypc<br>+${String(catcps[game.cats[2]])} x ${fruitMulti} cps`
         }
         if (cps == 0) {
-            cps = catcps[cats[2]]
+            cps = catcps[game.cats[2]]
         }
     }
-    if (cats[3] == 0) {
+    if (game.cats[3] == 0) {
         document.getElementById("catown4").innerHTML = "You have no cat in slot 4"
     } else {
         if (programMulti == 1) {
-            document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat <br>+${String(mpcadd[cats[3]])} ypc<br>+${String(catcps[cats[3]])} cps`
+            document.getElementById("catown4").innerHTML = `You have a ${String(ctname[game.cats[3]])} Cat <br>+${String(mpcadd[game.cats[3]])} ypc<br>+${String(catcps[game.cats[3]])} cps`
         } else {
-            document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat <br>+${String(mpcadd[cats[3]])} x ${programMulti} ypc<br>+${String(catcps[cats[3]])} x ${programMulti} cps`
+            document.getElementById("catown4").innerHTML = `You have a ${String(ctname[game.cats[3]])} Cat <br>+${String(mpcadd[game.cats[3]])} x ${programMulti} ypc<br>+${String(catcps[game.cats[3]])} x ${programMulti} cps`
         }
         if (cps == 0) {
-            cps = catcps[cats[3]]
+            cps = catcps[game.cats[3]]
         }
     }
-    if (cats[4] == 0) {
+    if (game.cats[4] == 0) {
         document.getElementById("catown5").innerHTML = "You have no cat in slot 5"
     } else {
         if (planetMulti == 1) {
-            document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat <br>+${String(mpcadd[cats[4]])} ypc<br>+${String(catcps[cats[4]])} cps`
+            document.getElementById("catown5").innerHTML = `You have a ${String(ctname[game.cats[4]])} Cat <br>+${String(mpcadd[game.cats[4]])} ypc<br>+${String(catcps[game.cats[4]])} cps`
         } else {
-            document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat <br>+${String(mpcadd[cats[4]])} x ${planetMulti} ypc<br>+${String(catcps[cats[4]])} x ${planetMulti} cps`
+            document.getElementById("catown5").innerHTML = `You have a ${String(ctname[game.cats[4]])} Cat <br>+${String(mpcadd[game.cats[4]])} x ${planetMulti} ypc<br>+${String(catcps[game.cats[4]])} x ${planetMulti} cps`
         }
         if (cps == 0) {
-            cps = catcps[cats[4]]
+            cps = catcps[game.cats[4]]
         }
     }
 }
@@ -319,14 +309,14 @@ function parseSeconds(seconds) {
 
 
 function fastTickUpdate() {
-    document.getElementById("totalyarntext").innerHTML = `You have made ${parseCommas(totalmade)} yarn ever`
-    tickLevel = Math.round(prestigeLevel(totalmade)[0])
-    tickRemain = Math.round(prestigeLevel(totalmade)[1])
-    tickMax = Math.round(prestigeLevel(totalmade)[2])
+    document.getElementById("totalyarntext").innerHTML = `You have made ${parseCommas(game.totalyarn)} yarn ever`
+    tickLevel = Math.round(prestigeLevel(game.totalyarn)[0])
+    tickRemain = Math.round(prestigeLevel(game.totalyarn)[1])
+    tickMax = Math.round(prestigeLevel(game.totalyarn)[2])
     if (totalmade > 1000000) {
-        document.getElementById("prestigecurrent").innerHTML = `You have ${prestigelevel} fish bones`
-        document.getElementById("prestigelevel").innerHTML = `You will have ${tickLevel} fish bones (+${tickLevel-prestigelevel})<br>${parseCommas(tickRemain)} to next level`
-        document.getElementById("prestigeprogress").value = ((totalmade-tickMax)/((totalmade+tickRemain)-tickMax))*1000
+        document.getElementById("prestigecurrent").innerHTML = `You have ${game.fishbones} fish bones`
+        document.getElementById("prestigelevel").innerHTML = `You will have ${tickLevel} fish bones (+${tickLevel-game.fishbones})<br>${parseCommas(tickRemain)} to next level`
+        document.getElementById("prestigeprogress").value = ((game.totalyarn-tickMax)/((game.totalyarn+tickRemain)-tickMax))*1000
     }
 }
 
@@ -348,6 +338,7 @@ function devResetConfirm() {
     localStorage.removeItem("prestige")
     localStorage.removeItem("total")
     localStorage.removeItem("catgot")
+    localStorage.removeItem("json")
     window.location.reload();
   } else {
     console.log("You are not in dev-reset mode.")
@@ -365,8 +356,8 @@ function toggleChangelog() {
 }
 
 function updateCatalogue() {
-    for (let i=0;i<catgot.length;i++) {
-        if (catgot[i] > 0) {
+    for (let i=0;i<game.catgot.length;i++) {
+        if (game.catgot[i] > 0) {
             cataUnlock(i)
         } else {
             cataLock(i)
@@ -378,17 +369,17 @@ function updateCatalogue() {
 function buildYpc() {
     let mpca = 1
 
-    mpca = mpca + (mpcadd[cats[0]]*strayMulti)
-    mpca = mpca + (mpcadd[cats[1]]*magicMulti)
-    mpca = mpca + (mpcadd[cats[2]]*fruitMulti)
-    mpca = mpca + (mpcadd[cats[3]]*programMulti)
-    mpca = mpca + (mpcadd[cats[4]]*planetMulti)
+    mpca = mpca + (mpcadd[game.cats[0]]*strayMulti)
+    mpca = mpca + (mpcadd[game.cats[1]]*magicMulti)
+    mpca = mpca + (mpcadd[game.cats[2]]*fruitMulti)
+    mpca = mpca + (mpcadd[game.cats[3]]*programMulti)
+    mpca = mpca + (mpcadd[game.cats[4]]*planetMulti)
 
 
-    mpca = mpca + (1*bought[1])
-    mpca = mpca + (2*bought[2])
-    mpca = mpca + (10*bought[3])
-    mpca = mpca + (100*bought[4])
+    mpca = mpca + (1*game.bought[1])
+    mpca = mpca + (2*game.bought[2])
+    mpca = mpca + (10*game.bought[3])
+    mpca = mpca + (100*game.bought[4])
 
     mpca = mpca * prestigeMulti
     return mpca
@@ -397,9 +388,9 @@ function buildYpc() {
 function buildCps() {
     let cpsa = 0
     
-    cpsa = cpsa + (catcps[cats[2]]*fruitMulti)
-    cpsa = cpsa + (catcps[cats[3]]*programMulti)
-    cpsa = cpsa + (catcps[cats[4]]*planetMulti)
+    cpsa = cpsa + (catcps[game.cats[2]]*fruitMulti)
+    cpsa = cpsa + (catcps[game.cats[3]]*programMulti)
+    cpsa = cpsa + (catcps[game.cats[4]]*planetMulti)
 
 
     cpsa = cpsa + prestigeCps
@@ -424,14 +415,14 @@ function lockbuybetter() {
 }
 
 function buildPrestige() {
-    if (prestigelevel >= 2) {
+    if (game.fishbones >= 2) {
         prestigeMulti = 2
         document.getElementById("p1").classList = "prestigeyes"
     } else {
         prestigeMulti = 1
         document.getElementById("p1").classList = "prestigeno"
     }
-    if (prestigelevel >= 4) {
+    if (game.fishbones >= 4) {
         buybetter = 10
         unlockbuybetter()
         document.getElementById("p2").classList = "prestigeyes"
@@ -440,182 +431,182 @@ function buildPrestige() {
         lockbuybetter()
         document.getElementById("p2").classList = "prestigeno"
     }
-    if (prestigelevel >= 10) {
+    if (game.fishbones >= 10) {
         strayMulti = 9
         document.getElementById("p3").classList = "prestigeyes"
     } else {
         strayMulti = 1
         document.getElementById("p3").classList = "prestigeno"
     }
-    if (prestigelevel >= 20) {
+    if (game.fishbones >= 20) {
         prestigeCps = 1
         document.getElementById("p4").classList = "prestigeyes"
     } else {
         prestigeCps = 0
         document.getElementById("p4").classList = "prestigeno"
     }
-    if (prestigelevel >= 50) {
+    if (game.fishbones >= 50) {
         prestigeMulti = 4
         document.getElementById("p5").classList = "prestigeyes"
     } else {
         document.getElementById("p5").classList = "prestigeno"
     }
-    if (prestigelevel >= 100) {
+    if (game.fishbones >= 100) {
         magicMulti = 9
         document.getElementById("p6").classList = "prestigeyes"
     } else {
         magicMulti = 1
         document.getElementById("p6").classList = "prestigeno"
     }
-    if (prestigelevel >= 150) {
+    if (game.fishbones >= 150) {
         prestigeMulti = 8
         document.getElementById("p7").classList = "prestigeyes"
     } else {
         document.getElementById("p7").classList = "prestigeno"
     }
-    if (prestigelevel >= 200) {
+    if (game.fishbones >= 200) {
         prestigeCps = 6
         document.getElementById("p8").classList = "prestigeyes"
     } else {
         document.getElementById("p8").classList = "prestigeno"
 
     }
-    if (prestigelevel >= 300) {
+    if (game.fishbones >= 300) {
         fruitMulti = 9
         document.getElementById("p9").classList = "prestigeyes"
     } else {
         fruitMulti = 1
         document.getElementById("p9").classList = "prestigeno"
     }
-    if (prestigelevel >= 350) {
+    if (game.fishbones >= 350) {
         prestigeMulti = 16
         document.getElementById("p10").classList = "prestigeyes"
     } else {
         document.getElementById("p10").classList = "prestigeno"
     }
-    if (prestigelevel >= 400) {
+    if (game.fishbones >= 400) {
         strayMulti = 81
         document.getElementById("p11").classList = "prestigeyes"
     } else {
         document.getElementById("p11").classList = "prestigeno"
     }
-    if (prestigelevel >= 500) {
+    if (game.fishbones >= 500) {
         programMulti = 9
         document.getElementById("p12").classList = "prestigeyes"
     } else {
         document.getElementById("p12").classList = "prestigeno"
     }
-    if (prestigelevel >= 550) {
+    if (game.fishbones >= 550) {
         prestigeMulti = 32
         document.getElementById("p13").classList = "prestigeyes"
     } else {
         document.getElementById("p13").classList = "prestigeno"
     }
-    if (prestigelevel >= 600) {
+    if (game.fishbones >= 600) {
         magicMulti = 81
         document.getElementById("p14").classList = "prestigeyes"
     } else {
         document.getElementById("p14").classList = "prestigeno"
     }
-    if (prestigelevel >= 650) {
+    if (game.fishbones >= 650) {
         prestigeMulti = 64
         document.getElementById("p15").classList = "prestigeyes"
     } else {
         document.getElementById("p15").classList = "prestigeno"
     }
-    if (prestigelevel >= 700) {
+    if (game.fishbones >= 700) {
         prestigeMulti = 128
         document.getElementById("p16").classList = "prestigeyes"
     } else {
         document.getElementById("p16").classList = "prestigeno"
     }
-    if (prestigelevel >= 1000) {
+    if (game.fishbones >= 1000) {
         prestigeCps = 21
         document.getElementById("p17").classList = "prestigeyes"
     } else {
         document.getElementById("p17").classList = "prestigeno"
     }
-    if (prestigelevel >= 2000) {
+    if (game.fishbones >= 2000) {
         prestigeMulti = 256
         document.getElementById("p18").classList = "prestigeyes"
     } else {
         document.getElementById("p18").classList = "prestigeno"
     }
-    if (prestigelevel >= 3000) {
+    if (game.fishbones >= 3000) {
         prestigeCps = 51
         document.getElementById("p19").classList = "prestigeyes"
     } else {
         document.getElementById("p19").classList = "prestigeno"
     }
-    if (prestigelevel >= 4000) {
+    if (game.fishbones >= 4000) {
         strayMulti = 729
         document.getElementById("p20").classList = "prestigeyes"
     } else {
         document.getElementById("p20").classList = "prestigeno"
     }
-    if (prestigelevel >= 5000) {
+    if (game.fishbones >= 5000) {
         buybetter = 100
         document.getElementById("p21").classList = "prestigeyes"
     } else {
         document.getElementById("p21").classList = "prestigeno"
     }
-    if (prestigelevel >= 7500) {
+    if (game.fishbones >= 7500) {
         rollboost = 1
         document.getElementById("p22").classList = "prestigeyes"
     } else {
         rollboost = 0
         document.getElementById("p22").classList = "prestigeno"
     }
-    if (prestigelevel >= 10000) {
+    if (game.fishbones >= 10000) {
         manualclick = 25
         document.getElementById("p23").classList = "prestigeyes"
     } else {
         manualclick = 1
         document.getElementById("p23").classList = "prestigeno"
     }
-    if (prestigelevel >= 12500) {
+    if (game.fishbones >= 12500) {
         prestigeMulti = 512
         document.getElementById("p24").classList = "prestigeyes"
     } else {
         document.getElementById("p24").classList = "prestigeno"
     }
-    if (prestigelevel >= 15000) {
+    if (game.fishbones >= 15000) {
         magicMulti = 729
         document.getElementById("p25").classList = "prestigeyes"
     } else {
         document.getElementById("p25").classList = "prestigeno"
     }
-    if (prestigelevel >= 17500) {
+    if (game.fishbones >= 17500) {
         planetMulti = 2
         document.getElementById("p26").classList = "prestigeyes"
     } else {
         document.getElementById("p26").classList = "prestigeno"
     }
-    if (prestigelevel >= 20000) {
+    if (game.fishbones >= 20000) {
         rollboost = 3
         document.getElementById("p27").classList = "prestigeyes"
     } else {
         document.getElementById("p27").classList = "prestigeno"
     }
-    if (prestigelevel >= 25000) {
+    if (game.fishbones >= 25000) {
         prestigeMulti = 1024
         document.getElementById("p28").classList = "prestigeyes"
     } else {
         document.getElementById("p28").classList = "prestigeno"
     }
-    if (prestigelevel >= 30000) {
+    if (game.fishbones >= 30000) {
         prestigeCps = 100
         document.getElementById("p29").classList = "prestigeyes"
     } else {
         document.getElementById("p29").classList = "prestigeno"
     }
-    if (prestigelevel >= 40000) {
+    if (game.fishbones >= 40000) {
         manualclick = 50
         document.getElementById("p30").classList = "prestigeyes"
     } else {
         document.getElementById("p30").classList = "prestigeno"
     }
-    if (prestigelevel >= 50000) {
+    if (game.fishbones >= 50000) {
         rollboost = 6
         document.getElementById("p31").classList = "prestigeyes"
     } else {
@@ -630,4 +621,15 @@ function buildPrestige() {
 function expandNum(x) {
     let num = x.toLocaleString('fullwide', {useGrouping:false})
     return num
+}
+
+
+
+function encrypt(string) {
+    var post = CryptoJS.AES.encrypt(string, "catclickeryay")
+    return post.toString()
+}
+function decrypt(string) {
+    var post = CryptoJS.AES.decrypt(string, "catclickeryay")
+    return post.toString(CryptoJS.enc.Utf8)
 }
