@@ -38,8 +38,9 @@ function getCat(set, roll = 9999) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING ID
   } else {
     weightroll = roll
   }
-  if (weightroll < 5) {
+  if (weightroll-rollboost < 5) {
     achstore = `1${achstore.substring(1)}`
+    game.achievements[40] = 1
   }
   console.log("Rolled ",weightroll," out of ",combpool)
   for (let i=0; i<possibleids.length; i++) {
@@ -59,13 +60,14 @@ function getCat(set, roll = 9999) { // DO NOT TOUCH THIS FUNCTION YOU FUCKING ID
 
 function buyCatSet1(id = 0) {
   if (id == 0) {
-    if (dolor >= 500) {
+    if (game.yarn >= 500) {
         catgot1 = getCat(1)
+        game.catgot[catgot1] = game.catgot[catgot1] + 1
         enterCat(catgot1)
         iscat1 = 1
         document.getElementById("catres1").innerHTML = `Got a ${String(ctname[catgot1])} Cat (+${String(mpcadd[catgot1])} ypc)`
         document.getElementById("cat1error").innerHTML = "---"
-        dolor = dolor-500
+        game.yarn = game.yarn-500
         localsave();
         updatetext();
     } else {
@@ -73,6 +75,7 @@ function buyCatSet1(id = 0) {
     }
   } else {
     catgot1 = getCat(1, id)
+    game.catgot[catgot1] = game.catgot[catgot1] + 1
     enterCat(catgot1)
     iscat1 = 1
     document.getElementById("catres1").innerHTML = `Got a ${String(ctname[catgot1])} Cat (+${String(mpcadd[catgot1])} ypc)`
@@ -83,11 +86,11 @@ function buyCatSet1(id = 0) {
 
 function buyBetter1() {
   let catiter = 0
-  if (cats[0] == 5) {
+  if (game.cats[0] == 5) {
     console.log("You already have the best cat")
   } else {
     clearTimeout(betterinfo)
-    while (catgot1 <= cats[0] && dolor >= 500 && catiter < buybetter) {
+    while (catgot1 <= game.cats[0] && game.yarn >= 500 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet1()
     }
@@ -100,13 +103,15 @@ function buyBetter1() {
 
 function keepCat1() {
   if (iscat1 == 1) {
-    if (cats[0] == 5 && catgot1 < 5) {
+    if (game.cats[0] == 5 && catgot1 < 5) {
       achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+      game.achievements[47] = 1
     }
-    cats.splice(0, 1, catgot1)
+    game.cats[0] = catgot1
+    // cats.splice(0, 1, catgot1)
     document.getElementById("catres1").innerHTML = `Search for a new cat...`
     document.getElementById("cat1error").innerHTML = "---"
-    document.getElementById("catown1").innerHTML = `You have a ${String(ctname[cats[0]])} Cat (+${String(mpcadd[cats[0]])} ypc)`
+    document.getElementById("catown1").innerHTML = `You have a ${String(ctname[game.cats[0]])} Cat (+${String(mpcadd[game.cats[0]])} ypc)`
     iscat1 = 0
     catgot1 = 0
     localsave();
@@ -133,13 +138,14 @@ function releaseCat1() {
 
 function buyCatSet2(id = 0) {
     if (id == 0) {
-        if (dolor >= 20000) {
+        if (game.yarn >= 20000) {
             catgot2 = getCat(2)
+            game.catgot[catgot2] = game.catgot[catgot2] + 1
             enterCat(catgot2)
             iscat2 = 1
             document.getElementById("catres2").innerHTML = `Got a ${String(ctname[catgot2])} Cat (+${String(mpcadd[catgot2])} ypc)`
             document.getElementById("cat2error").innerHTML = "---"
-            dolor = dolor-20000
+            game.yarn = game.yarn-20000
             localsave();
             updatetext();
             } else {
@@ -147,6 +153,7 @@ function buyCatSet2(id = 0) {
             }
     } else {
         catgot2 = getCat(2, id)
+        game.catgot[catgot2] = game.catgot[catgot2] + 1
         enterCat(catgot2)
         iscat2 = 1
         document.getElementById("catres2").innerHTML = `Got a ${String(ctname[catgot2])} Cat (+${String(mpcadd[catgot2])} ypc)`
@@ -157,11 +164,11 @@ function buyCatSet2(id = 0) {
   
 function buyBetter2() {
   let catiter = 0
-  if (cats[1] == 9) {
+  if (game.cats[1] == 9) {
     console.log("You already have the best cat")
   } else {
     clearTimeout(betterinfo)
-    while (catgot2 <= cats[1] && dolor >= 20000 && catiter < buybetter) {
+    while (catgot2 <= game.cats[1] && game.yarn >= 20000 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet2()
     }
@@ -174,13 +181,15 @@ function buyBetter2() {
 
 function keepCat2() {
     if (iscat2 == 1) {
-      if (cats[1] == 9 && catgot2 < 9) {
+      if (game.cats[1] == 9 && catgot2 < 9) {
         achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+        game.achievements[47] = 1
       }
-      cats.splice(1, 1, catgot2)
+      game.cats[1] = catgot2
+      // cats.splice(1, 1, catgot2)
       document.getElementById("catres2").innerHTML = `Summon a new cat...`
       document.getElementById("cat2error").innerHTML = "---"
-      document.getElementById("catown2").innerHTML = `You have a ${String(ctname[cats[1]])} Cat (+${String(mpcadd[cats[1]])} ypc)`
+      document.getElementById("catown2").innerHTML = `You have a ${String(ctname[game.cats[1]])} Cat (+${String(mpcadd[game.cats[1]])} ypc)`
       iscat2 = 0
       catgot2 = 0
       localsave();
@@ -211,13 +220,14 @@ function releaseCat2() {
 
 function buyCatSet3(id = 0) {
     if (id == 0) {
-        if (dolor >= 500000) {
+        if (game.yarn >= 500000) {
             catgot3 = getCat(3)
+            game.catgot[catgot3] = game.catgot[catgot3] + 1
             enterCat(catgot3)
             iscat3 = 1
             document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} ypc, +${String(catcps[catgot3])} cps)`
             document.getElementById("cat3error").innerHTML = "---"
-            dolor = dolor-500000
+            game.yarn = game.yarn-500000
             localsave();
             updatetext();
         } else {
@@ -225,6 +235,7 @@ function buyCatSet3(id = 0) {
         }
     } else {
         catgot3 = getCat(3, id)
+        game.catgot[catgot3] = game.catgot[catgot3] + 1
         enterCat(catgot3)
         iscat3 = 1
         document.getElementById("catres3").innerHTML = `Got a ${String(ctname[catgot3])} Cat (+${String(mpcadd[catgot3])} ypc, +${String(catcps[catgot3])} cps)`
@@ -235,11 +246,11 @@ function buyCatSet3(id = 0) {
   
 function buyBetter3() {
   let catiter = 0
-  if (cats[2] == 14) {
+  if (game.cats[2] == 14) {
     console.log("You already have the best cat")
   } else {
     clearTimeout(betterinfo)
-    while (catgot3 <= cats[2] && dolor >= 500000 && catiter < buybetter) {
+    while (catgot3 <= game.cats[2] && game.yarn >= 500000 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet3()
     }
@@ -252,13 +263,15 @@ function buyBetter3() {
 
 function keepCat3() {
     if (iscat3 == 1) {
-      if (cats[2] == 14 && catgot3 < 14) {
+      if (game.cats[2] == 14 && catgot3 < 14) {
         achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+        game.achievements[47] = 1
       }
-      cats.splice(2, 1, catgot3)
+      game.cats[2] = catgot3
+      // cats.splice(2, 1, catgot3)
       document.getElementById("catres3").innerHTML = `Get a new bowl...`
       document.getElementById("cat3error").innerHTML = "---"
-      document.getElementById("catown3").innerHTML = `You have a ${String(ctname[cats[2]])} Cat (+${String(mpcadd[cats[2]])} ypc, +${String(catcps[cats[2]])} cps)`
+      document.getElementById("catown3").innerHTML = `You have a ${String(ctname[game.cats[2]])} Cat (+${String(mpcadd[game.cats[2]])} ypc, +${String(catcps[game.cats[2]])} cps)`
       iscat3 = 0
       catgot3 = 0
       localsave();
@@ -285,13 +298,14 @@ function releaseCat3() {
 
 function buyCatSet4(id = 0) {
     if (id == 0) {
-        if (dolor >= 100000000) {
+        if (game.yarn >= 100000000) {
             catgot4 = getCat(4)
+            game.catgot[catgot4] = game.catgot[catgot4] + 1
             enterCat(catgot4)
             iscat4 = 1
             document.getElementById("catres4").innerHTML = `Got a ${String(ctname[catgot4])} Cat (+${String(mpcadd[catgot4])} ypc, +${String(catcps[catgot4])} cps)`
             document.getElementById("cat4error").innerHTML = "---"
-            dolor = dolor-100000000
+            game.yarn = game.yarn-100000000
             localsave();
             updatetext();
         } else {
@@ -299,6 +313,7 @@ function buyCatSet4(id = 0) {
         }
     } else {
         catgot4 = getCat(4, id)
+        game.catgot[catgot4] = game.catgot[catgot4] + 1
         enterCat(catgot4)
         iscat4 = 1
         document.getElementById("catres4").innerHTML = `Got a ${String(ctname[catgot4])} Cat (+${String(mpcadd[catgot4])} ypc, +${String(catcps[catgot4])} cps)`
@@ -309,11 +324,11 @@ function buyCatSet4(id = 0) {
   
 function buyBetter4() {
   let catiter = 0
-  if (cats[3] == 18) {
+  if (game.cats[3] == 18) {
     console.log("You already have the best cat")
   } else {
     clearTimeout(betterinfo)
-    while (catgot4 <= cats[3] && dolor >= 100000000 && catiter < buybetter) {
+    while (catgot4 <= game.cats[3] && game.yarn >= 100000000 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet4()
     }
@@ -326,14 +341,16 @@ function buyBetter4() {
 
 function keepCat4() {
     if (iscat4 == 1) {
-      if (cats[3] == 18 && catgot4 < 18) {
+      if (game.cats[3] == 18 && catgot4 < 18) {
         console.log("betrayal")
         achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+        game.achievements[47] = 1
       }
-      cats.splice(3, 1, catgot4)
+      game.cats[3] = catgot4
+      // cats.splice(3, 1, catgot4)
       document.getElementById("catres4").innerHTML = `Run a new program...`
       document.getElementById("cat4error").innerHTML = "---"
-      document.getElementById("catown4").innerHTML = `You have a ${String(ctname[cats[3]])} Cat (+${String(mpcadd[cats[3]])} ypc, +${String(catcps[cats[3]])} cps)`
+      document.getElementById("catown4").innerHTML = `You have a ${String(ctname[game.cats[3]])} Cat (+${String(mpcadd[game.cats[3]])} ypc, +${String(catcps[game.cats[3]])} cps)`
       iscat4 = 0
       catgot4 = 0
       localsave();
@@ -361,13 +378,14 @@ function releaseCat4() {
 
 function buyCatSet5(id = 0) {
   if (id == 0) {
-      if (dolor >= 10000000000) {
+      if (game.yarn >= 10000000000) {
           catgot5 = getCat(5)
+          game.catgot[catgot5] = game.catgot[catgot5] + 1
           enterCat(catgot5)
           iscat5 = 1
           document.getElementById("catres5").innerHTML = `Got a ${String(ctname[catgot5])} Cat (+${String(mpcadd[catgot5])} ypc, +${String(catcps[catgot5])} cps)`
           document.getElementById("cat5error").innerHTML = "---"
-          dolor = dolor-10000000000
+          game.yarn = game.yarn-10000000000
           localsave();
           updatetext();
       } else {
@@ -375,6 +393,7 @@ function buyCatSet5(id = 0) {
       }
   } else {
       catgot5 = getCat(5, id)
+      game.catgot[catgot5] = game.catgot[catgot5] + 1
       enterCat(catgot5)
       iscat5 = 1
       document.getElementById("catres5").innerHTML = `Got a ${String(ctname[catgot5])} Cat (+${String(mpcadd[catgot5])} ypc, +${String(catcps[catgot5])} cps)`
@@ -385,11 +404,11 @@ function buyCatSet5(id = 0) {
 
 function buyBetter5() {
   let catiter = 0
-  if (cats[4] == 28) {
+  if (game.cats[4] == 28) {
     console.log("You already have the best cat")
   } else {
     clearTimeout(betterinfo)
-    while (catgot5 <= cats[4] && dolor >= 10000000000 && catiter < buybetter) {
+    while (catgot5 <= game.cats[4] && game.yarn >= 10000000000 && catiter < buybetter) {
       catiter = catiter + 1
       buyCatSet5()
     }
@@ -402,13 +421,15 @@ function buyBetter5() {
 
 function keepCat5() {
   if (iscat5 == 1) {
-    if (cats[4] == 27 && catgot5 < 27) {
+    if (game.cats[4] == 27 && catgot5 < 27) {
       achstore = `${achstore.substring(0, 7)}1${achstore.substring(8)}`
+      game.achievements[47] = 1
     }
-    cats.splice(4, 1, catgot5)
+    game.cats[4] = catgot5
+    // cats.splice(4, 1, catgot5)
     document.getElementById("catres5").innerHTML = `Observe a new system...`
     document.getElementById("cat5error").innerHTML = "---"
-    document.getElementById("catown5").innerHTML = `You have a ${String(ctname[cats[4]])} Cat (+${String(mpcadd[cats[4]])} ypc, +${String(catcps[cats[4]])} cps)`
+    document.getElementById("catown5").innerHTML = `You have a ${String(ctname[game.cats[4]])} Cat (+${String(mpcadd[game.cats[4]])} ypc, +${String(catcps[game.cats[4]])} cps)`
     iscat5 = 0
     catgot5 = 0
     localsave();
