@@ -98,7 +98,8 @@ function importconf() {
         if (newsave.yarn && newsave.totalyarn && newsave.fishbones && newsave.cats && newsave.catgot && newsave.bought && newsave.achievements) {
             console.log("valid save input")
             game = newsave
-
+            loader = 0
+            console.log(game)
             if (game.fishbones > prestigeLevel(game.totalyarn)[0]) {
                 game.fishbones = prestigeLevel(game.totalyarn)[0]
             }
@@ -108,7 +109,7 @@ function importconf() {
             buildAch()
             achLoad()
             loader = 1
-
+            localsave()
 
             document.getElementById("importconf").classList = "importconf importgood"
             setTimeout(function () {
