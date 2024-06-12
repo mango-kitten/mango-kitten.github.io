@@ -313,11 +313,10 @@ function fastTickUpdate() {
     tickLevel = Math.round(prestigeLevel(game.totalyarn)[0])
     tickRemain = Math.round(prestigeLevel(game.totalyarn)[1])
     tickMax = Math.round(prestigeLevel(game.totalyarn)[2])
-    if (totalmade > 1000000) {
-        document.getElementById("prestigecurrent").innerHTML = `You have ${game.fishbones} fish bones`
-        document.getElementById("prestigelevel").innerHTML = `You will have ${tickLevel} fish bones (+${tickLevel-game.fishbones})<br>${parseCommas(tickRemain)} to next level`
-        document.getElementById("prestigeprogress").value = ((game.totalyarn-tickMax)/((game.totalyarn+tickRemain)-tickMax))*1000
-    }
+    document.getElementById("prestigecurrent").innerHTML = `You have ${game.fishbones} fish bones`
+    document.getElementById("prestigelevel").innerHTML = `You will have ${tickLevel} fish bones (+${tickLevel-game.fishbones})<br>${parseCommas(tickRemain)} to next level`
+    document.getElementById("prestigeprogress").value = ((game.totalyarn-tickMax)/((game.totalyarn+tickRemain)-tickMax))*1000
+
 }
 
 
