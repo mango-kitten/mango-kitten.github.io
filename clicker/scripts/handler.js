@@ -55,6 +55,10 @@ if (game.achievements.length < achtotal) {
     }
 }
 
+for (let i=0; i<game.catgot.length; i++) {
+    game.catgot[i] = Number(game.catgot[i])
+}
+
 
 console.log(game)
 
