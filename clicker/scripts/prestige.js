@@ -82,6 +82,7 @@ function confirmPrestige() {
         game.fishbones = prestigeLevel(totalmade)[0]
         // dolor = 0;
         game.yarn = 0
+        game.catnip = 0
         // localStorage.setItem("money", 0);
         // mpc = 1;
         // bought = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
