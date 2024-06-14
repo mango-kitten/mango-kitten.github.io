@@ -740,26 +740,32 @@ function buildPrestige() {
     } else {
         document.getElementById("p41").classList = "prestigeno"
     }
-    if (game.fishbones >= 800000) {
-        manualclick = 150
+    if (game.fishbones >= 750000) {
         document.getElementById("p42").classList = "prestigeyes"
     } else {
         document.getElementById("p42").classList = "prestigeno"
     }
-    if (game.fishbones >= 999999) {
+    if (game.fishbones >= 800000) {
+        manualclick = 150
         document.getElementById("p43").classList = "prestigeyes"
     } else {
         document.getElementById("p43").classList = "prestigeno"
     }
-    if (game.fishbones >= 1250000) {
+    if (game.fishbones >= 999999) {
+        prestigeMulti = 8192
         document.getElementById("p44").classList = "prestigeyes"
     } else {
         document.getElementById("p44").classList = "prestigeno"
     }
-    if (game.fishbones >= 1500000) {
+    if (game.fishbones >= 1250000) {
         document.getElementById("p45").classList = "prestigeyes"
     } else {
         document.getElementById("p45").classList = "prestigeno"
+    }
+    if (game.fishbones >= 1500000) {
+        document.getElementById("p46").classList = "prestigeyes"
+    } else {
+        document.getElementById("p46").classList = "prestigeno"
     }
 }
 
