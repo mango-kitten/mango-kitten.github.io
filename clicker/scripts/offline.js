@@ -4,12 +4,16 @@ function calcOffline(duration) {
     if (game.fishbones >= 500) {
       var earnings = duration * (mpc * cps)
       var efficency = 0
-      if (game.fishbones < 10000) {
-        efficency = 25
-        earnings = earnings / 4
+      if (game.fishbones > 1500000 && duration < 3600) {
+        efficency = 100
       } else {
-        efficency = 50
-        earnings = earnings / 2
+        if (game.fishbones < 10000) {
+          efficency = 25
+          earnings = earnings / 4
+        } else {
+          efficency = 50
+          earnings = earnings / 2
+        }
       }
       console.log(`Earned ${earnings} yarn while offline for ${duration} seconds (${efficency}% efficency)`)
       document.getElementById("offltop").innerHTML = `You were offline for ${parseSeconds(duration)}`
