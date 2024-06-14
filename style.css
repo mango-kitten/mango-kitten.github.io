@@ -520,3 +520,18 @@ button {
 .importbad {
     background-color: red;
 }
+
+.catnipbox {
+    display: flex;
+    justify-content: center;
+    height: 30px;
+}
+.catnipimg {
+    width: 40px;
+    height: 20px;
+    padding-top: 5px;
+    padding-right: 8px;
+}
+.catnipdisp {
+    margin-top: 0px;
+}
