@@ -20,10 +20,10 @@ function gaincatnip(sec = 1) {
 
     if (game.catnip > 0) {
         catnipmulti = ((game.catnip-(0.0000050005*game.catnip*game.catnip))/100)+1
-        document.getElementById("catnipdisp").classList = "catnipdisp"
+        document.getElementById("catnipbox").classList = "catnipbox"
     } else {
         catnipmulti = 1
-        document.getElementById("catnipdisp").classList = "catnipdisp hidden"
+        document.getElementById("catnipbox").classList = "catnipbox hidden"
     }
     document.getElementById("catnipdisp").innerHTML = `Catnip: ${game.catnip} (x${Math.round(catnipmulti*10000)/10000} yarn)`
 }
