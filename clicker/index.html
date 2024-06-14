@@ -20,6 +20,7 @@
       </audio>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
       <script src="scripts/handler.js"></script>
+      <script src="scripts/catnip.js"></script>
       <script src="scripts/essentials.js"></script>
       <script src="scripts/achievement.js"></script>
       <script>
@@ -100,10 +101,15 @@
         let fruitMulti = 1
         let programMulti = 1
         let planetMulti = 1
+        let gardenMulti = 1
+        let mythMulti = 1
         let prestigeCps = 0
         let buybetter = 0
         let rollboost = 0
         let manualclick = 1
+
+        let dustycat = 0
+        let aliencat = 0
 
         var str = localStorage.getItem("cats");
         if (str) {
@@ -219,6 +225,14 @@
 
             game.yarn = calcOffline(timepass)[0]
             game.totalyarn = calcOffline(timepass)[1]
+            if (game.fishbones > 1250000) {
+              let catnipcurr = game.catnip
+              gaincatnip(Math.round(timepass/10))
+              document.getElementById("offlnipa").classList = "offlbot"
+              document.getElementById("offlnipb").classList = "offlbot"
+              document.getElementById("offlnipa").innerHTML = `Got ${game.catnip-catnipcurr} catnip`
+              document.getElementById("offlnipb").innerHTML = "10% efficency"
+            }
           }
           updatetext();
           updatebutton();
@@ -299,6 +313,7 @@
 
         setInterval(function () {
           updateAchievements();
+          gaincatnip();
         }, 1000);
 
         setInterval(function () {
@@ -319,7 +334,7 @@
           <p>&#10240</p>
         </div>
         <div class="topbar">
-          <p id="clickertopbar">Cat Clicker v0.8.1</p>
+          <p id="clickertopbar">Cat Clicker v0.8.2</p>
         </div>
 
         <button onclick="homepage()" class="menubutton">Home</button>
@@ -342,6 +357,10 @@
         <div class="interface">
           <h2 id="moneydisp">Yarn: 0</h2>
           <p id="mpcdisp">Yarn per Click: 1</p>
+          <div class="catnipbox">
+            <img src="../img/catnip.png" class="catnipimg">
+            <p id="catnipdisp" class="hidden catniptext">Catnip: 0 (x1 yarn)</p>
+          </div>
           <p id="cpsdisp" class="hidden">Clicks per Second: 0</p>
         </div>
       </div>
@@ -421,6 +440,22 @@
             <p class="prestigeno" id="p29">30000 - +49 cps</p>
             <p class="prestigeno" id="p30">40000 - increase manual clicking multi by +25x</p>
             <p class="prestigeno" id="p31">50000 - increase cat rolls by 3</p>
+            <p class="prestigeno" id="p32">60000 - boost garden cats</p>
+          </div>
+          <div class="prestigebonus">
+            <p class="prestigeno" id="p33">75000 - x2 yarn</p>
+            <p class="prestigeno" id="p34">100k - +100 cps</p>
+            <p class="prestigeno" id="p35">150k - increase manual clicking multi by +50x</p>
+            <p class="prestigeno" id="p36">200k - elevate planetary cats</p>
+            <p class="prestigeno" id="p37">250k - dusty cat</p>
+            <p class="prestigeno" id="p38">300k - boost mythological cats</p>
+            <p class="prestigeno" id="p39">400k - x2 yarn</p>
+            <p class="prestigeno" id="p40">500k - alien cat</p>
+            <p class="prestigeno" id="p41">650k - increase cat rolls by 2</p>
+            <p class="prestigeno" id="p42">800k - increase manual clicking multi by +50x</p>
+            <p class="prestigeno" id="p43">1m - unlock catnip, gain +1/sec</p>
+            <p class="prestigeno" id="p44">1.25m - get 10% of catnip earnings while offline</p>
+            <p class="prestigeno" id="p45">1.5m - if offline for < 1 hour get 100% efficency yarn</p>
           </div>
         </div>
       </div>
@@ -433,42 +468,42 @@
           <div class="getcat">
             <p id="cat1error">---</p>
             <div>
-              <button onclick="buyCatSet1()" class="buybutton" id="getc1">Find a Stray (¥500)</button>
+              <button onclick="buyCatSet(1)" class="buybutton" id="getc1">Find a Stray (¥500)</button>
             </div>
             <div>
-              <button onclick="buyBetter1()" class="buybutton hidden" id="betc1">Buy until better x10</button>
+              <button onclick="buyBetterSet(1)" class="buybutton hidden" id="betc1">Buy until better x10</button>
             </div>
             <p id="catres1">No cats recently found</p>
-            <button onclick="keepCat1()" class="keepbutton" id="keepc1">Adopt</button>
-            <button onclick="releaseCat1()" class="replacebutton" id="releasec1">Release</button>
+            <button onclick="keepCatSet(1)" class="keepbutton" id="keepc1">Adopt</button>
+            <button onclick="releaseCatSet(1)" class="replacebutton" id="releasec1">Release</button>
             <p id="catown1">You have no cat in slot 1</p>
           </div>
 
           <div class="getcat">
             <p id="cat2error">---</p>
             <div>
-              <button onclick="buyCatSet2()" class="buybutton" id="getc2">Perform a Magic Ritual (¥20000)</button>
+              <button onclick="buyCatSet(2)" class="buybutton" id="getc2">Perform a Magic Ritual (¥20000)</button>
             </div>
             <div>
-              <button onclick="buyBetter2()" class="buybutton hidden" id="betc2">Buy until better x10</button>
+              <button onclick="buyBetterSet(2)" class="buybutton hidden" id="betc2">Buy until better x10</button>
             </div>
             <p id="catres2">No cats recently summoned</p>
-            <button onclick="keepCat2()" class="keepbutton" id="keepc2">Adopt</button>
-            <button onclick="releaseCat2()" class="replacebutton" id="releasec2">Release</button>
+            <button onclick="keepCatSet(2)" class="keepbutton" id="keepc2">Adopt</button>
+            <button onclick="releaseCatSet(2)" class="replacebutton" id="releasec2">Release</button>
             <p id="catown2">You have no cat in slot 2</p>
           </div>
 
           <div class="getcat">
               <p id="cat3error">---</p>
               <div>
-                <button onclick="buyCatSet3()" class="buybutton" id="getc3">Buy an Odd Fruitbowl (¥500k)</button>
+                <button onclick="buyCatSet(3)" class="buybutton" id="getc3">Buy an Odd Fruitbowl (¥500k)</button>
               </div>
               <div>
-                <button onclick="buyBetter3()" class="buybutton hidden" id="betc3">Buy until better x10</button>
+                <button onclick="buyBetterSet(3)" class="buybutton hidden" id="betc3">Buy until better x10</button>
               </div>
               <p id="catres3">No cats recently picked</p>
-              <button onclick="keepCat3()" class="keepbutton" id="keepc3">Adopt</button>
-              <button onclick="releaseCat3()" class="replacebutton" id="releasec3">Release</button>
+              <button onclick="keepCatSet(3)" class="keepbutton" id="keepc3">Adopt</button>
+              <button onclick="releaseCatSet(3)" class="replacebutton" id="releasec3">Release</button>
               <p id="catown3">You have no cat in slot 3</p>
           </div>
 
@@ -476,29 +511,58 @@
           <div class="getcat">
               <p id="cat4error">---</p>
               <div>
-                <button onclick="buyCatSet4()" class="buybutton" id="getc4">Program some Cats in (¥100m)</button>
+                <button onclick="buyCatSet(4)" class="buybutton" id="getc4">Program some Cats in (¥100m)</button>
               </div>
               <div>
-                <button onclick="buyBetter4()" class="buybutton hidden" id="betc4">Buy until better x10</button>
+                <button onclick="buyBetterSet(4)" class="buybutton hidden" id="betc4">Buy until better x10</button>
               </div>
               <p id="catres4">No cats recently encoded</p>
-              <button onclick="keepCat4()" class="keepbutton" id="keepc4">Adopt</button>
-              <button onclick="releaseCat4()" class="replacebutton" id="releasec4">Release</button>
+              <button onclick="keepCatSet(4)" class="keepbutton" id="keepc4">Adopt</button>
+              <button onclick="releaseCatSet(4)" class="replacebutton" id="releasec4">Release</button>
               <p id="catown4">You have no cat in slot 4</p>
           </div>
           
           <div class="getcat">
             <p id="cat5error">---</p>
             <div>
-              <button onclick="buyCatSet5()" class="buybutton" id="getc5">Observe a Cat-based Solar System (¥10b)</button>
+              <button onclick="buyCatSet(5)" class="buybutton" id="getc5">Observe a Cat-based Solar System (¥10b)</button>
             </div>
             <div>
-              <button onclick="buyBetter5()" class="buybutton hidden" id="betc5">Buy until better x10</button>
+              <button onclick="buyBetterSet(5)" class="buybutton hidden" id="betc5">Buy until better x10</button>
             </div>
             <p id="catres5">No cats recently observed</p>
-            <button onclick="keepCat5()" class="keepbutton" id="keepc5">Adopt</button>
-            <button onclick="releaseCat5()" class="replacebutton" id="releasec5">Release</button>
+            <button onclick="keepCatSet(5)" class="keepbutton" id="keepc5">Adopt</button>
+            <button onclick="releaseCatSet(5)" class="replacebutton" id="releasec5">Release</button>
             <p id="catown5">You have no cat in slot 5</p>
+          </div>
+        </div>
+        <div class="catstorage">
+          <div class="getcat">
+            <p id="cat6error">---</p>
+            <div>
+              <button onclick="buyCatSet(6)" class="buybutton" id="getc6">Plant a Cat Seed (¥100t)</button>
+            </div>
+            <div>
+              <button onclick="buyBetterSet(6)" class="buybutton hidden" id="betc6">Buy until better x10</button>
+            </div>
+            <p id="catres6">No cats recently planted</p>
+            <button onclick="keepCatSet(6)" class="keepbutton" id="keepc6">Adopt</button>
+            <button onclick="releaseCatSet(6)" class="replacebutton" id="releasec6">Release</button>
+            <p id="catown6">You have no cat in slot 6</p>
+          </div>
+
+          <div class="getcat">
+            <p id="cat7error">---</p>
+            <div>
+              <button onclick="buyCatSet(7)" class="buybutton" id="getc7">Find a Mythological Cat (¥50qd)</button>
+            </div>
+            <div>
+              <button onclick="buyBetterSet(7)" class="buybutton hidden" id="betc7">Buy until better x10</button>
+            </div>
+            <p id="catres7">No cats recently planted</p>
+            <button onclick="keepCatSet(7)" class="keepbutton" id="keepc7">Adopt</button>
+            <button onclick="releaseCatSet(7)" class="replacebutton" id="releasec7">Release</button>
+            <p id="catown7">You have no cat in slot 7</p>
           </div>
         </div>
       </div>
@@ -814,11 +878,210 @@
             <p class="cattext2">Incredibly Rare - < 0.1%</p>
           </div>
         </div>
+
+        <div class="catatier">
+          <div class="catentry">
+            <img src="../img/flower.png" class="catimg hidden" id="29acati">
+            <img src="../img/nocat.png" class="catimg" id="29bcati">
+            <p class="cattext hidden" id="29acatt">Flower Cat</p>
+            <p class="cattext greytext" id="29bcatt">???</p>
+            <p class="cattext2 hidden" id="29acatd">such a pretty kitty... lets plant more!</p>
+            <p class="cattext2 greytext" id="29bcatd">???</p>
+            <p class="cattext2" id="29bcata">Obtained: 0</p>
+            <p class="cattext2">Common - 51%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/tree.png" class="catimg hidden" id="30acati">
+            <img src="../img/nocat.png" class="catimg" id="30bcati">
+            <p class="cattext hidden" id="30acatt">Tree Cat</p>
+            <p class="cattext greytext" id="30bcatt">???</p>
+            <p class="cattext2 hidden" id="30acatd">reaching for the sky</p>
+            <p class="cattext2 greytext" id="30bcatd">???</p>
+            <p class="cattext2" id="30bcata">Obtained: 0</p>
+            <p class="cattext2">Common - 31%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/rock.png" class="catimg hidden" id="31acati">
+            <img src="../img/nocat.png" class="catimg" id="31bcati">
+            <p class="cattext hidden" id="31acatt">Rock Cat</p>
+            <p class="cattext greytext" id="31bcatt">???</p>
+            <p class="cattext2 hidden" id="31acatd">steady as can be, a dependable cat</p>
+            <p class="cattext2 greytext" id="31bcatd">???</p>
+            <p class="cattext2" id="31bcata">Obtained: 0</p>
+            <p class="cattext2">Rare - 10%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/cactus.png" class="catimg hidden" id="32acati">
+            <img src="../img/nocat.png" class="catimg" id="32bcati">
+            <p class="cattext hidden" id="32acatt">Cactus Cat</p>
+            <p class="cattext greytext" id="32bcatt">???</p>
+            <p class="cattext2 hidden" id="32acatd">ow!</p>
+            <p class="cattext2 greytext" id="32bcatd">???</p>
+            <p class="cattext2" id="32bcata">Obtained: 0</p>
+            <p class="cattext2">Rare - 5%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/spore.png" class="catimg hidden" id="33acati">
+            <img src="../img/nocat.png" class="catimg" id="33bcati">
+            <p class="cattext hidden" id="33acatt">Spore Cat</p>
+            <p class="cattext greytext" id="33bcatt">???</p>
+            <p class="cattext2 hidden" id="33acatd">spread throughout the world</p>
+            <p class="cattext2 greytext" id="33bcatd">???</p>
+            <p class="cattext2" id="33bcata">Obtained: 0</p>
+            <p class="cattext2">Very Rare - 2.5%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/mushroom.png" class="catimg hidden" id="34acati">
+            <img src="../img/nocat.png" class="catimg" id="34bcati">
+            <p class="cattext hidden" id="34acatt">Mushroom Cat</p>
+            <p class="cattext greytext" id="34bcatt">???</p>
+            <p class="cattext2 hidden" id="34acatd">squishy fluffy mushreemmm</p>
+            <p class="cattext2 greytext" id="34bcatd">???</p>
+            <p class="cattext2" id="34bcata">Obtained: 0</p>
+            <p class="cattext2">Incredibly Rare - 0.1%</p>
+          </div>
+          <div class="catentry flexhidden">
+            <img src="../img/food.png" class="catimg hidden" id="0acati">
+            <img src="../img/nocat.png" class="catimg" id="0bcati">
+            <p class="cattext hidden" id="0acatt">No Cat</p>
+            <p class="cattext greytext" id="0bcatt">???</p>
+            <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
+            <p class="cattext2 greytext" id="0bcatd">???</p>
+            <p class="cattext2" id="0bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/ghost.png" class="catimg hidden" id="35acati">
+            <img src="../img/nocat.png" class="catimg" id="35bcati">
+            <p class="cattext hidden" id="35acatt">Ghost Cat</p>
+            <p class="cattext greytext" id="35bcatt">???</p>
+            <p class="cattext2 hidden" id="35acatd">sighing and swaying in the wind...</p>
+            <p class="cattext2 greytext" id="35bcatd">???</p>
+            <p class="cattext2" id="35bcata">Obtained: 0</p>
+            <p class="cattext2">Common - 56%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/pixie.png" class="catimg hidden" id="36acati">
+            <img src="../img/nocat.png" class="catimg" id="36bcati">
+            <p class="cattext hidden" id="36acatt">Pixie Cat</p>
+            <p class="cattext greytext" id="36bcatt">???</p>
+            <p class="cattext2 hidden" id="36acatd">small but dangerous</p>
+            <p class="cattext2 greytext" id="36bcatd">???</p>
+            <p class="cattext2" id="36bcata">Obtained: 0</p>
+            <p class="cattext2">Uncommon - 28%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/devil.png" class="catimg hidden" id="37acati">
+            <img src="../img/nocat.png" class="catimg" id="37bcati">
+            <p class="cattext hidden" id="37acatt">Devil Cat</p>
+            <p class="cattext greytext" id="37bcatt">???</p>
+            <p class="cattext2 hidden" id="37acatd">like a demon but more dangerous</p>
+            <p class="cattext2 greytext" id="37bcatd">???</p>
+            <p class="cattext2" id="37bcata">Obtained: 0</p>
+            <p class="cattext2">Rare - 11%</p>
+          </div>
+        </div>
+
+        <div class="catatier">
+          <div class="catentry">
+            <img src="../img/sphinx.png" class="catimg hidden" id="38acati">
+            <img src="../img/nocat.png" class="catimg" id="38bcati">
+            <p class="cattext hidden" id="38acatt">Sphinx Cat</p>
+            <p class="cattext greytext" id="38bcatt">???</p>
+            <p class="cattext2 hidden" id="38acatd">what walks on four legs during the day and becomes a loaf at night</p>
+            <p class="cattext2 greytext" id="38bcatd">???</p>
+            <p class="cattext2" id="38bcata">Obtained: 0</p>
+            <p class="cattext2">Very Rare - 4%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/death.png" class="catimg hidden" id="39acati">
+            <img src="../img/nocat.png" class="catimg" id="39bcati">
+            <p class="cattext hidden" id="39acatt">Death Cat</p>
+            <p class="cattext greytext" id="39bcatt">???</p>
+            <p class="cattext2 hidden" id="39acatd">Hᴇʟʟᴏ.</p>
+            <p class="cattext2 greytext" id="39bcatd">???</p>
+            <p class="cattext2" id="39bcata">Obtained: 0</p>
+            <p class="cattext2">Incredibly Rare - 1.5%</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/void.png" class="catimg hidden" id="40acati">
+            <img src="../img/nocat.png" class="catimg" id="40bcati">
+            <p class="cattext hidden" id="40acatt">Ȧ̶̤̣b̸͍̈́̔ŷ̴͍s̵̞̅͝s̶̢̆a̷̬͋l̴̹̓ Cat</p>
+            <p class="cattext greytext" id="40bcatt">???</p>
+            <p class="cattext2 hidden" id="40acatd">Stare into the void for too long, and i̷t̵ m̸̲̐i̵̢͋g̷̗͝h̸̨̦͂ṱ̷̛̃͜. s̴̲̯̘͈̭̾̒̅͠ṱ̴̦̲̐͊͘a̴͓̐̋͐̚͝r̴̯̓ė̷̘͝ b̶̧̨̟̣̱̘̟͌̅̃͜ǎ̷̜͍̝̥̟̖̭ç̸̲̼̮̤͖̙̅̈̽͒͌̀k̷̛̻̖̹̠̟͌̉.̴̨̡̦̥̗̺̝͙̫̆̇͗̌͐̍͘.̵̲̂̃͂͛̑̉̐͋̽</p>
+            <p class="cattext2 greytext" id="40bcatd">???</p>
+            <p class="cattext2" id="40bcata">Obtained: 0</p>
+            <p class="cattext2">Incredibly Rare - < 0.1%</p>
+          </div>
+          <div class="catentry flexhidden">
+            <img src="../img/food.png" class="catimg hidden" id="0acati">
+            <img src="../img/nocat.png" class="catimg" id="0bcati">
+            <p class="cattext hidden" id="0acatt">No Cat</p>
+            <p class="cattext greytext" id="0bcatt">???</p>
+            <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
+            <p class="cattext2 greytext" id="0bcatd">???</p>
+            <p class="cattext2" id="0bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry flexhidden">
+            <img src="../img/food.png" class="catimg hidden" id="0acati">
+            <img src="../img/nocat.png" class="catimg" id="0bcati">
+            <p class="cattext hidden" id="0acatt">No Cat</p>
+            <p class="cattext greytext" id="0bcatt">???</p>
+            <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
+            <p class="cattext2 greytext" id="0bcatd">???</p>
+            <p class="cattext2" id="0bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry flexhidden">
+            <img src="../img/food.png" class="catimg hidden" id="0acati">
+            <img src="../img/nocat.png" class="catimg" id="0bcati">
+            <p class="cattext hidden" id="0acatt">No Cat</p>
+            <p class="cattext greytext" id="0bcatt">???</p>
+            <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
+            <p class="cattext2 greytext" id="0bcatd">???</p>
+            <p class="cattext2" id="0bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry flexhidden">
+            <img src="../img/food.png" class="catimg hidden" id="0acati">
+            <img src="../img/nocat.png" class="catimg" id="0bcati">
+            <p class="cattext hidden" id="0acatt">No Cat</p>
+            <p class="cattext greytext" id="0bcatt">???</p>
+            <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
+            <p class="cattext2 greytext" id="0bcatd">???</p>
+            <p class="cattext2" id="0bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry flexhidden">
+            <img src="../img/food.png" class="catimg hidden" id="0acati">
+            <img src="../img/nocat.png" class="catimg" id="0bcati">
+            <p class="cattext hidden" id="0acatt">No Cat</p>
+            <p class="cattext greytext" id="0bcatt">???</p>
+            <p class="cattext2 hidden" id="0acatd">01101110 01110101 01101100 01101100</p>
+            <p class="cattext2 greytext" id="0bcatd">???</p>
+            <p class="cattext2" id="0bcata">Obtained: 0</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/dusty.png" class="catimg hidden" id="01acati">
+            <img src="../img/nocat.png" class="catimg" id="01bcati">
+            <p class="cattext hidden" id="01acatt">Dusty Cat</p>
+            <p class="cattext greytext" id="01bcatt">???</p>
+            <p class="cattext2 hidden" id="01acatd">Its been here, waiting. For you.</p>
+            <p class="cattext2 greytext" id="01bcatd">???</p>
+            <p class="cattext2">Gives +100k ypc on unlock</p>
+          </div>
+          <div class="catentry">
+            <img src="../img/alien.png" class="catimg hidden" id="02acati">
+            <img src="../img/nocat.png" class="catimg" id="02bcati">
+            <p class="cattext hidden" id="02acatt">Alien Cat</p>
+            <p class="cattext greytext" id="02bcatt">???</p>
+            <p class="cattext2 hidden" id="02acatd">gnarp gnap</p>
+            <p class="cattext2 greytext" id="02bcatd">???</p>
+            <p class="cattext2">Gives +250k ypc on unlock</p>
+          </div>
+        </div>
       </div>
 
 
       <div class="changelog hidden" id="changelog">
         <h2>Changelog:</h2>
+        <p>v0.8.2<br>Added 2 new sets, added more prestige bonuses and CATNIP</p>
         <p>v0.8.1<br>Switched over to JSON, allowing for faster runtime and export/import of saves</p>
         <p>v0.8.0<br>Added achievements</p>
         <p>v0.7.9<br>Added offline progress, unlocked and improved at different prestige layers</p>
@@ -919,6 +1182,8 @@
         <p class="offltop" id="offltop">You were offline for 0 seconds.</p>
         <p class="offlbot" id="offlbot">You made 0 yarn.</p>
         <p class="offlbot" id="offlper">0% efficency</p>
+        <p class="offltop hidden" id="offlnipa">You got 0 catnip.</p>
+        <p class="offlbot hidden" id="offlnipb">0% efficency</p>
       </div>
 
 
@@ -1064,6 +1329,22 @@
             </div>
             <img src="../img/achievement/achno.png" class="achimg" id="a18a">
             <img src="../img/achievement/achcata5.png" class="achimg hidden" id="a18b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a19t">
+              <p class="tooltiptop">Garden Cats</p>
+              <p class="tooltipbot">Get all cats in the 'garden cat' Catalogue</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a19a">
+            <img src="../img/achievement/achcata6.png" class="achimg hidden" id="a19b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a20t">
+              <p class="tooltiptop">Mythological Cats</p>
+              <p class="tooltipbot">Get all cats in the 'mythological cat' Catalogue</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a20a">
+            <img src="../img/achievement/achcata7.png" class="achimg hidden" id="a20b">
           </div>
         </div>
 
@@ -1230,6 +1511,14 @@
             </div>
             <img src="../img/achievement/achno.png" class="achimg" id="a50a">
             <img src="../img/achievement/achpluto.png" class="achimg hidden" id="a50b">
+          </div>
+          <div class="achievementbox">
+            <div class="tooltip" id="a51t">
+              <p class="tooltiptop">A nip in time</p>
+              <p class="tooltipbot">Get an hour of catnip (3600).</p>
+            </div>
+            <img src="../img/achievement/achno.png" class="achimg" id="a51a">
+            <img src="../img/achievement/achcatnip1.png" class="achimg hidden" id="a51b">
           </div>
         </div>
 
