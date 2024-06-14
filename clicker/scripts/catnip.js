@@ -10,7 +10,7 @@ let catnipmulti = 1
 let catnipmax = 99999
 
 function gaincatnip(sec = 1) {
-    if (game.fishbones >= 999999) {
+    if (game.fishbones >= 750000) {
         catnipsc = 1
     }
     game.catnip = game.catnip + (catnipsc * sec)
