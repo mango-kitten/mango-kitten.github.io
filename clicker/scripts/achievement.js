@@ -24,6 +24,37 @@ function achLoad() {
                 let achnameb = `a${i}b`
                 document.getElementById(achnamea).classList = "achimg hidden"
                 document.getElementById(achnameb).classList = "achimg"
+
+                if (i == 42) {
+                    document.getElementById("9acati").classList = "catimg hidden"
+                    document.getElementById("9ccati").classList = "catimg"
+                    document.getElementById("murdera").classList = "tooltipbot hidden"
+                    document.getElementById("murderb").classList = "tooltipbot"
+                }
+                if (i == 43) {
+                    document.getElementById("wastea").classList = "tooltipbot hidden"
+                    document.getElementById("wasteb").classList = "tooltipbot"
+                }
+                if (i == 46) {
+                    document.getElementById("reala").classList = "tooltipbot hidden"
+                    document.getElementById("realb").classList = "tooltipbot"
+                }
+                if (i == 47) {
+                    document.getElementById("betraya").classList = "tooltipbot hidden"
+                    document.getElementById("betrayb").classList = "tooltipbot"
+                }
+                if (i == 48) {
+                    document.getElementById("demona").classList = "tooltipbot hidden"
+                    document.getElementById("demonb").classList = "tooltipbot"
+                }
+                if (i == 49) {
+                    document.getElementById("suna").classList = "tooltipbot hidden"
+                    document.getElementById("sunb").classList = "tooltipbot"
+                }
+                if (i == 50) {
+                    document.getElementById("plutoa").classList = "tooltipbot hidden"
+                    document.getElementById("plutob").classList = "tooltipbot"
+                }
             } catch (error) {
 
             }
@@ -226,6 +257,24 @@ function updateAchievements() {
             achlog = `${achlog}, Planetary Cataloguist`
         }
     }
+    if (game.catgot[29]> 0 && game.catgot[30]> 0 && game.catgot[31]> 0 && game.catgot[32]> 0 && game.catgot[33]> 0 && game.catgot[34]> 0 && game.achievements[19] == 0) {
+        getAchievement(19)
+        achrecent = achrecent + 1
+        if (achrecent == 1) {
+            achlog = "Gardening Cataloguist"
+        } else {
+            achlog = `${achlog}, Gardening Cataloguist`
+        }
+    }
+    if (game.catgot[35]> 0 && game.catgot[36]> 0 && game.catgot[37]> 0 && game.catgot[38]> 0 && game.catgot[39]> 0 && game.catgot[40]> 0 && game.achievements[20] == 0) {
+        getAchievement(20)
+        achrecent = achrecent + 1
+        if (achrecent == 1) {
+            achlog = "Mythological Cataloguist"
+        } else {
+            achlog = `${achlog}, Mythological Cataloguist`
+        }
+    }
 
 
     if (game.fishbones >= 1 && game.achievements[27]== 0) {
@@ -421,6 +470,15 @@ function updateAchievements() {
             achlog = "That doesnt belong?"
         } else {
             achlog = `${achlog}, That doesnt belong?`
+        }
+    }
+    if (game.catnip >= 3600 && game.achievements[51]== 0) {
+        getAchievement(51)
+        achrecent = achrecent + 1
+        if (achrecent == 1) {
+            achlog = "A nip in time"
+        } else {
+            achlog = `${achlog}, A nip in time`
         }
     }
 
