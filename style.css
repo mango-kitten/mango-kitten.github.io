@@ -535,3 +535,908 @@ button {
 .catnipdisp {
     margin-top: 0px;
 }
+
+
+
+
+
+
+
+
+
+
+.pullbot {
+    position: absolute;
+    width: 10%;
+    height: auto;
+    left: 90%;
+    bottom: 2%;
+    z-index: 9991;
+}
+.pulltop {
+    position: absolute;
+    width: 10%;
+    height: auto;
+    left: 90%;
+    bottom: 15%;
+}
+
+.invcontainer {
+    position: absolute;
+    width: 100%;
+    background-color: aqua;
+    background-image: url(img/gacha/woodbg.jpg);;
+    height: 50%;
+    overflow-y: scroll;
+}
+
+.invbottomline { 
+    position: absolute;
+    width: 100%;
+    height: 0.5%;
+    top: 50%;
+    background-color: rgb(43, 28, 0);
+    z-index: 9999;
+}
+
+.starsbox {
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+    width: 15%;
+    height: fit-content;
+    z-index: 998;
+}
+
+
+
+
+.rankstar {
+    transition: 0.3s;
+    padding: 0.5%;
+    width: 17%;
+}
+
+.summary {
+    position: absolute;
+    left: 25%;
+    bottom: 10%;
+}
+
+.pullstartfull {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.invitem {
+    aspect-ratio: 1/1;
+    width: 7.75%;
+    margin: 1%;
+    border: 0.5px solid rgb(83, 63, 8);
+    border-radius: 20px;
+    z-index: 1500;
+    background-color: rgb(83, 63, 8);
+    overflow-wrap: anywhere;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+.invtier {
+    display: flex;
+    width: 100%;
+}
+
+.invimg {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+}
+.invimgoverlaymin {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0.1;
+    margin-left: -100%;
+    right: 0px;
+}
+.invimgoverlaylow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0.25;
+    margin-left: -100%;
+    right: 0px;
+}
+.invimgoverlaymid {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    margin-left: -100%;
+    right: 0px;
+}
+.invimgoverlaymax {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    margin-left: -100%;
+    right: 0px;
+}
+
+.pullgrey {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    opacity: 0.6;
+    z-index: 10000;
+}
+.pullne {
+    position: absolute;
+    z-index: 10001;
+    width: 40%;
+    height: 20%;
+    background-color: rgb(18, 18, 172);
+    border-radius: 10px;
+    left: 30%;
+    top: 40%;
+}
+.pullneno {
+    position: absolute;
+    left: 30%;
+    width: 10%;
+    height: 15%;
+    bottom: 10%;
+    text-align: center;
+    background-color: rgb(17, 17, 121);
+    padding-top: 0.5%;
+    border-radius: 7px;
+    font-family: 'Playpen Sans', cursive;
+    color: aqua;
+
+}
+.pullneyes {
+    position: absolute;
+    left: 60%;
+    width: 10%;
+    height: 15%;
+    bottom: 10%;
+    text-align: center;
+    background-color: rgb(17, 17, 121);
+    padding-top: 0.5%;
+    border-radius: 7px;
+    font-family: 'Playpen Sans', cursive;
+    color: aqua;
+}
+.pullnetop {
+    text-align: center;
+}
+
+
+
+
+.errormessage {
+    position: absolute;
+    z-index: 10000;
+    bottom: 32%;
+    left: 0.5%;
+    background-color: red;
+    opacity: 0;
+    border-radius: 10px;
+    width: 15%;
+    height: fit-content;
+    padding: 0.5%;
+    color: rgb(184, 152, 152);
+    font-family: 'Playpen Sans', cursive;
+}
+
+
+.katkoinimg {
+    position: absolute;
+    z-index: 10002;
+    bottom: 2%;
+    left: 1%;
+    height: 5.5%;
+    aspect-ratio: 1/1;
+}
+.katkoinamnt {
+    position: absolute;
+    z-index: 10002;
+    bottom: 2%;
+    left: 5%;
+}
+
+.katvouchimg {
+    position: absolute;
+    z-index: 10002;
+    bottom: 10%;
+    left: 1%;
+    height: 7.5%;
+    aspect-ratio: 1/1;
+}
+.katvouchamnt {
+    position: absolute;
+    z-index: 10002;
+    bottom: 10%;
+    left: 5%;
+}
+
+.pixelimg {
+    position: absolute;
+    z-index: 10002;
+    bottom: 18%;
+    left: 1%;
+    height: 7%;
+    aspect-ratio: 1/1;
+}
+.pixelamnt {
+    position: absolute;
+    z-index: 10002;
+    bottom: 18%;
+    left: 5%;
+}
+
+.pullbg {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+}
+
+
+.dailyokay {
+    position: absolute;
+    left: 45%;
+    width: 10%;
+    height: 15%;
+    bottom: 10%;
+    text-align: center;
+    background-color: rgb(58, 40, 6);
+    padding-top: 0.5%;
+    border-radius: 7px;
+    font-family: 'Playpen Sans', cursive;
+    color: rgb(165, 116, 52);
+}
+
+
+.throwbase {
+    z-index: 10004;
+    width: 3%;
+    height: 1%;
+    position: absolute;
+    left: 5%;
+    opacity: 0;
+}
+
+.throwkoin {
+    bottom: 5.5%;
+}
+.throwvouch {
+    bottom: 13.5%;
+}
+.throwpixel {
+    bottom: 21.5%;
+}
+
+.shopsupercontainer {
+    z-index: 9999;
+    position: absolute;
+    width: 50%;
+    height: 40%;
+    bottom: 1%;
+    left: 25%;
+    background-image: url(img/gacha/woodbg.jpg);
+    border-radius: 10px;
+}
+
+.shoptier {
+    display: flex;
+}
+
+.shoptier div {
+    margin: 1.5%;
+    aspect-ratio: 1/1;
+    width: 12%;
+    height: fit-content;
+    background-color: rgb(88, 68, 8);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+
+.pixelvouch img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    height: auto;
+}
+
+
+.buyslider {
+    position: absolute;
+    width: 40%;
+    left: 30%;
+    
+}
+.buyslidercontainer {
+    display: flex;
+    height: 10%;
+}
+.sliderleft {
+    width: 50%;
+    text-align: center;
+    margin-top: -0.5%;
+}
+.sliderright {
+    width: 50%;
+    text-align: center;
+    margin-top: -0.5%;
+}
+
+.buysupercontainer {
+    position: absolute;
+    z-index: 10001;
+    width: 40%;
+    height: 30%;
+    background-color: rgb(18, 18, 172);
+    border-radius: 10px;
+    left: 30%;
+    top: 35%;
+    /* display: none; */
+}
+
+.buyno {
+    position: absolute;
+    left: 30%;
+    width: fit-content;
+    height: fit-content;
+    bottom: 10%;
+    text-align: center;
+    background-color: rgb(17, 17, 121);
+    padding: 0.5%;
+    border-radius: 7px;
+    font-family: 'Playpen Sans', cursive;
+    color: aqua;
+
+}
+.buyyes {
+    position: absolute;
+    left: 60%;
+    width: fit-content;
+    height: fit-content;
+    bottom: 10%;
+    text-align: center;
+    background-color: rgb(17, 17, 121);
+    padding: 0.5%;
+    border-radius: 7px;
+    font-family: 'Playpen Sans', cursive;
+    color: aqua;
+}
+
+
+.pullgot {
+    position: absolute;
+    font-size: 28px;
+    bottom: 20%;
+    left: 22%;
+}
+.pullmodifier {
+    position: absolute;
+    font-size: 18px;
+    bottom: 18%;
+    left: 32%;
+}
+
+.pullgotimg {
+    position: absolute;
+    height: 30%;
+    width: auto;
+    bottom: 32%;
+    left: 21%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.codesupercontainer {
+    position: absolute;
+    z-index: 10001;
+    width: 40%;
+    height: 20%;
+    background-image: url(img/gacha/woodbg.jpg);
+    border-radius: 10px;
+    left: 30%;
+    top: 40%;
+    display: block;
+}
+
+.codetop {
+    color: rgb(59, 29, 0);
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+    position: absolute;
+    width: 50%;
+    height: auto;
+    left: 25%;
+    top: 5%;
+    text-align: center;
+}
+
+.codeinput {
+    position: absolute;
+    width: 40%;
+    height: auto;
+    left: 30%;
+    top: 45%;
+    text-align: center;
+    font-size: 20px;
+}
+
+.codebot {
+    position: absolute;
+    width: 5.5%;
+    height: auto;
+    right: 0.25%;
+    bottom: 26%;
+}
+
+.tooltipg {
+    height: 28px;
+    width: auto;
+    padding-top: 5px;
+}
+
+.serialsort {
+    position: absolute;
+    top: 50%;
+    left: 0.5%;
+    width: 2%;
+    text-align: center;
+    background-color: rgb(110, 84, 26);
+    font-family: 'Playpen Sans', cursive;
+    font-size: 15px;
+    z-index: 9998;
+    border-radius: 6px;
+    color: white;
+}
+.hisort {
+    position: absolute;
+    top: 50%;
+    left: 2.5%;
+    width: 2%;
+    text-align: center;
+    background-color: rgb(95, 71, 18);
+    font-family: 'Playpen Sans', cursive;
+    font-size: 15px;
+    z-index: 9998;
+    border-radius: 6px;
+    color: white;
+}
+.losort {
+    position: absolute;
+    top: 50%;
+    left: 4.5%;
+    width: 2%;
+    text-align: center;
+    background-color: rgb(87, 64, 14);
+    font-family: 'Playpen Sans', cursive;
+    font-size: 15px;
+    z-index: 9998;
+    border-radius: 6px;
+    color: white;
+}
+.modsort {
+    position: absolute;
+    top: 50%;
+    left: 6.5%;
+    width: 2%;
+    text-align: center;
+    background-color: rgb(63, 45, 6);
+    font-family: 'Playpen Sans', cursive;
+    font-size: 15px;
+    z-index: 9998;
+    border-radius: 6px;
+    color: white;
+}
+
+
+.gamesicon {
+    position: absolute;
+    width: 5.5%;
+    right: 0%;
+    background-color: rgb(44, 24, 2);
+    color: white;
+    bottom: 39%;
+    border-radius: 8px;
+    padding: 0.5%;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 20px;
+}
+.gamesupercontainer {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background-color: rgb(128, 83, 24);
+    background-image: url(img/gacha/woodbg.jpg);
+    top: 10%;
+    left: 10%;
+    border-radius: 13px;
+    z-index: 10002;
+}
+.gameexit {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    z-index: 10003;
+    background-color: red;
+    width: 3%;
+    aspect-ratio: 1/1;
+    height: auto;
+    border-radius: 8px;
+    border: 2px;
+    border-color: rgb(177, 7, 7);
+    text-align: center;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 20px;
+}
+.gacharoulette {
+    position: absolute;
+    top: 5%;
+    left: 3%;
+    height: 47.5%;
+    width: 30%;
+    background-color: rgb(145 100 49);
+    opacity: 0.9;
+    border-radius: 10px;
+}
+.wheeltimer {
+    position: absolute;
+    bottom: 5%;
+    padding: 2%;
+    width: 15%;
+    left: 40.5%;
+    height: fit-content;
+    text-align: center;
+    background-color: rgb(18, 97, 143);
+    border-radius: 4px;
+}
+.wheelres {
+    position: absolute;
+    height: fit-content;
+    top: 37.5%;
+    width: 50%;
+    padding: 5%;
+    padding-top: 0.25%;
+    padding-bottom: 0.25%;
+    left: 20%;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Playpen Sans', cursive;
+    background-color: rgb(18, 97, 143);
+    border-radius: 8px;
+    text-overflow: wrap;
+}
+.wheeltop {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 99.5%;
+    background-color: rgb(78, 54, 17);
+    font-family: 'Playpen Sans', cursive;
+    font-size: 20px;
+    height: fit-content;
+    padding: 0.25%;
+    text-align: center;
+    border-radius: 12px;
+    color: white;
+}
+
+
+
+.gachadropper {
+    position: absolute;
+    top: 5%;
+    left: 36%;
+    height: 47.5%;
+    width: 30%;
+    background-color: rgb(145 100 49);
+    opacity: 0.9;
+    border-radius: 10px;
+}
+.dropres {
+    position: absolute;
+    height: 0.5%;
+    top: 49.75%;
+    width: 50%;
+    left: 25%;
+    background-color: rgb(0, 0, 0);
+
+}
+.dropearn {
+    position: absolute;
+    height: 15%;
+    top: 55%;
+    width: 50%;
+    padding: 5%;
+    padding-top: 0.25%;
+    left: 20%;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Playpen Sans', cursive;
+    background-color: rgb(18, 97, 143);
+    border-radius: 8px;
+    text-overflow: wrap;
+}
+.dropupgrade {
+    position: absolute;
+    height: 5%;
+    bottom: 16.5%;
+    width: 65%;
+    padding: 5%;
+    padding-top: 0.25%;
+    padding-bottom: 0.25%;
+    left: 12.5%;
+    text-align: center;
+    font-size: 10px;
+    font-family: 'Playpen Sans', cursive;
+    background-color: rgb(18, 97, 143);
+    border-radius: 8px;
+    text-overflow: wrap;
+}
+.dropmid {
+    padding: 0.25%;
+    background-color: black;
+    height: 3%;
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    border-radius: 2px;
+}
+
+.gachaslots {
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    height: 47.5%;
+    width: 30%;
+    background-color: rgb(145 100 49);
+    opacity: 0.9;
+    border-radius: 10px;
+}
+.wheeltop sub {
+    font-size: 8px;
+}
+.slotmachine {
+    position: absolute;
+    border-radius: 5px;
+    top: 30%;
+    left: 35%;
+    width: 30%;
+    height: 50%;
+    background-color: rgb(104, 56, 17);
+}
+.slotscreen {
+    position: absolute;
+    background-color: rgb(252, 224, 188);
+    width: 90%;
+    height: 50%;
+    border-radius: 4px;
+    top: 3%;
+    left: 5%;
+}
+.slot1 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 3%;
+    left: 2%;
+}
+.slot2 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 3%;
+    left: 26%;
+}
+.slot3 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 3%;
+    left: 50%;
+}
+.slot4 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 3%;
+    left: 74%;
+}
+/* no flexboxes????? :megamind: */
+.slot5 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 35%;
+    left: 2%;
+}
+.slot6 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 35%;
+    left: 26%;
+}
+.slot7 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 35%;
+    left: 50%;
+}
+.slot8 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 35%;
+    left: 74%;
+}
+/* no flexboxes????? :megamind: */
+.slot9 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 67%;
+    left: 2%;
+}
+.slot10 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 67%;
+    left: 26%;
+}
+.slot11 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 67%;
+    left: 50%;
+}
+.slot12 {
+    position: absolute;
+    width: 23%;
+    height: 30%;
+    background-color: white;
+    top: 67%;
+    left: 74%;
+}
+.slotpayout {
+    width: 100%;
+    bottom: 20%;
+    height: fit-content;
+    text-align: center;
+    text-overflow: wrap;
+    position: absolute;
+}
+.slotbutton {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: red;
+    top: 40%;
+    left: 65%;
+    z-index: 10003;
+}
+.slotrod {
+    position: absolute;
+    width: 10px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: rgb(59, 38, 5);
+    top: 40%;
+    left: 65%;
+    z-index: 10002;
+}
+
+.staramnt {
+    position: absolute;
+    top: 50%;
+    left: 9%;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    background-color: rgb(43, 28, 0);
+    color: white;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 15px;
+    z-index: 9998;
+    border-radius: 6px;
+}
+
+.sincefive {
+    position: absolute;
+    width: fit-content;
+    padding: 5px;
+    padding-right: 30px;
+    border-radius: 6px;
+    height: auto;
+    right: 8.5%;
+    bottom: 5.5%;
+    background-color: rgb(190, 127, 10);
+    z-index: 9990;
+    font-family: 'Playpen Sans', cursive;
+}
+
+.mobilepage {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    background-color: grey;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    font-family: 'Playpen Sans', cursive;
+    color: white;
+    z-index: 100000;
+    display: none;
+}
+
+.uiddisp {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    background-color: rgb(43, 28, 0);
+    color: white;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 15px;
+    z-index: 9998;
+    border-radius: 6px;
+}
+
+.savesupercontainer {
+    position: absolute;
+    bottom: 0%;
+    left: 76%;
+    width: 12%;
+    height: 25%;
+    background-color: rgb(92, 51, 13);
+    border-radius: 8px;
+}
+.importsavefilegacha {
+    color: white;
+}
+.exportbuttongacha {
+    background-color: rgb(104, 65, 20);
+    color: white;
+    height: fit-content;
+    width: fit-content;
+    padding: 3px;
+    font-size: 14px;
+    border-radius: 1px;
+}
