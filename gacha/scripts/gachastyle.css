@@ -1,0 +1,33 @@
+
+/* this file is for gacha-specific stylings that need to not overlap w/ cat clicker */
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #8a570b;
+    border-radius: 7.5px;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #5e3f05;
+    border-radius: 7.5px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #3f2806;
+}
+
+.gachabackdrop {
+    background-image: radial-gradient(rgb(90, 51, 0), rgb(73, 40, 2));
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
