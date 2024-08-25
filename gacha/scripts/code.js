@@ -148,6 +148,9 @@ function loadCodeJSON() {
 const releasecode = new newCode(0, "XUiuwvRGrLqgZcCxJUFD", 1, 3000, "Alpha Release Supporter", "alphasupporter", 2, 20, 0, 0)
 const release2code = new newCode(0, "RELEASEGIFTYAY", 1, 5000, 2, 10, "Royal Mango", "royalmangocat", 0, 0)
 const extracode = new newCode(0, "cxCpgTcKfTffRJAohXTq", 1, 10000, 2, 100, 0, 0, 0, 0)
+const aquagift = new newCode(145467523, "AQUAGIFT", 1, 500, 0, 0, 0, 0, 0, 0)
+const muffingift = new newCode(545874937, "MUFFINGIFT", 1, 500, 0, 0, 0, 0, 0, 0)
+const goobgift = new newCode(582227009, "GOOBGIFT", 1, 500, 0, 0, 0, 0, 0, 0)
 
 // ██████████▀▀▀▀▀▀▀▀▀▀▀▀▀██████████
 // █████▀▀░░░░░░░░░░░░░░░░░░░▀▀█████
