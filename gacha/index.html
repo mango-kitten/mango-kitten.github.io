@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mango Gacha</title>
+          <link rel="stylesheet" href="../style.css">
+          <link rel="stylesheet" href="scripts/gachastyle.css">
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap" rel="stylesheet">
+          <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    </head>
+    <body onload="onloadListeners()" class="gachamain">
+        <script src="scripts/global.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+        <script src="scripts/items.js"></script>
+        <script src="scripts/inv.js"></script>
+        <script src="scripts/daily.js"></script>
+        <script>
+
+            let game = localStorage.getItem("game")
+            game = JSON.parse(game)
+            if (game) {
+                console.log("Found game in localStorage!")
+                loadSerial()
+            } else {
+                let uid = genUID()
+                var now = new Date();
+                now = Number(now.getTime())
+                console.log("No game file found, creating new file.")
+                game = {
+                    uid: uid,
+                    katkoin: 0,
+                    katvouchers: 0,
+                    pixels: 0,
+                    inventory: [
+
+                    ],
+                    lastcheckin: 0,
+                    lastsave: 0,
+                    accountcreated: now,
+                    checkindays: 0,
+                    since5star: 0,
+                    wheelready: 0,
+                    dropready: 0,
+                    dropqty: 10,
+                    slotsready: 0
+                }
+            }
+
+            console.log("Hey, you there. This game is merely for fun and stuff. Why would you cheat?")
+            let tooltipdiv
+            let tooltipcont
+
+            function detectMobile() {
+                var a;
+                if (navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)) {
+                    a = true ;
+                } else {
+                    a = false ;
+                }
+                return a
+            }
+            function removeMobileWarn() {
+                document.getElementById("mobilepage").style.display = "none"
+            }
+
+            function saveGame() {
+                var now = new Date();
+                now = Number(now.getTime())
+                game.lastsave = now
+                let gamestr = JSON.stringify(game)
+                localStorage.setItem("game", gamestr)
+                
+            }
+
+            function onloadListeners() {
+
+                clearPullStart()
+                loadCodeJSON()
+
+                if (detectMobile()) {
+                    document.getElementById("mobilepage").style.display = "block"
+                } else {
+                    document.getElementById("mobilepage").style.display = "none"
+                }
+
+
+                loadInv(0)
+
+                pullbuttoni = document.getElementById("pull1")
+                pullbuttoni.addEventListener('mousedown', function() {
+                    openPull(1)
+                });
+                pullbuttonii = document.getElementById("pull10")
+                pullbuttonii.addEventListener('mousedown', function() {
+                    openPull(10)
+                });
+                document.addEventListener('mousedown', function() {
+                    if (inpull == 1 && inprogress == 0) {
+                        conf = 1
+                    } else {
+                        conf = 0
+                    }
+                });
+                document.getElementById("pullgrey").style.display = "none"
+                document.getElementById("pullne").style.display = "none"
+                document.getElementById("dailysupercontainer").style.display = "none"
+                document.getElementById("buysupercontainer").style.display = "none"
+                document.getElementById("codesupercontainer").style.display = "none"
+                document.getElementById("pullbg").style.opacity = "0"
+                document.getElementById("gamesupercontainer").style.display = "none"
+                document.getElementById("sincefive").innerHTML = `${game.since5star} Pity`
+                dropupgradediv.innerHTML = `Upgrade for ${Math.pow(2, (game.dropqty/10)+1)} KatKoin (${game.dropqty} +10)`
+
+                setInterval(function () {
+                    document.getElementById("katkoinamnt").innerHTML = `${game.katkoin}`
+                    document.getElementById("katvouchamnt").innerHTML = `${game.katvouchers}`
+                    document.getElementById("pixelamnt").innerHTML = `${game.pixels}`
+                }, 30);
+                updateStars()
+                setInterval(function () {
+                    saveGame()
+                    updateStars()
+                    readSaveData()
+                    document.getElementById("uiddisp").innerHTML = `${game.uid}`
+                }, 1000)
+                checkDaily()
+
+                if (game.wheelready > 0) {
+                    var now = new Date();
+                    now = Number(now.getTime())
+
+                    game.wheelready = game.wheelready - Math.floor((now-game.lastsave)/1000)
+
+                    if (game.wheelready > 0) {
+                        wheelinterval = setInterval(function () {
+                            if (game.wheelready <= 0) {
+                                clearInterval(wheelinterval)
+                                game.wheelready = 0
+                                wheeltimer.innerHTML = "Spin!"
+                            } else {
+                                game.wheelready = game.wheelready - 1
+                                wheeltimer.innerHTML = `${game.wheelready}s`
+                            }
+                        }, 1000)
+                    } else {
+                        game.wheelready = 0
+                        wheeltimer.innerHTML = "Spin!"
+                    }
+                    
+                } else {
+                    game.wheelready = 0
+                    wheeltimer.innerHTML = "Spin!"
+                }
+
+
+                if (game.dropready > 0) {
+                    var now = new Date();
+                    now = Number(now.getTime())
+
+                    game.dropready = game.dropready - Math.floor((now-game.lastsave)/1000)
+
+                    if (game.dropready > 0) {
+                        normdropinterval = setInterval(function () {
+                            if (game.dropready <= 0) {
+                                clearInterval(normdropinterval)
+                                game.dropready = 0
+                                droptimer.innerHTML = "Drop!"
+                            } else {
+                                game.dropready = game.dropready - 1
+                                droptimer.innerHTML = `${game.dropready}s`
+                            }
+                        }, 1000)
+                    } else {
+                        game.dropready = 0
+                        droptimer.innerHTML = "Drop!"
+                    }
+                    
+                } else {
+                    game.dropready = 0
+                    droptimer.innerHTML = "Drop!"
+                }
+                game.slotsready = 15
+                slotstimer.innerHTML = "Waiting..."
+                setTimeout(function () {
+                    game.slotsready = 0
+                    slotstimer.innerHTML = "Spin!"
+                }, 15000)
+            }
+
+            function hardReset() {
+                localStorage.removeItem("game")
+                window.location.reload();
+            }
+        </script>
+        <main>
+            <audio id="starsound">
+                <source src="../aud/star-sound.mp3" type="audio/mp3">
+            </audio>
+            <audio id="dingsound">
+                <source src="../aud/ding.mp3" type="audio/mp3">
+            </audio>
+
+            <div id="mobilepage" class="mobilepage" onclick="removeMobileWarn()">
+                This site is NOT designed for mobile, use at your own risk. Click to remove me.
+            </div>
+
+            <div class="pullbg" id="pullbg">
+                <img src="../img/gacha/pullbg.png" style="z-index: 99998; width: 100%; height: 100%; margin: auto; opacity: 1;">
+                <div id="pullgetting">
+                    <p class="pullgot" id="pullgot"></p>
+                    <img class="pullgotimg" id="pullgotimg" src="../img/cat.png">
+                    <p class="pullmodifier" id="pullmodifier"></p>
+                </div>
+            </div>
+
+
+            <div class="gachabackdrop"></div>
+
+
+            <div id="invsupercontainer" class="invsupercontainer">
+                <div id="invcontainer" class="invcontainer">
+
+                </div>
+                <div id="invbottomline" class="invbottomline">
+                </div>
+                <div class="serialsort" id="serialsort" onclick="loadInv(0)">#</div>
+                <div class="hisort" id="hisort" onclick="loadInv(1)">&#8600</div>
+                <div class="losort" id="losort" onclick="loadInv(2)">&#8599</div>
+                <div class="modsort" id="modsort" onclick="loadInv(3)">&#9881</div>
+                <div class="staramnt" id="staramnt"></div>
+                <div class="uiddisp" id="uiddisp" onclick="copyUidToClipboard()"></div>
+            </div>
+
+            
+
+            <div class="pullgrey" id="pullgrey"></div>
+            <div id="pullne" class="pullne"> <!-- stands for pull not enough -->
+                <p class="pullnetop">You do not have the required Kat Vouchers to perform this action! You can purchase more to continue.</p>
+                <p class="pullnetop" id="pullne1">(this action will cost 1300 KatKoin)</p>
+                <div id="pullneno" class="pullneno">No</div>
+                <div id="pullneyes" class="pullneyes">Yes</div>
+            </div>
+
+
+            <div id="pullbuttons">
+                <img src="../img/gacha/pull1.png" class="pulltop" id="pull1">
+                <img src="../img/gacha/pull10.png" class="pullbot" id="pull10">
+                <div class="sincefive" id="sincefive"></div>
+                <img src="../img/gacha/codeimg.png" class="codebot" onclick="openCode()">   
+                <div class="gamesicon" onclick="openGame()">Games</div>
+
+
+                
+                <div class="gamesupercontainer" id="gamesupercontainer">
+                    <div class="gameexit" onclick="closeGame()">X</div>
+                    <div class="gacharoulette">
+                        <div class="wheeltop">Wheel of Fortune</div>
+                        <div class="wheelres" id="wheelres">Waiting for spin...</div>
+                        <div class="wheeltimer" id="wheeltimer" onclick="wheelSpin()"></div>
+                    </div>
+
+                    <div class="gachadropper">
+                        <div class="dropresmid"></div>
+                        <div class="wheeltop">Dropper</div>
+                        <div class="dropres" id="dropres"></div>
+                        <div class="dropearn" id="dropearn"></div>
+                        <div class="dropmid"></div>
+                        <div class="dropupgrade" id="dropupgrade" onclick="upgradeDropper()">abcd</div>
+                        <div class="wheeltimer" id="droptimer" onclick="doDropper()"></div>
+                    </div>
+
+                    <div class="gachaslots">
+                        <div class="wheeltop">Slots<sub>  by popular request</sub></div>
+                        <div class="slotmachine">
+                            <div class="slotscreen">
+                                <div class="slot1" id="slot1"></div>
+                                <div class="slot2" id="slot2"></div> <!--yes i KNOW flexboxes exist.-->
+                                <div class="slot3" id="slot3"></div> <!--im lazy-->
+                                <div class="slot4" id="slot4"></div>
+                                <div class="slot5" id="slot5"></div>
+                                <div class="slot6" id="slot6"></div> <!--deal with it.-->
+                                <div class="slot7" id="slot7"></div>
+                                <div class="slot8" id="slot8"></div>
+                                <div class="slot9" id="slot9"></div> <!--alright?-->
+                                <div class="slot10" id="slot10"></div>
+                                <div class="slot11" id="slot11"></div>
+                                <div class="slot12" id="slot12"></div> <!--thats all from dev mango-->
+                            </div>
+                            <div class="slotpayout" id="slotpayout"></div>
+                        </div>
+                        <div class="slotbutton" onclick="slotMachine()"></div>
+                        <div class="slotrod"></div>
+                        <div class="wheeltimer" id="slotstimer" onclick="slotMachine()"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="errormessage" class="errormessage">
+                Error: Not enough KatKoin
+            </div>
+            <div id="tooltip" style="z-index: 10010; left: -200px; top: -200px; position: absolute; background-color: rgb(102, 102, 214); padding: 7px; border-radius: 5px; font-family: 'Playpen Sans', cursive; max-width: 15%; text-overflow: wrap;">
+                <p></p>
+            </div>
+
+            <div id="currencysupercontainer">
+                <div id="katkoincontainer">
+                    <img src="../img/gacha/katkoin.png" class="katkoinimg">
+                    <p class="katkoinamnt" id="katkoinamnt"></p>
+                </div>
+                
+                <div id="katvouchercontainer">
+                    <img src="../img/gacha/katvoucher.png" class="katvouchimg">
+                    <p class="katvouchamnt" id="katvouchamnt"></p>
+                </div>
+                
+                <div id="pixelcontainer">
+                    <img src="../img/gacha/pixel.png" class="pixelimg">
+                    <p class="pixelamnt" id="pixelamnt"></p>
+                </div>
+            </div>
+
+            <div id="dailysupercontainer" class="pullne">
+                <p class="pullnetop" id="dailytop"></p>
+                <p class="pullnetop" id="dailymiddle"></p>
+                <div id="dailyokay" class="dailyokay">Yay!</div>
+            </div>
+
+            <div id="buysupercontainer" class="buysupercontainer">
+                <p class="pullnetop" id="buytop"></p>
+                <p class="pullnetop">How many would you like to buy?</p>
+                <p class="pullnetop" id="buycost"></p>
+                <div class="buyslidercontainer">
+                    <p class="sliderleft">1</p>
+                    <input class="buyslider" type="range" id="buyslider" min="1" max="10" value="1">
+                    <p class="sliderright" id="sliderright"></p>
+                </div>
+                <div id="buyno" class="buyno" onclick="cancelBuy()">Cancel</div>
+                <div id="buyyes" class="buyyes" onclick="confirmBuy()">Confirm</div>
+            </div>
+
+            <div id="codesupercontainer" class="codesupercontainer">
+                <p class="codetop">Input code below to redeem it!</p>
+                <input type="text" id="codeinput" class="codeinput">
+                <div class="dailyokay" onclick="confirmCode()">Confirm</div>
+            </div>
+
+            <p class="throwbase throwkoin" id="throwkoin"></p>
+            <p class="throwbase throwvouch" id="throwvouch"></p>
+            <p class="throwbase throwpixel" id="throwpixel"></p>
+
+            <div class="shopsupercontainer" id="shopsupercontainer">
+                <div class="shoptier">
+                    <div class="pixelvouch" id="pixelvouch" onclick="openBuy(0)"><img src="../img/gacha/plus1cv.png"></div>
+                    <div class="pixelvouch" id="koinvouch" onclick="openBuy(1)"><img src="../img/gacha/plus1kv.png"></div>
+                    <div class="pixelvouch" id="koinpixel" onclick="openBuy(2)"><img src="../img/gacha/plus1kp.png"></div>
+                </div>
+                <div class="shoptier" id="shoptier2">
+                </div>
+            </div>
+
+
+            <div class="pullstartfull" id="pullstartfull">
+                <img id="pullstart2" src="../img/gacha/2starpull.png" class="pullbg" style="display: none; transition: 3s;">
+                <img id="pullstart3" src="../img/gacha/3starpull.png" class="pullbg" style="display: none; transition: 3s;"> 
+                <img id="pullstart4" src="../img/gacha/4starpull.png" class="pullbg" style="display: none; transition: 3s;">
+                <img id="pullstart5" src="../img/gacha/5starpull.png" class="pullbg" style="display: none; transition: 3s;">
+            </div>
+            
+
+
+            <div id="stars" class="starsbox" style="display: none;">
+                <img src="../img/gacha/star.png" id="star1" style="opacity: 1; padding: 0.5%; width: 17%; scale: 1;">
+                <img src="../img/gacha/star.png" id="star2" style="opacity: 1; padding: 0.5%; width: 17%; scale: 1;">
+                <img src="../img/gacha/star.png" id="star3" style="opacity: 1; padding: 0.5%; width: 17%; scale: 1;">
+                <img src="../img/gacha/star.png" id="star4" style="opacity: 1; padding: 0.5%; width: 17%; scale: 1;">
+                <img src="../img/gacha/star.png" id="star5" style="opacity: 1; padding: 0.5%; width: 17%; scale: 1;">
+            </div>
+
+
+            <div class="savesupercontainer" id="savesupercontainer">
+                <input type="file" class="importsavefilegacha" id="filesaveinput">
+                <button class="exportbuttongacha" onclick="fullExport()">Export</button>
+                <button class="exportbuttongacha" onclick="fullImport()">Import</button>
+                <div id="saveholder" style="color: white; padding: 5px;">
+                    <div id="newsaveuid"></div>
+                    <div id="newsavelastsave"></div>
+                    <div id="newsavekatkoin"></div>
+                    <div id="newsavekvouch"></div>
+                    <div id="newsaveitems"></div>
+                </div>
+            </div>
+
+        </main>
+        <script src="scripts/throw.js"></script>
+        <script src="scripts/tooltip.js"></script>
+        <script src="scripts/pull.js"></script>
+        <script src="scripts/shop.js"></script>
+        <script src="scripts/shoptemp.js"></script>
+        <script src="scripts/code.js"></script>
+        <script src="scripts/game.js"></script>
+    </body>  
+</html>
