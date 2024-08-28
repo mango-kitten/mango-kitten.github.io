@@ -79,16 +79,6 @@ function wheelSpin() {
             gamePayout(175)
         }
         game.wheelready = 600
-        wheelinterval = setInterval(function () {
-            if (game.wheelready <= 0) {
-                clearInterval(wheelinterval)
-                game.wheelready = 0
-                wheeltimer.innerHTML = "Spin!"
-            } else {
-                game.wheelready = game.wheelready - 1
-                wheeltimer.innerHTML = `${game.wheelready}s`
-            }
-        }, 1000)
     }
 }
 
@@ -146,16 +136,6 @@ function doDropper() {
 
 
         game.dropready = 240
-        normdropinterval = setInterval(function () {
-            if (game.dropready <= 0) {
-                clearInterval(normdropinterval)
-                game.dropready = 0
-                droptimer.innerHTML = "Drop!"
-            } else {
-                game.dropready = game.dropready - 1
-                droptimer.innerHTML = `${game.dropready}s`
-            }
-        }, 1000)
     }
 }
 
@@ -251,16 +231,6 @@ function slotMachine() {
         gamePayout(totalearnings)
     
         game.slotsready = 30
-        slotinterval = setInterval(function () {
-            if (game.slotsready <= 0) {
-                clearInterval(slotinterval)
-                game.slotsready = 0
-                slotstimer.innerHTML = "Spin!"
-            } else {
-                game.slotsready = game.slotsready - 1
-                slotstimer.innerHTML = `${game.slotsready}s`
-            }
-        }, 1000)
     }
 }
 
