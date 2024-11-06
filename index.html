@@ -1,88 +1,144 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MangoKitten Home</title>
+        <title>Mango About Page (Home)</title>
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     </head>
     <body>
+        <script src="mainsite.js"></script>
+
+        <nav>
+            <a onclick="toHome()">Home</a> |
+            <a onclick="toLinktree()">Links</a>
+        </nav>
+
         <header>
             <p class="spacer">&#10240</p>
             <h1>MangoKitten</h1>
-            <h2>Home</h2>
-            <!-- <nav>
-                <a href="index.html">Home</a>
-                <a href="projects/index.html">Projects</a>
-                <a href="social/index.html">Social</a>
-            </nav> -->
             <p class="spacer">&#10240</p>
-            <p class="tinytext">Site by @mangokitten</p>
+            <p class="tinytext">Site by @mangokitten, or me!</p>
         </header>
         <main>
-            <div class="spacer">
-                <p>&#10240</p>
-            </div>
-            <div class="infobox">
-                <div class="general">
-                    <h1>General Information</h1>
-                    <p>Nonbinary/Transfem (she/they pronouns)<br>Shy (please don't bother me a bunch online, if I don't know you I won't want to respond)
-                        <br>Minor<br>Programmer, gamer, content creator at twitch.tv/mnangokittengaming<br>Cat obsession<br>Will consume any form of chocolate with extreme excitement
-                        <br>Listens to: pixel music, indie game music, j-core<br>Programming languages: Python, HTML/CSS, JavaScript<br>Games: Omori, Genshin Impact, Minecraft, Undertale
-                </div>
-                <div class="dni">
-                    <h1>DNI (Do Not Interact):</h1>
-                    <p>Homophobes, transphobes, racists, etc.<br>NSFW (i'm a minor, seriously)<br>Constant AI users (you're taking my future job peoples)
-                        <br>Basil (from omori) Haters (I know basil is overrepresented, but don't hate them for it)
-                    </p>
-                </div>
+
+            <div id="mainsitehome" class="">
                 <div class="spacer">
                     <p>&#10240</p>
+                </div>
+                <img id="mainsitepfpimg" class="mainsitepfpimg" onclick="swapPfp()" src="img/mangopfpbasic.png">
+                <div class="infobox">
+                    <div class="general">
+                        <h1>General Information</h1>
+                        <p>Nonbinary/Transfem (she/they pronouns)<br>Shy (please don't bother me a bunch online, if I don't know you I won't want to respond)
+                            <br>Minor<br>Programmer, gamer, content creator<br>Cat obsession<br>Will consume any form of chocolate with extreme excitement
+                            <br>Listens to: hatsune miku, pixel music, indie game music, j-core<br>Programming languages: Python, HTML/CSS, JavaScript<br>Games: Omori, Genshin Impact, Minecraft, Undertale
+                    </div>
+                    <div class="dni">
+                        <h1>DNI (Do Not Interact):</h1>
+                        <p>Homophobes, transphobes<br>Racists (even in a joking way, I don't want to hear it)<br>NSFW (i'm a minor, seriously)<br>Constant AI users (you're taking my future job peoples)                    </p>
+                    </div>
+                    <div class="spacer">
+                        <p>&#10240</p>
+                    </div>
+                </div>
+
+                <div class="whatido">
+                    <div class="spacer">
+                        <p>&#10240</p>
+                    </div>
+                    <h1>What I Do</h1>
+                    <div class="stuffrow">
+                        <div class="stuffcolumn">
+                            <h2>Programming</h2>
+                            <img src="programming.png">
+                            <p>I mainly program in Python, HTML and CSS, however I have dabbled in other languages such as C#, Lua, C++, JavaScript, and R.<br>Check out the Projects page for more info.</p>
+                            <p class="spacer">&#10240</p>
+                            <h2>Modding</h2>
+                            <img src="badtime.png">
+                            <p>I like taking the games I love and making them... not quite the games you know.<br>Currently modding: Omori.</p>
+                        </div>
+                        <div class="stuffcolumn">
+                            <h2>Omori</h2>
+                            <img src="omori.png">
+                            <p>One of my more recent obsessions, I simply love the game as a whole and it's art style.<br>(also its moddability is very nice, see below)</p>
+                            <p class="spacer">&#10240</p>
+                            <h2>Minecraft</h2>
+                            <img src="minecraft.png">
+                            <p>I've been playing Minecraft on various platforms for approximately 8 years.<br>I currently own and host a Minecraft server for my Discord Server, called MangoCraft.</p>
+                        </div>
+                        <div class="stuffcolumn">
+                            <h2>Undertale</h2>
+                            <img src="undertale.png">
+                            <p>As we all know, it's one of those games that if you play it, you'll remember it. I've logged plenty of time and made plenty of jokes about it.</p>
+                            <p class="spacer">&#10240</p>
+                            <h2>Various Art</h2>
+                            <img src="mangocrown.png">
+                            <p>I do some pixel art, photoshop and work with a 3d pen in my spare time, nothing too impressive.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="whatido">
-                <div class="spacer">
-                    <p>&#10240</p>
-                </div>
-                <h1>What I Do</h1>
-                <div class="stuffrow">
-                    <div class="stuffcolumn">
-                        <h2>Programming</h2>
-                        <img src="img/programming.png">
-                        <p>I mainly program in Python, HTML and CSS, however I have dabbled in other languages such as C#, Lua, C++, JavaScript, and R.<br>Check out the Projects page for more info.</p>
-                        <p class="spacer">&#10240</p>
-                        <h2>Modding</h2>
-                        <img src="img/badtime.png">
-                        <p>I like taking the games I love and making them... not quite the games you know.<br>Currently modding: Omori.</p>
+            <div id="mainsitelinktree" class="hidden">
+                <div class="linktreeinsite">
+                    <div class="linktreetop">In-Site Links</div>
+                    <div class="linktreediv">
+                        <div class="linktreedivtop">Cat Clicker v0.8.2</div>
+                        <div class="linktreedivbottom">My first full game, it is very similar to cookie clicker except the whole premise is around finding and collecting cute cats, with art designed by myself and a few friends.<br>Unfortunately, I lost motivation and it is left in-progress.</div>
+                        <a class="linktreedivlink" href="https://mangokitten.com/clicker">Link (mangokitten.com/clicker)</a>
                     </div>
-                    <div class="stuffcolumn">
-                        <h2>Omori</h2>
-                        <img src="img/omori.png">
-                        <p>One of my more recent obsessions, I simply love the game as a whole and it's art style.<br>(also its moddability is very nice, see below)</p>
-                        <p class="spacer">&#10240</p>
-                        <h2>Minecraft</h2>
-                        <img src="img/minecraft.png">
-                        <p>I've been playing Minecraft on various platforms for approximately 8 years.<br>I currently own and host a Minecraft server for my Discord Server, called MangoCraft.</p>
+                    <div class="linktreediv">
+                        <div class="linktreedivtop">Mangos Gacha Game v1.1</div>
+                        <div class="linktreedivbottom">Who doesnt love gambling! This is a very simple gacha game designed around getting references to my discord server (linked below), made to fulfill all your gambling needs without ever spending a single penny!</div>
+                        <a class="linktreedivlink" href="https://mangokitten.com/gacha">Link (mangokitten.com/gacha)</a>
                     </div>
-                    <div class="stuffcolumn">
-                        <h2>Undertale</h2>
-                        <img src="img/undertale.png">
-                        <p>As we all know, it's one of those games that if you play it, you'll remember it. I've logged plenty of time and made plenty of jokes about it.</p>
-                        <p class="spacer">&#10240</p>
-                        <h2>Various Art</h2>
-                        <img src="img/mangocrown.png">
-                        <p>I do some pixel art, photoshop and work with a 3d pen in my spare time, nothing too impressive.</p>
+                    <div class="linktreediv">
+                        <div class="linktreedivtop">Mangos Award Show 2023</div>
+                        <div class="linktreedivbottom">A yearly award show, where people in my discord server compete to get confusing and crazy awards!</div>
+                        <a class="linktreedivlink" href="https://mangokitten.com/mas2023">Link (mangokitten.com/mas2023)</a>
+                    </div>
+                    <div class="linktreediv">
+                        <div class="linktreedivtop">Fake Premium Page (2024 April Fools Joke)</div>
+                        <a class="linktreedivlink" href="https://mangokitten.com/premium">Link (mangokitten.com/premium)</a>
                     </div>
                 </div>
+
+                <div class="linktreeoffsite">
+                    <div class="linktreetop">Social Links</div>
+                    <div class="linktreediv">
+                        <div class="linktreedivtop">Twitch</div>
+                        <div class="linktreedivbottom">I stream here, occasionally, and would greatly appreciate any and all follows!</div>
+                        <a class="linktreedivlink" href="https://twitch.tv/mangokittengaming">Link (twitch.tv/mangokittengaming)</a>
+                    </div>
+                    <div class="linktreediv">
+                        <div class="linktreedivtop">Discord</div>
+                        <div class="linktreedivbottom">You can find and message me at @mangokitten, I am very active on Discord so expect a decently fast response.</div>
+                        <a class="linktreedivlink" href="https://discord.gg/fdYrQd7Hus">Server Link (discord.gg/fdYrQd7Hus)</a>
+                    </div>
+                    <div class="linktreediv">
+                        <div class="linktreedivtop">YouTube</div>
+                        <div class="linktreedivbottom">uploads coming soon(tm)</div>
+                        <a class="linktreedivlink" href="https://www.youtube.com/@mangokittengaming">Link (youtube.com/@mangokittengaming)</a>
+                    </div>
+                    <div class="linktreediv">
+                        <div class="linktreedivtop">Steam</div>
+                        <div class="linktreedivbottom">im a pro gaymer fr :3</div>
+                        <a class="linktreedivlink" href="https://steamcommunity.com/profiles/76561199415611477/">Link (steamcommunity.com/profiles/76561199415611477/)</a>
+                    </div>
+
+                </div>
+
+
             </div>
+
         </main>
-        <footer>
+
+        <!-- <footer>
             <a href="https://www.youtube.com/@mangokittengaming">YouTube</a>
             <a href="https://www.twitch.tv/mangokittengaming">Twitch</a>
             <a href="https://steamcommunity.com/profiles/76561199415611477/">Steam</a>
-        </footer>
+        </footer> -->
     </body>
 </html>
