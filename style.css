@@ -36,7 +36,7 @@ header {
     border: 3px;
     border-color: aqua;
     /* background-color: rgb(7, 0, 104); */
-    background-image: url("img/headspace.jpg");
+    background-image: url("headspace.jpg");
 }
 nav {
     text-align: center;
@@ -47,7 +47,7 @@ nav {
 
 
 .spacer{
-    font-size: 32px;
+    font-size: 50px;
 }
 
 
@@ -60,7 +60,9 @@ header a{
 .infobox {
     padding-left: 45%;
 }
-
+.basictext {
+    text-align: center;
+}
 .whatido{
     background-image: linear-gradient(rgb(78, 2, 66), rgb(155, 0, 160));
 }
@@ -76,11 +78,67 @@ header a{
 }
   
 .stuffcolumn {
-    flex: 20%;
+    flex: 33%;
 }
 .tinytext {
     font-size: 12px;
 }
+nav a {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 20px;
+
+}
+
+.mainsitepfpimg {
+    aspect-ratio: 1/1;
+    width: 28%;
+    height: auto;
+    position: absolute;
+    left: 5%;
+}
+.linktreediv {
+    width: 100%;
+    padding-bottom: 40px;
+}
+.linktreetop {
+    padding: 10px;
+    padding-top: 50px;
+    padding-left: 40px;
+    font-family: 'Playpen Sans', cursive;
+    color: rgb(255, 166, 0);
+    font-size: 32px;
+}
+.linktreedivtop {
+    padding: 10px;
+    padding-top: 50px;
+    padding-left: 60px;
+    font-family: 'Playpen Sans', cursive;
+    color: rgb(255, 166, 0);
+    font-size: 28px;
+}
+.linktreedivbottom {
+    padding: 10px;
+    padding-left: 70px;
+    font-family: 'Playpen Sans', cursive;
+    color: rgb(255, 166, 0);
+    font-size: 18px;
+}
+.linktreedivlink {
+    padding: 10px;
+    padding-left: 80px;
+    font-family: 'Playpen Sans', cursive;
+    color: rgb(255, 166, 0);
+    font-size: 18px;
+}
+.linktreeinsite {
+    background-image: linear-gradient(rgb(6, 20, 82), rgb(0, 12, 121));
+}
+.linktreeoffsite {
+    background-image: linear-gradient(rgb(78, 2, 66), rgb(155, 0, 160));
+}
+
+/* gacha stylings */
+
 .basictext {
     text-align: center;
 }
