@@ -36,7 +36,7 @@ header {
     border: 3px;
     border-color: aqua;
     /* background-color: rgb(7, 0, 104); */
-    background-image: url("headspace.jpg");
+    background-image: url("img/headspace.jpg");
 }
 nav {
     text-align: center;
