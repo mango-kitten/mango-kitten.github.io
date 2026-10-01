@@ -1,0 +1,133 @@
+body {
+    font-family: "Share Tech Mono", monospace;
+    /* background: repeating-linear-gradient(179deg, rgb(6, 21, 7), rgb(6, 21, 7) 50px, rgb(61, 125, 66) 50px, rgb(61, 125, 66) 54px); */
+    background-color: rgb(6, 21, 7);
+    /* background-size: 200%; */
+    color: rgb(22, 204, 22);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    animation: backdropCycle 4s linear infinite forwards;
+    font-size: 16px;
+    line-height: 1.4em;
+    /* filter: url(#fisheye-filter); */
+}
+input {
+    caret-shape: block;
+    background-color: transparent;
+    border: none;
+    color: rgb(22, 204, 22);
+    font-family: "Share Tech Mono", monospace;
+    font-size: 16px;
+}
+input:focus {
+    outline: none;
+}
+@keyframes backdropCycle {
+    from {
+        background-position: 0px 0px;
+    }
+    to {
+        background-position: 0px 54px;
+    }
+}
+a {
+    color: rgb(22, 204, 22);
+}
+a:hover {
+    background-color: rgb(206, 255, 206);
+}
+#terminal-input {
+    width: 95%;
+}
+#terminal-loady {
+    font-size: 16px;
+}
+.datablock-head {
+    font-size: 24px;
+}
+.datablock-top {
+    font-size: 19px;
+}
+.datablock-txt {
+    font-size: 16px;
+}
+.datablock-ts {
+    font-size: 12px;
+    color: rgb(70, 99, 70);
+}
+.colors-good {
+    color: rgb(22, 204, 22);
+}
+.colors-warn {
+    color: rgb(223, 223, 9);
+}
+.colors-issue {
+    color: rgb(200, 10, 10);
+}
+
+.activitysearch-head {
+    font-size: 24px;
+}
+.activitysearch-top {
+    font-size: 20px;
+}
+.activitysearch-mid {
+    font-size: 16px;
+}
+
+#sim-data-full {
+    height: calc(100vh - 28px);
+    width: calc(100vw - 28px);
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    padding: 15px;
+    overflow-y: auto;
+    scrollbar-color: rgb(22, 204, 22) transparent;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+
+.overlay {
+    background: repeating-linear-gradient(179deg, transparent, transparent 50px, rgba(61, 125, 66, 0.5) 50px, rgba(61, 125, 66, 0.5) 54px);
+    /* background-size: 200%; */
+    height: 200vh;
+    width: 200vw;
+    animation: backdropCycle 4s linear infinite forwards;
+    z-index: 999;
+    pointer-events: none;
+    position: absolute;
+    top: -50vh;
+    left: -50vw;
+    filter: url(#vertical-skew-filter);
+}
+
+
+#main-auth-container {
+    padding: 20px;
+}
+button {
+    padding: 2px 0px;
+    width: 25ex;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 16px;
+    background-color: transparent;
+    color: rgb(22, 204, 22);
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    text-align: left;
+}
+button:disabled {
+    color: rgb(149, 182, 149) !important;
+}
+button:not(:disabled):hover {
+    background-color: rgb(206, 255, 206);
+}
+.arrow-selected:not(:disabled) {
+    background-color: rgb(206, 255, 206);
+}
+.arrow-selected:disabled {
+    background-color: rgb(138, 152, 138);
+}

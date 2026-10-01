@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MangoKitten Auth</title>
+    <link rel="icon" href="../assets/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../client/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="main-auth-container" class="auth-container">
+        <span class="title">MangoKitten Dot Com Login</span>
+        <form id="auth-form">
+            <div class="input-group">
+                <label for="identity">Username</label>
+                <input class="disablable" type="text" name="identity" id="identity" placeholder=" " required />
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input class="disablable" type="password" name="password" id="password" placeholder=" " required />
+            </div>
+            <button class="disablable" type="submit" disabled>&gt; Login</button>
+        </form><br>
+        <button id="guestbutton">&gt; Continue as Guest</button>
+    </div>
+    <div class="overlay"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
