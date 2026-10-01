@@ -25,7 +25,7 @@ const escapeHTML = text => text.replace(/[&<>"]/g, c => ({
 }[c]));
 
 const formatMs = (ms) => {
-    if (ms < 1e3) return `A near-nonexistent amount of time`
+    if (ms < 1e3) return `${ms}ms`;
     const years = Math.floor(ms/31536000000)
     ms = ms % 31536000000
     const days = Math.floor(ms/864e5)
@@ -265,7 +265,7 @@ ${generalhelp_prealph.sort().join(" ")}
     {
         cmd: "logo",
         execute: async function (remainder) {
-            return {type: "img", data: "/assets/logo.ico", size: 24}
+            return {type: "img", data: "../assets/logo.ico", size: 24}
         },
         help: "Returns the website's .ico logo."
     },
@@ -280,9 +280,9 @@ Pronouns: she/her<br>
 Gender Orientation: Transgender female<br>
 Age: Undisclosed<br>
 Favorite Animal: Cat<br>
-Favorite Food: Chocolate<br>
+Favorite Food: Chocolate (pho for the candy-as-a-food haters)<br>
 Favorite Game: Zenless Zone Zero<br>
-Favorite Content Creators: hermestheflyingpug, sunflowersmith, shenpai<br>
+Favorite Content Creators: josh_lain, hermestheflyingpug, sunflowersmith, shenpai<br>
 Hobbies: Game development, game playing, game streaming<br>
 Do Not Interact List: Transphobes/homophobes, NSFW, LLM users<br>
 Claim To Fame: abstractors.mangokitten.com, ttv/mangokittengaming<br>
@@ -292,21 +292,25 @@ Claim To Fame: abstractors.mangokitten.com, ttv/mangokittengaming<br>
             }
             
         },
-        help: "Gives a short bio of the current system operator. Supply with 'status' to recieve a live status."
+        help: "Gives a short bio of the current system operator."
     },
     {
         cmd: "sound",
         execute: async function (remainder) {
             if (!remainder[0]) return "Please supply a sound to play.";
-            new Audio(remainder[0]).play()
+            if (remainder[0].startsWith("/")) {
+                new Audio(".."+remainder[0]).play()
+            } else {
+                new Audio(remainder[0]).play()
+            }
             return "Playing sound..."
         },
-        help: "Plays a sound from the given url. Must be a direct link to the sound, or '/assets/audio/alarm.mp3', '/assets/audio/meow.mp3', or '/assets/audio/buzzer.mp3'"
+        help: "Plays a sound from the given url. Must be a direct link to the sound, or '/assets/audio/meow.mp3'"
     },
     {
         cmd: "meow",
         execute: async function (remainder) {
-            new Audio('/assets/audio/meow.mp3').play()
+            new Audio('../assets/audio/meow.mp3').play()
             return `<pre style="line-height: 1em;">
  _._     _,-'""\`-._
 (,-.\`._,'(       |\\\`-/|

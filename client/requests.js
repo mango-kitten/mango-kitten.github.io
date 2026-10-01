@@ -16,6 +16,10 @@ const reqUptime = async () => {
     }
 }
 
+const reqMangoStatus = async () => {
+    return "Instance is currently in offline mode."
+}
+
 const logOut = async () => {
     location.href = '/auth';
 }

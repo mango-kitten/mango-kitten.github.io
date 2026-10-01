@@ -4,7 +4,9 @@ document.addEventListener("click", e => {
 }, true)
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById("identity").focus()
+  setTimeout(() => {
+    document.getElementById("identity").focus()
+  }, 500)
   elsAvail.push(document.getElementById("auth-form").getElementsByTagName("button")[0])
   elsAvail.push(document.getElementById("guestbutton"))
   elSelected = document.getElementById("auth-form").getElementsByTagName("button")[0];
