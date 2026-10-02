@@ -10,7 +10,6 @@ body {
     animation: backdropCycle 4s linear infinite forwards;
     font-size: 16px;
     line-height: 1.4em;
-    /* filter: url(#fisheye-filter); */
 }
 input {
     caret-shape: block;
@@ -29,6 +28,23 @@ input:focus {
     }
     to {
         background-position: 0px 54px;
+    }
+}
+@keyframes staticMove {
+    0% {
+        background-position: -50px 12px;
+    }
+    25% {
+        background-position: 37px -54px;
+    }
+    50% {
+        background-position: 352px 59px;
+    }
+    75% {
+        background-position: -132px -35px;
+    }
+    100% {
+        background-position: 93px -63px;
     }
 }
 a {
@@ -102,14 +118,26 @@ a:hover {
     left: -50vw;
 }
 .computer-overlay {
+    animation: staticMove 0.1s linear infinite alternate;
+    --dist: 0.0006px;
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    width: 200vw;
+    height: 200vh;
     z-index: 1000;
     pointer-events: none;
-    top: 0;
-    left: 0;
-    backdrop-filter: url(#vertical-skew-filter);
+    top: -50vh;
+    left: -50vw;
+    /* backdrop-filter: url(#vertical-skew-filter); */
+    background-image: repeating-radial-gradient(
+        #888888,
+        var(--dist),
+        #888888,
+        0,
+        #88888800,
+        calc(var(--dist) * 5),
+        #88888800 0
+    );
+    opacity: 0.2;
 }
 
 #main-auth-container {
