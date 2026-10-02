@@ -15,11 +15,27 @@
         <script src="preload.js"></script>
         <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
         <script src="init.js"></script>
+
+        <svg id="svg-nonsense" x="0" y="0" viewBox="10 10 50 50" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="vertical-skew-filter" filterUnits="objectBoundingBox">
+                    <feImage href="data:image/png;base64,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" result="dispMapPre" />
+                    <feGaussianBlur in="dispMapPre" stdDeviation="3" result="dispMap" />
+                    <feDisplacementMap
+                        in="SourceGraphic"
+                        in2="dispMap"
+                        scale="10"
+                        xChannelSelector="B"
+                        yChannelSelector="R" />
+                </filter>
+            </defs>
+        </svg>
         <div id="sim-data-full">
             <div id="sim-data-block"></div>
             <span>&gt; </span><span id="terminal-loady"></span><input id="terminal-input" type="text" placeholder=" " autocomplete="off" maxlength="500"> </input>
         </div>
         <div class="overlay"></div>
+        <div class="computer-overlay"></div>
         <script src="requests.js"></script>
         <script src="render.js"></script>
     </body>

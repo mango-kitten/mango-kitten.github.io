@@ -1,10 +1,30 @@
 const initializationts = Date.now()
+const setCookie = (name, value, days = 365) => {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=None; Secure`;
+};
+
+let dyslexiaMode = "noneRestriction";
+const updateDyslexiaMode = () => {
+    if (dyslexiaMode === "fullRestriction") {
+        getClassEl("overlay").classList.add("hidden")
+        getClassEl("computer-overlay").classList.add("hidden")
+    } else if (dyslexiaMode === "baseRestriction") {
+        getClassEl("overlay").classList.remove("hidden")
+        getClassEl("computer-overlay").classList.add("hidden")
+    } else {
+        getClassEl("overlay").classList.remove("hidden")
+        getClassEl("computer-overlay").classList.remove("hidden")
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-    const token = document.cookie.split('; ').reduce((acc, cur) => {
+    dyslexiaMode = document.cookie.split('; ').reduce((acc, cur) => {
         const [key, val] = cur.split('=');
-        return key === "token" ? decodeURIComponent(val) : acc;
+        return key === "dyslexiaMode" ? decodeURIComponent(val) : acc;
     }, '')
+    if (dyslexiaMode === "" || dyslexiaMode === undefined || dyslexiaMode === null) dyslexiaMode = "noneRestriction";
+    updateDyslexiaMode()
 
     document.body.addEventListener("keydown", function (evt) {
         if (evt.keyCode === 17 || evt.keyCode === 91) {
@@ -41,10 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(function () {
         renderLine({ts: Date.now(), txt: `&gt; explorer https://mangokitten.com`})
     }, 250)
-    // renderLine({ts: Date.now(), txt: `&gt; explorer "https://mangokitten.com"`})
     setTimeout(function () {
         renderLine({ts: Date.now(), txt: `&gt; data`})
-        reqData()
+        renderLine({ts: Date.now(), txt: "Data not found: in offline mode"})
+        // reqData()
     }, 500)
     // renderLine({ts: Date.now(), txt: `&gt; search`})
     // renderLine({ts: Date.now(), txt: ``})

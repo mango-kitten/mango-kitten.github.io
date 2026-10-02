@@ -5,6 +5,7 @@ let terminalHistoryHolder = ""
 
 
 const getEl = (id) => document.getElementById(id);
+const getClassEl = (classname) => document.getElementsByClassName(classname)[0];
 const sleep = (ms) => new Promise(resolve => {
     let listenController = new AbortController()
     const sleepTimeout = setTimeout(function () {
@@ -84,6 +85,7 @@ const linkClickRender = (link) => {
 }
 
 const adjustHistoryCheck = (dir) => {
+    if (terminalHistory.length == 0) return getEl("terminal-input").value = terminalHistoryHolder;
     terminalHistoryAt += dir
     if (terminalHistoryAt > 0) {
         terminalHistoryAt = 0
@@ -139,7 +141,9 @@ const generalhelp_prealph = [
     `exit, logout - Logs out of the system and returns to the Auth page.<br>`,
     `data - Fetches data about current logged in user.<br>`,
     `links [page] - Gives a list of the operator's various links.<br>`,
-    `kofi - Gives a list of the operator's kofi supporters.<br>`
+    `kofi - Gives a list of the operator's kofi supporters.<br>`,
+    `echo - Repeats the phrase that follows.<br>`,
+    `dyslexia [mode] - Sets the dyslexia mode, to make reading text easier.<br>`
 ]
 const operhelp_prealph = [
     `&& - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
@@ -197,9 +201,7 @@ const consolecmds = [
         execute: function (remainder) {
             if (remainder[0]) {
                 if (remainder[0] === "oper") {
-                    return `Operator HELP<br>
-${operhelp_prealph.sort().join(" ")}
-`
+                    return `Operator HELP<br>${operhelp_prealph.sort().join(" ")}`
                 }
                 const matchingcmd = consolecmds.find(c => c.cmd === remainder[0].toLowerCase())
                 if (matchingcmd) {
@@ -282,17 +284,43 @@ Age: Undisclosed<br>
 Favorite Animal: Cat<br>
 Favorite Food: Chocolate (pho for the candy-as-a-food haters)<br>
 Favorite Game: Zenless Zone Zero<br>
-Favorite Content Creators: josh_lain, hermestheflyingpug, sunflowersmith, shenpai<br>
+Favorite Content Creators: josh_lain, hermestheflyingpug, sunflowersmith<br>
 Hobbies: Game development, game playing, game streaming<br>
-Do Not Interact List: Transphobes/homophobes, NSFW, LLM users<br>
+Do Not Interact List: Transphobes/homophobes/racists/etc, NSFW, LLM users<br>
 Claim To Fame: abstractors.mangokitten.com, ttv/mangokittengaming<br>
 `
             } else {
-                if (remainder[0] === "status") return (await reqMangoStatus());
+                switch (remainder[0]) {
+                    case "status":
+                        return (await reqMangoStatus())
+                    case "name":
+                        return "MangoKitten is her online name, it has no relation to her irl name (which is not disclosed). She is a big fan of cats, given the second portion. You can just call her Mango if you don't want to type the full username."
+                    case "gender":
+                        return "MangoKitten exclusively identifies as female. Please avoid referring to her with gender neutral pronouns."
+                    case "age":
+                        return "MangoKitten's age will not be disclosed online for the sake of keeping her privacy."
+                    case "faves":
+                        return "MangoKitten quite likes cats, greatly preferring them as a pet.<br>Chocolate is an amazing food, and cannot be denied, although she also enjoys various food from around the world, especially Pho and Ethiopian.<br>Zenless Zone Zero has been her fixation for a very long time, with somewhere near 700 login days as of writing this.<br>Run 'bio favecc' to learn about the content creators."
+                    case "favecc":
+                        renderLink({ts: Date.now(), txt: "Josh Lain is an FPS streamer, doing streams to record games like Overwatch and Escape from Tarkov.", ltxt: "Josh_Lain's YouTube channel", link: "https://www.youtube.com/@JoshLain"})
+                        renderLink({ts: Date.now(), txt: "Hermestheflyingpug is a TetrIO streamer, who also streams games that follow similar mechanics, like Lumines Arise.", ltxt: "Hermes' Twitch channel", link: "https://www.twitch.tv/hermestheflyingpug"})
+                        renderLink({ts: Date.now(), txt: "SunflowerSmith is a variety streamer, who is an angel VTuber.", ltxt: "SunflowerSmith's Twitch channel", link: "https://www.twitch.tv/sunflowersmith"})
+                        return "Finished logging."
+                    case "hobby":
+                        return "MangoKitten greatly enjoys anything to do with computers, and creating things is her passion."
+                    case "dni":
+                        return "MangoKitten's DNI list is very simple, and mainly surrounds bigots."
+                    case "fame":
+                        renderLink({ts: Date.now(), txt: "MangoKitten has created several games, the most popular of which is Abstractors. Go play it now via web!", ltxt: "Open Abstractors in Explorer", link: "https://abstractors.mangokitten.com/chat/"})                        
+                        renderLink({ts: Date.now(), txt: "MangoKitten streams occasionally, creating general content on a variety of games. She is not very good at any of these games.", ltxt: "Open Twitch in Explorer", link: "https://twitch.tv/mangokittengaming"})      
+                        return "Finished logging."                  
+                    default:
+                        return "Error with argument 'part'."
+                }
             }
             
         },
-        help: "Gives a short bio of the current system operator."
+        help: "Gives a short bio of the current system operator. Supply with 'name', 'gender', 'age', 'faves', 'favecc', 'hobby', 'dni', or 'fame' for more detailed information."
     },
     {
         cmd: "sound",
@@ -364,12 +392,39 @@ Claim To Fame: abstractors.mangokitten.com, ttv/mangokittengaming<br>
         cmd: "kofi",
         execute: async function (remainder) {
             return `
-Tuxedo Cats - aleicht, uselessentity
-Angel Cats -
-Kittens - Yellosuu
+Tuxedo Cats - aleicht, uselessentity<br>
+Angel Cats -<br>
+Kittens - Yellosuu<br>
 One Time - saderen, muninn`
         },
         help: "Gives a list of Mangos kofi supporters."
+    },
+    {
+        cmd: "echo",
+        execute: async function (remainder) {
+            return remainder.join(" ")
+        },
+        help: "Echoes the next argument supplied, logging it to this console."
+    },
+    {
+        cmd: "dyslexia",
+        execute: async function (remainder) {
+            if (remainder[0] === "off") {
+                setCookie("dyslexiaMode", "noneRestriction")
+                dyslexiaMode = "noneRestriction"
+            } else if (remainder[0] === "light") {
+                setCookie("dyslexiaMode", "baseRestriction")
+                dyslexiaMode = "baseRestriction"
+            } else if (remainder[0] === "heavy") {
+                setCookie("dyslexiaMode", "fullRestriction")
+                dyslexiaMode = "fullRestriction"
+            } else {
+                return "Error with argument 'mode'."
+            }
+            updateDyslexiaMode()
+            return "Updated dyslexia mode."
+        },
+        help: "Sets the dyslexia mode, disabling a lot of animations. Supply with 'off' to disable, 'light' to remove some animations, and 'heavy' to remove all animations."
     }
 ]
 

@@ -100,9 +100,17 @@ a:hover {
     position: absolute;
     top: -50vh;
     left: -50vw;
-    filter: url(#vertical-skew-filter);
 }
-
+.computer-overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    backdrop-filter: url(#vertical-skew-filter);
+}
 
 #main-auth-container {
     padding: 20px;
@@ -130,4 +138,11 @@ button:not(:disabled):hover {
 }
 .arrow-selected:disabled {
     background-color: rgb(138, 152, 138);
+}
+
+.hidden {
+    display: none;
+    width: 0;
+    height: 0;
+    backdrop-filter: none !important;
 }
