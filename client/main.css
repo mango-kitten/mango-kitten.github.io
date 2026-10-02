@@ -119,7 +119,7 @@ a:hover {
 }
 .computer-overlay {
     animation: staticMove 0.1s linear infinite alternate;
-    --dist: 0.0006px;
+    --dist: 0.0001px;
     position: absolute;
     width: 200vw;
     height: 200vh;

@@ -17,6 +17,19 @@ const updateDyslexiaMode = () => {
         getClassEl("computer-overlay").classList.remove("hidden")
     }
 }
+let graphicsMode = "default";
+const updateGraphicsMode = () => {
+    if (graphicsMode === "default") {
+        getClassEl("computer-overlay").style.backgroundImage = "repeating-radial-gradient(#888888,var(--dist),#888888,0,#88888800,calc(var(--dist) * 5),#88888800 0)"
+        getClassEl("computer-overlay").style.animation = "none"
+    } else if (graphicsMode === "low") {
+        getClassEl("computer-overlay").style.backgroundImage = "none"
+        getClassEl("computer-overlay").style.animation = "none"   
+    } else {
+        getClassEl("computer-overlay").style.backgroundImage = "repeating-radial-gradient(#888888,var(--dist),#888888,0,#88888800,calc(var(--dist) * 5),#88888800 0)"
+        getClassEl("computer-overlay").style.animation = "staticMove 0.1s linear infinite alternate"
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     dyslexiaMode = document.cookie.split('; ').reduce((acc, cur) => {
@@ -25,6 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }, '')
     if (dyslexiaMode === "" || dyslexiaMode === undefined || dyslexiaMode === null) dyslexiaMode = "noneRestriction";
     updateDyslexiaMode()
+    graphicsMode = document.cookie.split('; ').reduce((acc, cur) => {
+        const [key, val] = cur.split('=');
+        return key === "graphicsMode" ? decodeURIComponent(val) : acc;
+    }, '')
+    if (graphicsMode === "" || graphicsMode === undefined || graphicsMode === null) graphicsMode = "default";
+    updateGraphicsMode()
 
     document.body.addEventListener("keydown", function (evt) {
         if (evt.keyCode === 17 || evt.keyCode === 91) {

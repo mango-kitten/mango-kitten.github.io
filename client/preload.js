@@ -425,6 +425,26 @@ One Time - saderen, muninn`
             return "Updated dyslexia mode."
         },
         help: "Sets the dyslexia mode, disabling a lot of animations. Supply with 'off' to disable, 'light' to remove some animations, and 'heavy' to remove all animations."
+    },
+    {
+        cmd: "graphics",
+        execute: async function (remainder) {
+            if (remainder[0] === "default") {
+                setCookie("graphicsMode", "default")
+                graphicsMode = "default"
+            } else if (remainder[0] === "low") {
+                setCookie("graphicsMode", "low")
+                graphicsMode = "low"
+            } else if (remainder[0] === "high") {
+                setCookie("graphicsMode", "high")
+                graphicsMode = "high"
+            } else {
+                return "Error with argument 'mode'."
+            }
+            updateGraphicsMode()
+            return "Updated graphics mode."
+        },
+        help: "Adjusts the graphics level, determining how much happens on the page. 'default' is the normal setting, 'low' removes almost all animation, 'high' ."
     }
 ]
 
