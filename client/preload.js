@@ -143,7 +143,8 @@ const generalhelp_prealph = [
     `links [page] - Gives a list of the operator's various links.<br>`,
     `kofi - Gives a list of the operator's kofi supporters.<br>`,
     `echo - Repeats the phrase that follows.<br>`,
-    `dyslexia [mode] - Sets the dyslexia mode, to make reading text easier.<br>`
+    `dyslexia [mode] - Sets the dyslexia mode, to make reading text easier.<br>`,
+    `stats - Toggles the Stats for Nerds popup, giving technical details about the site.<br>`
 ]
 const operhelp_prealph = [
     `&& - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
@@ -445,6 +446,13 @@ One Time - saderen, muninn`
             return "Updated graphics mode."
         },
         help: "Adjusts the graphics level, determining how much happens on the page. 'default' is the normal setting, 'low' removes almost all animation, 'high' ."
+    },
+    {
+        cmd: "stats",
+        execute: async function (remainder) {
+            return getEl("stats-holder").classList.toggle("hidden") === true ? "Hiding Stats for Nerds" : "Showing Stats for Nerds";
+        },
+        help: "Toggles the visibility of the Stats for Nerds popup."
     }
 ]
 
@@ -467,7 +475,10 @@ const consoleEvent = async (value) => {
                 if (using.length === 0) break;
                 let matchingcmd2 = consolecmds.find(c => c.cmd === using[0].toLowerCase())
                 if (matchingcmd2) {
+                    const initTimeAt = Date.now()
                     const cmdresult = await matchingcmd2.execute(using.slice(1))
+                    responseTimes.push(Date.now() - initTimeAt)
+                    if (responseTimes.length > responseHeldDuration) responseTimes.shift();
                     if (cmdresult !== false) {
                         if (typeof cmdresult === "object") {
                             if (cmdresult.type === "img") {
@@ -491,7 +502,10 @@ const consoleEvent = async (value) => {
             }
         } else {
             cmdsplit.splice(0, 1)
+            const initTimeAt = Date.now()
             const cmdresult = await matchingcmd.execute(cmdsplit)
+            responseTimes.push(Date.now() - initTimeAt)
+            if (responseTimes.length > responseHeldDuration) responseTimes.shift();
             if (cmdresult !== false) {
                 if (typeof cmdresult === "object") {
                     if (cmdresult.type === "img") {

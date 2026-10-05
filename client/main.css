@@ -119,7 +119,7 @@ a:hover {
 }
 .computer-overlay {
     animation: staticMove 0.1s linear infinite alternate;
-    --dist: 0.0001px;
+    --dist: 0.0003px;
     position: absolute;
     width: 200vw;
     height: 200vh;
@@ -173,4 +173,11 @@ button:not(:disabled):hover {
     width: 0;
     height: 0;
     backdrop-filter: none !important;
+}
+
+#stats-holder {
+    position: absolute;
+    text-align: right;
+    top: 15px;
+    right: 15px;
 }

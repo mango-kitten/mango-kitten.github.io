@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     getEl("terminal-input").addEventListener("keydown", function (event) {
-        if (event.code === "Enter") {
+        if (event.code === "Enter" || event.keyCode === 13) {
             scrollToBottom()
             terminalHistory.push(event.target.value)
             consoleEvent(event.target.value)
@@ -85,6 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
         renderLine({ts: Date.now(), txt: "Data not found: in offline mode"})
         // reqData()
     }, 500)
+    setTimeout(function () {
+        if (navigator.maxTouchPoints > 1 && window.innerHeight > window.innerWidth) {
+            renderLine({ts: Date.now(), txt: "Using a mobile device is not recommended! For the best experience, please use a computer."})
+        }
+    }, 750)
+    
     // renderLine({ts: Date.now(), txt: `&gt; search`})
     // renderLine({ts: Date.now(), txt: ``})
     setTimeout(function () {
