@@ -56,6 +56,7 @@ const renderLine = ({ts, txt}) => {
     const newEl = document.createElement("div")
     newEl.innerHTML = `<span class="datablock-txt">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
+    scrollToBottom()
 }
 const renderHead = ({ts, txt}) => {
     const dateobj = new Date(ts)
@@ -139,12 +140,12 @@ const generalhelp_prealph = [
     `bio [part] - Provides a short description of the lead operator.<br>`,
     `meow - Prints a kitty to the console.<br>`,
     `exit, logout - Logs out of the system and returns to the Auth page.<br>`,
-    `data - Fetches data about current logged in user.<br>`,
     `links [page] - Gives a list of the operator's various links.<br>`,
     `kofi - Gives a list of the operator's kofi supporters.<br>`,
     `echo - Repeats the phrase that follows.<br>`,
     `dyslexia [mode] - Sets the dyslexia mode, to make reading text easier.<br>`,
-    `stats - Toggles the Stats for Nerds popup, giving technical details about the site.<br>`
+    `stats - Toggles the Stats for Nerds popup, giving technical details about the site.<br>`,
+    `user - Shows a little bit about you, the user. Yes, I mean you.<br>`
 ]
 const operhelp_prealph = [
     `&& - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
@@ -453,6 +454,75 @@ One Time - saderen, muninn`
             return getEl("stats-holder").classList.toggle("hidden") === true ? "Hiding Stats for Nerds" : "Showing Stats for Nerds";
         },
         help: "Toggles the visibility of the Stats for Nerds popup."
+    },
+    {
+        cmd: "user",
+        execute: async function (remainder) {
+            renderLine({ts: Date.now(), txt: "you really thought that the computer would not know who you were? please. let me show you."})
+            await sleep(1500)
+            const c0 = navigator.userAgentData
+            const c05 = navigator.userAgent
+            c0 ? renderLine({ts: Date.now(), txt: c0.platform === "Windows" ? `a windows user, eh? good ol reliable, even if it has way too much bloatware. at least it can run any game you want.` 
+                : c0.platform === "Linux" ? `maybe you are more techy? linux is a good choice as long as you dont want to play any games ever.` 
+                : c0.platform === "Android" ? `oh, an android phone user! those are few and far between, mangos android phone badly needs to be replaced.`
+                : c0.platform === "iOS" ? `an apple phone i see, i hope that storage and camera make up for the steep price you paid. those things are expensive.`
+                : c0.platform === "Mac OS" ? `i see macos on like every work laptop for some reason. i hope you dont get in trouble for visiting random website at work, and dont boot up abstractors.`
+                : c0.platform === "CrOS" ? `a schoolkid on their chromebook i see? you better get off that abstractors right now.`
+                : "your browser wont tell me what your operating system is, or i dont recognize it... oh well, ill figure it out eventually."})
+                : c05 ? renderLine({ts: Date.now(), txt: ``})
+                : renderLine({ts: Date.now(), txt: `your browser will not tell me anything about itself. isnt that just sad.`});
+            await sleep(1200)
+            const c1 = navigator.language.startsWith("en")
+            const c2 = navigator.languages.length
+            renderLine({ts: Date.now(), txt: 
+                c1 && c2 > 2 ? `not only do you speak english, but you also speak some other languages! isnt that cool.` : 
+                c1 ? "your browser tells me you only speak english, tu dit petit quand de lang or something like that." : 
+                "wait... if you dont speak any english, how are you reading this site?"});
+            await sleep(1200)
+            renderLineBreak()
+            renderLine({ts: Date.now(), txt: 
+                navigator.hardwareConcurrency <= 6 ? `a mere ${navigator.hardwareConcurrency} cores would not be enough for most, but you make do.` : 
+                navigator.hardwareConcurrency <= 10 ? `a respectable ${navigator.hardwareConcurrency} cores is plenty for you to work with, you should be able to run plenty of essential processes.` : 
+                `${navigator.hardwareConcurrency} cores is a lot of cores. holy moly.`});
+            navigator.deviceMemory ? renderLine({ts: Date.now(), txt: 
+                navigator.deviceMemory <= 4 ? `a mere ${navigator.deviceMemory} gigs of memory is not much, but i hope it is working for you. i wish an upgrade upon you soon.` 
+                : navigator.deviceMemory <= 8 ? `you have a decent ${navigator.deviceMemory} gigs of memory. i promise you, that amount of memory is usable but there are some games you can only wish to play.` 
+                : navigator.deviceMemory <= 16 ? `you have a wonderful ${navigator.deviceMemory} gigs of memory. that's pretty close to what mango has, and she can run anything on that beast of a laptop.` 
+                : navigator.deviceMemory <= 32 ? `${navigator.deviceMemory} gigs of memory?! thats a pretty good amount! can i have some?` 
+                : `please speed, share some of your ${navigator.deviceMemory} gigs of memory. im kinda homeless.`})
+                : renderLine({ts: Date.now(), txt: "i am unable to see your device memory, you must be on firefox or an outdated browser."});
+            let sum = 0
+            frameTimes.forEach((frame, index) => sum += frame);
+            sum > 0 ? renderLine({ts: Date.now(), txt: `all that tech is making you run at ${Math.round(1000 / (sum / frameTimes.length)) || 0} fps. please do tell me about the experience.`}) : renderLine({ts: Date.now(), txt: "something went wrong with that framerate..."});
+            await sleep(1500)
+            renderLineBreak()
+            const c3 = await navigator.getBattery()
+            c3 ? renderLine({ts: Date.now(), txt: c3.charging ? 
+                (
+                    c3.level < 0.2 ? `you barely saved your computer from the brink of death, charging it at a low low ${Math.round(c3.level * 100)}%! good for you~` : 
+                    c3.level < 0.5 ? `you are at a solid ${Math.round(c3.level * 100)}% charge and on your way up. dont unplug your device too soon.` :
+                    c3.level < 0.9 ? `you have a good ${Math.round(c3.level * 100)}% charge left on your device, and are potentially planning on getting it to a full charge.` :
+                    `dont hog that outlet, with your device at ${Math.round(c3.level * 100)}%. please dont forget to unplug your device!`
+                ) : 
+                (
+                    c3.level < 0.2 ? `woah buddy, please plug in your device as it is at ${Math.round(c3.level * 100)}%! dont let her die on you like this!` : 
+                    c3.level < 0.5 ? `starting to get low on that charge, i see. plug it in before that ${Math.round(c3.level * 100)}% drops to 0%!` :
+                    c3.level < 0.9 ? `i really hope you arent going to let your device run down too low, it quite likes being around ${Math.round(c3.level * 100)}% charge.` :
+                    `oooooooh you just fully charged your device, and are still at a nice ${Math.round(c3.level * 100)}%...... i appreciate the hustle quite greatly.`
+                )})
+                : renderLine({ts: Date.now(), txt: "you are using a browser that does not allow me to see your battery. how sad."});
+            await sleep(1500)
+            renderLineBreak()
+            navigator.doNotTrack ? renderLine({ts: Date.now(), txt: navigator.doNotTrack == "1" ? "your browser told me not to track you, and trust me, i am listening. i am not saving your data on this website, its simply for fun." 
+                : "oh. you like being tracked? thats so... fascinating. maybe its a new browser! who am i to judge. anyways, that stuff really doesnt matter all too much, as you might be able to tell."})
+                : renderLine({ts: Date.now(), txt: "hmmmmm you might be a safari user, or you might be on an older browser. regardless, i can not see whether you want to be tracked."});
+            await sleep(1200)
+            renderLineBreak()
+            renderLink({ts: Date.now(), txt: "this little bit was inspired by yhvr. go check him out.", ltxt: "yhvr's personal page", link: "https://yhvr.me/"})
+            renderLineBreak()
+            return "and there you have it. a little bit about you, in a site about me. arent i so kind."
+        },
+        help: "Shows a little bit about you, the user."
     }
 ]
 

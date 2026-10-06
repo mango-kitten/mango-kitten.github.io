@@ -7,7 +7,7 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    animation: backdropCycle 4s linear infinite forwards;
+    /* animation: backdropCycle 4s linear infinite forwards; */
     font-size: 16px;
     line-height: 1.4em;
 }
@@ -24,27 +24,34 @@ input:focus {
 }
 @keyframes backdropCycle {
     from {
-        background-position: 0px 0px;
+        transform: translateX(0px) translateY(0px);
+        /* background-position: 0px 0px; */
     }
     to {
-        background-position: 0px 54px;
+        transform: translateX(0px) translateY(54px);
+        /* background-position: 0px 54px; */
     }
 }
 @keyframes staticMove {
     0% {
-        background-position: -50px 12px;
+        transform: translateX(-50px) translateY(12px);
+        /* background-position: -50px 12px; */
     }
     25% {
-        background-position: 37px -54px;
+        transform: translateX(37px) translateY(-54px);
+        /* background-position: 37px -54px; */
     }
     50% {
-        background-position: 352px 59px;
+        transform: translateX(352px) translateY(59px);
+        /* background-position: 352px 59px; */
     }
     75% {
-        background-position: -132px -35px;
+        transform: translateX(-132px) translateY(-35px);
+        /* background-position: -132px -35px; */
     }
     100% {
-        background-position: 93px -63px;
+        transform: translateX(93px) translateY(-63px);
+        /* background-position: 93px -63px; */
     }
 }
 a {
@@ -95,7 +102,7 @@ a:hover {
 #sim-data-full {
     height: calc(100vh - 28px);
     width: calc(100vw - 28px);
-    position: fixed;
+    position: absolute;
     top: 0px;
     right: 0px;
     padding: 15px;
