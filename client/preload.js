@@ -148,8 +148,8 @@ const generalhelp_prealph = [
     `user - Shows a little bit about you, the user. Yes, I mean you.<br>`
 ]
 const operhelp_prealph = [
-    `&& - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
-    `<< [repeats] - Returns to the start of the previous chain, repeating a specified amount of times.<br>`,
+    `&amp;&amp; - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
+    `&gt;&gt; [repeats] - Returns to the start of the previous chain, repeating a specified amount of times.<br>`,
     ``,
     ``,
     ``,
