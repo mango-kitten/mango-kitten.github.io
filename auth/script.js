@@ -1,6 +1,8 @@
 document.addEventListener("click", e => {
-  e.stopPropagation();
-  e.preventDefault();
+  if (e.target !== getEl("guestbutton")) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
 }, true)
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,7 +43,7 @@ document.addEventListener("keydown", (e) => {
     elSelected = elsAvail[selectnum];
     elSelected.classList.add("arrow-selected");
   }
-  if (e.key === "Enter") {
+  if (e.key === "Enter" || e.keyCode === 13) {
     if (elSelected == document.getElementById("guestbutton")) guestButtonClickE();
   }
 })

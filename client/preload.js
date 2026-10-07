@@ -149,7 +149,7 @@ const generalhelp_prealph = [
 ]
 const operhelp_prealph = [
     `&& - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
-    ``,
+    `<< [repeats] - Returns to the start of the previous chain, repeating a specified amount of times.<br>`,
     ``,
     ``,
     ``,
@@ -461,7 +461,7 @@ One Time - saderen, muninn`
             renderLine({ts: Date.now(), txt: "you really thought that the computer would not know who you were? please. let me show you."})
             await sleep(1500)
             const c0 = navigator.userAgentData
-            const c05 = navigator.userAgent
+            const c05 = navigator.userAgent.toLowerCase()
             c0 ? renderLine({ts: Date.now(), txt: c0.platform === "Windows" ? `a windows user, eh? good ol reliable, even if it has way too much bloatware. at least it can run any game you want.` 
                 : c0.platform === "Linux" ? `maybe you are more techy? linux is a good choice as long as you dont want to play any games ever.` 
                 : c0.platform === "Android" ? `oh, an android phone user! those are few and far between, mangos android phone badly needs to be replaced.`
@@ -469,7 +469,13 @@ One Time - saderen, muninn`
                 : c0.platform === "Mac OS" ? `i see macos on like every work laptop for some reason. i hope you dont get in trouble for visiting random website at work, and dont boot up abstractors.`
                 : c0.platform === "CrOS" ? `a schoolkid on their chromebook i see? you better get off that abstractors right now.`
                 : "your browser wont tell me what your operating system is, or i dont recognize it... oh well, ill figure it out eventually."})
-                : c05 ? renderLine({ts: Date.now(), txt: ``})
+                : c05 ? renderLine({ts: Date.now(), txt: c05.includes("windows") ? `a windows user, eh? good ol reliable, even if it has way too much bloatware. at least it can run any game you want.`
+                    : c05.includes("linux") ? `maybe you are more techy? linux is a good choice as long as you dont want to play any games ever.`
+                    : c05.includes("android") ? `oh, an android phone user! those are few and far between, mangos android phone badly needs to be replaced.` 
+                    : c05.includes("ios") ? `an apple phone i see, i hope that storage and camera make up for the steep price you paid. those things are expensive.`
+                    : c05.includes("mac os") ? `i see macos on like every work laptop for some reason. i hope you dont get in trouble for visiting random website at work, and dont boot up abstractors.`
+                    : c05.includes("cros") ? `a schoolkid on their chromebook i see? you better get off that abstractors right now.`
+                    : "your browser wont tell me what your operating system is, or i dont recognize it... oh well, ill figure it out eventually."})
                 : renderLine({ts: Date.now(), txt: `your browser will not tell me anything about itself. isnt that just sad.`});
             await sleep(1200)
             const c1 = navigator.language.startsWith("en")
@@ -530,6 +536,58 @@ One Time - saderen, muninn`
 ]
 
 
+const runThroughLogic = async (fullsplit) => {
+    console.log(fullsplit)
+    if (fullsplit.includes("&&")) {
+        while (fullsplit.includes("&&")) {
+            if (fullsplit[0] === "&&") fullsplit.splice(0, 1);
+            const using = fullsplit.splice(0, (fullsplit.indexOf("&&") === -1 ? 999 : fullsplit.indexOf("&&")))
+            if (using.length === 0) break;
+            let matchingcmd2 = consolecmds.find(c => c.cmd === using[0].toLowerCase())
+            if (matchingcmd2) {
+                const initTimeAt = Date.now()
+                const cmdresult = await matchingcmd2.execute(using.slice(1))
+                responseTimes.push(Date.now() - initTimeAt)
+                if (responseTimes.length > responseHeldDuration) responseTimes.shift();
+                if (cmdresult !== false) {
+                    if (typeof cmdresult === "object") {
+                        if (cmdresult.type === "img") {
+                            renderImageLine({ts: Date.now(), url: cmdresult.data, size: cmdresult.size})
+                        }
+                    } else {
+                        renderLine({ts: Date.now(), txt: cmdresult})
+                    }
+                    scrollToBottom()
+                } else {
+                    renderLine({ts: Date.now(), txt: `Something went wrong executing command "${escapeHTML(using[0].toLowerCase())}"`})
+                    scrollToBottom()
+                    break;
+                }
+            } else {
+                renderLine({ts: Date.now(), txt: `Could not find command "${escapeHTML(using[0].toLowerCase())}"`})
+                scrollToBottom()
+                break;
+            }
+        }
+    } else {
+        const matchingcmd = consolecmds.find(c => c.cmd === fullsplit[0].toLowerCase())
+        fullsplit.splice(0, 1)
+        const initTimeAt = Date.now()
+        const cmdresult = await matchingcmd.execute(fullsplit)
+        responseTimes.push(Date.now() - initTimeAt)
+        if (responseTimes.length > responseHeldDuration) responseTimes.shift();
+        if (cmdresult !== false) {
+            if (typeof cmdresult === "object") {
+                if (cmdresult.type === "img") {
+                    renderImageLine({ts: Date.now(), url: cmdresult.data, size: cmdresult.size})
+                }
+            } else {
+                renderLine({ts: Date.now(), txt: cmdresult})
+            }
+        }
+    }
+}
+
 const consoleEvent = async (value) => {
     if (typeof value !== "string") return;
     if (value.replaceAll(" ", "") === "") return false;
@@ -541,55 +599,40 @@ const consoleEvent = async (value) => {
     const cmdsplit = value.split(" ")
     const matchingcmd = consolecmds.find(c => c.cmd === cmdsplit[0].toLowerCase())
     if (matchingcmd) {
-        if (cmdsplit.includes("&&")) {
-            while (cmdsplit.includes("&&")) {
-                if (cmdsplit[0] === "&&") cmdsplit.splice(0, 1);
-                const using = cmdsplit.splice(0, (cmdsplit.indexOf("&&") === -1 ? 999 : cmdsplit.indexOf("&&")))
-                if (using.length === 0) break;
-                let matchingcmd2 = consolecmds.find(c => c.cmd === using[0].toLowerCase())
-                if (matchingcmd2) {
-                    const initTimeAt = Date.now()
-                    const cmdresult = await matchingcmd2.execute(using.slice(1))
-                    responseTimes.push(Date.now() - initTimeAt)
-                    if (responseTimes.length > responseHeldDuration) responseTimes.shift();
-                    if (cmdresult !== false) {
-                        if (typeof cmdresult === "object") {
-                            if (cmdresult.type === "img") {
-                                renderImageLine({ts: Date.now(), url: cmdresult.data, size: cmdresult.size})
-                            }
-                        } else {
-                            renderLine({ts: Date.now(), txt: cmdresult})
+        if (cmdsplit.includes("<<")) {
+            const doublesplit = []
+            let singlesplit = []
+            cmdsplit.forEach(cmd => {
+                if (cmd === "<<") {
+                    doublesplit.push(singlesplit)
+                    singlesplit = []
+                } else {
+                    singlesplit.push(cmd)
+                }
+            })
+            doublesplit.push(singlesplit)
+            for (let iter=0;iter<doublesplit.length;iter++) {
+                const fullsplit = doublesplit[iter]
+                if (fullsplit.length < 1) {
+                    break;
+                }
+                if (doublesplit.length > (iter + 1)) {
+                    const potentialnum = doublesplit[iter+1][0]
+                    if (!isNaN(Number(potentialnum))) {
+                        for (let inner=0;inner<Number(potentialnum);inner++) {
+                            await runThroughLogic(Array.from(fullsplit))
                         }
-                        scrollToBottom()
+                        doublesplit[iter+1].shift()
                     } else {
-                        renderLine({ts: Date.now(), txt: `Something went wrong executing command "${escapeHTML(using[0].toLowerCase())}"`})
+                        renderLine({ts: Date.now(), txt: `"${escapeHTML(using[0].toLowerCase())}" is not a valid number`})
                         scrollToBottom()
                         break;
                     }
                 } else {
-                    renderLine({ts: Date.now(), txt: `Could not find command "${escapeHTML(using[0].toLowerCase())}"`})
-                    scrollToBottom()
-                    break;
-                }
-                
-            }
-        } else {
-            cmdsplit.splice(0, 1)
-            const initTimeAt = Date.now()
-            const cmdresult = await matchingcmd.execute(cmdsplit)
-            responseTimes.push(Date.now() - initTimeAt)
-            if (responseTimes.length > responseHeldDuration) responseTimes.shift();
-            if (cmdresult !== false) {
-                if (typeof cmdresult === "object") {
-                    if (cmdresult.type === "img") {
-                        renderImageLine({ts: Date.now(), url: cmdresult.data, size: cmdresult.size})
-                    }
-                } else {
-                    renderLine({ts: Date.now(), txt: cmdresult})
+                    await runThroughLogic(fullsplit)
                 }
             }
         }
-        
     } else {
         renderLine({ts: Date.now(), txt: `Could not find command "${escapeHTML(cmdsplit[0].toLowerCase())}"`})
         terminalLoadingState = false
