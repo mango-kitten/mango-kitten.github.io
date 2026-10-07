@@ -496,21 +496,24 @@ One Time - saderen, muninn`
             sum > 0 ? renderLine({ts: Date.now(), txt: `all that tech is making you run at ${Math.round(1000 / (sum / frameTimes.length)) || 0} fps. please do tell me about the experience.`}) : renderLine({ts: Date.now(), txt: "something went wrong with that framerate..."});
             await sleep(1500)
             renderLineBreak()
-            const c3 = await navigator.getBattery()
-            c3 ? renderLine({ts: Date.now(), txt: c3.charging ? 
-                (
-                    c3.level < 0.2 ? `you barely saved your computer from the brink of death, charging it at a low low ${Math.round(c3.level * 100)}%! good for you~` : 
-                    c3.level < 0.5 ? `you are at a solid ${Math.round(c3.level * 100)}% charge and on your way up. dont unplug your device too soon.` :
-                    c3.level < 0.9 ? `you have a good ${Math.round(c3.level * 100)}% charge left on your device, and are potentially planning on getting it to a full charge.` :
-                    `dont hog that outlet, with your device at ${Math.round(c3.level * 100)}%. please dont forget to unplug your device!`
-                ) : 
-                (
-                    c3.level < 0.2 ? `woah buddy, please plug in your device as it is at ${Math.round(c3.level * 100)}%! dont let her die on you like this!` : 
-                    c3.level < 0.5 ? `starting to get low on that charge, i see. plug it in before that ${Math.round(c3.level * 100)}% drops to 0%!` :
-                    c3.level < 0.9 ? `i really hope you arent going to let your device run down too low, it quite likes being around ${Math.round(c3.level * 100)}% charge.` :
-                    `oooooooh you just fully charged your device, and are still at a nice ${Math.round(c3.level * 100)}%...... i appreciate the hustle quite greatly.`
-                )})
-                : renderLine({ts: Date.now(), txt: "you are using a browser that does not allow me to see your battery. how sad."});
+            try {
+                const c3 = await navigator.getBattery()
+                c3 ? renderLine({ts: Date.now(), txt: c3.charging ? 
+                    (
+                        c3.level < 0.2 ? `you barely saved your computer from the brink of death, charging it at a low low ${Math.round(c3.level * 100)}%! good for you~` : 
+                        c3.level < 0.5 ? `you are at a solid ${Math.round(c3.level * 100)}% charge and on your way up. dont unplug your device too soon.` :
+                        c3.level < 0.9 ? `you have a good ${Math.round(c3.level * 100)}% charge left on your device, and are potentially planning on getting it to a full charge.` :
+                        `dont hog that outlet, with your device at ${Math.round(c3.level * 100)}%. please dont forget to unplug your device!`
+                    ) : 
+                    (
+                        c3.level < 0.2 ? `woah buddy, please plug in your device as it is at ${Math.round(c3.level * 100)}%! dont let her die on you like this!` : 
+                        c3.level < 0.5 ? `starting to get low on that charge, i see. plug it in before that ${Math.round(c3.level * 100)}% drops to 0%!` :
+                        c3.level < 0.9 ? `i really hope you arent going to let your device run down too low, it quite likes being around ${Math.round(c3.level * 100)}% charge.` :
+                        `oooooooh you just fully charged your device, and are still at a nice ${Math.round(c3.level * 100)}%...... i appreciate the hustle quite greatly.`
+                    )}) : renderLine({ts: Date.now(), txt: "you are using a browser that does not allow me to see your battery. how sad."});
+            } catch (e) {
+                renderLine({ts: Date.now(), txt: "you are using a browser that does not allow me to see your battery. how sad."});
+            }
             await sleep(1500)
             renderLineBreak()
             navigator.doNotTrack ? renderLine({ts: Date.now(), txt: navigator.doNotTrack == "1" ? "your browser told me not to track you, and trust me, i am listening. i am not saving your data on this website, its simply for fun." 
