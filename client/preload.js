@@ -149,7 +149,7 @@ const generalhelp_prealph = [
 ]
 const operhelp_prealph = [
     `&amp;&amp; - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
-    `&gt;&gt; [repeats] - Returns to the start of the previous chain, repeating a specified amount of times.<br>`,
+    `&lt;&lt; [repeats] - Returns to the start of the previous chain, repeating a specified amount of times.<br>`,
     ``,
     ``,
     ``,
@@ -632,6 +632,8 @@ const consoleEvent = async (value) => {
                     await runThroughLogic(fullsplit)
                 }
             }
+        } else {
+            await runThroughLogic(cmdsplit)
         }
     } else {
         renderLine({ts: Date.now(), txt: `Could not find command "${escapeHTML(cmdsplit[0].toLowerCase())}"`})
