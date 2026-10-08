@@ -31,7 +31,17 @@ const updateGraphicsMode = () => {
     }
 }
 
+let theme
+
 document.addEventListener('DOMContentLoaded', () => {
+    const achs = JSON.parse(atob(document.cookie.split('; ').reduce((acc, cur) => {
+        const [key, val] = cur.split('=');
+        return key === "innerStaticAch" ? decodeURIComponent(val) : acc;
+    }, '')) || '{}')
+    for (const key in Object.keys(achs)) {
+        userach[key] = achs[key]
+    }
+
     dyslexiaMode = document.cookie.split('; ').reduce((acc, cur) => {
         const [key, val] = cur.split('=');
         return key === "dyslexiaMode" ? decodeURIComponent(val) : acc;
@@ -44,17 +54,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }, '')
     if (graphicsMode === "" || graphicsMode === undefined || graphicsMode === null) graphicsMode = "default";
     updateGraphicsMode()
+    theme = document.cookie.split('; ').reduce((acc, cur) => {
+        const [key, val] = cur.split('=');
+        return key === "innerStaticTheme" ? decodeURIComponent(val) : acc;
+    }, '')
+    if (theme === "" || theme === undefined || theme === null) {
+        changeTheme()
+    } else {
+        changeTheme(theme)
+    }
 
     document.body.addEventListener("keydown", function (evt) {
         if (evt.keyCode === 17 || evt.keyCode === 91) {
             ctrlDown = true
+        }
+        if (evt.keyCode === 16 || evt.keyCode === 13) {
+            shiftDown = true
+        }
+        if (ctrlDown && shiftDown && evt.keyCode === 73 && !consoleBeenOpened) {
+            console.log('%cSTOP!', 'background: #000; color: #ff0000; font-size: 35px')
+            console.log('%cPart of the fun of this site is poking around! If you want to spoil the fun, then please feel free to mess around in here. Otherwise, close the console! You will find a lot more value if you let the site play out. ', 'background: #000; color: #ff0000')
+            if (!userach['3']) {userach['3'] = true; renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: "And something glittered back."})}
+            consoleBeenOpened = true
         }
     })
     document.body.addEventListener("keyup", function (evt) {
         if (evt.keyCode === 17 || evt.keyCode === 91) {
             ctrlDown = false
         }
+        if (evt.keyCode === 16 || evt.keyCode === 13) {
+            shiftDown = false
+        }
     })
+    window.oncontextmenu = function () {
+        return false
+    }
+    
 
     getEl("terminal-input").addEventListener("keydown", function (event) {
         if (event.code === "Enter" || event.keyCode === 13) {

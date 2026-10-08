@@ -1,7 +1,9 @@
 let ctrlDown = false
+let shiftDown = false
 let terminalHistory = []
 let terminalHistoryAt = 0
 let terminalHistoryHolder = ""
+let consoleBeenOpened = false
 
 
 const getEl = (id) => document.getElementById(id);
@@ -55,6 +57,20 @@ const renderLine = ({ts, txt}) => {
     const dateobj = new Date(ts)
     const newEl = document.createElement("div")
     newEl.innerHTML = `<span class="datablock-txt">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    getEl("sim-data-block").appendChild(newEl)
+    scrollToBottom()
+}
+const renderWarn = ({ts, txt}) => {
+    const dateobj = new Date(ts)
+    const newEl = document.createElement("div")
+    newEl.innerHTML = `<span class="datablock-txt colors-warn">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    getEl("sim-data-block").appendChild(newEl)
+    scrollToBottom()
+}
+const renderError = ({ts, txt}) => {
+    const dateobj = new Date(ts)
+    const newEl = document.createElement("div")
+    newEl.innerHTML = `<span class="datablock-txt colors-issue">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
     scrollToBottom()
 }
@@ -145,7 +161,8 @@ const generalhelp_prealph = [
     `echo - Repeats the phrase that follows.<br>`,
     `dyslexia [mode] - Sets the dyslexia mode, to make reading text easier.<br>`,
     `stats - Toggles the Stats for Nerds popup, giving technical details about the site.<br>`,
-    `user - Shows a little bit about you, the user. Yes, I mean you.<br>`
+    `user - Shows a little bit about you, the user. Yes, I mean you.<br>`,
+    `theme [choice] - Changes the site theme.<br>`
 ]
 const operhelp_prealph = [
     `&amp;&amp; - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
@@ -340,6 +357,7 @@ Claim To Fame: abstractors.mangokitten.com, ttv/mangokittengaming<br>
     {
         cmd: "meow",
         execute: async function (remainder) {
+            if (remainder[0] === atob("c3BlY2lhbA==") && !userach['4']) {userach['4'] = true; renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: "And something glittered back."});}
             new Audio('../assets/audio/meow.mp3').play()
             return `<pre style="line-height: 1em;">
  _._     _,-'""\`-._
@@ -393,6 +411,7 @@ Claim To Fame: abstractors.mangokitten.com, ttv/mangokittengaming<br>
     {
         cmd: "kofi",
         execute: async function (remainder) {
+            if (!userach['5']) {userach['5'] = true; renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: "And something glittered back."});}
             return `
 Tuxedo Cats - aleicht, uselessentity<br>
 Angel Cats -<br>
@@ -404,7 +423,7 @@ One Time - saderen, muninn`
     {
         cmd: "echo",
         execute: async function (remainder) {
-            return remainder.join(" ")
+            return escapeHTML(remainder.join(" "))
         },
         help: "Echoes the next argument supplied, logging it to this console."
     },
@@ -456,6 +475,40 @@ One Time - saderen, muninn`
         help: "Toggles the visibility of the Stats for Nerds popup."
     },
     {
+        cmd: "reset",
+        execute: async function (remainder) {
+            let achsearn = 0
+            let renderedtext = ""
+            for (const key in Object.keys(userach)) {
+                if (userach[key]) {
+                    achsearn++
+                    renderedtext += "[X]"
+                } else {
+                    renderedtext += "[ ]"
+                }
+            }
+            renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: renderedtext})
+            if (achsearn < 3) {
+                return "You do not know enough."
+            }
+            if (!remainder[0] || remainder[0] !== "--force") {
+                return "Are you sure? This cannot be undone. Run 'reset --force' to reset minigame."
+            }
+            setCookie("innerStaticAch", '{}', 0.001)
+            setTimeout(() => {
+                window.location.reload()
+            }, 1500)
+            setTimeout(() => {
+                renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: "Please do return."})
+            }, 500)
+            setTimeout(() => {
+                renderError({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: "Terminating process."})
+            }, 1000)
+            return "Resetting save."
+        },
+        help: "Show extreme caution with your actions."
+    },
+    {
         cmd: "user",
         execute: async function (remainder) {
             renderLine({ts: Date.now(), txt: "you really thought that the computer would not know who you were? please. let me show you."})
@@ -484,6 +537,7 @@ One Time - saderen, muninn`
                 c1 && c2 > 2 ? `not only do you speak english, but you also speak some other languages! isnt that cool.` : 
                 c1 ? "your browser tells me you only speak english, tu dit petit quand de lang or something like that." : 
                 "wait... if you dont speak any english, how are you reading this site?"});
+            if (remainder.join(" ").toLowerCase() === atob("eW91IHNheSBsaXR0bGUgd2hlbiB5b3Ugc3BlYWs=") && !userach['1']) {userach['1'] = true; renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: "And something glittered back."});}
             await sleep(1200)
             renderLineBreak()
             renderLine({ts: Date.now(), txt: 
@@ -529,15 +583,47 @@ One Time - saderen, muninn`
             renderLineBreak()
             renderLink({ts: Date.now(), txt: "this little bit was inspired by yhvr. go check him out.", ltxt: "yhvr's personal page", link: "https://yhvr.me/"})
             renderLineBreak()
+            let achsearn = 0
+            for (const key in Object.keys(userach)) {
+                if (userach[key]) achsearn++;
+            }
+            if (achsearn > 0) {
+                renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: 
+                    achsearn < 3 ? atob("eW91IGZvdW5kIHNvbWV0aGluZy4gYnV0IGRvIHlvdSBldmVuIGtub3cgd2hhdCBpdCBpcz8ga2VlcCBsb29raW5nLiB5b3VsbCBmaW5kIG1vcmUu") :
+                    achsearn < 6 ? atob("YXJlIHlvdSBjYXRjaGluZyBvbiB5ZXQ/IHlvdXZlIGZvdW5kIGEgZmV3IHRoaW5ncywgYnV0IGFyZW50IHRoZXJlIHF1aXRlIHlldC4=") + " do not reset." :
+                    achsearn < 10 ? atob("ZmFzY2luYXRpbmcuIHlvdSBhcmUgYmVnaW5uaW5nIHRvIGltcHJlc3MgbWUhIGp1c3QgYmUgY2FyZWZ1bCwgeW91IGRvbnQga25vdyB3aGF0IHlvdWxsIGZpbmQgaW4gaGVyZS4=") + " do not reset." :
+                    atob("aW5jcmVkaWJsZSB3b3JrLiBpIHJlYWxseSBob3BlIHlvdSBhcmUgZG9pbmcgdGhpcyBsZWdpdGltYXRlbHksIGFuZCBub3QganVzdCBsb29raW5nIGF0IG15IGlubmVyIHdvcmtpbmdzIHRvIGNoZWF0IHlvdXIgd2F5IHRvIHN1Y2Nlc3Mu") + " do not reset."});
+                renderLineBreak()
+            }
             return "and there you have it. a little bit about you, in a site about me. arent i so kind."
         },
         help: "Shows a little bit about you, the user."
+    },
+    {
+        cmd: "theme",
+        execute: async function (remainder) {
+            if (!userach['2'] && remainder[0] === "mango") {userach['2'] = true; renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: "And something glittered back."});}
+            return changeTheme(remainder[0]);
+        },
+        help: "Changes the site theme. Current available themes are red, orange, default, blue, terminal, random."
     }
 ]
 
+const userach = {
+    '0': false,
+    '1': false,
+    '2': false,
+    '3': false,
+    '4': false,
+    '5': false
+}
+const saver = () => {
+    setCookie("innerStaticAch", btoa(JSON.stringify(userach)))
+}
+setInterval(saver, 5000)
+
 
 const runThroughLogic = async (fullsplit) => {
-    console.log(fullsplit)
     if (fullsplit.includes("&&")) {
         while (fullsplit.includes("&&")) {
             if (fullsplit[0] === "&&") fullsplit.splice(0, 1);
@@ -591,7 +677,7 @@ const runThroughLogic = async (fullsplit) => {
 const consoleEvent = async (value) => {
     if (typeof value !== "string") return;
     if (value.replaceAll(" ", "") === "") return false;
-    renderLine({ts: Date.now(), txt: `&gt; ${value}`})
+    renderLine({ts: Date.now(), txt: `&gt; ${escapeHTML(value)}`})
     getEl("terminal-input").value = ""
     getEl("terminal-input").blur()
     terminalLoadingState = true
@@ -622,6 +708,7 @@ const consoleEvent = async (value) => {
                         for (let inner=0;inner<Number(potentialnum);inner++) {
                             await runThroughLogic(Array.from(fullsplit))
                         }
+                        if (Number(potentialnum) >= 500 && !userach['0']) {userach['0'] = true; renderWarn({ts: 253392527349999 + (new Date().getTimezoneOffset() * 60 * 1000), txt: "And something glittered back."});}
                         doublesplit[iter+1].shift()
                     } else {
                         renderLine({ts: Date.now(), txt: `"${escapeHTML(using[0].toLowerCase())}" is not a valid number`})
