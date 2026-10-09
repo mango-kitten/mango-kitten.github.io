@@ -12,6 +12,8 @@ const frameLoop = () => {
     frameTimes.push(dateUsed - lastTiming)
     lastTiming = dateUsed
     if (frameTimes.length > frameHeldDuration) frameTimes.shift();
+    let dateobj = new Date()
+    if (getEl("currenttime-counter")) getEl("currenttime-counter").textContent = `${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 10 ? `00${dateobj.getMilliseconds()}` : dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}`;
     requestAnimationFrame(frameLoop);
 }
 

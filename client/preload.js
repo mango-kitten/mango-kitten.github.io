@@ -50,40 +50,40 @@ const scrollToBottom = () => {
 const renderBlock = ({ts, top, txt}) => {
     const dateobj = new Date(ts)
     const newEl = document.createElement("div")
-    newEl.innerHTML = `<span class="datablock-top">${top}</span><br><span class="datablock-txt">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    newEl.innerHTML = `<span class="datablock-top">${top}</span><br><span class="datablock-txt">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 10 ? `00${dateobj.getMilliseconds()}` : dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
 }
 const renderLine = ({ts, txt}) => {
     const dateobj = new Date(ts)
     const newEl = document.createElement("div")
-    newEl.innerHTML = `<span class="datablock-txt">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    newEl.innerHTML = `<span class="datablock-txt">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 10 ? `00${dateobj.getMilliseconds()}` : dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
     scrollToBottom()
 }
 const renderWarn = ({ts, txt}) => {
     const dateobj = new Date(ts)
     const newEl = document.createElement("div")
-    newEl.innerHTML = `<span class="datablock-txt colors-warn">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    newEl.innerHTML = `<span class="datablock-txt colors-warn">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 10 ? `00${dateobj.getMilliseconds()}` : dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
     scrollToBottom()
 }
 const renderError = ({ts, txt}) => {
     const dateobj = new Date(ts)
     const newEl = document.createElement("div")
-    newEl.innerHTML = `<span class="datablock-txt colors-issue">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    newEl.innerHTML = `<span class="datablock-txt colors-issue">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 10 ? `00${dateobj.getMilliseconds()}` : dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
     scrollToBottom()
 }
 const renderHead = ({ts, txt}) => {
     const dateobj = new Date(ts)
     const newEl = document.createElement("div")
-    newEl.innerHTML = `<span class="datablock-head">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    newEl.innerHTML = `<span class="datablock-head">${txt}</span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 10 ? `00${dateobj.getMilliseconds()}` : dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
 }
 const renderImageLine = ({ts, url, size}) => {
     const dateobj = new Date(ts)
     const newEl = document.createElement("div")
-    newEl.innerHTML = `<img src="${url}" style="width: ${size}px; height: ${size}px; display: inline-block;"> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    newEl.innerHTML = `<img src="${url}" style="width: ${size}px; height: ${size}px; display: inline-block;"> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 10 ? `00${dateobj.getMilliseconds()}` : dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
 }
 const renderLineBreak = () => {
@@ -93,11 +93,15 @@ const renderLineBreak = () => {
 const renderLink = ({ts, txt, ltxt, link}) => {
     const dateobj = new Date(ts)
     const newEl = document.createElement("div")
-    newEl.innerHTML = `<span class="datablock-txt">${txt}<br><a onclick="linkClickRender('${link}')" href="#">${ltxt}</a></span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
+    newEl.innerHTML = `<span class="datablock-txt">${txt}<br><a onclick="linkClickRender('${link}')" href="#">${ltxt}</a></span> <span class="datablock-ts">${dateobj.toLocaleTimeString().slice(0, -3).length < 8 ? `0${dateobj.toLocaleTimeString().slice(0, -3)}` : dateobj.toLocaleTimeString().slice(0, -3)}.${dateobj.getMilliseconds() < 10 ? `00${dateobj.getMilliseconds()}` : dateobj.getMilliseconds() < 100 ? `0${dateobj.getMilliseconds()}` : dateobj.getMilliseconds()}</span>`
     getEl("sim-data-block").appendChild(newEl)
 }
 const linkClickRender = (link) => {
     getEl("terminal-input").value = `explorer ${link}`
+    getEl("terminal-input").focus()
+}
+const bioClickRender = (bioid) => {
+    getEl("terminal-input").value = `blog ${bioid}`
     getEl("terminal-input").focus()
 }
 
@@ -159,10 +163,12 @@ const generalhelp_prealph = [
     `links [page] - Gives a list of the operator's various links.<br>`,
     `kofi - Gives a list of the operator's kofi supporters.<br>`,
     `echo - Repeats the phrase that follows.<br>`,
-    `dyslexia [mode] - Sets the dyslexia mode, to make reading text easier.<br>`,
+    `dyslexia &lt;mode&gt; - Sets the dyslexia mode, to make reading text easier.<br>`,
+    `graphics &lt;mode&gt; - Changes the graphics level of the site, to help with lag.<br>`,
     `stats - Toggles the Stats for Nerds popup, giving technical details about the site.<br>`,
     `user - Shows a little bit about you, the user. Yes, I mean you.<br>`,
-    `theme [choice] - Changes the site theme.<br>`
+    `theme [choice] - Changes the site theme.<br>`,
+    `blog [index] - Shows the posted blogs, or opens a specific blog.<br>`
 ]
 const operhelp_prealph = [
     `&amp;&amp; - Chains two commands together, waiting until the first is successfully finished before executing the next.<br>`,
@@ -494,7 +500,7 @@ One Time - saderen, muninn`
             if (!remainder[0] || remainder[0] !== "--force") {
                 return "Are you sure? This cannot be undone. Run 'reset --force' to reset minigame."
             }
-            setCookie("innerStaticAch", '{}', 0.001)
+            setCookie("innerStaticAch", btoa('{}'), 0.001)
             setTimeout(() => {
                 window.location.reload()
             }, 1500)
@@ -606,6 +612,20 @@ One Time - saderen, muninn`
             return changeTheme(remainder[0]);
         },
         help: "Changes the site theme. Current available themes are red, orange, default, blue, terminal, random."
+    },
+    {
+        cmd: "blog",
+        execute: async function (remainder) {
+            if (remainder[0]) {
+                const filteredBlog = blogPosts.filter((blog, index) => String(index) === String(remainder[0]))
+                if (filteredBlog[0]) return `${filteredBlog[0].title}<br>${fixAllText(filteredBlog[0].content)}`
+            } else {
+                let blognames = ""
+                blogPosts.forEach((post, index) => blognames = `${index} - <a href="#" onclick="bioClickRender('${index}')">${post.title}</a> ${new Date(post.ts).toDateString()} - ${new Date(post.ts).toLocaleTimeString().slice(0, -3).length < 8 ? `0${new Date(post.ts).toLocaleTimeString().slice(0, -3)}` : new Date(post.ts).toLocaleTimeString().slice(0, -3)}.${new Date(post.ts).getMilliseconds() < 10 ? `00${new Date(post.ts).getMilliseconds()}` : new Date(post.ts).getMilliseconds() < 100 ? `0${new Date(post.ts).getMilliseconds()}` : new Date(post.ts).getMilliseconds()}<br>${blognames}`);
+                return blognames
+            }
+        },
+        help: "Shows available blogs. Can be supplied with id of a blog to open."
     }
 ]
 
